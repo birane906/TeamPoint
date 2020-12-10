@@ -34,7 +34,7 @@ public interface DAO<T> {
 	 * @param date from Date java package
 	 * @return the correct String format according to SQL "yyyy-mm-dd"
 	 */
-	public static String dateFormatSQL(Date date) {
+	public static String dateFormat(Date date) {
 		
 		if(date == null) {
 			return null;
@@ -63,7 +63,7 @@ public interface DAO<T> {
 			return null;
 		}
 		
-		return "'" + str + "'";
+		return "\"" + str + "\"";
 	}
 
 }

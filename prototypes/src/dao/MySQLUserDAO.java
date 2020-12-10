@@ -50,12 +50,12 @@ public class MySQLUserDAO extends UserDAO {
 			e.printStackTrace();
 		}
 		
-		String date = DAO.dateFormatSQL(obj.getBirthday());
+		String date = DAO.dateFormat(obj.getBirthday());
 		
 		String req = "INSERT INTO User"
 				+ " (name, firstName, email, password, phoneNumber, profileDescription, birthday)" + 
-				" VALUES(" + DAO.nullStringFormat(obj.getName()) + ", " + DAO.nullStringFormat(obj.getFirstName()) + ", " + 
-				obj.getEmail() + ", " + DAO.nullStringFormat(obj.getPassword()) + ", " + 
+				" VALUES(" + obj.getName() + ", " + obj.getFirstName() + ", " + 
+				obj.getEmail() + ", " + obj.getPassword() + ", " + 
 				DAO.nullStringFormat(obj.getPhoneNumber()) + ", " + DAO.nullStringFormat(obj.getProfileDescription()) + 
 				", " + DAO.nullStringFormat(date) + ")";
 		
