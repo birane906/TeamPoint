@@ -57,7 +57,7 @@ public interface DAO<T> {
 	 * @param String str
 	 * @return a null pointer if str null, if not null return 'str'
 	 */
-	public static String nullStringFormat(String str) {
+	public static String stringFormat(String str) {
 		
 		if(str == null) {
 			return null;

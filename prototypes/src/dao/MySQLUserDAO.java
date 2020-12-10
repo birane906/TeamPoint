@@ -54,10 +54,10 @@ public class MySQLUserDAO extends UserDAO {
 		
 		String req = "INSERT INTO User"
 				+ " (name, firstName, email, password, phoneNumber, profileDescription, birthday)" + 
-				" VALUES(" + obj.getName() + ", " + obj.getFirstName() + ", " + 
-				obj.getEmail() + ", " + obj.getPassword() + ", " + 
-				DAO.nullStringFormat(obj.getPhoneNumber()) + ", " + DAO.nullStringFormat(obj.getProfileDescription()) + 
-				", " + DAO.nullStringFormat(date) + ")";
+				" VALUES(" + DAO.stringFormat(obj.getName()) + ", " + DAO.stringFormat(obj.getFirstName()) + ", " + 
+				DAO.stringFormat(obj.getEmail()) + ", " + DAO.stringFormat(obj.getPassword()) + ", " + 
+				DAO.stringFormat(obj.getPhoneNumber()) + ", " + DAO.stringFormat(obj.getProfileDescription()) + 
+				", " + DAO.stringFormat(date) + ")";
 		
 			try {
 				
