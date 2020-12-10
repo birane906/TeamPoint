@@ -171,6 +171,6 @@ public class MySQLUserDAO extends UserDAO {
 		//System.out.println(mySQLUserDAO.signUp("name", "firstName", "emailCreated", "toto"));
 
 		// Delete test
-		System.out.println(mySQLUserDAO.delete("emailCreated"));
+		//System.out.println(mySQLUserDAO.delete("emailCreated"));
 	}
 }

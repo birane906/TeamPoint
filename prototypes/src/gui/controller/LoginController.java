@@ -67,6 +67,7 @@ public class LoginController implements Initializable{
 			authIncorrecte();
 		}else{
 			//CHANGEMENT DE VUE
+			System.out.println("validé");
 		}
 	}
 
