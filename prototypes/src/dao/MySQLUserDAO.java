@@ -189,6 +189,7 @@ public class MySQLUserDAO extends UserDAO {
 		return user;
 	}
 
+/*
 	public static void main(String[] args) {
 		
 		MySQLUserDAO mySQLUserDAO = new MySQLUserDAO();
@@ -208,5 +209,5 @@ public class MySQLUserDAO extends UserDAO {
 		// Delete test
 		System.out.println(mySQLUserDAO.delete(new User(null, null, "emailCreated", "pass", null, null)));
 	}
-
+*/
 }
