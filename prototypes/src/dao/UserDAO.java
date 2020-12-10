@@ -26,7 +26,7 @@ public abstract class UserDAO implements DAO<User>{
 	 * @param obj The object data structure must exist in the database 
 	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code> 
 	 */
-	// TODO docs
+	// TODO verify doc
 	public abstract boolean signUp(String name, String firstname, String email, String password);
 
 	/**
@@ -35,7 +35,7 @@ public abstract class UserDAO implements DAO<User>{
 	 * @param obj The object data structure must exist in the database 
 	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code>
 	 */
-	// TODO docs
+	// TODO verify doc
 	/**
 	 * Delete the user given in parameter in the MySQL database
 	 * 

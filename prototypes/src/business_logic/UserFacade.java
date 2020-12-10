@@ -53,8 +53,8 @@ public class UserFacade {
 	/**
 	 * Asks for UserDAO to return a user based on email and password,
 	 * sets the currentUser to the returned {@link User}
-	 * @param email 
-	 * @param password 
+	 * @param email : the user's email
+	 * @param password : the user's password
 	 * @return true if user found, false if user not found or incorrect 
 	 */
 	public boolean login(String email, String password) {
@@ -71,7 +71,14 @@ public class UserFacade {
 		return true;
 	}
 
-	//TODO docs
+	/**
+	 * Asks for UserDAO to create a {@link User}.
+	 * @param name : the user's name.
+	 * @param firstname : the user's firstname.
+ 	 * @param email : the user's email.
+	 * @param password : the user's password.
+	 * @return <code>true</code> if the signup succeed, <code>false</code> otherwise.
+	 */
 	public boolean signUp(String name, String firstname,
 		String email, String password){
 		
@@ -85,6 +92,11 @@ public class UserFacade {
 		return userDAO.signUp(name, firstname, email, password);
 	}
 
+	/**
+	 * Asks for UserDAO to delete a {@link User} giving an email.
+	 * @param email : the user's email.
+	 * @return <code>true</code> if the deletion succeed, <code>false</code> otherwise.
+	 */
 	public boolean delete(String email) {
 		if (email == null) {
 			return false;
