@@ -77,7 +77,7 @@ public class UserFacade {
 	 * @param firstname : the user's firstname.
  	 * @param email : the user's email.
 	 * @param password : the user's password.
-	 * @return true if the signup succeed, false otherwise.
+	 * @return <code>true</code> if the signup succeed, <code>false</code> otherwise.
 	 */
 	public boolean signUp(String name, String firstname,
 		String email, String password){
@@ -93,7 +93,7 @@ public class UserFacade {
 	/**
 	 * Asks for UserDAO to delete a {@link User} giving an email.
 	 * @param email : the user's email.
-	 * @return true if the deletion succeed, false otherwise.
+	 * @return <code>true</code> if the deletion succeed, <code>false</code> otherwise.
 	 */
 	public boolean delete(String email) {
 		if (email == null) {
