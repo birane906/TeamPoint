@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 02 déc. 2020 à 18:42
+-- Généré le :  jeu. 10 déc. 2020 à 15:52
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `user` (
-  `Id_User` int(10) NOT NULL,
+  `idUser` int(10) NOT NULL,
   `name` varchar(25) DEFAULT NULL,
   `firstName` varchar(25) DEFAULT NULL,
   `email` varchar(25) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`Id_User`, `name`, `firstName`, `email`, `password`, `phoneNumber`, `profileDescription`, `birthday`) VALUES
+INSERT INTO `user` (`idUser`, `name`, `firstName`, `email`, `password`, `phoneNumber`, `profileDescription`, `birthday`) VALUES
 (1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', 'toto', NULL, NULL, NULL);
 
 --
@@ -54,7 +54,7 @@ INSERT INTO `user` (`Id_User`, `name`, `firstName`, `email`, `password`, `phoneN
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`Id_User`);
+  ADD PRIMARY KEY (`idUser`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -64,7 +64,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `Id_User` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
