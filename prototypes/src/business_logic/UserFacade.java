@@ -74,10 +74,12 @@ public class UserFacade {
 	//TODO docs
 	public boolean signUp(String name, String firstname,
 		String email, String password){
+		
 		if (email == null || password == null || name == null 
 			|| firstname == null) {
 			return false;
 		}
+		
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		UserDAO userDAO = daoFactory.createUserDAO();
 		return userDAO.signUp(name, firstname, email, password);

@@ -77,7 +77,7 @@ public class LoginController implements Initializable{
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		File brandingFile = new File("teampoint_logo/TeamPointLogo2.png");
+		File brandingFile = new File("../teampoint_logo/TeamPointLogo2.png");
 		Image brandingImage = new Image(brandingFile.toURI().toString());
 		logoImage.setImage(brandingImage);
 	}
