@@ -18,136 +18,68 @@ import java.util.ArrayList;
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class MySQLUserDAO extends UserDAO {
-	
-	/**
-	 * The constructor.
-	 */
-	public MySQLUserDAO() {}
 
-	/**
-	 * Insert a new User in the database
-	 * precondition: User obj must have at least an email and a password
-	 * postcondition: the user is created in the database
-	 * @return true if the user is correctly created, false if not
-	 */
-	// TODO Check if email is already in the db
-	// TODO find solution for password without stocking it in a user
 	@Override
-	public Boolean create(User obj) {
-		
-		if(obj.getEmail() == null || obj.getPassword() == null) {
+	public boolean delete(String email) {
+		if (email == null) {
 			return false;
 		}
-		
+		// Result from DB
+		ResultSet rs = null;
+
 		// Query statement
 		Statement stmt = null;
-				
+
 		try {
 			// Getconnection
-			stmt = getConnection().createStatement();
+			stmt = getConnection()
+				.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					 ResultSet.CONCUR_UPDATABLE);
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
 		}
-		
-		String date = DAO.dateFormat(obj.getBirthday());
-		
-		String req = "INSERT INTO User"
-				+ " (name, firstName, email, password, phoneNumber, profileDescription, birthday)" + 
-				" VALUES(" + DAO.stringFormat(obj.getName()) + ", " + DAO.stringFormat(obj.getFirstName()) + ", " + 
-				DAO.stringFormat(obj.getEmail()) + ", " + DAO.stringFormat(obj.getPassword()) + ", " + 
-				DAO.stringFormat(obj.getPhoneNumber()) + ", " + DAO.stringFormat(obj.getProfileDescription()) + 
-				", " + DAO.stringFormat(date) + ")";
-		
-			try {
-				
-				stmt.execute(req);
-				return true;
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				return false;
-			}
-	}
 
-	/**
-	 * Delete the user given in parameter in the MySQL database
-	 * @param the user that will be deleted
-	 * @return true if the user is deleted, false if not
-	 * precondition : user obj must have an email
-	 * postcondition: user obj is deleted in the database,
-	 * 				  if an email is in the database multiple times the user corresponding to the database 
-	 * 				  is only deleted once
-	 */
-	@Override
-	public Boolean delete(User obj) {
-		
-		if(obj.getEmail() == null) {
-			return false;
-		}
-		
-		// Result from DB
-		ResultSet rs = null;
-		
-		// Query statement
-		Statement stmt = null;
-		
-		try {
-			// Getconnection
-			stmt = getConnection().createStatement(
-		              ResultSet.TYPE_SCROLL_SENSITIVE,
-		              ResultSet.CONCUR_UPDATABLE);		
-			} 
-		catch (SQLException e) {
-			// TODO explain database not found
-			e.printStackTrace();
-		}
-	    
-	    
-		String req = "SELECT idUser, email FROM User " + 
-				"WHERE email = '" + obj.getEmail() + "'";
-		
+		String req = "SELECT idUser, email FROM User " 
+			+ "WHERE email = " + DAO.stringFormat(email);
+
 		try {
 			rs = stmt.executeQuery(req);
-			
-			while(rs.next()){
+			if(rs.next()) {
 				rs.deleteRow();
 				return true;
-	        }  
+			}
+			// if rs is empty
+			return false;
+		} catch (SQLException e) {
 			return false;
 		}
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			return false;
-		}
-	}	
-		
+	}
+
 	public Connection getConnection() {
 		return JDBCConnector.getJDBCConnectorInstance().getConnection();
 	}
 
-	/**ask to the database to return the line that correspond to an email and password
-	 * @param email 
-	 * @param password 
+	/**
+	 * ask to the database to return the line that correspond to an email and
+	 * password
+	 * 
+	 * @param email
+	 * @param password
 	 * @return the User created
 	 */
 	@Override
 	public User getUser(String email, String password) throws Exception {
-		//TODO adjust, correct getUser
-		
+		if (email == null || password == null) {
+			throw new Exception();
+		}
 		// List of all fields to create an user
 		ArrayList<String> resultat = new ArrayList<String>();
-		
 		// Result from database
 		ResultSet rs = null;
-		
 		// Query statement
 		Statement stmt = null;
-		
-		
-		
+
 		try {
 			// Getconnection from JDBCConnector
 			stmt = getConnection().createStatement();
@@ -155,59 +87,90 @@ public class MySQLUserDAO extends UserDAO {
 			// TODO explain database not found
 			e.printStackTrace();
 		}
-		
-		String req = "SELECT idUser, name, firstName, email, phoneNumber, profileDescription, birthday" + 
-					 " FROM User "
-					 + "WHERE email = '" + email + "'" + " AND password = '" + password + "'";
+
+		String req = "SELECT name, firstName, email, phoneNumber,"
+				+ "profileDescription, birthday" + " FROM User "
+				+ "WHERE email = " + DAO.stringFormat(email) 
+				+ " AND password = " + DAO.stringFormat(password);
 
 		try {
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
-			}
-			
-			while (rs.next()) {
-				
-            	resultat.add(rs.getString("name"));
-            	resultat.add(rs.getString("firstName"));
-                
-            	resultat.add(rs.getString("email"));
-                
-            	resultat.add(rs.getString("profileDescription"));
-            	resultat.add(rs.getString("phoneNumber"));
 			}
 		} catch (SQLException e) {
 			// TODO explain connection lost
 			e.printStackTrace();
 		}
 
+		// if we have a result then move to the next line
+		if(rs.next()){
+			resultat.add(rs.getString("name"));
+			resultat.add(rs.getString("firstName"));
+
+			resultat.add(rs.getString("email"));
+
+			resultat.add(rs.getString("profileDescription"));
+			resultat.add(rs.getString("phoneNumber"));
+		}
+
 		if (resultat.size() == 0) {
+			// TODO customize Exception
 			throw new Exception("User not found");
 		}
-		
-		User user = new User(resultat.get(0), resultat.get(1), resultat.get(2), resultat.get(3), resultat.get(4));
-		System.out.println(user.toString());
-		return user;
+
+		return new User(resultat.get(0), resultat.get(1), 
+			resultat.get(2), resultat.get(3), resultat.get(4));
 	}
 
-/*
-	public static void main(String[] args) {
-		
-		MySQLUserDAO mySQLUserDAO = new MySQLUserDAO();
-
-		// Login test
+	@Override
+	public boolean signUp(String name, String firstname, 
+		String email, String password) {
+		// Query statement
+		Statement stmt = null;
 
 		try {
-			mySQLUserDAO.getUser("galoisnicolas@gmail.com", "toto");
+			// Getconnection
+			stmt = getConnection().createStatement();
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		String req = "INSERT INTO User"
+				+ " (name, firstName, email, password) VALUES("
+				+ DAO.stringFormat(name) + ", " 
+				+ DAO.stringFormat(firstname) 
+				+ ", " + DAO.stringFormat(email) + ", "
+				+ DAO.stringFormat(password) + ")";
+		try {
+			stmt.execute(req);
+		} catch (SQLException e) {
+			return false;
+		}
+		return true;
+	}
+
+	public static void main(String[] args) {
+		MySQLUserDAO mySQLUserDAO = new MySQLUserDAO();
+
+		User user = null;
+		
+		// Login test
+		try {
+			user = mySQLUserDAO.getUser("galoisnicolas@gmail.com", "toto");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		System.out.println(user);
+
+
+		// TODO check utility
 		// insert test
-		System.out.println(mySQLUserDAO.create(new User(null, null, "emailCreated", "pass", null, null)));
-		
+		//System.out.println(mySQLUserDAO.signUp("name", "firstName", "emailCreated", "toto"));
+
 		// Delete test
-		System.out.println(mySQLUserDAO.delete(new User(null, null, "emailCreated", "pass", null, null)));
+		System.out.println(mySQLUserDAO.delete("emailCreated"));
 	}
-*/
 }

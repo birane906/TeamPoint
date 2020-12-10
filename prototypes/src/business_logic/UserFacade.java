@@ -10,8 +10,8 @@ import dao.UserDAO;
 
 /**
  * {@link UserFacade} is a Singleton class. Simplify the use of 
- * buisness logic subsystem for the GUI layer. Facade pattern. Contains the
- * buisness methods.
+ * buisness logic subsystem for the GUI layer. Facade pattern. 
+ * Contains the buisness methods.
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class UserFacade {
@@ -23,15 +23,11 @@ public class UserFacade {
 	@SuppressWarnings("unused")
 	private User currentUser;
 
-
-	private DAOFactory daoFactory;
-
 	/**
 	 * <code>private</code> constructor
 	 */
 	private UserFacade() {
 		this.currentUser = null;
-		this.daoFactory = DAOFactory.getDaoFactoryInstance();
 	}
 
 	/***
@@ -46,7 +42,8 @@ public class UserFacade {
 	}
 
 	/***
-	 * <code>static</code> method. Gives the unique instance of {@link UserFacade}
+	 * <code>static</code> method. Gives the unique instance of 
+	 * {@link UserFacade}
 	 * @return Returns the {@link UserFacade} 
 	 */
 	public static UserFacade getUserFacadeInstance() {
@@ -60,8 +57,11 @@ public class UserFacade {
 	 * @param password 
 	 * @return true if user found, false if user not found or incorrect 
 	 */
-	public Boolean login(String email, String password) {
-		daoFactory.initializeConnection();
+	public boolean login(String email, String password) {
+		if (email == null || password == null) {
+			return false;
+		}
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		UserDAO userDAO = daoFactory.createUserDAO();
 		try {
 			this.currentUser = userDAO.getUser(email, password);	
@@ -69,5 +69,37 @@ public class UserFacade {
 			return false;
 		}
 		return true;
+	}
+
+	//TODO docs
+	public boolean signUp(String name, String firstname,
+		String email, String password){
+		if (email == null || password == null || name == null 
+			|| firstname == null) {
+			return false;
+		}
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		UserDAO userDAO = daoFactory.createUserDAO();
+		return userDAO.signUp(name, firstname, email, password);
+	}
+
+	public boolean delete(String email) {
+		if (email == null) {
+			return false;
+		}
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		UserDAO userDAO = daoFactory.createUserDAO(); 
+		return userDAO.delete(email);
+
+	}
+	
+	public static void main(String[] args) {
+		UserFacade userFacade = new UserFacade();
+		
+		System.out.println(userFacade.login("galoisnicolas@gmail.com", "toto"));
+		
+		System.out.println(userFacade.signUp("salu", "saas", "sasa", "de"));
+		System.out.println(userFacade.delete("sasa"));
+		
 	}
 }

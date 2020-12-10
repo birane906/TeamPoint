@@ -19,20 +19,20 @@ public class MongoUserDAO extends UserDAO {
 	}
 
 	@Override
-	public Boolean create(User obj) {
-		// TODO user insertion query to the DB
-		return null;
-	}
-
-	@Override
-	public Boolean delete(User obj) {
+	public boolean delete(String email) {
 		// TODO user deletion query to the database
-		return null;
+		return false;
 	}
 
 	@Override
 	public User getUser(String email, String password) throws Exception {
 		//TODO user select where email and pwd query in the database
 		return null;
+	}
+
+	@Override
+	public boolean signUp(String name, String firstname, String email, String password) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

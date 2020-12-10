@@ -3,8 +3,6 @@
  *******************************************************************************/
 package dao;
 
-import database.JDBCConnector;
-
 /**
  * {@link DAOFactory} is the Abstract Factory for {@link DAO} objects.
  * 
@@ -12,10 +10,6 @@ import database.JDBCConnector;
  */
 public abstract class DAOFactory {
 
-	/**
-	 * The {@link JDBCConnector} instance
-	 */
-	private JDBCConnector jdbcConnector; 
 
 	private static class DAOFactoryHolder {
 		/**
@@ -31,31 +25,10 @@ public abstract class DAOFactory {
 	public abstract UserDAO createUserDAO();
 
 	/**
-	 * Retrieves the {@link JDBCConnector} instance and set the <code>jdbcConnector</code>
-	 * class member
-	 */
-	public void initializeConnection(){
-		this.setJdbcConnector(JDBCConnector.getJDBCConnectorInstance());
-	}
-
-	/**
 	 * <code>static</code> method. It returns a subtype of {@link DAOFactory} (a concrete factory)
 	 * @return Returns the concrete factory for creating {@link DAO} object family
 	 */
 	public static DAOFactory getDaoFactoryInstance() {
 		return DAOFactoryHolder.DAO_FACTORY;
-	}
-
-	/**
-	 * Getter
-	 * @return Returns the {@link JDBCConnector} class member
-	 */
-
-	public JDBCConnector getJdbcConnector() {
-		return jdbcConnector;
-	}
-
-	public void setJdbcConnector(JDBCConnector jdbcConnector) {
-		this.jdbcConnector = jdbcConnector;
 	}
 }
