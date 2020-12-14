@@ -112,8 +112,8 @@ public class UserFacade {
 		
 		System.out.println(userFacade.login("galoisnicolas@gmail.com", "toto"));
 		
-		System.out.println(userFacade.signUp("salu", "saas", "sasa", "de"));
-		System.out.println(userFacade.delete("sasa"));
+		System.out.println(userFacade.signUp("salu", "saas", "mail", "de"));
+		System.out.println(userFacade.delete("mail"));
 		
 	}
 }

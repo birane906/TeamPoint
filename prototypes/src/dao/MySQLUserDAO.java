@@ -139,8 +139,8 @@ public class MySQLUserDAO extends UserDAO {
 		String req = "INSERT INTO User"
 				+ " (name, firstName, email, password) VALUES("
 				+ DAO.stringFormat(name) + ", " 
-				+ DAO.stringFormat(firstname) 
-				+ ", " + DAO.stringFormat(email) + ", "
+				+ DAO.stringFormat(firstname) + ", " 
+				+ DAO.stringFormat(email) + ", "
 				+ DAO.stringFormat(password) + ")";
 		try {
 			stmt.execute(req);
@@ -168,9 +168,9 @@ public class MySQLUserDAO extends UserDAO {
 
 		// TODO check utility
 		// insert test
-		//System.out.println(mySQLUserDAO.signUp("name", "firstName", "emailCreated", "toto"));
+		System.out.println(mySQLUserDAO.signUp("name", "firstName", "emailCreated", "toto"));
 
 		// Delete test
-		//System.out.println(mySQLUserDAO.delete("emailCreated"));
+		System.out.println(mySQLUserDAO.delete("emailCreated"));
 	}
 }
