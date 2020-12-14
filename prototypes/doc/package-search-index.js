@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"business_logic"},{"l":"business_logic.user"},{"l":"business_logic.workspace"},{"l":"dao"},{"l":"database"},{"l":"gui.controller"},{"l":"gui.view"}]
