@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -75,6 +76,16 @@
             <Image url="@profile.png" />
          </image>
       </ImageView>
-      <ChoiceBox layoutX="306.0" layoutY="27.0" prefHeight="26.0" prefWidth="268.0" />
+      <MenuButton layoutX="312.0" layoutY="20.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="&quot;workspace courant&quot;">
+        <items>
+          <MenuItem mnemonicParsing="false" text="wsp1" />
+          <MenuItem mnemonicParsing="false" text="wps2" />
+        </items>
+      </MenuButton>
+      <ImageView fitHeight="19.0" fitWidth="50.0" layoutX="982.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@3points.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
