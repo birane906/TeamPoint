@@ -2,68 +2,63 @@
  * 2020, All rights reserved.
  *******************************************************************************/
 package business_logic.board;
-
-invalid
-// Start of user code (user defined imports)
-
-// End of user code
+import java.util.Date;
 
 /**
- * Description of TimelineType.
+ * Type used in a {@link Column} to specify a duration between a start date and an end date
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class TimelineType extends AbstractType implements  {
 	/**
-	 * Description of the property startDate.
+	 * Starting {@link Date} of the {@link TimelineType}
 	 */
-	private Date startDate = new Date();
+	private Date startDate;
 	
 	/**
-	 * Description of the property endDate.
+	 * Ending {@link Date} of the {@link TimelineType}
 	 */
-	private Date endDate = new Date();
-	
-	// Start of user code (user defined attributes for TimelineType)
-	
-	// End of user code
-	
-	
-	// Start of user code (user defined methods for TimelineType)
-	
-	// End of user code
+	private Date endDate;
+
 	/**
-	 * Returns startDate.
-	 * @return startDate 
+	 * Create a new {@link TimelineType} giving 2 {@link Date}
+	 * @param startDate The starting {@link Date} of the {@link TimelineType}
+	 * @param endDate The ending {@link Date} of the {@link TimelineType}
+	 */
+	public TimelineType(Date startDate, Date endDate) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
+	/**
+	 * @return The starting {@link Date} of the {@link TimelineType}.
 	 */
 	public Date getStartDate() {
 		return this.startDate;
 	}
 	
 	/**
-	 * Sets a value to attribute startDate. 
-	 * @param newStartDate 
+	 * Sets the starting {@link Date} of the {@link TimelineType}
+	 * @param startDate The new starting {@link Date}
 	 */
-	public void setStartDate(Date newStartDate) {
-	    this.startDate = newStartDate;
+	public void setStartDate(Date startDate) {
+	    this.startDate = startDate;
 	}
 
 	/**
-	 * Returns endDate.
+	 * Return the ending {@link Date} of the {@link TimelineType}.
 	 * @return endDate 
 	 */
 	public Date getEndDate() {
 		return this.endDate;
 	}
-	
+
 	/**
-	 * Sets a value to attribute endDate. 
-	 * @param newEndDate 
+	 * Sets the ending {@link Date} of the {@link TimelineType}
+	 * @param endDate The new ending {@link Date}
 	 */
-	public void setEndDate(Date newEndDate) {
-	    this.endDate = newEndDate;
+	public void setEndDate(Date endDate) {
+	    this.endDate = endDate;
 	}
-
-
 
 }
