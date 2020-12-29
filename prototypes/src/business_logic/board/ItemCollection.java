@@ -1,13 +1,9 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board;
 
 import business_logic.board.Board;
 import business_logic.board.Item;
-// Start of user code (user defined imports)
 
-// End of user code
+import java.util.HashSet;
 
 /**
  * Description of ItemCollection.
@@ -18,7 +14,7 @@ public class ItemCollection {
 	/**
 	 * Description of the property itemCollection_id.
 	 */
-	public Int itemCollection_id = null;
+	public int itemCollection_id;
 
 	/**
 	 * Description of the property name.
@@ -35,17 +31,11 @@ public class ItemCollection {
 	 */
 	public HashSet<Item> items = new HashSet<Item>();
 
-	// Start of user code (user defined attributes for ItemCollection)
-
-	// End of user code
-
 	/**
 	 * Description of the method addItem.
 	 * @param item 
 	 */
 	public void addItem(Item item) {
-		// Start of user code for method addItem
-		// End of user code
 	}
 
 	/**
@@ -53,18 +43,13 @@ public class ItemCollection {
 	 * @param item 
 	 */
 	public void deleteItem(Item item) {
-		// Start of user code for method deleteItem
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for ItemCollection)
-
-	// End of user code
 	/**
 	 * Returns itemCollection_id.
 	 * @return itemCollection_id 
 	 */
-	public Int getItemCollection_id() {
+	public int getItemCollection_id() {
 		return this.itemCollection_id;
 	}
 
@@ -72,7 +57,7 @@ public class ItemCollection {
 	 * Sets a value to attribute itemCollection_id. 
 	 * @param newItemCollection_id 
 	 */
-	public void setItemCollection_id(Int newItemCollection_id) {
+	public void setItemCollection_id(int newItemCollection_id) {
 		this.itemCollection_id = newItemCollection_id;
 	}
 
