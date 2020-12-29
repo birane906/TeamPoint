@@ -64,6 +64,7 @@ public class ColumnFacade {
 	 * @return 
 	 */
 	public Object retrieveColumnTypes() {
+		return null;
 		// Start of user code for method retrieveColumnTypes
 		// End of user code
 	}

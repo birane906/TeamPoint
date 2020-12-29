@@ -7,6 +7,9 @@ import business_logic.board.Column;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
 import business_logic.board.StatusLabel;
+import business_logic.user.BoardOwner;
+import business_logic.workspace.Workspace;
+
 import java.util.Date;
 import java.util.HashSet;
 // Start of user code (user defined imports)
@@ -47,7 +50,7 @@ public class Board {
 	/**
 	 * Description of the property boardOwner.
 	 */
-	public BoardOwner boardOwner = null;
+	public BoardOwner boardOwner;
 
 	/**
 	 * Description of the property creationDate.
@@ -57,12 +60,8 @@ public class Board {
 	/**
 	 * Description of the property board_id.
 	 */
-	private Int board_id = null;
+	private int board_id;
 
-	/**
-	 * Description of the property boardOwner.
-	 */
-	public Object boardOwner = ;
 	
 	// Start of user code (user defined attributes for Board)
 	

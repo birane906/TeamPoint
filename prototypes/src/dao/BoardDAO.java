@@ -5,8 +5,6 @@ package dao;
 
 import business_logic.workspace.Workspace;
 
-import java.util.Date;
-
 import business_logic.board.Board;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
@@ -36,81 +34,57 @@ public abstract class BoardDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method addBoard.
-	 * @param name 
-	 * @param workspace 
-	 * @param user 
+	 * Creates board in database.
+	 * @param name of the board
+	 * @param workspace where the user creates the board
+	 * @param user is the board owner, must be the one who creates it
 	 * @return 
 	 */
 	public abstract Board addBoard(String name, Workspace workspace, User user);
 
 	/**
-	 * Description of the method deleteBoard.
-	 * @param board 
-	 * @return 
+	 * delete the board in the database.
+	 * @param board that will be deleted
+	 * @return true or false according to success of deletion
 	 */
 	public abstract Boolean deleteBoard(Board board);
 
 	/**
-	 * Description of the method retrieveBoard.
-	 * @param board 
-	 * @return 
+	 * Retrieve the board given.
+	 * @param board that will be retrieved
+	 * @return the board updated according to the one in the database
 	 */
 	public abstract Board retrieveBoard(Board board);
 
 	/**
-	 * Description of the method addItemCollection.
-	 * @param itemCollectionName 
-	 * @param board 
-	 * @return 
+	 * add item collection to a board.
+	 * @param itemCollectionName name of the item collection
+	 * @param board where we want the collection to be in
+	 * @return a boolean according to the success of insert
 	 */
 	public abstract Boolean addItemCollection(String itemCollectionName, Board board);
 
 	/**
-	 * Description of the method deleteItemCollection.
+	 * delete Item Collection.
 	 * @param itemCollection 
-	 * @return 
+	 * @return a boolean according to the success of delete
 	 */
 	public abstract Boolean deleteItemCollection(ItemCollection itemCollection);
 
 	/**
-	 * Description of the method addItem.
-	 * @param itemCollection 
-	 * @param itemLabel 
-	 * @return 
+	 * add Item.
+	 * @param itemCollection the item collection we want the item to be in 
+	 * @param itemLabel the name of the item
+	 * @return a boolean according to the success of insert
 	 */
 	public abstract Boolean addItem(ItemCollection itemCollection, String itemLabel);
 
 	/**
 	 * Description of the method deleteItem.
-	 * @param item 
-	 * @return 
+	 * @param item to be inserted
+	 * @return a boolean according to the success of delete
 	 */
 	public abstract Boolean deleteItem(Item item);
-
-	/**
-	 * Description of the method dateFormat.
-	 * @param date 
-	 * @return 
-	 */
-	public String dateFormat(Date date) {
-		// Start of user code for method dateFormat
-		String dateFormat = "";
-		return dateFormat;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method stringFormat.
-	 * @param string 
-	 * @return 
-	 */
-	public String stringFormat(String string) {
-		// Start of user code for method stringFormat
-		String stringFormat = "";
-		return stringFormat;
-		// End of user code
-	}
 
 	// Start of user code (user defined methods for BoardDAO)
 

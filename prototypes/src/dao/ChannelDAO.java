@@ -33,16 +33,16 @@ public abstract class ChannelDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method createChannel.
+	 * create Channel of a said item.
 	 * @param item 
-	 * @return 
+	 * @return the channel created
 	 */
 	public abstract Channel createChannel(Item item);
 
 	/**
-	 * Description of the method deleteChannel.
-	 * @param item 
-	 * @return 
+	 * delete Channel of a said item.
+	 * @param item  
+	 * @return a boolean according to the success of delete
 	 */
 	public abstract Boolean deleteChannel(Item item);
 	 

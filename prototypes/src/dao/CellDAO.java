@@ -3,8 +3,6 @@
  *******************************************************************************/
 package dao;
 
-import java.util.Date;
-
 import business_logic.board.AbstractType;
 import business_logic.board.Cell;
 import business_logic.board.Column;
@@ -34,10 +32,10 @@ public abstract class CellDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method addCell.
+	 * add Cell.
 	 * @param column 
 	 * @param item 
-	 * @return 
+	 * @return the cell created
 	 */
 	public Cell addCell(Column column, Item item) {
 		// Start of user code for method addCell
@@ -47,9 +45,9 @@ public abstract class CellDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method deleteCell.
+	 * delete Cell.
 	 * @param cell 
-	 * @return 
+	 * @return a boolean according to the success of delete
 	 */
 	public Boolean deleteCell(Cell cell) {
 		// Start of user code for method deleteCell
@@ -59,39 +57,15 @@ public abstract class CellDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method editCell.
+	 * edit Cell.
 	 * @param cell 
 	 * @param value 
-	 * @return 
+	 * @return a boolean according to the success of update
 	 */
 	public Boolean editCell(Cell cell, AbstractType value) {
 		// Start of user code for method editCell
 		Boolean editCell = Boolean.FALSE;
 		return editCell;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method dateFormat.
-	 * @param date 
-	 * @return 
-	 */
-	public String dateFormat(Date date) {
-		// Start of user code for method dateFormat
-		String dateFormat = "";
-		return dateFormat;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method stringFormat.
-	 * @param string 
-	 * @return 
-	 */
-	public String stringFormat(String string) {
-		// Start of user code for method stringFormat
-		String stringFormat = "";
-		return stringFormat;
 		// End of user code
 	}
 

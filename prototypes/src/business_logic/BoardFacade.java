@@ -4,7 +4,7 @@
 package business_logic;
 
 import business_logic.BoardFacade;
-import business_logic.Workspace.Workspace;
+import business_logic.workspace.Workspace;
 import business_logic.board.Board;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
