@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 29 déc. 2020 à 13:17
+-- Généré le :  mar. 29 déc. 2020 à 13:34
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `board` (
   `idBoard` int(10) NOT NULL,
   `userOwner` int(10) NOT NULL,
+  `idPermission` int(10) NOT NULL,
   `boardName` varchar(25) NOT NULL,
   `parentWorkspace` int(10) NOT NULL,
   `boardCreationDate` date NOT NULL DEFAULT current_timestamp()
@@ -126,6 +127,18 @@ CREATE TABLE `item_collection_item` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `typepermission`
+--
+
+CREATE TABLE `typepermission` (
+  `idTypePermission` int(10) NOT NULL,
+  `labelPermission` varchar(25) NOT NULL,
+  `description` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `user`
 --
 
@@ -182,7 +195,8 @@ CREATE TABLE `workspace` (
 ALTER TABLE `board`
   ADD PRIMARY KEY (`idBoard`),
   ADD KEY `FOREIGN_PARENT_WORKSPACE` (`parentWorkspace`),
-  ADD KEY `FOREIGN_USER_OWNER` (`userOwner`);
+  ADD KEY `FOREIGN_USER_OWNER` (`userOwner`),
+  ADD KEY `FOREIGN_PERMISSION` (`idPermission`);
 
 --
 -- Index pour la table `board_contains`
@@ -238,6 +252,12 @@ ALTER TABLE `item_collection_item`
   ADD KEY `FOREIGN_ITEM_COLLECTION_ITEM` (`idItemCollection`);
 
 --
+-- Index pour la table `typepermission`
+--
+ALTER TABLE `typepermission`
+  ADD PRIMARY KEY (`idTypePermission`);
+
+--
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
@@ -276,6 +296,7 @@ ALTER TABLE `user`
 --
 ALTER TABLE `board`
   ADD CONSTRAINT `FOREIGN_PARENT_WORKSPACE` FOREIGN KEY (`parentWorkspace`) REFERENCES `workspace` (`idWorskpace`),
+  ADD CONSTRAINT `FOREIGN_PERMISSION` FOREIGN KEY (`idPermission`) REFERENCES `typepermission` (`idTypePermission`),
   ADD CONSTRAINT `FOREIGN_USER_OWNER` FOREIGN KEY (`userOwner`) REFERENCES `user` (`idUser`);
 
 --
