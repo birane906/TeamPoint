@@ -4,9 +4,6 @@
 package dao;
 
 import business_logic.user.User;
-import database.JDBCConnector;
-
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -94,7 +91,7 @@ public class MySQLUserDAO extends UserDAO {
 			e.printStackTrace();
 		}
 
-		String req = "SELECT name, firstName, email, phoneNumber,"
+		String req = "SELECT idUser, name, firstName, email, phoneNumber,"
 				+ "profileDescription, birthday" + " FROM User "
 				+ "WHERE email = " + DAO.stringFormat(email) 
 				+ " AND password = " + DAO.stringFormat(password);
@@ -110,6 +107,8 @@ public class MySQLUserDAO extends UserDAO {
 
 		// if we have a result then move to the next line
 		if(rs.next()){
+			
+			resultat.add(rs.getInt("idUser") + "");
 			resultat.add(rs.getString("name"));
 			resultat.add(rs.getString("firstName"));
 
@@ -124,8 +123,14 @@ public class MySQLUserDAO extends UserDAO {
 			throw new Exception("User not found");
 		}
 
-		return new User(resultat.get(0), resultat.get(1), 
-			resultat.get(2), resultat.get(3), resultat.get(4));
+		String idUser = resultat.get(0);
+		String name = resultat.get(1);
+		String firstName = resultat.get(2);
+		String emailUser = resultat.get(3);
+		String profileDesc = resultat.get(4);
+		String phoneNumber = resultat.get(5);
+		
+		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
 
 	/**
