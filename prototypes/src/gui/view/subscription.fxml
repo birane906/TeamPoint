@@ -21,7 +21,7 @@
       <TextField fx:id="firstNameTextField" layoutX="67.0" layoutY="166.0" prefHeight="26.0" prefWidth="242.0" promptText="Prénom" />
       <Hyperlink fx:id="signInHyperlink" layoutX="170.0" layoutY="394.0" text="Vous avez déjà un compte TeamPoint ? Connectez vous" />
       <Button fx:id="subscriptionButton" layoutX="234.0" layoutY="345.0" mnemonicParsing="false" onAction="#subscriptionButtonOnAction" prefHeight="38.0" prefWidth="224.0" text="S'INSCRIRE" />
-      <Label fx:id="numberInvalidLabel" alignment="CENTER" layoutX="58.0" layoutY="295.0" prefHeight="16.0" prefWidth="242.0" text="Numéro de téléphone invalide" textFill="#d30b0b" />
+      <Label fx:id="numberInvalidLabel" alignment="CENTER" layoutX="67.0" layoutY="304.0" prefHeight="16.0" prefWidth="242.0" textFill="#f20f0f" />
       <Button fx:id="closeButton" cancelButton="true" layoutX="609.0" layoutY="20.0" mnemonicParsing="false" onAction="#closeButtonOnAction" prefHeight="6.0" prefWidth="20.0" style="-fx-background-color: #E76A4F;" text="X" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font size="9.0" />
@@ -37,8 +37,9 @@
       <DatePicker fx:id="birthdayDP" layoutX="357.0" layoutY="269.0" prefHeight="26.0" prefWidth="252.0" promptText="Date de naissance" />
       <TextField fx:id="emailTextField" layoutX="67.0" layoutY="217.0" prefHeight="26.0" prefWidth="242.0" promptText="Adresse Mail" />
       <TextField fx:id="numberTextField" layoutX="67.0" layoutY="269.0" prefHeight="26.0" prefWidth="242.0" promptText="Numéro de télépone" />
-      <Label fx:id="emailInvalidLabel" alignment="CENTER" layoutX="49.0" layoutY="243.0" prefHeight="16.0" prefWidth="242.0" text="Adresse mail invalide" textFill="#d30b0b" />
-      <Label fx:id="nameFirstNameInvalidLabel" alignment="CENTER" layoutX="67.0" layoutY="192.0" prefHeight="16.0" prefWidth="541.0" text="Prénom ou nom de famille invalide : ils doivent contenir que des lettres" textFill="#d30b0b" />
-      <Label fx:id="passwordInvalidLabel" alignment="CENTER" layoutX="68.0" layoutY="320.0" prefHeight="16.0" prefWidth="558.0" text="Mot de passe invalide : au moins 6 caractères et au moins un chiffre" textFill="#d30b0b" />
+      <Label fx:id="emailInvalidLabel" alignment="CENTER" layoutX="49.0" layoutY="243.0" prefHeight="16.0" prefWidth="242.0" textFill="#d30b0b" />
+      <Label fx:id="nameFirstNameInvalidLabel" alignment="CENTER" layoutX="67.0" layoutY="192.0" prefHeight="16.0" prefWidth="541.0" textFill="#d30b0b" />
+      <Label fx:id="passwordInvalidLabel" alignment="CENTER" layoutX="68.0" layoutY="320.0" prefHeight="16.0" prefWidth="558.0" textFill="#d30b0b" />
+      <Label fx:id="userRegisteredLabel" layoutX="194.0" layoutY="136.0" prefHeight="16.0" prefWidth="278.0" />
    </children>
 </AnchorPane>

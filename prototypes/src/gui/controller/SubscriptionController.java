@@ -13,6 +13,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+
 /**
  * Description of LoginController.
  * 
@@ -36,6 +40,12 @@ public class SubscriptionController implements Initializable{
 	 */
 	@FXML
 	private ImageView logoImage;
+
+	/**
+	 * Description of the label in the case of a good subscription
+	 */
+	@FXML
+	private Label userRegisteredLabel;
 
 	/**
 	 * Description of the first name text field
@@ -114,21 +124,37 @@ public class SubscriptionController implements Initializable{
 	}
 
 	/**
-	 * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+	 * Method which permite to subscribe into TeamPoint when the user clicks on the subscribe button and provides the right
 	 * email and password
 	 */
 	@FXML
 	public void subscriptionButtonOnAction(ActionEvent event){
-		if(emailTextField.getText().isBlank() 
-			|| passwordField.getText().isBlank()
-			|| !userFacade.login(emailTextField.getText(),passwordField.getText())){
-			wrongAuth();
-		}else{
-			//CHANGEMENT DE VUE
-			System.out.println("validé");
-		}
+
+		String regexFirstName ="";
+		String firstName = emailTextField.getText();
+		Pattern ptEmail = Pattern.compile(regexEmail);
+		Matcher mEmail = ptEmail.matcher(email);
+		boolean emailIsGood = mEmail.matches();
+
+		String regexEmail ="^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+		String email = emailTextField.getText();
+		Pattern ptEmail = Pattern.compile(regexEmail);
+		Matcher mEmail = ptEmail.matcher(email);
+		boolean emailIsGood = mEmail.matches();
+
+		String regexPassword ="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
+		String password = emailTextField.getText();
+		Pattern ptPassword = Pattern.compile(regexPassword;
+		Matcher mPassword = ptPassword.matcher(password);
+		boolean passwordIsGood = mPassword.matches();
+
+
+		userRegisteredLabel.setText("Votre compte a bien été crééé !");
 	}
 
+	public void registerUser(){
+
+	}
 
 	/**
 	 * Method which initialize the login window
