@@ -1,7 +1,7 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package ui.controller;
+package gui.controller;
 
 import business_logic.Workspace.Workspace;
 import business_logic.board.AbstractType;
@@ -10,6 +10,7 @@ import business_logic.board.Cell;
 import business_logic.board.Column;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
+import gui.view.*;
 // Start of user code (user defined imports)
 
 // End of user code
