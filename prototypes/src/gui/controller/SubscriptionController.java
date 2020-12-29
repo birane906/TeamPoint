@@ -161,14 +161,30 @@ public class SubscriptionController implements Initializable{
 		boolean numberIsGood = mNumber.matches();
 
 
+		if(firstNameIsGood == true && nameIsGood == true){
+			if(emailIsGood == true){
+				if(passwordIsGood == true){
+					if(numberIsGood == true){
+						userRegisteredLabel.setText("Votre compte a bien été crééé !");
+						System.out.println("ON INSERTE LE NOUVEAU USER DANS LA BDD");
+					}else{
+						numberInvalidLabel.setText("Numéro de téléphone invalide !");
+					}
+				}else{
+					passwordInvalidLabel.setText("Mot de passe non conforme ! Il doit contenir au moins 8 caractères, un chiffre, une majuscule");
+				}
+			}else{
+				emailInvalidLabel.setText("Adresse Mail invalide !");
+			}
+		}else{
+			nameFirstNameInvalidLabel.setText("Prénom ou nom de famille non conforme !");
+		}
 
 
-		userRegisteredLabel.setText("Votre compte a bien été crééé !");
+
 	}
 
-	public void registerUser(){
 
-	}
 
 	/**
 	 * Method which initialize the login window
