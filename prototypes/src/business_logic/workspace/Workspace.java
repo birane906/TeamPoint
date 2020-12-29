@@ -2,8 +2,7 @@ package business_logic.workspace;
 
 
 import business_logic.board.Board;
-import business_logic.user.AbstractUserAttendance;
-import business_logic.user.User;
+import business_logic.user.*;
 
 import java.util.Date;
 import java.util.HashSet;
