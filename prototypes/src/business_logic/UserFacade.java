@@ -106,6 +106,44 @@ public class UserFacade {
 		return userDAO.delete(email);
 
 	}
+
+	/**
+	 * Description of the method getCurrentUserEmail.
+	 * @return 
+	 */
+	public String getCurrentUserEmail() {
+		// Start of user code for method getCurrentUserEmail
+		String getCurrentUserEmail = "";
+		return getCurrentUserEmail;
+		// End of user code
+	}
+
+	// Start of user code (user defined methods for UserFacade)
+
+	// End of user code
+	/**
+	 * Returns currentUser.
+	 * @return currentUser 
+	 */
+	public User getCurrentUser() {
+		return this.currentUser;
+	}
+
+	/**
+	 * Sets a value to attribute currentUser. 
+	 * @param newCurrentUser 
+	 */
+	public void setCurrentUser(User newCurrentUser) {
+		this.currentUser = newCurrentUser;
+	}
+
+	/**
+	 * Returns workspaces.
+	 * @return workspaces 
+	 */
+	public HashSet<Workspace> getWorkspaces() {
+		return this.workspaces;
+	}
 	
 	public static void main(String[] args) {
 		UserFacade userFacade = new UserFacade();
