@@ -3,8 +3,10 @@
  *******************************************************************************/
 package dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import business_logic.board.AbstractType;
 import business_logic.board.Board;
 import business_logic.board.Column;
 import dao.DAO;
@@ -51,7 +53,9 @@ public abstract class ColumnDAO implements DAO {
 	 * getAllColumnTypes .
 	 * @return column types String that describe type of all the column types
 	 */
-	public abstract Object getAllColumnTypes();
+	public abstract ArrayList<AbstractType> getAllColumnTypes();
+	
+	public abstract AbstractType getColumnType(int columnId);
 
 	// Start of user code (user defined methods for ColumnDAO)
 
