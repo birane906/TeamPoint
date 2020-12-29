@@ -4,10 +4,7 @@ import business_logic.UserFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -27,11 +24,6 @@ public class SubscriptionController implements Initializable{
 	 */
 	private UserFacade userFacade;
 
-	/**
-	 * Description of the label in the case of a wrong authentification
-	 */
-	@FXML
-	private Label wrongAuthentification;
 
 	/**
 	 * Description of the close button
@@ -46,6 +38,18 @@ public class SubscriptionController implements Initializable{
 	private ImageView logoImage;
 
 	/**
+	 * Description of the first name text field
+	 */
+	@FXML
+	private TextField firstNameTextField;
+
+	/**
+	 * Description of the name text field
+	 */
+	@FXML
+	private TextField nameTextField;
+
+	/**
 	 * Description of the email text field
 	 */
 	@FXML
@@ -57,6 +61,41 @@ public class SubscriptionController implements Initializable{
 	@FXML
 	private PasswordField passwordField;
 
+	/**
+	 * Description of the number phone text field
+	 */
+	@FXML
+	private TextField numberTextField;
+
+	/**
+	 * Description of the birthday date picker
+	 */
+	@FXML
+	private DatePicker birthday;
+
+	/**
+	 * Description of the label in the case of a wrong email
+	 */
+	@FXML
+	private Label emailInvalidLabel;
+
+	/**
+	 * Description of the label in the case of a wrong number phone
+	 */
+	@FXML
+	private Label numberInvalidLabel;
+
+	/**
+	 * Description of the label in the case of a wrong name or first name
+	 */
+	@FXML
+	private Label nameFirstNameInvalidLabel;
+
+	/**
+	 * Description of the label in the case of a wrong password
+	 */
+	@FXML
+	private Label passwordInvalidLabel;
 
 	/**
 	 * The constructor.
@@ -79,7 +118,7 @@ public class SubscriptionController implements Initializable{
 	 * email and password
 	 */
 	@FXML
-	public void loginButtonOnAction(ActionEvent event){
+	public void subscriptionButtonOnAction(ActionEvent event){
 		if(emailTextField.getText().isBlank() 
 			|| passwordField.getText().isBlank()
 			|| !userFacade.login(emailTextField.getText(),passwordField.getText())){
@@ -90,13 +129,6 @@ public class SubscriptionController implements Initializable{
 		}
 	}
 
-	/**
-	 * an utility function used
-	 */
-	@FXML
-	private void wrongAuth(){
-		wrongAuthentification.setText("Email ou mot de passe incorrect");
-	}
 
 	/**
 	 * Method which initialize the login window
