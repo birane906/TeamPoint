@@ -3,9 +3,12 @@
  *******************************************************************************/
 package dao;
 
+import java.sql.Connection;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+
+import database.JDBCConnector;
 
 /**
  * DAO interface
@@ -49,6 +52,10 @@ public interface DAO {
 		}
 		
 		return "\"" + str + "\"";
+	}
+	
+	public static Connection getConnection() {
+		return JDBCConnector.getJDBCConnectorInstance().getConnection();
 	}
 
 }

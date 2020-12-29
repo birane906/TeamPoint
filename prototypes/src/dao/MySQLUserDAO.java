@@ -38,7 +38,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection
-			stmt = getConnection()
+			stmt = DAO.getConnection()
 				.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					 ResultSet.CONCUR_UPDATABLE);
 		} catch (SQLException e) {
@@ -62,10 +62,6 @@ public class MySQLUserDAO extends UserDAO {
 		}
 	}
 
-	public Connection getConnection() {
-		return JDBCConnector.getJDBCConnectorInstance().getConnection();
-	}
-
 	/**
 	 * For a given email and password returns the corresponding {@link User}
 	 * @param email an email as a {@link String}
@@ -87,7 +83,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = getConnection().createStatement();
+			stmt = DAO.getConnection().createStatement();
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
@@ -141,7 +137,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection
-			stmt = getConnection().createStatement();
+			stmt = DAO.getConnection().createStatement();
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
