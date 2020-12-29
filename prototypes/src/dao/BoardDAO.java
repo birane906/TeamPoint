@@ -8,6 +8,7 @@ import business_logic.workspace.Workspace;
 import business_logic.board.Board;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
+import business_logic.board.Permission;
 import business_logic.user.User;
 import dao.DAO;
 // Start of user code (user defined imports)
@@ -40,7 +41,7 @@ public abstract class BoardDAO implements DAO {
 	 * @param user is the board owner, must be the one who creates it
 	 * @return 
 	 */
-	public abstract Board addBoard(String name, Workspace workspace, User user);
+	public abstract Board addBoard(String name, Workspace workspace, User user, Permission permission);
 
 	/**
 	 * delete the board in the database.

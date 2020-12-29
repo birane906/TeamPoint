@@ -230,7 +230,7 @@ CREATE TABLE `user_workspace` (
 --
 
 CREATE TABLE `workspace` (
-  `idWorskpace` int(10) NOT NULL,
+  `idWorkspace` int(10) NOT NULL,
   `idUserOwner` int(10) NOT NULL,
   `workspaceName` varchar(25) NOT NULL,
   `workspaceCreationDate` date NOT NULL DEFAULT current_timestamp()
@@ -240,7 +240,7 @@ CREATE TABLE `workspace` (
 -- Déchargement des données de la table `workspace`
 --
 
-INSERT INTO `workspace` (`idWorskpace`, `idUserOwner`, `workspaceName`, `workspaceCreationDate`) VALUES
+INSERT INTO `workspace` (`idWorkspace`, `idUserOwner`, `workspaceName`, `workspaceCreationDate`) VALUES
 (0, 1, 'Test', '0000-00-00');
 
 --
@@ -333,7 +333,7 @@ ALTER TABLE `user_workspace`
 -- Index pour la table `workspace`
 --
 ALTER TABLE `workspace`
-  ADD PRIMARY KEY (`idWorskpace`),
+  ADD PRIMARY KEY (`idWorkspace`),
   ADD KEY `FOREIGN_ADMIN_OWNER_WORKSPACE` (`idUserOwner`);
 
 --
@@ -352,6 +352,17 @@ ALTER TABLE `board`
 ALTER TABLE `cell`
   MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
+ALTER TABLE `workspace`
+  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+ALTER TABLE `column`
+  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+ALTER TABLE `item`
+  MODIFY `idItem` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+ALTER TABLE `itemCollection`
+  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- Contraintes pour les tables déchargées
 --
@@ -360,7 +371,7 @@ ALTER TABLE `cell`
 -- Contraintes pour la table `board`
 --
 ALTER TABLE `board`
-  ADD CONSTRAINT `FOREIGN_PARENT_WORKSPACE` FOREIGN KEY (`parentWorkspace`) REFERENCES `workspace` (`idWorskpace`),
+  ADD CONSTRAINT `FOREIGN_PARENT_WORKSPACE` FOREIGN KEY (`parentWorkspace`) REFERENCES `workspace` (`idWorkspace`),
   ADD CONSTRAINT `FOREIGN_PERMISSION` FOREIGN KEY (`idPermission`) REFERENCES `typepermission` (`idTypePermission`),
   ADD CONSTRAINT `FOREIGN_USER_OWNER` FOREIGN KEY (`userOwner`) REFERENCES `user` (`idUser`);
 
@@ -414,7 +425,7 @@ ALTER TABLE `item_collection_item`
 --
 ALTER TABLE `user_workspace`
   ADD CONSTRAINT `FOREIGN_USER_WORKSPACE_USER` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
-  ADD CONSTRAINT `FOREIGN_WORKSPACE_USER_WORKSPACE` FOREIGN KEY (`idWorkspace`) REFERENCES `workspace` (`idWorskpace`);
+  ADD CONSTRAINT `FOREIGN_WORKSPACE_USER_WORKSPACE` FOREIGN KEY (`idWorkspace`) REFERENCES `workspace` (`idWorkspace`);
 
 --
 -- Contraintes pour la table `workspace`

@@ -7,21 +7,30 @@ package business_logic.board;
  * @author 
  */
 public class Permission {
+	
+	private int idPermission;
+	
 	/**
 	 * Description of the property label.
 	 */
-	private Object label = null;
+	private String label;
 
 	/**
 	 * Description of the property description.
 	 */
-	private Object description = null;
+	private String description;
+	
+	public Permission(int id, String label, String description) {
+		this.idPermission = id;
+		this.label = label;
+		this.description = description;
+	}
 
 	/**
 	 * Returns label.
 	 * @return label 
 	 */
-	public Object getLabel() {
+	public String getLabel() {
 		return this.label;
 	}
 
@@ -29,7 +38,7 @@ public class Permission {
 	 * Sets a value to attribute label. 
 	 * @param newLabel 
 	 */
-	public void setLabel(Object newLabel) {
+	public void setLabel(String newLabel) {
 		this.label = newLabel;
 	}
 
@@ -37,7 +46,7 @@ public class Permission {
 	 * Returns description.
 	 * @return description 
 	 */
-	public Object getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
@@ -45,8 +54,12 @@ public class Permission {
 	 * Sets a value to attribute description. 
 	 * @param newDescription 
 	 */
-	public void setDescription(Object newDescription) {
+	public void setDescription(String newDescription) {
 		this.description = newDescription;
+	}
+
+	public int getIdPermission() {
+		return idPermission;
 	}
 
 }

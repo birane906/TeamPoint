@@ -7,6 +7,7 @@ import business_logic.user.User;
 import database.JDBCConnector;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -79,11 +80,15 @@ public class MySQLUserDAO extends UserDAO {
 		// Result from database
 		ResultSet rs = null;
 		// Query statement
-		Statement stmt = null;
+		PreparedStatement stmt = null;
+		String query = "SELECT name, firstName, email, phoneNumber,"
+				+ "profileDescription, birthday" + " FROM User "
+				+ "WHERE email = ?"
+				+ " AND password = ?";
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().createStatement();
+			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
@@ -133,11 +138,13 @@ public class MySQLUserDAO extends UserDAO {
 	public boolean signUp(String name, String firstname, 
 		String email, String password) {
 		// Query statement
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 
+		String query = "INSERT INTO User(name, firstName, email, password) VALUES(?, ?, ?, ?)";
+		
 		try {
 			// Getconnection
-			stmt = DAO.getConnection().createStatement();
+			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
