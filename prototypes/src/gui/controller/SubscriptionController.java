@@ -130,11 +130,17 @@ public class SubscriptionController implements Initializable{
 	@FXML
 	public void subscriptionButtonOnAction(ActionEvent event){
 
-		String regexFirstName ="";
-		String firstName = emailTextField.getText();
-		Pattern ptEmail = Pattern.compile(regexEmail);
-		Matcher mEmail = ptEmail.matcher(email);
-		boolean emailIsGood = mEmail.matches();
+		String regexFirstName ="^[a-zA-Z]+$";
+		String firstName = firstNameTextField.getText();
+		Pattern ptFirstName = Pattern.compile(regexFirstName);
+		Matcher mFirstName = ptFirstName.matcher(firstName);
+		boolean firstNameIsGood = mFirstName.matches();
+
+		String regexName ="^[a-zA-Z]+$";
+		String name = nameTextField.getText();
+		Pattern ptName = Pattern.compile(regexName);
+		Matcher mName = ptName.matcher(name);
+		boolean nameIsGood = mName.matches();
 
 		String regexEmail ="^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 		String email = emailTextField.getText();
@@ -144,9 +150,17 @@ public class SubscriptionController implements Initializable{
 
 		String regexPassword ="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
 		String password = emailTextField.getText();
-		Pattern ptPassword = Pattern.compile(regexPassword;
+		Pattern ptPassword = Pattern.compile(regexPassword);
 		Matcher mPassword = ptPassword.matcher(password);
 		boolean passwordIsGood = mPassword.matches();
+
+		String regexNumber ="^(0|\\+33)[1-9]([-. ]?[0-9]{2}){4}$";
+		String number = numberTextField.getText();
+		Pattern ptNumber = Pattern.compile(regexNumber);
+		Matcher mNumber = ptNumber.matcher(number);
+		boolean numberIsGood = mNumber.matches();
+
+
 
 
 		userRegisteredLabel.setText("Votre compte a bien été crééé !");
