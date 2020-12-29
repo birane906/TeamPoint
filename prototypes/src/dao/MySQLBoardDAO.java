@@ -30,11 +30,11 @@ public class MySQLBoardDAO extends ColumnDAO {
 	}
 
 	/**
-	 * Description of the method addColumn.
+	 * add Column.
 	 * @param columnName 
-	 * @param board 
-	 * @param typeName 
-	 * @return 
+	 * @param board we want the column to be created
+	 * @param typeName String type of {@link AbstractType}
+	 * @return the board with the new column
 	 */
 	public Board addColumn(String columnName, Board board, String typeName) {
 		// Start of user code for method addColumn
@@ -44,9 +44,9 @@ public class MySQLBoardDAO extends ColumnDAO {
 	}
 
 	/**
-	 * Description of the method deleteColumn.
-	 * @param column 
-	 * @return 
+	 * delete Column.
+	 * @param column to be deleted
+	 * @return the board updated
 	 */
 	public Boolean deleteColumn(Column column) {
 		// Start of user code for method deleteColumn
@@ -56,8 +56,8 @@ public class MySQLBoardDAO extends ColumnDAO {
 	}
 
 	/**
-	 * Description of the method getAllColumnTypes.
-	 * @return 
+	 * getAllColumnTypes .
+	 * @return column types String that describe type of all the column types
 	 */
 	public Object getAllColumnTypes() {
 		return null;

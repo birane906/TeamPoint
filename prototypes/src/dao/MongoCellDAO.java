@@ -3,6 +3,10 @@
  *******************************************************************************/
 package dao;
 
+import business_logic.board.AbstractType;
+import business_logic.board.Cell;
+import business_logic.board.Column;
+import business_logic.board.Item;
 import business_logic.user.User;
 import dao.CellDAO;
 import dao.UserDAO;
@@ -67,6 +71,24 @@ public class MongoCellDAO extends CellDAO {
 		User signup = null;
 		return signup;
 		// End of user code
+	}
+
+	@Override
+	public Cell addCell(Column column, Item item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean deleteCell(Cell cell) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean editCell(Cell cell, AbstractType value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// Start of user code (user defined methods for MongoCellDAO)

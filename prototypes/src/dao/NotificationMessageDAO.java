@@ -32,24 +32,24 @@ public abstract class NotificationMessageDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method createNotificationMessage.
-	 * @param message 
-	 * @param user 
-	 * @return 
+	 * create Notification Message. {@link NotificationMessage}
+	 * @param message {@link Message}
+	 * @param user {@link User}
+	 * @return the message
 	 */
 	public abstract Message createNotificationMessage(Message message, User user);
 
 	/**
-	 * Description of the method deleteNotificationMessage.
+	 * delete Notification Message.
 	 * @param notificationMessage 
-	 * @return 
+	 * @return a boolean according to the success of delete
 	 */
 	public abstract Boolean deleteNotificationMessage(NotificationMessage notificationMessage);
 
 	/**
-	 * Description of the method retrieveAllUserNotificationMessages.
-	 * @param user 
-	 * @return 
+	 * retrieve All User Invitations.
+	 * @param user we want the invitations
+	 * @return a hashset of invitation and roles
 	 */
 	public abstract HashSet<NotificationMessage> retrieveAllUserNotificationMessages(User user);
 	 

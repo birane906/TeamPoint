@@ -37,37 +37,24 @@ public abstract class CellDAO implements DAO {
 	 * @param item 
 	 * @return the cell created
 	 */
-	public Cell addCell(Column column, Item item) {
-		// Start of user code for method addCell
-		Cell addCell = null;
-		return addCell;
-		// End of user code
-	}
+	// TODO verify if really abstract
+	public abstract Cell addCell(Column column, Item item);
 
 	/**
 	 * delete Cell.
 	 * @param cell 
 	 * @return a boolean according to the success of delete
 	 */
-	public Boolean deleteCell(Cell cell) {
-		// Start of user code for method deleteCell
-		Boolean deleteCell = Boolean.FALSE;
-		return deleteCell;
-		// End of user code
-	}
-
+	// TODO verify if really abstract
+	public abstract Boolean deleteCell(Cell cell);
 	/**
 	 * edit Cell.
 	 * @param cell 
 	 * @param value 
 	 * @return a boolean according to the success of update
 	 */
-	public Boolean editCell(Cell cell, AbstractType value) {
-		// Start of user code for method editCell
-		Boolean editCell = Boolean.FALSE;
-		return editCell;
-		// End of user code
-	}
+	// TODO verify if really abstract
+	public abstract Boolean editCell(Cell cell, AbstractType value);
 
 	// Start of user code (user defined methods for CellDAO)
 

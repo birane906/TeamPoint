@@ -35,7 +35,7 @@ public abstract class ColumnDAO implements DAO {
 	 * add Column to a board.
 	 * @param columnName 
 	 * @param board 
-	 * @param typeName the String of the abstractType {@link business_logic.board.AbstractType}
+	 * @param typeName the String of the abstractType {@link AbstractType}
 	 * @return a {@link Board}
 	 */
 	public abstract Board addColumn(String columnName, Board board, String typeName);

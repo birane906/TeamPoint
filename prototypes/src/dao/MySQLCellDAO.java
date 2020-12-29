@@ -3,6 +3,10 @@
  *******************************************************************************/
 package dao;
 
+import business_logic.board.AbstractType;
+import business_logic.board.Cell;
+import business_logic.board.Column;
+import business_logic.board.Item;
 import dao.CellDAO;
 // Start of user code (user defined imports)
 
@@ -25,6 +29,41 @@ public class MySQLCellDAO extends CellDAO {
 		// Start of user code constructor for MySQLCellDAO)
 		super();
 		// End of user code
+	}
+
+	/**
+	 * add Cell.
+	 * @param column 
+	 * @param item 
+	 * @return the cell created
+	 */
+	@Override
+	public Cell addCell(Column column, Item item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * delete Cell.
+	 * @param cell 
+	 * @return a boolean according to the success of delete
+	 */
+	@Override
+	public Boolean deleteCell(Cell cell) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * edit Cell.
+	 * @param cell 
+	 * @param value 
+	 * @return a boolean according to the success of update
+	 */
+	@Override
+	public Boolean editCell(Cell cell, AbstractType value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// Start of user code (user defined methods for MySQLCellDAO)

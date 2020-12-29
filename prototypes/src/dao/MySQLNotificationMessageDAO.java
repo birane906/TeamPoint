@@ -33,10 +33,10 @@ public class MySQLNotificationMessageDAO extends NotificationMessageDAO {
 	}
 	
 	/**
-	 * Description of the method createNotificationMessage.
-	 * @param message 
-	 * @param user 
-	 * @return 
+	 * create Notification Message. {@link NotificationMessage}
+	 * @param message {@link Message}
+	 * @param user {@link User}
+	 * @return the message
 	 */
 	public Message createNotificationMessage(Message message, User user) {
 		// Start of user code for method createNotificationMessage
@@ -46,9 +46,9 @@ public class MySQLNotificationMessageDAO extends NotificationMessageDAO {
 	}
 	 
 	/**
-	 * Description of the method deleteNotificationMessage.
+	 * delete Notification Message.
 	 * @param notificationMessage 
-	 * @return 
+	 * @return a boolean according to the success of delete
 	 */
 	public Boolean deleteNotificationMessage(NotificationMessage notificationMessage) {
 		// Start of user code for method deleteNotificationMessage
@@ -58,9 +58,9 @@ public class MySQLNotificationMessageDAO extends NotificationMessageDAO {
 	}
 	 
 	/**
-	 * Description of the method retrieveAllUserNotificationMessages.
-	 * @param user 
-	 * @return 
+	 * retrieve All User Invitations.
+	 * @param user we want the invitations
+	 * @return a hashset of invitation and roles
 	 */
 	public HashSet<NotificationMessage> retrieveAllUserNotificationMessages(User user) {
 		// Start of user code for method retrieveAllUserNotificationMessages

@@ -33,25 +33,25 @@ public abstract class InvitationDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method createInvitation.
+	 * create Invitation to a workspace.
 	 * @param workspace 
-	 * @param user 
-	 * @param attendance 
-	 * @return 
+	 * @param user the user we invite
+	 * @param attendance the role we give to the user
+	 * @return an Invitation {@link Invitation}
 	 */
 	public abstract Invitation createInvitation(Workspace workspace, User user, String attendance);
 
 	/**
-	 * Description of the method deleteInvitation.
-	 * @param invitation 
-	 * @return 
+	 * delete Invitation.
+	 * @param invitation to be deleted
+	 * @return a boolean according to the success of delete 
 	 */
 	public abstract Boolean deleteInvitation(Invitation invitation);
 
 	/**
-	 * Description of the method retrieveAllUserInvitations.
-	 * @param user 
-	 * @return 
+	 * retrieve All User Invitations.
+	 * @param user we want the invitations
+	 * @return a hashset of invitation and roles
 	 */
 	public abstract HashSet<Invitation> retrieveAllUserInvitations(User user);
 	 

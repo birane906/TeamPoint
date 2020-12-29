@@ -32,12 +32,12 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	}
 
 	/**
-	 * Description of the method addWorkspace.
+	 * craete Workspace in the database.
 	 * @param workspaceName 
-	 * @param user 
-	 * @return 
+	 * @param user that created it {@link User}
+	 * @return a boolean according to the success of insert
 	 */
-	public Boolean addWorkspace(String workspaceName, User user) {
+	public Boolean createWorkspace(String workspaceName, User user) {
 		// Start of user code for method addWorkspace
 		Boolean addWorkspace = Boolean.FALSE;
 		return addWorkspace;
@@ -45,9 +45,9 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	}
 
 	/**
-	 * Description of the method deleteWorkspace.
-	 * @param workspace 
-	 * @return 
+	 * delete Workspace in the database.
+	 * @param workspace to be deleted
+	 * @return a boolean according to the success of insert
 	 */
 	public Boolean deleteWorkspace(Workspace workspace) {
 		// Start of user code for method deleteWorkspace
@@ -59,7 +59,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	/**
 	 * Description of the method retrieveWorkspace.
 	 * @param workspace 
-	 * @return 
+	 * @return a workspace {@link Workspace}
 	 */
 	public Workspace retrieveWorkspace(Workspace workspace) {
 		// Start of user code for method retrieveWorkspace
@@ -69,9 +69,9 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	}
 
 	/**
-	 * Description of the method getUserWorkspaces.
-	 * @param user 
-	 * @return 
+	 * get User Workspaces.
+	 * @param user we want the worksapces from
+	 * @return a collection of workspace
 	 */
 	public HashSet<Workspace> getUserWorkspaces(User user) {
 		// Start of user code for method getUserWorkspaces

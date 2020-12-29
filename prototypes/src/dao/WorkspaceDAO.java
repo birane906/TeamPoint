@@ -31,31 +31,31 @@ public abstract class WorkspaceDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method addWorkspace.
+	 * create Workspace in the database and add it to the user workspaces.
 	 * @param workspaceName 
-	 * @param user 
-	 * @return 
+	 * @param user that created it {@link User}
+	 * @return a boolean according to the success of insert
 	 */
-	public abstract Boolean addWorkspace(String workspaceName, User user);
+	public abstract Boolean createWorkspace(String workspaceName, User user);
 
 	/**
-	 * Description of the method deleteWorkspace.
-	 * @param workspace 
-	 * @return 
+	 * delete Workspace in the database.
+	 * @param workspace to be deleted {@link Workspace}
+	 * @return a boolean according to the success of insert
 	 */
 	public abstract Boolean deleteWorkspace(Workspace workspace);
 
 	/**
 	 * Description of the method retrieveWorkspace.
-	 * @param workspace 
-	 * @return 
+	 * @param workspace {@link Workspace}
+	 * @return a workspace {@link Workspace}
 	 */
 	public abstract Workspace retrieveWorkspace(Workspace workspace);
 
 	/**
-	 * Description of the method getUserWorkspaces.
-	 * @param user 
-	 * @return 
+	 * get User Workspaces.
+	 * @param user we want the worksapces from {@link User}
+	 * @return a collection of workspace {@link Workspace}
 	 */
 	public abstract HashSet<Workspace> getUserWorkspaces(User user);
 

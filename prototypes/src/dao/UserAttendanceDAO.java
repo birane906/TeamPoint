@@ -31,8 +31,8 @@ public abstract class UserAttendanceDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method createUserAttendance.
-	 * @param workspace 
+	 * create User Attendance in the database.
+	 * @param workspace
 	 * @param user 
 	 * @param attendance 
 	 * @return 
