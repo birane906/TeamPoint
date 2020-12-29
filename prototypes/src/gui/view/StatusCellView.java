@@ -1,12 +1,4 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
-package ui.view;
-
-invalid
-// Start of user code (user defined imports)
-
-// End of user code
+package gui.view;
 
 /**
  * Description of StatusCellView.
@@ -14,17 +6,11 @@ invalid
  * @author 
  */
 public class StatusCellView extends CellView {
-	// Start of user code (user defined attributes for StatusCellView)
-	
-	// End of user code
-	
 	/**
 	 * The constructor.
 	 */
 	public StatusCellView() {
-		// Start of user code constructor for StatusCellView)
 		super();
-		// End of user code
 	}
 	
 	/**
@@ -34,10 +20,6 @@ public class StatusCellView extends CellView {
 		// Start of user code for method displayEdit
 		// End of user code
 	}
-	 
-	// Start of user code (user defined methods for StatusCellView)
-	
-	// End of user code
 
 
 }
