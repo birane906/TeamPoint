@@ -4,6 +4,8 @@
 package business_logic;
 
 
+import java.util.HashSet;
+
 import business_logic.user.User;
 import dao.DAOFactory;
 import dao.UserDAO;
@@ -143,7 +145,7 @@ public class UserFacade {
 	 * @return workspaces 
 	 */
 	public HashSet<Workspace> getWorkspaces() {
-		return this.workspaces;
+		return null;
 	}
 	
 	public static void main(String[] args) {
