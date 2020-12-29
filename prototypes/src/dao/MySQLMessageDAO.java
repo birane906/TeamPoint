@@ -3,7 +3,11 @@
  *******************************************************************************/
 package dao;
 
-invalid
+import java.util.HashSet;
+
+import business_logic.notification.Channel;
+import business_logic.notification.Message;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -33,7 +37,7 @@ public class MySQLMessageDAO extends MessageDAO {
 	 * @param channel; Channel 
 	 * @return 
 	 */
-	public Message createMessage(String message, Object channel; Channel) {
+	public Message createMessage(String message, Channel channel) {
 		// Start of user code for method createMessage
 		Message createMessage = null;
 		return createMessage;

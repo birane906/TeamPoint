@@ -3,9 +3,13 @@
  *******************************************************************************/
 package dao;
 
-import dao.ColumnDAO;
-import dao.UserDAO;
+import business_logic.board.Board;
+import business_logic.board.Column;
+import business_logic.board.Item;
+import business_logic.board.ItemCollection;
+import business_logic.user.User;
 // Start of user code (user defined imports)
+import business_logic.workspace.Workspace;
 
 // End of user code
 
@@ -14,7 +18,7 @@ import dao.UserDAO;
  * 
  * @author 
  */
-public class MongoBoardDAO extends UserDAOColumnDAO {
+public class MongoBoardDAO extends BoardDAO {
 	// Start of user code (user defined attributes for MongoBoardDAO)
 
 	// End of user code
@@ -99,8 +103,51 @@ public class MongoBoardDAO extends UserDAOColumnDAO {
 	 * @return 
 	 */
 	public Object getAllColumnTypes() {
+		return null;
 		// Start of user code for method getAllColumnTypes
 		// End of user code
+	}
+
+	@Override
+	public Board addBoard(String name, Workspace workspace, User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean deleteBoard(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Board retrieveBoard(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean addItemCollection(String itemCollectionName, Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean deleteItemCollection(ItemCollection itemCollection) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean addItem(ItemCollection itemCollection, String itemLabel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean deleteItem(Item item) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// Start of user code (user defined methods for MongoBoardDAO)

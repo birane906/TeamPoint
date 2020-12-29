@@ -3,6 +3,8 @@
  *******************************************************************************/
 package dao;
 
+import java.util.Date;
+
 import business_logic.board.Board;
 import business_logic.board.Column;
 import dao.DAO;

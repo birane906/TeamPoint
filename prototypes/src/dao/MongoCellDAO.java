@@ -3,6 +3,7 @@
  *******************************************************************************/
 package dao;
 
+import business_logic.user.User;
 import dao.CellDAO;
 import dao.UserDAO;
 // Start of user code (user defined imports)
@@ -14,7 +15,7 @@ import dao.UserDAO;
  * 
  * @author 
  */
-public class MongoCellDAO extends UserDAOCellDAO {
+public class MongoCellDAO extends CellDAO {
 	// Start of user code (user defined attributes for MongoCellDAO)
 
 	// End of user code

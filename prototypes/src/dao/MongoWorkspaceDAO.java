@@ -3,6 +3,10 @@
  *******************************************************************************/
 package dao;
 
+import java.util.HashSet;
+
+import business_logic.user.User;
+import business_logic.workspace.Workspace;
 import dao.UserDAO;
 import dao.WorkspaceDAO;
 // Start of user code (user defined imports)
@@ -14,7 +18,7 @@ import dao.WorkspaceDAO;
  * 
  * @author 
  */
-public class MongoWorkspaceDAO extends UserDAOWorkspaceDAO {
+public class MongoWorkspaceDAO extends WorkspaceDAO {
 	// Start of user code (user defined attributes for MongoWorkspaceDAO)
 
 	// End of user code

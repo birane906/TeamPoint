@@ -3,6 +3,8 @@
  *******************************************************************************/
 package dao;
 
+import business_logic.board.Board;
+import business_logic.board.Column;
 import dao.ColumnDAO;
 // Start of user code (user defined imports)
 
@@ -58,6 +60,7 @@ public class MySQLBoardDAO extends ColumnDAO {
 	 * @return 
 	 */
 	public Object getAllColumnTypes() {
+		return null;
 		// Start of user code for method getAllColumnTypes
 		// End of user code
 	}

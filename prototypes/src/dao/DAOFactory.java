@@ -28,34 +28,19 @@ public abstract class DAOFactory {
 	 * Description of the method createBoardDAO.
 	 * @return 
 	 */
-	public abstract BoardDAO createBoardDAO() {
-		// Start of user code for method createBoardDAO
-		BoardDAO createBoardDAO = null;
-		return createBoardDAO;
-		// End of user code
-	}
+	public abstract BoardDAO createBoardDAO();
 
 	/**
 	 * Description of the method createWorkspaceDAO.
 	 * @return 
 	 */
-	public abstract WorkspaceDAO createWorkspaceDAO() {
-		// Start of user code for method createWorkspaceDAO
-		WorkspaceDAO createWorkspaceDAO = null;
-		return createWorkspaceDAO;
-		// End of user code
-	}
+	public abstract WorkspaceDAO createWorkspaceDAO();
 
 	/**
 	 * Description of the method createColumnDAO.
 	 * @return 
 	 */
-	public abstract ColumnDAO createColumnDAO() {
-		// Start of user code for method createColumnDAO
-		ColumnDAO createColumnDAO = null;
-		return createColumnDAO;
-		// End of user code
-	}
+	public abstract ColumnDAO createColumnDAO();
 
 	/**
 	 * <code>static</code> method. It returns a subtype of {@link DAOFactory} (a concrete factory)

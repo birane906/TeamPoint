@@ -3,7 +3,12 @@
  *******************************************************************************/
 package dao;
 
-invalid
+import java.util.HashSet;
+
+import business_logic.notification.Invitation;
+import business_logic.user.User;
+import business_logic.workspace.Workspace;
+
 // Start of user code (user defined imports)
 
 // End of user code
