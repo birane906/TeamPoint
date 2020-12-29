@@ -3,7 +3,10 @@
  *******************************************************************************/
 package dao;
 
-import business_logic.Workspace.Workspace;
+import business_logic.workspace.Workspace;
+
+import java.util.Date;
+
 import business_logic.board.Board;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;

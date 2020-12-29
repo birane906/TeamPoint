@@ -22,4 +22,22 @@ public class MongoDAOFactory extends DAOFactory {
 	public UserDAO createUserDAO() {
 		return new MongoUserDAO();
 	}
+
+	@Override
+	public BoardDAO createBoardDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public WorkspaceDAO createWorkspaceDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ColumnDAO createColumnDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

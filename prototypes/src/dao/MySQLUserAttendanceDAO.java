@@ -3,7 +3,10 @@
  *******************************************************************************/
 package dao;
 
-invalid
+import business_logic.user.AbstractUserAttendance;
+import business_logic.user.User;
+import business_logic.workspace.Workspace;
+
 // Start of user code (user defined imports)
 
 // End of user code
