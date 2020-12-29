@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 29 déc. 2020 à 13:34
+-- Généré le :  mar. 29 déc. 2020 à 17:51
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -37,6 +37,13 @@ CREATE TABLE `board` (
   `boardCreationDate` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `board`
+--
+
+INSERT INTO `board` (`idBoard`, `userOwner`, `idPermission`, `boardName`, `parentWorkspace`, `boardCreationDate`) VALUES
+(0, 1, 0, 'TestBoard', 0, '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
@@ -59,10 +66,18 @@ CREATE TABLE `cell` (
   `idCell` int(10) NOT NULL,
   `idBoard` int(10) NOT NULL,
   `idColumn` int(10) NOT NULL,
+  `idItem` int(10) NOT NULL,
   `idItemCollection` int(10) NOT NULL,
   `cellValue` varchar(25) NOT NULL,
   `idCellType` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `cell`
+--
+
+INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idItemCollection`, `cellValue`, `idCellType`) VALUES
+(0, 0, 0, 0, 0, 'ValueTest', 0);
 
 -- --------------------------------------------------------
 
@@ -76,6 +91,14 @@ CREATE TABLE `celltype` (
   `descriptionType` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `celltype`
+--
+
+INSERT INTO `celltype` (`idCellType`, `nameType`, `descriptionType`) VALUES
+(0, 'TimeLineType', 'two date'),
+(1, 'textType', 'field of text');
+
 -- --------------------------------------------------------
 
 --
@@ -87,6 +110,13 @@ CREATE TABLE `column` (
   `idBoard` int(10) NOT NULL,
   `columnName` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `column`
+--
+
+INSERT INTO `column` (`idColumn`, `idBoard`, `columnName`) VALUES
+(0, 0, 'Columntest');
 
 -- --------------------------------------------------------
 
@@ -101,6 +131,13 @@ CREATE TABLE `item` (
   `itemName` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `item`
+--
+
+INSERT INTO `item` (`idItem`, `idBoard`, `idItemCollection`, `itemName`) VALUES
+(0, 0, 0, 'Item Test');
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +149,13 @@ CREATE TABLE `itemcollection` (
   `idBoard` int(10) NOT NULL,
   `itemCollectionName` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `itemcollection`
+--
+
+INSERT INTO `itemcollection` (`idItemCollection`, `idBoard`, `itemCollectionName`) VALUES
+(0, 0, 'collection Test');
 
 -- --------------------------------------------------------
 
@@ -135,6 +179,13 @@ CREATE TABLE `typepermission` (
   `labelPermission` varchar(25) NOT NULL,
   `description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `typepermission`
+--
+
+INSERT INTO `typepermission` (`idTypePermission`, `labelPermission`, `description`) VALUES
+(0, 'EditEverything', 'member of a board can edit every row and column');
 
 -- --------------------------------------------------------
 
@@ -186,6 +237,13 @@ CREATE TABLE `workspace` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Déchargement des données de la table `workspace`
+--
+
+INSERT INTO `workspace` (`idWorskpace`, `idUserOwner`, `workspaceName`, `workspaceCreationDate`) VALUES
+(0, 1, 'Test', '0000-00-00');
+
+--
 -- Index pour les tables déchargées
 --
 
@@ -214,7 +272,8 @@ ALTER TABLE `cell`
   ADD KEY `FOREIGN_CELL_TYPE` (`idCellType`),
   ADD KEY `FOREIGN_CELL_BOARD` (`idBoard`),
   ADD KEY `FOREIGN_COLUMN_CELL` (`idColumn`),
-  ADD KEY `FOREIGN_ITEM_COLLECTION_CELL` (`idItemCollection`);
+  ADD KEY `FOREIGN_ITEM_COLLECTION_CELL` (`idItemCollection`),
+  ADD KEY `FOREIGN_ITEM_ROW` (`idItem`);
 
 --
 -- Index pour la table `celltype`
@@ -314,7 +373,8 @@ ALTER TABLE `cell`
   ADD CONSTRAINT `FOREIGN_CELL_BOARD` FOREIGN KEY (`idBoard`) REFERENCES `board` (`idBoard`),
   ADD CONSTRAINT `FOREIGN_CELL_TYPE` FOREIGN KEY (`idCellType`) REFERENCES `celltype` (`idCellType`),
   ADD CONSTRAINT `FOREIGN_COLUMN_CELL` FOREIGN KEY (`idColumn`) REFERENCES `column` (`idColumn`),
-  ADD CONSTRAINT `FOREIGN_ITEM_COLLECTION_CELL` FOREIGN KEY (`idItemCollection`) REFERENCES `itemcollection` (`idItemCollection`);
+  ADD CONSTRAINT `FOREIGN_ITEM_COLLECTION_CELL` FOREIGN KEY (`idItemCollection`) REFERENCES `itemcollection` (`idItemCollection`),
+  ADD CONSTRAINT `FOREIGN_ITEM_ROW` FOREIGN KEY (`idItem`) REFERENCES `item` (`idItem`);
 
 --
 -- Contraintes pour la table `column`
