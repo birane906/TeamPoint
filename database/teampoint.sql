@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 29 déc. 2020 à 13:05
+-- Généré le :  mar. 29 déc. 2020 à 13:17
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -134,7 +134,7 @@ CREATE TABLE `user` (
   `name` varchar(25) DEFAULT NULL,
   `firstName` varchar(25) DEFAULT NULL,
   `email` varchar(25) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(500) NOT NULL,
   `phoneNumber` varchar(10) DEFAULT NULL,
   `profileDescription` varchar(500) DEFAULT NULL,
   `birthday` date DEFAULT NULL
@@ -150,23 +150,13 @@ INSERT INTO `user` (`idUser`, `name`, `firstName`, `email`, `password`, `phoneNu
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user_as_member_of_workspace`
+-- Structure de la table `user_workspace`
 --
 
-CREATE TABLE `user_as_member_of_workspace` (
+CREATE TABLE `user_workspace` (
   `idUser` int(10) NOT NULL,
-  `idWorkspace` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `user_attendance`
---
-
-CREATE TABLE `user_attendance` (
-  `idUser` int(10) NOT NULL,
-  `roleLabel` varchar(25) NOT NULL
+  `idWorkspace` int(10) NOT NULL,
+  `userRole` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -254,17 +244,11 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`idUser`);
 
 --
--- Index pour la table `user_as_member_of_workspace`
+-- Index pour la table `user_workspace`
 --
-ALTER TABLE `user_as_member_of_workspace`
-  ADD KEY `FOREIGN_USER` (`idUser`),
-  ADD KEY `FOREIGN_WORKSPACE` (`idWorkspace`);
-
---
--- Index pour la table `user_attendance`
---
-ALTER TABLE `user_attendance`
-  ADD KEY `FOREIGN_USER_ATTENDANCE` (`idUser`);
+ALTER TABLE `user_workspace`
+  ADD KEY `FOREIGN_USER_WORKSPACE_USER` (`idUser`),
+  ADD KEY `FOREIGN_WORKSPACE_USER_WORKSPACE` (`idWorkspace`);
 
 --
 -- Index pour la table `workspace`
@@ -339,17 +323,11 @@ ALTER TABLE `item_collection_item`
   ADD CONSTRAINT `FOREIGN_ITEM__ITEM_COLLECTION` FOREIGN KEY (`idItem`) REFERENCES `item` (`idItem`);
 
 --
--- Contraintes pour la table `user_as_member_of_workspace`
+-- Contraintes pour la table `user_workspace`
 --
-ALTER TABLE `user_as_member_of_workspace`
-  ADD CONSTRAINT `FOREIGN_USER` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
-  ADD CONSTRAINT `FOREIGN_WORKSPACE` FOREIGN KEY (`idWorkspace`) REFERENCES `workspace` (`idWorskpace`);
-
---
--- Contraintes pour la table `user_attendance`
---
-ALTER TABLE `user_attendance`
-  ADD CONSTRAINT `FOREIGN_USER_ATTENDANCE` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`);
+ALTER TABLE `user_workspace`
+  ADD CONSTRAINT `FOREIGN_USER_WORKSPACE_USER` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
+  ADD CONSTRAINT `FOREIGN_WORKSPACE_USER_WORKSPACE` FOREIGN KEY (`idWorkspace`) REFERENCES `workspace` (`idWorskpace`);
 
 --
 -- Contraintes pour la table `workspace`
