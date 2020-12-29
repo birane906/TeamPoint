@@ -17,8 +17,6 @@ public class StatusCellView extends CellView {
 	 * Description of the method displayEdit.
 	 */
 	public void displayEdit() {
-		// Start of user code for method displayEdit
-		// End of user code
 	}
 
 
