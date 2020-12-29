@@ -1,8 +1,5 @@
 package business_logic.workspace;
 
-/******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 
 import business_logic.board.Board;
 import business_logic.user.AbstractUserAttendance;

@@ -3,17 +3,10 @@
  *******************************************************************************/
 package gui.controller;
 
-import business_logic.Workspace.Workspace;
-import business_logic.board.AbstractType;
-import business_logic.board.Board;
-import business_logic.board.Cell;
-import business_logic.board.Column;
-import business_logic.board.Item;
-import business_logic.board.ItemCollection;
+import business_logic.*;
+import business_logic.workspace.Workspace;
 import gui.view.*;
-// Start of user code (user defined imports)
 
-// End of user code
 
 /**
  * Description of BoardController.
@@ -41,17 +34,12 @@ public class BoardController {
 	 */
 	public BoardFacade boardFacade = null;
 
-	// Start of user code (user defined attributes for BoardController)
-
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
 	public BoardController() {
-		// Start of user code constructor for BoardController)
 		super();
-		// End of user code
 	}
 
 	/**
@@ -61,10 +49,8 @@ public class BoardController {
 	 * @return 
 	 */
 	public Boolean createBoard(String name, Workspace workspace) {
-		// Start of user code for method createBoard
 		Boolean createBoard = Boolean.FALSE;
 		return createBoard;
-		// End of user code
 	}
 
 	/**

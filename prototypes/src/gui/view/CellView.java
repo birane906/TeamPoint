@@ -1,11 +1,6 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
-package ui.view;
+package gui.view;
 
-// Start of user code (user defined imports)
-
-// End of user code
+import gui.controller.*;
 
 /**
  * Description of CellView.
@@ -18,9 +13,7 @@ public abstract class CellView {
 	 */
 	public BoardController boardController = null;
 
-	// Start of user code (user defined attributes for CellView)
 
-	// End of user code
 
 	/**
 	 * The constructor.

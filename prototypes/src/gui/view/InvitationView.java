@@ -3,15 +3,12 @@
  *******************************************************************************/
 package gui.view;
 
-import gui.view.AbstractNotificationView;
-// Start of user code (user defined imports)
-
-// End of user code
+import gui.controller.*;
 
 /**
  * Description of InvitationView.
  * 
- * @author Raphael
+ * @author
  */
 public class InvitationView extends AbstractNotificationView {
 	/**
@@ -19,22 +16,13 @@ public class InvitationView extends AbstractNotificationView {
 	 */
 	public InvitationController invitationController = null;
 
-	// Start of user code (user defined attributes for InvitationView)
-
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
 	public InvitationView() {
-		// Start of user code constructor for InvitationView)
 		super();
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for InvitationView)
-
-	// End of user code
 	/**
 	 * Returns invitationController.
 	 * @return invitationController 

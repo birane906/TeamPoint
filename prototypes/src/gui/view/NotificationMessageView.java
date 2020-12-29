@@ -3,15 +3,12 @@
  *******************************************************************************/
 package gui.view;
 
-import gui.view.AbstractNotificationView;
-// Start of user code (user defined imports)
-
-// End of user code
+import gui.controller.*;
 
 /**
  * Description of NotificationMessageView.
  * 
- * @author Raphael
+ * @author
  */
 public class NotificationMessageView extends AbstractNotificationView {
 	/**
@@ -19,22 +16,13 @@ public class NotificationMessageView extends AbstractNotificationView {
 	 */
 	public NotificationMessageController notificationController = null;
 
-	// Start of user code (user defined attributes for NotificationMessageView)
-
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
 	public NotificationMessageView() {
-		// Start of user code constructor for NotificationMessageView)
 		super();
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for NotificationMessageView)
-
-	// End of user code
 	/**
 	 * Returns notificationController.
 	 * @return notificationController 
