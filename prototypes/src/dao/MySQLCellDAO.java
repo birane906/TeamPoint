@@ -114,6 +114,7 @@ public class MySQLCellDAO extends CellDAO {
 
 		try {
 			rs = stmt.executeQuery(req);
+
 			while(rs.next()) {
 				rs.deleteRow();
 				return true;
@@ -155,7 +156,7 @@ public class MySQLCellDAO extends CellDAO {
 		
 		Column column = new Column(parentBoard, "sa", 0, 0);
 		
-		Cell cell = new Cell(item, column, "de");
+		Cell cell = new Cell(item, column, "sa");
 		
 		Boolean res = mySQL.deleteCell(cell);
 		System.out.println(res);
