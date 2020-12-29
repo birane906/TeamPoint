@@ -3,58 +3,36 @@
  *******************************************************************************/
 package business_logic.board;
 
-invalid
-// Start of user code (user defined imports)
-
-// End of user code
-
 /**
- * Description of PersonType.
- * 
- * @author 
+ * Type used in a {@link Column} to specify a set of {@link User}
+ *
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class PersonType extends AbstractType implements  {
 	/**
-	 * Description of the property users.
+	 * All the {@link User} of the {@link PersonType}
 	 */
-	public HashSet<User> users = new HashSet<User>();
-	
-	// Start of user code (user defined attributes for PersonType)
-	
-	// End of user code
+	public HashSet<User> users;
 	
 	/**
-	 * The constructor.
+	 * Create an empty {@link PersonType}
 	 */
-	public PersonType() {
-		// Start of user code constructor for PersonType)
-		super();
-		// End of user code
-	}
+	public PersonType() {}
 	
 	/**
-	 * Description of the method PersonTypes.
-	 * @param users 
-	 * @return 
+	 * Create a {@link PersonType} giving a set of {@link User}
+	 * @param users A set of {@link User}
 	 */
-	public PersonType PersonTypes(HashSet<User> users) {
-		// Start of user code for method PersonTypes
+	public PersonTypes(HashSet<User> users) {
 		PersonType PersonTypes = null;
 		return PersonTypes;
-		// End of user code
 	}
 	 
-	// Start of user code (user defined methods for PersonType)
-	
-	// End of user code
 	/**
-	 * Returns users.
-	 * @return users 
+	 * @return All the {@link User} of the {@link PersonType}
 	 */
 	public HashSet<User> getUsers() {
 		return this.users;
 	}
-
-
 
 }
