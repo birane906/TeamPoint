@@ -108,7 +108,7 @@ public class Board {
 	 * @param itemCollection_id 
 	 * @param item 
 	 */
-	public void addItem(Int itemCollection_id, Item item) {
+	public void addItem(int itemCollection_id, Item item) {
 		// Start of user code for method addItem
 		// End of user code
 	}
@@ -118,7 +118,7 @@ public class Board {
 	 * @param itemCollection_id 
 	 * @param item_id 
 	 */
-	public void deleteItem(Int itemCollection_id, Int item_id) {
+	public void deleteItem(int itemCollection_id, int item_id) {
 		// Start of user code for method deleteItem
 		// End of user code
 	}
@@ -128,7 +128,7 @@ public class Board {
 	 * @param column_id 
 	 * @return 
 	 */
-	public String getColumnType(Int column_id) {
+	public String getColumnType(int column_id) {
 		// Start of user code for method getColumnType
 		String getColumnType = "";
 		return getColumnType;
@@ -140,7 +140,7 @@ public class Board {
 	 * @param column_id 
 	 * @return 
 	 */
-	public HashSet<StatusLabel> getStatusColumnLabels(Int column_id) {
+	public HashSet<StatusLabel> getStatusColumnLabels(int column_id) {
 		// Start of user code for method getStatusColumnLabels
 		HashSet<StatusLabel> getStatusColumnLabels = new HashSet<StatusLabel>();
 		return getStatusColumnLabels;
@@ -253,7 +253,7 @@ public class Board {
 	 * Returns board_id.
 	 * @return board_id 
 	 */
-	public Int getBoard_id() {
+	public int getBoard_id() {
 		return this.board_id;
 	}
 
@@ -261,27 +261,7 @@ public class Board {
 	 * Sets a value to attribute board_id. 
 	 * @param newBoard_id 
 	 */
-	public void setBoard_id(Int newBoard_id) {
+	public void setBoard_id(int newBoard_id) {
 		this.board_id = newBoard_id;
 	}
-
-	/**
-	 * Returns boardOwner.
-	 * @return boardOwner 
-	 */
-	public Object getBoardOwner() {
-		return this.boardOwner;
-	}
-
-	/**
-	 * Sets a value to attribute boardOwner. 
-	 * @param newBoardOwner 
-	 */
-	public void setBoardOwner(Object newBoardOwner) {
-		if (this.boardOwner != null) {
-			this.boardOwner.set(null);
-		}
-		this.boardOwner.set(this);
-	}
-
 }
