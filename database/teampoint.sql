@@ -85,8 +85,8 @@ INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idItemCollection
 -- Structure de la table `celltype`
 --
 
-CREATE TABLE `celltype` (
-  `idCellType` int(10) NOT NULL,
+CREATE TABLE `type` (
+  `idType` int(10) NOT NULL,
   `nameType` varchar(25) NOT NULL,
   `descriptionType` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -95,7 +95,7 @@ CREATE TABLE `celltype` (
 -- Déchargement des données de la table `celltype`
 --
 
-INSERT INTO `celltype` (`idCellType`, `nameType`, `descriptionType`) VALUES
+INSERT INTO `type` (`idType`, `nameType`, `descriptionType`) VALUES
 (0, 'TimeLineType', 'two date'),
 (1, 'textType', 'field of text');
 
@@ -278,8 +278,8 @@ ALTER TABLE `cell`
 --
 -- Index pour la table `celltype`
 --
-ALTER TABLE `celltype`
-  ADD PRIMARY KEY (`idCellType`);
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`idType`);
 
 --
 -- Index pour la table `column`
@@ -341,10 +341,16 @@ ALTER TABLE `workspace`
 --
 
 --
--- AUTO_INCREMENT pour la table `user`
+-- AUTO_INCREMENT
 --
 ALTER TABLE `user`
   MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+ALTER TABLE `board`
+  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+ALTER TABLE `cell`
+  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Contraintes pour les tables déchargées
@@ -371,7 +377,7 @@ ALTER TABLE `board_contains`
 --
 ALTER TABLE `cell`
   ADD CONSTRAINT `FOREIGN_CELL_BOARD` FOREIGN KEY (`idBoard`) REFERENCES `board` (`idBoard`),
-  ADD CONSTRAINT `FOREIGN_CELL_TYPE` FOREIGN KEY (`idCellType`) REFERENCES `celltype` (`idCellType`),
+  ADD CONSTRAINT `FOREIGN_CELL_TYPE` FOREIGN KEY (`idCellType`) REFERENCES `type` (`idType`),
   ADD CONSTRAINT `FOREIGN_COLUMN_CELL` FOREIGN KEY (`idColumn`) REFERENCES `column` (`idColumn`),
   ADD CONSTRAINT `FOREIGN_ITEM_COLLECTION_CELL` FOREIGN KEY (`idItemCollection`) REFERENCES `itemcollection` (`idItemCollection`),
   ADD CONSTRAINT `FOREIGN_ITEM_ROW` FOREIGN KEY (`idItem`) REFERENCES `item` (`idItem`);
