@@ -8,9 +8,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import business_logic.board.AbstractType;
+import business_logic.board.Board;
 import business_logic.board.Cell;
 import business_logic.board.Column;
 import business_logic.board.Item;
+import business_logic.board.ItemCollection;
+import business_logic.user.User;
+import business_logic.workspace.Workspace;
 import dao.CellDAO;
 // Start of user code (user defined imports)
 
@@ -42,10 +46,37 @@ public class MySQLCellDAO extends CellDAO {
 	 * @return the cell created
 	 */
 	@Override
-	public Cell addCell(Column column, Item item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// TODO think about all the test before we can add a cell
+	public Cell addCell(Column column, Item item, Object value) {
+		// Query statement
+		Statement stmt = null;
+
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().createStatement();
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+		
+		String req = "INSERT INTO cell"
+				+ " (idBoard, idColumn, idItem, idItemCollection, cellValue, idCellType) VALUES("
+				+ DAO.stringFormat(column.getParentBoard().getBoard_id() + "") + ", " 
+				+ DAO.stringFormat(column.getColumn_id() + "") + ", " 
+				+ DAO.stringFormat(item.getItem_id() + "") + ", "
+				+ DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "") + ", "
+				+ DAO.stringFormat(value + "") + ", "
+				+ DAO.stringFormat(column.getColumnType() + "")
+				+ ")";
+		
+		try {
+			stmt.execute(req);
+		} catch (SQLException e) {
+			return null;
+		}
+		
+		return new Cell(item, column, value);
+	}	
 
 	/**
 	 * delete Cell.
@@ -75,11 +106,15 @@ public class MySQLCellDAO extends CellDAO {
 		}
 
 		String req = "SELECT idCell "
-				+ "FROM Cell";
+				+ "FROM Cell "
+				+ "WHERE idBoard = " + DAO.stringFormat(cell.getItem().getParentItemCollection().getParentBoard().getBoard_id() + "")
+				+ " AND idColumn = " + DAO.stringFormat(cell.getColumn().getColumn_id() + "")
+				+ " AND idItem = " + DAO.stringFormat(cell.getItem().getItem_id() + "")
+				+ " AND idItemCollection = " + DAO.stringFormat(cell.getItem().getParentItemCollection().getItemCollection_id() + "");
 
 		try {
 			rs = stmt.executeQuery(req);
-			if(rs.next()) {
+			while(rs.next()) {
 				rs.deleteRow();
 				return true;
 			}
@@ -109,7 +144,23 @@ public class MySQLCellDAO extends CellDAO {
 	public static void main(String[] args) {
 		MySQLCellDAO mySQL = new MySQLCellDAO();
 		
-		mySQL.deleteCell(new Cell(5));
+		
+		Workspace parentWorkspace = new Workspace("salut");
+		
+		User boardOwner = new User("name", "firstName", "email", "profileDescription", "phoneNumber");
+		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner);
+		
+		ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
+		Item item = new Item(itemCol, 0, "salut");
+		
+		Column column = new Column(parentBoard, "sa", 0, 0);
+		
+		Cell cell = new Cell(item, column, "de");
+		
+		Boolean res = mySQL.deleteCell(cell);
+		System.out.println(res);
+		
+		//System.out.println(mySQL.addCell(column, item, "sa"));
 	}
 
 }

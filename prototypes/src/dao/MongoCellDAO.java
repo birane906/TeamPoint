@@ -74,7 +74,7 @@ public class MongoCellDAO extends CellDAO {
 	}
 
 	@Override
-	public Cell addCell(Column column, Item item) {
+	public Cell addCell(Column column, Item item, Object value) {
 		// TODO Auto-generated method stub
 		return null;
 	}

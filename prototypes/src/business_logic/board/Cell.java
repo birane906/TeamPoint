@@ -3,7 +3,6 @@
  *******************************************************************************/
 package business_logic.board;
 
-import T;
 import business_logic.board.Cell;
 import business_logic.board.Column;
 import business_logic.board.Item;
@@ -25,20 +24,19 @@ public class Cell {
 	/**
 	 * Description of the property value.
 	 */
-	private T value = null;
+	private Object value = null;
 
 	/**
 	 * Description of the property item.
 	 */
 	public Item item = null;
 
-	// Start of user code (user defined attributes for Cell)
+	public Cell(Item item, Column column, Object value) {
+		this.column = column;
+		this.value = value;
+		this.item = item;
+	}
 
-	// End of user code
-
-	// Start of user code (user defined methods for Cell)
-
-	// End of user code
 	/**
 	 * Returns column.
 	 * @return column 
@@ -59,7 +57,7 @@ public class Cell {
 	 * Returns value.
 	 * @return value 
 	 */
-	public T getValue() {
+	public Object getValue() {
 		return this.value;
 	}
 
@@ -67,7 +65,7 @@ public class Cell {
 	 * Sets a value to attribute value. 
 	 * @param newValue 
 	 */
-	public void setValue(T newValue) {
+	public void setValue(Object newValue) {
 		this.value = newValue;
 	}
 
@@ -86,5 +84,14 @@ public class Cell {
 	public void setItem(Item newItem) {
 		this.item = newItem;
 	}
-
+	
+	public String toString() {
+		String str = "";
+		
+		str += "column: " + getColumn().getName();
+		str += " item: " + getItem().getLabel();
+		str += " value: " + getValue();
+		
+		return str;
+	}
 }

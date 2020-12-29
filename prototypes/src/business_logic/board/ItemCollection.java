@@ -31,6 +31,12 @@ public class ItemCollection {
 	 */
 	public HashSet<Item> items = new HashSet<Item>();
 
+	public ItemCollection(String name, int id, Board parentBoard) {
+		this.itemCollection_id = id;
+		this.name = name;
+		this.parentBoard = parentBoard;
+	}
+	
 	/**
 	 * Description of the method addItem.
 	 * @param item 

@@ -8,6 +8,7 @@ import business_logic.board.Item;
 import business_logic.board.ItemCollection;
 import business_logic.board.StatusLabel;
 import business_logic.user.BoardOwner;
+import business_logic.user.User;
 import business_logic.workspace.Workspace;
 
 import java.util.Date;
@@ -25,7 +26,7 @@ public class Board {
 	/**
 	 * Description of the property parentWorkspace.
 	 */
-	public Workspace parentWorkspace = null;
+	public Workspace parentWorkspace;
 
 	/**
 	 * Description of the property name.
@@ -45,12 +46,13 @@ public class Board {
 	/**
 	 * Description of the property permission.
 	 */
-	public Permission permission = null;
+	public Permission permission;
 
 	/**
 	 * Description of the property boardOwner.
 	 */
-	public BoardOwner boardOwner;
+	//TODO verify why class BoardOwner
+	public User boardOwner;
 
 	/**
 	 * Description of the property creationDate.
@@ -62,10 +64,12 @@ public class Board {
 	 */
 	private int board_id;
 
-	
-	// Start of user code (user defined attributes for Board)
-	
-	// End of user code
+	public Board(int id, String name, Workspace parentWorkspace, User boardOwner) {
+		this.parentWorkspace = parentWorkspace;
+		this.board_id = id;
+		this.boardOwner = boardOwner;
+		this.name = name;
+	}
 
 	/**
 	 * Description of the method addColumn.
@@ -218,7 +222,7 @@ public class Board {
 	 * Returns boardOwner.
 	 * @return boardOwner 
 	 */
-	public BoardOwner getBoardOwner() {
+	public User getBoardOwner() {
 		return this.boardOwner;
 	}
 
@@ -226,12 +230,14 @@ public class Board {
 	 * Sets a value to attribute boardOwner. 
 	 * @param newBoardOwner 
 	 */
+	/*
 	public void setBoardOwner(BoardOwner newBoardOwner) {
 		if (this.boardOwner != null) {
 			this.boardOwner.set(null);
 		}
 		this.boardOwner.set(this);
 	}
+	*/
 
 	/**
 	 * Returns creationDate.

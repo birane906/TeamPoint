@@ -3,6 +3,8 @@
  *******************************************************************************/
 package business_logic.board;
 
+import java.util.HashSet;
+
 import business_logic.board.Board;
 // Start of user code (user defined imports)
 
@@ -27,20 +29,23 @@ public class Column {
 	/**
 	 * Description of the property column_id.
 	 */
-	public Int column_id = null;
+	public int column_id;
 
 	/**
 	 * Description of the property parentBoard.
 	 */
-	public Board parentBoard = null;
+	public Board parentBoard;
+	
+	private int columnTypeId;
 
-	// Start of user code (user defined attributes for Column)
 
-	// End of user code
-
-	// Start of user code (user defined methods for Column)
-
-	// End of user code
+	public Column(Board parentBoard, String name, int idCol, int idType) {
+		this.column_id = idCol;
+		this.parentBoard = parentBoard;
+		this.name = name;
+		this.columnTypeId = idType;
+	}
+	
 	/**
 	 * Returns name.
 	 * @return name 
@@ -69,7 +74,7 @@ public class Column {
 	 * Returns column_id.
 	 * @return column_id 
 	 */
-	public Int getColumn_id() {
+	public int getColumn_id() {
 		return this.column_id;
 	}
 
@@ -77,7 +82,7 @@ public class Column {
 	 * Sets a value to attribute column_id. 
 	 * @param newColumn_id 
 	 */
-	public void setColumn_id(Int newColumn_id) {
+	public void setColumn_id(int newColumn_id) {
 		this.column_id = newColumn_id;
 	}
 
@@ -95,6 +100,10 @@ public class Column {
 	 */
 	public void setParentBoard(Board newParentBoard) {
 		this.parentBoard = newParentBoard;
+	}
+	
+	public int getColumnType() {
+		return columnTypeId;
 	}
 
 }

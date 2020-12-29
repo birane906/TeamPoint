@@ -38,7 +38,7 @@ public abstract class CellDAO implements DAO {
 	 * @return the cell created
 	 */
 	// TODO verify if really abstract
-	public abstract Cell addCell(Column column, Item item);
+	public abstract Cell addCell(Column column, Item item, Object value);
 
 	/**
 	 * delete Cell.

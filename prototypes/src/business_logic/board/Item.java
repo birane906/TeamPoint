@@ -3,6 +3,8 @@
  *******************************************************************************/
 package business_logic.board;
 
+import java.util.HashSet;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -21,25 +23,23 @@ public class Item {
 	/**
 	 * Description of the property item_id.
 	 */
-	public Int item_id = null;
+	public int item_id;
 
 	/**
 	 * Description of the property parentItemCollection.
 	 */
-	public ItemCollection parentItemCollection = null;
+	public ItemCollection parentItemCollection;
 
 	/**
 	 * Description of the property cells.
 	 */
 	public HashSet<Cell> cells = new HashSet<Cell>();
 
-	// Start of user code (user defined attributes for Item)
-
-	// End of user code
-
-	// Start of user code (user defined methods for Item)
-
-	// End of user code
+	public Item(ItemCollection parentItemCollection, int id, String label) {
+		this.item_id = id;
+		this.parentItemCollection = parentItemCollection;
+		this.label = label;
+	}
 	/**
 	 * Returns label.
 	 * @return label 
@@ -60,7 +60,7 @@ public class Item {
 	 * Returns item_id.
 	 * @return item_id 
 	 */
-	public Int getItem_id() {
+	public int getItem_id() {
 		return this.item_id;
 	}
 
@@ -68,7 +68,7 @@ public class Item {
 	 * Sets a value to attribute item_id. 
 	 * @param newItem_id 
 	 */
-	public void setItem_id(Int newItem_id) {
+	public void setItem_id(int newItem_id) {
 		this.item_id = newItem_id;
 	}
 
