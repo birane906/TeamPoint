@@ -4,7 +4,8 @@
 package gui.controller;
 
 import business_logic.*;
-import business_logic.workspace.Workspace;
+import business_logic.board.*;
+import business_logic.workspace.*;
 import gui.view.*;
 
 
@@ -131,10 +132,8 @@ public class BoardController {
 	 * @return 
 	 */
 	public Boolean deleteItemCollection(ItemCollection itemCollection) {
-		// Start of user code for method deleteItemCollection
 		Boolean deleteItemCollection = Boolean.FALSE;
 		return deleteItemCollection;
-		// End of user code
 	}
 
 	/**
@@ -144,10 +143,8 @@ public class BoardController {
 	 * @return 
 	 */
 	public Boolean addItem(String itemLabel, ItemCollection itemCollection) {
-		// Start of user code for method addItem
 		Boolean addItem = Boolean.FALSE;
 		return addItem;
-		// End of user code
 	}
 
 	/**
@@ -156,10 +153,8 @@ public class BoardController {
 	 * @return 
 	 */
 	public Boolean deleteItem(Item item) {
-		// Start of user code for method deleteItem
 		Boolean deleteItem = Boolean.FALSE;
 		return deleteItem;
-		// End of user code
 	}
 
 	/**
@@ -169,15 +164,10 @@ public class BoardController {
 	 * @return 
 	 */
 	public Boolean editCell(Cell cell, AbstractType value) {
-		// Start of user code for method editCell
 		Boolean editCell = Boolean.FALSE;
 		return editCell;
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for BoardController)
-
-	// End of user code
 	/**
 	 * Returns cellView.
 	 * @return cellView 
