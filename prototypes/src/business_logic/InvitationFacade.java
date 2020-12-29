@@ -3,8 +3,11 @@
  *******************************************************************************/
 package business_logic;
 
+import java.util.HashSet;
+
 import business_logic.InvitationFacade;
 import business_logic.notification.Invitation;
+import gui.controller.InvitationController;
 // Start of user code (user defined imports)
 
 // End of user code

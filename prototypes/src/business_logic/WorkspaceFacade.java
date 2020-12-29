@@ -3,7 +3,8 @@
  *******************************************************************************/
 package business_logic;
 
-import business_logic.Workspace.Workspace;
+import business_logic.workspace.Workspace;
+import gui.controller.WorkspaceController;
 import business_logic.WorkspaceFacade;
 import business_logic.user.User;
 import java.util.HashSet;
@@ -20,7 +21,7 @@ public class WorkspaceFacade {
 	/**
 	 * Description of the property  .
 	 */
-	public WorkspaceController=null;
+	private WorkspaceController workspaceController;
 
 	/**
 	 * Description of the property currentWorkspace.

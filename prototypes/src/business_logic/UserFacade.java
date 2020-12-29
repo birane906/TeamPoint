@@ -7,6 +7,7 @@ package business_logic;
 import business_logic.user.User;
 import dao.DAOFactory;
 import dao.UserDAO;
+import business_logic.workspace.Workspace;
 
 /**
  * {@link UserFacade} is a Singleton class. Simplify the use of 

@@ -32,50 +32,26 @@ public abstract class ColumnDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method addColumn.
+	 * add Column to a board.
 	 * @param columnName 
 	 * @param board 
-	 * @param typeName 
-	 * @return 
+	 * @param typeName the String of the abstractType {@link business_logic.board.AbstractType}
+	 * @return a {@link Board}
 	 */
 	public abstract Board addColumn(String columnName, Board board, String typeName);
 
 	/**
-	 * Description of the method deleteColumn.
+	 * delete Column.
 	 * @param column 
-	 * @return 
+	 * @return a boolean according to the success of delete
 	 */
 	public abstract Boolean deleteColumn(Column column);
 
 	/**
-	 * Description of the method getAllColumnTypes.
-	 * @return 
+	 * getAllColumnTypes .
+	 * @return column types String that describe type of all the column types
 	 */
 	public abstract Object getAllColumnTypes();
-
-	/**
-	 * Description of the method dateFormat.
-	 * @param date 
-	 * @return 
-	 */
-	public String dateFormat(Date date) {
-		// Start of user code for method dateFormat
-		String dateFormat = "";
-		return dateFormat;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method stringFormat.
-	 * @param string 
-	 * @return 
-	 */
-	public String stringFormat(String string) {
-		// Start of user code for method stringFormat
-		String stringFormat = "";
-		return stringFormat;
-		// End of user code
-	}
 
 	// Start of user code (user defined methods for ColumnDAO)
 
