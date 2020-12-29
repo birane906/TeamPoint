@@ -23,18 +23,30 @@ public class MySQLDAOFactory extends DAOFactory {
 		return new MySQLUserDAO();
 	}
 
+	/**
+	 * Creates a {@link BoardDAO} object
+	 * @return Returns a {@link BoardDAO}
+	 */
 	@Override
 	public BoardDAO createBoardDAO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Creates a {@link WorkspaceDAO} object
+	 * @return Returns a {@link WorkspaceDAO}
+	 */
 	@Override
 	public WorkspaceDAO createWorkspaceDAO() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Creates a {@link ColumnDAO} object
+	 * @return Returns a {@link ColumnDAO}
+	 */
 	@Override
 	public ColumnDAO createColumnDAO() {
 		// TODO Auto-generated method stub

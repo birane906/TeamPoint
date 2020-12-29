@@ -19,6 +19,12 @@ import java.util.ArrayList;
  */
 public class MySQLUserDAO extends UserDAO {
 
+	/**
+	 * Removes the data corresponding to this object form the database.
+	 * (Delete Query)
+	 * @param obj The object data structure must exist in the database 
+	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code>
+	 */
 	@Override
 	public boolean delete(String email) {
 		if (email == null) {
@@ -32,7 +38,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection
-			stmt = getConnection()
+			stmt = DAO.getConnection()
 				.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					 ResultSet.CONCUR_UPDATABLE);
 		} catch (SQLException e) {
@@ -56,17 +62,12 @@ public class MySQLUserDAO extends UserDAO {
 		}
 	}
 
-	public Connection getConnection() {
-		return JDBCConnector.getJDBCConnectorInstance().getConnection();
-	}
-
 	/**
-	 * ask to the database to return the line that correspond to an email and
-	 * password
-	 * 
-	 * @param email
-	 * @param password
-	 * @return the User created
+	 * For a given email and password returns the corresponding {@link User}
+	 * @param email an email as a {@link String}
+	 * @param password the given password as a {@link String}
+	 * @return Returns the corresponding {@link User} if found in the database
+	 * otherwise throw an {@link Exception}
 	 */
 	@Override
 	public User getUser(String email, String password) throws Exception {
@@ -82,7 +83,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = getConnection().createStatement();
+			stmt = DAO.getConnection().createStatement();
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
@@ -122,6 +123,12 @@ public class MySQLUserDAO extends UserDAO {
 			resultat.get(2), resultat.get(3), resultat.get(4));
 	}
 
+	/**
+	 * Creates User in the database.
+	 * (Insert query)
+	 * @param obj The object data structure must exist in the database 
+	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code> 
+	 */
 	@Override
 	public boolean signUp(String name, String firstname, 
 		String email, String password) {
@@ -130,7 +137,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection
-			stmt = getConnection().createStatement();
+			stmt = DAO.getConnection().createStatement();
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();

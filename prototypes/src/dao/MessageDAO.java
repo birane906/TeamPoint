@@ -31,24 +31,24 @@ public abstract class MessageDAO implements DAO {
 	}
 
 	/**
-	 * Description of the method createMessage.
-	 * @param message 
-	 * @param channel; Channel 
-	 * @return 
+	 * create Message on a channel.
+	 * @param message String
+	 * @param channel {@link Channel}
+	 * @return the message create
 	 */
 	public abstract Message createMessage(String message, Channel channel);
 
 	/**
-	 * Description of the method deleteMessage.
-	 * @param message 
-	 * @return 
+	 * delete a Message.
+	 * @param message that will be deleted
+	 * @return a boolean according to the success of delete
 	 */
 	public abstract Boolean deleteMessage(Message message);
 
 	/**
-	 * Description of the method retrieveAllChannelMessages.
-	 * @param channel 
-	 * @return 
+	 * retrieveAllChannelMessages.
+	 * @param channel we want the message from
+	 * @return a hashSet of all messages and their creator {@link User}
 	 */
 	public abstract HashSet<Message> retrieveAllChannelMessages(Channel channel);
 	 

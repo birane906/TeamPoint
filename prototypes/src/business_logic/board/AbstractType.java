@@ -12,11 +12,14 @@ package business_logic.board;
  * 
  * @author 
  */
-public abstract class AbstractType {
+// TODO verify if not really abstract
+public class AbstractType {
 	/**
 	 * Description of the property description.
 	 */
-	public String description = "";
+	private String description;
+	private String nameType;
+	private int idType;
 
 	// Start of user code (user defined attributes for AbstractType)
 
@@ -25,10 +28,10 @@ public abstract class AbstractType {
 	/**
 	 * The constructor.
 	 */
-	public AbstractType() {
-		// Start of user code constructor for AbstractType)
-		super();
-		// End of user code
+	public AbstractType(int id, String nameType, String description) {
+		this.idType = id;
+		this.description = description;
+		this.nameType = nameType;
 	}
 
 	// Start of user code (user defined methods for AbstractType)
@@ -48,6 +51,32 @@ public abstract class AbstractType {
 	 */
 	public void setDescription(String newDescription) {
 		this.description = newDescription;
+	}
+
+	public String getNameType() {
+		return nameType;
+	}
+
+	public void setNameType(String nameType) {
+		this.nameType = nameType;
+	}
+
+	public int getIdType() {
+		return idType;
+	}
+
+	public void setIdType(int idType) {
+		this.idType = idType;
+	}
+	
+	public String toString() {
+		String str = "";
+		
+		str += getIdType() + "/ ";
+		str += getNameType() + "/ ";
+		str += getDescription();
+		
+		return str;
 	}
 
 }

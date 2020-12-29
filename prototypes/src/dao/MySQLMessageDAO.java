@@ -32,10 +32,10 @@ public class MySQLMessageDAO extends MessageDAO {
 	}
 
 	/**
-	 * Description of the method createMessage.
-	 * @param message 
-	 * @param channel; Channel 
-	 * @return 
+	 * create Message on a channel.
+	 * @param message String
+	 * @param channel {@link Channel}
+	 * @return the message create
 	 */
 	public Message createMessage(String message, Channel channel) {
 		// Start of user code for method createMessage
@@ -45,9 +45,9 @@ public class MySQLMessageDAO extends MessageDAO {
 	}
 
 	/**
-	 * Description of the method deleteMessage.
-	 * @param message 
-	 * @return 
+	 * delete a Message.
+	 * @param message that will be deleted
+	 * @return a boolean according to the success of delete
 	 */
 	public Boolean deleteMessage(Message message) {
 		// Start of user code for method deleteMessage
@@ -57,9 +57,9 @@ public class MySQLMessageDAO extends MessageDAO {
 	}
 
 	/**
-	 * Description of the method retrieveAllChannelMessages.
-	 * @param channel 
-	 * @return 
+	 * retrieveAllChannelMessages.
+	 * @param channel we want the message from
+	 * @return a hashSet of all messages and their creator {@link User}
 	 */
 	public HashSet<Message> retrieveAllChannelMessages(Channel channel) {
 		// Start of user code for method retrieveAllChannelMessages

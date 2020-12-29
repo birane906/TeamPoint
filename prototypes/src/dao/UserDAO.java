@@ -35,15 +35,5 @@ public abstract class UserDAO implements DAO{
 	 * @param obj The object data structure must exist in the database 
 	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code>
 	 */
-	// TODO verify doc
-	/**
-	 * Delete the user given in parameter in the MySQL database
-	 * 
-	 * @param the user that will be deleted
-	 * @return true if the user is deleted, false if not precondition : user obj
-	 *         must have an email postcondition: user obj is deleted in the
-	 *         database, if an email is in the database multiple times the user
-	 *         corresponding to the database is only deleted once
-	 */
 	public abstract boolean delete(String email);
 }
