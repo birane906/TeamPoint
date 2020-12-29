@@ -13,25 +13,17 @@ public abstract class CellView {
 	 */
 	public BoardController boardController = null;
 
-
-
 	/**
 	 * The constructor.
 	 */
 	public CellView() {
-		// Start of user code constructor for CellView)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * Description of the method displayEdit.
 	 */
 	public abstract void displayEdit();
-
-	// Start of user code (user defined methods for CellView)
-
-	// End of user code
 	/**
 	 * Returns boardController.
 	 * @return boardController 
