@@ -1,8 +1,10 @@
+/*******************************************************************************
+ * 2020, All rights reserved.
+ *******************************************************************************/
 package business_logic.workspace;
 
-
 import business_logic.board.Board;
-import business_logic.user.*;
+import business_logic.user.AbstractUserAttendance;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,39 +12,42 @@ import java.util.Set;
 
 
 /**
- * Description of Workspace.
+ * Workspace public class representing a workspace
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class Workspace {
 
 	/**
-	 * Description of the property workspace_id.
+	 * <code>int</code> used to identify the workspace must corespond ton the id store in 
+	 * the database.
 	 */
 	private int workspace_id;
 
 	/**
-	 * Description of the property name.
+	 * The workspace name
 	 */
 	private String name;
 
 	/**
-	 * Description of the property creationDate.
+	 * The workspace creation date  
 	 */
 	private Date creationDate;
 	
 	/**
-	 * Description of the property workspaceUsers.
+	 * All users in this workspace wheter it is a WorkspaceMember or a 
+	 * WorkspaceVistor
 	 */
 	public Set<AbstractUserAttendance> workspaceUsers;
 
 	/**
-	 * Description of the property boards.
+	 * The boards inside this workspace
 	 */
 	public Set<Board> boards;
 
 	/**
-	 * 
-	 * @param name
+	 * Workspace constructor for a given name give the corresponding
+	 * worspace class intance
+	 * @param name the Workspace name
 	 */
 	public Workspace(String name){
 		this.name = name;
@@ -52,56 +57,66 @@ public class Workspace {
 	}
 
 	/**
-	 * Description of the method addBoard.
-	 * @param board 
+	 * Adds the given board to the collection of boards contained 
+	 * in this workspace. If this workspace already contains 
+	 * the element, the call leaves the workspace unchanged and returns false.
+	 * @param board is the {@link Board} object to be added to this workspace.
+	 * @return <code>true</code> if the {@link Workspace} did not already contain the
+	 * specified element.
 	 */
-	public void addBoard(Board board) {
-		//TODO
+	public boolean addBoard(Board board) {
+		return this.boards.add(board);
 	}
 
 	/**
-	 * Description of the method deleteBoard.
-	 * @param board 
+	 * Removes the specified board from this Workspace if it is present.
+	 * @param board the board to be removed form this workspace.
+	 * @return <code>true</code> if this set contained the specified element
 	 */
-	public void deleteBoard(Board board) {
-		//TODO
+	public boolean removeBoard(Board board) {
+		return this.boards.remove(board);
 	}
 
 	/**
-	 * Description of the method deleteWorkspace.
-	 */
-	public void deleteWorkspace() {
-		//TODO
-	}
-
-	/**
-	 * Description of the method removeUser.
-	 * @param user 
-	 */
-	public void removeUser(User user) {
-		//TODO
-	}
-
-	/**
-	 * Description of the method getWorkspaceUsers.
-	 * @return 
-	 */
-	public Set<AbstractUserAttendance> getWorkspaceUsers() {
-		
-		return this.workspaceUsers;
-	}
-
-	/**
-	 * Returns boards.
-	 * @return boards 
+	 * Getter for the workspace's boards
+	 * @return a {@link Set} of {@link Board}
 	 */
 	public Set<Board> getBoards() {
 		return this.boards;
 	}
 
 	/**
-	 * Returns workspace_id.
-	 * @return workspace_id 
+	 * Adds the specified {@link AbstractUserAttendance} from the workspace
+	 * @param userAttendance is the {@link AbstractUserAttendance} object to
+	 * be added from the workspace.
+	 * @return <code>true</code> if the {@link Workspace} did not already contain the
+	 * specified element.
+	 */
+	public boolean addUser(AbstractUserAttendance userAttendance) {
+		return this.workspaceUsers.add(userAttendance);
+	}
+
+	/**
+	 * Removes the specified board from this Workspace if it is present.
+	 * @param userAttendance the {@link AbstractUserAttendance} to be 
+	 * removed form this workspace.
+	 * @return <code>true</code> if this set contained the specified element
+	 */
+	public boolean removeUser(AbstractUserAttendance userAttendance) {
+		return this.workspaceUsers.remove(userAttendance);
+	}
+
+	/**
+	 * Getter for the workspace's users
+	 * @return a {@link Set} of {@link AbstractUserAttendance}
+	 */
+	public Set<AbstractUserAttendance> getWorkspaceUsers() {
+		return this.workspaceUsers;
+	}
+
+	/**
+	 * Getter for workspace id
+	 * @return an <code>int</code>
 	 */
 	public int getWorkspace_id() {
 		return this.workspace_id;
@@ -116,8 +131,8 @@ public class Workspace {
 	}
 
 	/**
-	 * Returns name.
-	 * @return name 
+	 * Getter for the workspace name
+	 * @return a {@link String}
 	 */
 	public String getName() {
 		return this.name;
@@ -125,15 +140,16 @@ public class Workspace {
 
 	/**
 	 * Sets a value to attribute name. 
-	 * @param newName 
+	 * @param newName is the {@link String} that will replace the 
+	 * previous workspace name.
 	 */
 	public void setName(String newName) {
 		this.name = newName;
 	}
 
 	/**
-	 * Returns creationDate.
-	 * @return creationDate 
+	 * Getter for the creation date of the workspace
+	 * @return the {@link Date}
 	 */
 	public Date getCreationDate() {
 		return this.creationDate;
@@ -141,10 +157,9 @@ public class Workspace {
 
 	/**
 	 * Sets a value to attribute creationDate. 
-	 * @param newCreationDate 
+	 * @param newCreationDate is the {@link Date} to be as new creation date
 	 */
 	public void setCreationDate(Date newCreationDate) {
 		this.creationDate = newCreationDate;
 	}
-
 }
