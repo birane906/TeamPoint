@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="1056.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane layoutX="92.0" layoutY="54.0" prefHeight="523.0" prefWidth="822.0">
+            <children>
+                <Line endX="-72.0" endY="542.2929077148438" layoutX="60.0" layoutY="37.0" startX="-72.0" startY="-93.0" />
+                <Line endX="777.0" endY="-52.0" layoutX="187.0" layoutY="59.0" startX="-198.5" startY="-52.0" />
+                <Line endX="-23.0" endY="477.0" layoutX="238.0" layoutY="104.0" startX="-23.0" startY="-96.5" />
+                <Label layoutX="14.0" layoutY="14.0" text="&quot;nom du projet&quot;">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="7.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/plusButton.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="38.0" layoutY="39.0" prefHeight="16.0" prefWidth="128.0" text="Ajouter un board" />
+                <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="11.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/inviteUserButton.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="34.0" layoutY="65.0" prefHeight="16.0" prefWidth="128.0" text="Inviter un membre" />
+                <Line endX="125.5" layoutX="90.0" layoutY="127.0" startX="-100.0" />
+                <ScrollPane layoutX="-12.0" layoutY="128.0" prefHeight="454.0" prefWidth="227.0">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="227.0">
+                            <children>
+                                <Label layoutX="14.0" layoutY="14.0" prefHeight="16.0" prefWidth="128.0" text="Equipe 1" />
+                                <Label layoutX="14.0" layoutY="40.0" prefHeight="16.0" prefWidth="128.0" text="Equipe 2" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </children></AnchorPane>
+        <Label layoutX="111.0" layoutY="25.0" text="Workspace">
+            <font>
+                <Font name="System Bold" size="23.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="69.0" fitWidth="51.0" layoutX="9.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/icon.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="37.0" fitWidth="43.0" layoutX="14.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/bellButton.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="26.0" fitWidth="31.0" layoutX="21.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/4Boxes.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="37.0" fitWidth="33.0" layoutX="18.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/parameters.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="10.0" layoutY="556.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/profile.png" />
+            </image>
+        </ImageView>
+        <MenuButton layoutX="312.0" layoutY="20.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="&quot;workspace courant&quot;">
+            <items>
+                <MenuItem mnemonicParsing="false" text="wsp1" />
+                <MenuItem mnemonicParsing="false" text="wps2" />
+            </items>
+        </MenuButton>
+        <ImageView fitHeight="19.0" fitWidth="50.0" layoutX="982.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/3points.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

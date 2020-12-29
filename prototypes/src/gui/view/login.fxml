@@ -14,7 +14,7 @@
    <children>
       <ImageView fx:id="logoImage" fitHeight="117.0" fitWidth="200.0" layoutX="125.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="412.4375" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="36.0">
          <image>
-            <Image url="@../../../../images/teampoint.png" />
+            <Image url="@../../../images/teampoint.png" />
          </image>
       </ImageView>
       <Label layoutX="112.0" layoutY="131.0" text="Connexion">
