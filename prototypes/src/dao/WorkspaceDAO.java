@@ -3,7 +3,7 @@
  *******************************************************************************/
 package dao;
 
-import business_logic.Workspace.Workspace;
+import business_logic.workspace.Workspace;
 import business_logic.user.User;
 import dao.DAO;
 import java.util.HashSet;
@@ -58,30 +58,6 @@ public abstract class WorkspaceDAO implements DAO {
 	 * @return 
 	 */
 	public abstract HashSet<Workspace> getUserWorkspaces(User user);
-
-	/**
-	 * Description of the method dateFormat.
-	 * @param date 
-	 * @return 
-	 */
-	public String dateFormat(Date date) {
-		// Start of user code for method dateFormat
-		String dateFormat = "";
-		return dateFormat;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method stringFormat.
-	 * @param string 
-	 * @return 
-	 */
-	public String stringFormat(String string) {
-		// Start of user code for method stringFormat
-		String stringFormat = "";
-		return stringFormat;
-		// End of user code
-	}
 
 	// Start of user code (user defined methods for WorkspaceDAO)
 

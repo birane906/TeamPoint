@@ -1,11 +1,5 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board;
 
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Permission.
@@ -16,21 +10,13 @@ public class Permission {
 	/**
 	 * Description of the property label.
 	 */
-	private Object label = ;
+	private Object label = null;
 
 	/**
 	 * Description of the property description.
 	 */
-	private Object description = ;
-	
-	// Start of user code (user defined attributes for Permission)
-	
-	// End of user code
-	
-	
-	// Start of user code (user defined methods for Permission)
-	
-	// End of user code
+	private Object description = null;
+
 	/**
 	 * Returns label.
 	 * @return label 
