@@ -15,6 +15,11 @@ public class StatusType extends AbstractType implements  {
 	private StatusLabel currentStatusLabel;
 
 	/**
+	 * All the possible {@link StatusLable} for the {@link StatusType}
+	 */
+	public HashSet<StatusLabel> statusLabels;
+
+	/**
 	 * Create a new {@link StatusType} giving a {@link StatusLabel}
 	 * @param currentStatusLabel The {@link StatusLabel} of the new {@link StatusType}
 	 */
@@ -37,4 +42,10 @@ public class StatusType extends AbstractType implements  {
 	    this.currentStatusLabel = currentStatusLabel;
 	}
 
+	/**
+	 * @return All the possible {@link StatusLabel} for the {@link StatusType}
+	 */
+	public HashSet<StatusLabel> getStatusLabels() {
+		return statusLabels;
+	}
 }
