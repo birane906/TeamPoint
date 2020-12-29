@@ -3,81 +3,67 @@
  *******************************************************************************/
 package business_logic.board;
 
-// Start of user code (user defined imports)
-
-// End of user code
-
 /**
- * Description of StatusLabel.
- * 
- * @author 
+ * Class used in {@link StatusType} to define its label
+ *
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class StatusLabel {
 	/**
-	 * Description of the property color.
+	 * The color used to represent the {@link StatusLabel}
 	 */
-	private String color = "";
+	private String color;
 
 	/**
-	 * Description of the property label.
+	 * The label of the {@link StatusLabel}
 	 */
-	private String label = "";
+	private String label;
 
 	/**
-	 * Description of the property statusType.
+	 * The {@link StatusType} using the {@link StatusLabel}
 	 */
-	public StatusType statusType = null;
+	public StatusType statusType;
 
-	// Start of user code (user defined attributes for StatusLabel)
-
-	// End of user code
-
-	// Start of user code (user defined methods for StatusLabel)
-
-	// End of user code
 	/**
-	 * Returns color.
-	 * @return color 
+	 * @return The color used to represent the {@link StatusLabel}
 	 */
 	public String getColor() {
 		return this.color;
 	}
 
 	/**
-	 * Sets a value to attribute color. 
-	 * @param newColor 
+	 * Sets the color of the {@link StatusLabel}
+	 * @param color The new color of the {@link StatusLabel}
 	 */
-	public void setColor(String newColor) {
-		this.color = newColor;
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	/**
-	 * Returns label.
-	 * @return label 
+	 * @return The label of the {@link StatusLabel}
 	 */
 	public String getLabel() {
 		return this.label;
 	}
 
 	/**
-	 * Sets a value to attribute label. 
-	 * @param newLabel 
+	 * Sets the label of the {@link StatusLabel}
+	 * @param label The new label of {@link StatusLabel}
 	 */
-	public void setLabel(String newLabel) {
-		this.label = newLabel;
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	/**
-	 * Returns statusType.
-	 * @return statusType 
+	 * @return The {@link StatusType} using the {@link StatusLabel}
 	 */
 	public StatusType getStatusType() {
 		return this.statusType;
 	}
 
 	/**
-	 * Sets a value to attribute statusType. 
-	 * @param newStatusType 
+	 * Sets the {@link StatusType} of the {@link StatusLabel}
+	 * @param newStatusType The new {@link StatusType} of the {@link StatusLabel}
 	 */
 	public void setStatusType(StatusType newStatusType) {
 		this.statusType = newStatusType;
