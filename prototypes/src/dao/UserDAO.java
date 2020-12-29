@@ -9,7 +9,7 @@ import business_logic.user.User;
  * {@link UserDAO} class implements {@link DAO} interface
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public abstract class UserDAO implements DAO<User>{
+public abstract class UserDAO implements DAO{
 	
 	/**
 	 * For a given email and password returns the corresponding {@link User}

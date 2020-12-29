@@ -11,7 +11,7 @@ import java.util.Date;
  * DAO interface
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public interface DAO<T> {
+public interface DAO {
 	
 	/**
 	 *  Format the date database for query 
