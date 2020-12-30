@@ -1,7 +1,8 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board;
+
+import business_logic.user.User;
+
+import java.util.HashSet;
 
 /**
  * Type used in a {@link Column} to specify a set of {@link User}
