@@ -6,6 +6,7 @@ package business_logic;
 
 import java.util.HashSet;
 
+import business_logic.user.*;
 import business_logic.user.User;
 import dao.DAOFactory;
 import dao.UserDAO;
@@ -24,13 +25,13 @@ public class UserFacade {
 	 * Is null until login method is called
 	 */
 	@SuppressWarnings("unused")
-	private User currentUser;
+	private User currentUser =null;
+
 
 	/**
-	 * <code>private</code> constructor
+	 * private constructor
 	 */
 	private UserFacade() {
-		this.currentUser = null;
 	}
 
 	/***
@@ -67,7 +68,7 @@ public class UserFacade {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		UserDAO userDAO = daoFactory.createUserDAO();
 		try {
-			this.currentUser = userDAO.getUser(email, password);	
+			this.currentUser = userDAO.getUser(email, password);
 		} catch (Exception e) {
 			return false;
 		}
@@ -115,15 +116,10 @@ public class UserFacade {
 	 * @return 
 	 */
 	public String getCurrentUserEmail() {
-		// Start of user code for method getCurrentUserEmail
 		String getCurrentUserEmail = "";
 		return getCurrentUserEmail;
-		// End of user code
 	}
 
-	// Start of user code (user defined methods for UserFacade)
-
-	// End of user code
 	/**
 	 * Returns currentUser.
 	 * @return currentUser 

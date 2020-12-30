@@ -8,7 +8,7 @@ import java.util.HashSet;
  * 
  * @author 
  */
-public class DependencyType extends AbstractType implements  {
+public class DependencyType extends AbstractType  {
 	/**
 	 * Description of the property items.
 	 */

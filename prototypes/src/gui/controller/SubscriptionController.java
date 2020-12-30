@@ -154,22 +154,15 @@ public class SubscriptionController implements Initializable{
 		Matcher mPassword = ptPassword.matcher(password);
 		boolean passwordIsGood = mPassword.matches();
 
-		String regexNumber ="^(0|\\+33)[1-9]([-. ]?[0-9]{2}){4}$";
-		String number = numberTextField.getText();
-		Pattern ptNumber = Pattern.compile(regexNumber);
-		Matcher mNumber = ptNumber.matcher(number);
-		boolean numberIsGood = mNumber.matches();
-
 
 		if(firstNameIsGood == true && nameIsGood == true){
 			if(emailIsGood == true){
 				if(passwordIsGood == true){
-					if(numberIsGood == true){
-						userRegisteredLabel.setText("Votre compte a bien été crééé !");
-						System.out.println("ON INSERTE LE NOUVEAU USER DANS LA BDD");
-					}else{
-						numberInvalidLabel.setText("Numéro de téléphone invalide !");
-					}
+						if(userFacade.signUp(name,firstName,email,password) == true) {
+							userRegisteredLabel.setText("Votre compte a bien été crééé !");
+						}else{
+							passwordInvalidLabel.setText("Erreur lors de la création de votre compte ");
+						}
 				}else{
 					passwordInvalidLabel.setText("Mot de passe non conforme ! Il doit contenir au moins 8 caractères, un chiffre, une majuscule");
 				}
@@ -180,10 +173,7 @@ public class SubscriptionController implements Initializable{
 			nameFirstNameInvalidLabel.setText("Prénom ou nom de famille non conforme !");
 		}
 
-
-
 	}
-
 
 
 	/**
