@@ -78,10 +78,9 @@ public class MongoWorkspaceDAO extends WorkspaceDAO {
 	 * @param user 
 	 * @return 
 	 */
-	public Boolean createWorkspace(String workspaceName, User user) {
+	public Workspace createWorkspace(String workspaceName, User user) {
 		// Start of user code for method addWorkspace
-		Boolean addWorkspace = Boolean.FALSE;
-		return addWorkspace;
+		return null;
 		// End of user code
 	}
 

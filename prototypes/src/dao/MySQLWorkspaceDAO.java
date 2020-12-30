@@ -3,6 +3,11 @@
  *******************************************************************************/
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashSet;
 
 import business_logic.user.User;
@@ -23,26 +28,78 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	// End of user code
 
 	/**
-	 * The constructor.
-	 */
-	public MySQLWorkspaceDAO() {
-		// Start of user code constructor for MySQLWorkspaceDAO)
-		super();
-		// End of user code
-	}
-
-	/**
 	 * craete Workspace in the database.
 	 * @param workspaceName 
 	 * @param user that created it {@link User}
 	 * @return a boolean according to the success of insert
 	 */
-	public Boolean createWorkspace(String workspaceName, User user) {
-		// Start of user code for method addWorkspace
-		Boolean addWorkspace = Boolean.FALSE;
-		return addWorkspace;
-		// End of user code
-	}
+	public Workspace createWorkspace(String workspaceName, User user) {
+		// Query statement
+		PreparedStatement prepStmt = null;
+		ResultSet rs = null;
+		int workspaceId = -1;
+		
+		String query = "INSERT INTO workspace (idUserOwner, workspaceName) "
+				+ "VALUES(?, ?)";
+		
+		try {
+			// Getconnection
+			prepStmt = DAO.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+		
+		String req = "INSERT INTO workspace"
+				+ " (idUserOwner, workspaceName) VALUES("
+				+ DAO.stringFormat(user.getUser_id() + "") + ", " 
+				+ DAO.stringFormat(workspaceName) + ")";
+					
+		try {
+			prepStmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
+			
+			rs = prepStmt.getGeneratedKeys();
+			rs.next();
+
+			workspaceId = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		// Fill the association between user and workspace
+		
+		// Query statement
+		PreparedStatement stmt = null;
+		
+		query = "INSERT INTO user_workspace(idUser, idWorkspace, userRole) VALUES(?, ?, ?)";
+		
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+				
+		req = "INSERT INTO user_workspace"
+				+ " (idUser, idWorkspace, userRole) VALUES("
+				+ DAO.stringFormat(user.getUser_id() + "") + ", " 
+				+ DAO.stringFormat(workspaceId + "") + ", "
+				+ DAO.stringFormat(workspaceAdmin)
+				+ ")";
+		
+		try {
+			stmt.execute(req);
+		} catch (SQLException e) {
+			return null;
+		}
+			
+		// The user has now a workspace
+		
+		return new Workspace(workspaceName);
+	}	
 
 	/**
 	 * delete Workspace in the database.
@@ -80,8 +137,14 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		// End of user code
 	}
 
-	// Start of user code (user defined methods for MySQLWorkspaceDAO)
-
-	// End of user code
+	public static void main(String[] args) {
+		MySQLWorkspaceDAO mySQL = new MySQLWorkspaceDAO();
+		
+		User workspaceOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
+		
+		//System.out.println(mySQL.deleteCell(cell));
+		
+		System.out.println(mySQL.createWorkspace("sa", workspaceOwner));
+	}
 
 }

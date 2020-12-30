@@ -70,6 +70,12 @@ public class Board {
 		this.boardOwner = boardOwner;
 		this.name = name;
 	}
+	
+	public Board(String name, Workspace parentWorkspace, User boardOwner) {
+		this.parentWorkspace = parentWorkspace;
+		this.boardOwner = boardOwner;
+		this.name = name;
+	}
 
 	/**
 	 * Description of the method addColumn.

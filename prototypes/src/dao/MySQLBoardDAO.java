@@ -3,6 +3,7 @@
  *******************************************************************************/
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,7 @@ import business_logic.board.Board;
 import business_logic.board.Column;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
+import business_logic.board.Permission;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.ColumnDAO;
@@ -40,10 +42,37 @@ public class MySQLBoardDAO extends BoardDAO {
 	}
 
 	@Override
-	public Board addBoard(String name, Workspace workspace, User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Board addBoard(String name, Workspace workspace, User user, Permission permission) {
+		// Query statement
+		PreparedStatement stmt = null;
+				
+		String query = "INSERT INTO workspace"
+				+ " (userOwner, idPermission, boardName, parentWorkspace) VALUES(?, ?, ?, ?)";
+		
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+		
+		String req = "INSERT INTO workspace"
+				+ " (userOwner, idPermission, boardName, parentWorkspace) VALUES("
+				+ DAO.stringFormat(user.getUser_id() + "") + ", " 
+				+ DAO.stringFormat(permission.getIdPermission() + "")
+				+ DAO.stringFormat(name) + ", "
+				+ DAO.stringFormat(workspace.getWorkspace_id() + "") + ", " 
+				+ ")";
+							
+		try {
+			stmt.execute(req);
+		} catch (SQLException e) {
+			return null;
+		}
+				
+		return new Board(name, workspace, user);
+	}	
 
 	@Override
 	public Boolean deleteBoard(Board board) {
@@ -59,8 +88,32 @@ public class MySQLBoardDAO extends BoardDAO {
 
 	@Override
 	public Boolean addItemCollection(String itemCollectionName, Board board) {
-		// TODO Auto-generated method stub
-		return null;
+		// Query statement
+		PreparedStatement stmt = null;
+						
+		String query = "INSERT INTO workspace"
+				+ " (idBoard, itemCollectionName) VALUES(?, ?)";
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+				
+		String req = "INSERT INTO workspace"
+				+ " (idBoard, itemCollectionName) VALUES("
+				+ DAO.stringFormat(board.getBoard_id() + "") + ", " 
+				+ DAO.stringFormat(itemCollectionName)
+				+  ")";
+									
+		try {
+			stmt.execute(req);
+		} catch (SQLException e) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	@Override
@@ -71,8 +124,33 @@ public class MySQLBoardDAO extends BoardDAO {
 
 	@Override
 	public Boolean addItem(ItemCollection itemCollection, String itemLabel) {
-		// TODO Auto-generated method stub
-		return null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "INSERT INTO workspace"
+				+ " (idBoard, idItemCollection, itemName) VALUES(?, ?, ?)";
+								
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+		
+		String req = "INSERT INTO workspace"
+				+ " (idBoard, idItemCollection, itemName) VALUES("
+				+ DAO.stringFormat(itemCollection.getParentBoard().getBoard_id() + "") + ", " 
+				+ DAO.stringFormat(itemCollection.getItemCollection_id() + "") + ", "
+				+ DAO.stringFormat(itemLabel)
+				+  ")";
+		
+		try {
+			stmt.execute(req);
+		} catch (SQLException e) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	@Override
@@ -82,6 +160,7 @@ public class MySQLBoardDAO extends BoardDAO {
 	}
 
 	public static void main(String[] args) {
+		
 	}
 
 }

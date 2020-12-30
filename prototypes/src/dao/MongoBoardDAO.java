@@ -7,6 +7,7 @@ import business_logic.board.Board;
 import business_logic.board.Column;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
+import business_logic.board.Permission;
 import business_logic.user.User;
 // Start of user code (user defined imports)
 import business_logic.workspace.Workspace;
@@ -109,7 +110,7 @@ public class MongoBoardDAO extends BoardDAO {
 	}
 
 	@Override
-	public Board addBoard(String name, Workspace workspace, User user) {
+	public Board addBoard(String name, Workspace workspace, User user, Permission permission) {
 		// TODO Auto-generated method stub
 		return null;
 	}

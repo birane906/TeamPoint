@@ -15,6 +15,8 @@ import java.util.HashSet;
  */
 public class User {
 
+	private int user_id;
+	
 	/**
 	 * The property name which is the user name.
 	 */
@@ -63,15 +65,24 @@ public class User {
 	
 	// TODO find solution for password without stocking it in a user
 	public User(String name, String firstName, String email, String password, String profileDescription, String phoneNumber) {
-			this.name = name;
-			this.firstName = firstName;
-			this.email = email;
-			this.password = password;
-			this.profileDescription = profileDescription;
-			this.phoneNumber = phoneNumber;
-		}
+		this.name = name;
+		this.firstName = firstName;
+		this.email = email;
+		this.password = password;
+		this.profileDescription = profileDescription;
+		this.phoneNumber = phoneNumber;
+	}
 	
 	public User(String name, String firstName, String email, String profileDescription, String phoneNumber) {
+		this.name = name;
+		this.firstName = firstName;
+		this.email = email;
+		this.profileDescription = profileDescription;
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public User(int id, String name, String firstName, String email, String profileDescription, String phoneNumber) {
+		this.user_id = id;
 		this.name = name;
 		this.firstName = firstName;
 		this.email = email;
@@ -201,6 +212,10 @@ public class User {
 		str += "/ Phone Number: " + getPhoneNumber();
 		
 		return str;
+	}
+
+	public int getUser_id() {
+		return user_id;
 	}
 
 }

@@ -17,9 +17,9 @@ import java.util.HashSet;
  * @author 
  */
 public abstract class WorkspaceDAO implements DAO {
-	// Start of user code (user defined attributes for WorkspaceDAO)
 
-	// End of user code
+	
+	final String workspaceAdmin = "WorkspaceAdmin";
 
 	/**
 	 * The constructor.
@@ -36,7 +36,7 @@ public abstract class WorkspaceDAO implements DAO {
 	 * @param user that created it {@link User}
 	 * @return a boolean according to the success of insert
 	 */
-	public abstract Boolean createWorkspace(String workspaceName, User user);
+	public abstract Workspace createWorkspace(String workspaceName, User user);
 
 	/**
 	 * delete Workspace in the database.
