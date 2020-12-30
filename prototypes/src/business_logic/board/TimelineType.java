@@ -9,7 +9,7 @@ import java.util.Date;
  * 
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public class TimelineType extends AbstractType implements  {
+public class TimelineType extends AbstractType  {
 	/**
 	 * Starting {@link Date} of the {@link TimelineType}
 	 */

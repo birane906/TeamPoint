@@ -8,7 +8,7 @@ package business_logic.board;
  *
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public class PersonType extends AbstractType implements  {
+public class PersonType extends AbstractType   {
 	/**
 	 * All the {@link User} of the {@link PersonType}
 	 */

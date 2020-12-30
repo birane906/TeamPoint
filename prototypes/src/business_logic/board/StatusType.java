@@ -8,7 +8,7 @@ package business_logic.board;
  *
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public class StatusType extends AbstractType implements  {
+public class StatusType extends AbstractType   {
 	/**
 	 * The current status of the {@link StatusType}
 	 */
