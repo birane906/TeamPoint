@@ -85,6 +85,7 @@ public class BoardController {
 	public Object retrieveColumnTypes() {
 		// Start of user code for method retrieveColumnTypes
 		// End of user code
+		return null;
 	}
 
 	/**
@@ -180,6 +181,7 @@ public class BoardController {
 	 * Sets a value to attribute cellView. 
 	 * @param newCellView 
 	 */
+	/*
 	public void setCellView(CellView newCellView) {
 		if (this.cellView != null) {
 			this.cellView.set(null);
@@ -187,6 +189,8 @@ public class BoardController {
 		this.cellView.set(this);
 	}
 
+
+	 */
 	/**
 	 * Returns columnFacade.
 	 * @return columnFacade 

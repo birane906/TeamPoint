@@ -3,8 +3,11 @@
  *******************************************************************************/
 package gui.controller;
 
+import business_logic.WorkspaceFacade;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
+import gui.view.InvitationSenderView;
+
 import java.util.HashSet;
 // Start of user code (user defined imports)
 
@@ -81,11 +84,14 @@ public class InvitationSenderController {
 	 * Sets a value to attribute invitationSenderView. 
 	 * @param newInvitationSenderView 
 	 */
+	/*
 	public void setInvitationSenderView(InvitationSenderView newInvitationSenderView) {
 		if (this.invitationSenderView != null) {
 			this.invitationSenderView.set(null);
 		}
 		this.invitationSenderView.set(this);
 	}
+
+	 */
 
 }

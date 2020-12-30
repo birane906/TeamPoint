@@ -8,7 +8,7 @@ package business_logic.board;
  *
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public class TextType extends AbstractType throws Exception {
+public class TextType extends AbstractType {
 	/**
 	 * The text of the {@link TextType}
 	 */
@@ -24,9 +24,10 @@ public class TextType extends AbstractType throws Exception {
 	 * @param text
 	 * @param charLimit
 	 */
-	public TextType(String text, int charLimit) throws Exception {
-		if (text.length > charLimit) {
-			throw new Exception("The text is too long.")
+	public TextType(String text, int charLimit, int id, String nameType, String description) throws Exception {
+		super(id, nameType, description);
+		if (text.length() > charLimit) {
+			throw new Exception("The text is too long.");
 		}
 		this.text = text;
 		this.charLimit = charLimit;
@@ -43,8 +44,8 @@ public class TextType extends AbstractType throws Exception {
 	 * Sets the text of the {@link TextType}
 	 * @param text The new text of the {@link TextType}
 	 */
-	public void setText(String text) {
-		if (text.length > this.charLimit) {
+	public void setText(String text) throws Exception {
+		if (text.length() > this.charLimit) {
 			throw new Exception("The text is too long.");
 		}
 	    this.text = text;
@@ -53,16 +54,16 @@ public class TextType extends AbstractType throws Exception {
 	/**
 	 * @return The limit of characters allowed in the text field
 	 */
-	public String getCharLimit() {
+	public int getCharLimit() {
 		return this.charLimit;
 	}
 	
 	/**
 	 * Sets the limit of characters for the text field
-	 * @param charLimit The limit of the text field of the {@link TextType}
+	 * @param newCharLimit The limit of the text field of the {@link TextType}
 	 */
-	public void setCharLimit(String charLimit) throws Exception {
-		if (this.text.length > charLimit) {
+	public void setCharLimit(int newCharLimit) throws Exception {
+		if (this.text.length() > charLimit) {
 			throw new Exception("Character limit is too low for current text field.");
 		}
 	    this.charLimit = newCharLimit;

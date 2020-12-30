@@ -120,11 +120,14 @@ public class WorkspaceFacade {
 	 * Sets a value to attribute currentWorkspace. 
 	 * @param newCurrentWorkspace 
 	 */
+	/*
 	public void setCurrentWorkspace(Workspace newCurrentWorkspace) {
 		if (this.currentWorkspace != null) {
 			this.currentWorkspace.set(null);
 		}
 		this.currentWorkspace.set(this);
 	}
+
+	 */
 
 }

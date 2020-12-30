@@ -13,8 +13,19 @@ public class DependencyType extends AbstractType  {
 	 * Description of the property items.
 	 */
 	public HashSet<Item> items = new HashSet<Item>();
-	
-	
+
+	/**
+	 * The constructor.
+	 *
+	 * @param id
+	 * @param nameType
+	 * @param description
+	 */
+	public DependencyType(int id, String nameType, String description) {
+		super(id, nameType, description);
+	}
+
+
 	/**
 	 * Description of the method addItem.
 	 * @param item 

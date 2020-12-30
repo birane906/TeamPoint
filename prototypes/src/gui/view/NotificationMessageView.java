@@ -35,11 +35,14 @@ public class NotificationMessageView extends AbstractNotificationView {
 	 * Sets a value to attribute notificationController. 
 	 * @param newNotificationController 
 	 */
+	/*
 	public void setNotificationController(NotificationMessageController newNotificationController) {
 		if (this.notificationController != null) {
 			this.notificationController.set(null);
 		}
 		this.notificationController.set(this);
 	}
+
+	 */
 
 }

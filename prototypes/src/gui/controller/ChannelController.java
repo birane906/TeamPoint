@@ -3,7 +3,9 @@
  *******************************************************************************/
 package gui.controller;
 
+import business_logic.ChannelFacade;
 import business_logic.notification.Channel;
+import gui.view.ChannelView;
 // Start of user code (user defined imports)
 
 // End of user code
@@ -65,12 +67,15 @@ public class ChannelController {
 	 * Sets a value to attribute channelView. 
 	 * @param newChannelView 
 	 */
+	/*
 	public void setChannelView(ChannelView newChannelView) {
 		if (this.channelView != null) {
 			this.channelView.set(null);
 		}
 		this.channelView.set(this);
 	}
+
+	 */
 
 	/**
 	 * Returns channelFacade.

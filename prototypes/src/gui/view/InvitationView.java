@@ -35,11 +35,13 @@ public class InvitationView extends AbstractNotificationView {
 	 * Sets a value to attribute invitationController. 
 	 * @param newInvitationController 
 	 */
+	/*
 	public void setInvitationController(InvitationController newInvitationController) {
 		if (this.invitationController != null) {
 			this.invitationController.set(null);
 		}
 		this.invitationController.set(this);
 	}
+	 */
 
 }

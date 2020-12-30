@@ -3,7 +3,6 @@
  *******************************************************************************/
 package business_logic.board;
 
-invalid
 // Start of user code (user defined imports)
 
 // End of user code
@@ -13,12 +12,23 @@ invalid
  * 
  * @author 
  */
-public class NumberType extends AbstractType implements  {
+public class NumberType extends AbstractType {
 	/**
 	 * Description of the property unit.
 	 */
 	private String unit = "";
-	
+
+	/**
+	 * The constructor.
+	 *
+	 * @param id
+	 * @param nameType
+	 * @param description
+	 */
+	public NumberType(int id, String nameType, String description) {
+		super(id, nameType, description);
+	}
+
 	// Start of user code (user defined attributes for NumberType)
 	
 	// End of user code

@@ -3,6 +3,8 @@
  *******************************************************************************/
 package business_logic.board;
 
+import java.util.HashSet;
+
 /**
  * Type used in a {@link Column} to specify a status
  *
@@ -23,7 +25,8 @@ public class StatusType extends AbstractType   {
 	 * Create a new {@link StatusType} giving a {@link StatusLabel}
 	 * @param currentStatusLabel The {@link StatusLabel} of the new {@link StatusType}
 	 */
-	public StatusType(StatusLabel currentStatusLabel) {
+	public StatusType(StatusLabel currentStatusLabel, int id, String nameType, String description) {
+		super(id, nameType, description);
 		this.currentStatusLabel = currentStatusLabel;
 	}
 	

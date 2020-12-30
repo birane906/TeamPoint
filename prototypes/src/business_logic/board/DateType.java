@@ -3,22 +3,34 @@
  *******************************************************************************/
 package business_logic.board;
 
-invalid
 // Start of user code (user defined imports)
 
 // End of user code
+
+import java.util.Date;
 
 /**
  * Description of DateType.
  * 
  * @author 
  */
-public class DateType extends AbstractType implements  {
+public class DateType extends AbstractType {
 	/**
 	 * Description of the property date.
 	 */
 	private Date date = new Date();
-	
+
+	/**
+	 * The constructor.
+	 *
+	 * @param id
+	 * @param nameType
+	 * @param description
+	 */
+	public DateType(int id, String nameType, String description) {
+		super(id, nameType, description);
+	}
+
 	// Start of user code (user defined attributes for DateType)
 	
 	// End of user code

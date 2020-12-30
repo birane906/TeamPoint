@@ -1,9 +1,9 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package ui.controller;
+package gui.controller;
 
-import business_logic.Workspace.Workspace;
+import business_logic.workspace.Workspace;
 // Start of user code (user defined imports)
 
 // End of user code

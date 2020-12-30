@@ -7,6 +7,8 @@ package business_logic.notification;
 
 // End of user code
 
+import business_logic.user.User;
+
 /**
  * Description of AbstractNotification.
  * 
@@ -16,12 +18,12 @@ public abstract class AbstractNotification {
 	/**
 	 * Description of the property isRead.
 	 */
-	private Object isRead = ;
+	private Object isRead;
 
 	/**
 	 * Description of the property date.
 	 */
-	private Object date = ;
+	private Object date;
 
 	/**
 	 * Description of the property user.

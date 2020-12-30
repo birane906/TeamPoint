@@ -36,11 +36,14 @@ public abstract class CellView {
 	 * Sets a value to attribute boardController. 
 	 * @param newBoardController 
 	 */
+	/*
 	public void setBoardController(BoardController newBoardController) {
 		if (this.boardController != null) {
 			this.boardController.set(null);
 		}
 		this.boardController.set(this);
 	}
+
+	 */
 
 }

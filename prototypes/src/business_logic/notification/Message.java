@@ -7,6 +7,10 @@ package business_logic.notification;
 
 // End of user code
 
+import business_logic.user.User;
+
+import java.util.HashSet;
+
 /**
  * Description of Message.
  * 
@@ -16,7 +20,7 @@ public class Message {
 	/**
 	 * Description of the property date.
 	 */
-	private Object date = ;
+	private Object date;
 
 	/**
 	 * Description of the property messageSender.
@@ -41,7 +45,7 @@ public class Message {
 	/**
 	 * Description of the property content.
 	 */
-	private Object content = ;
+	private Object content;
 	
 	// Start of user code (user defined attributes for Message)
 	

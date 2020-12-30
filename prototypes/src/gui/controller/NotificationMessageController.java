@@ -3,7 +3,9 @@
  *******************************************************************************/
 package gui.controller;
 
+import business_logic.NotificationMessageFacade;
 import business_logic.notification.NotificationMessage;
+import gui.view.NotificationMessageView;
 // Start of user code (user defined imports)
 
 // End of user code
@@ -92,11 +94,14 @@ public class NotificationMessageController {
 	 * Sets a value to attribute notificationMessageView. 
 	 * @param newNotificationMessageView 
 	 */
+	/*
 	public void setNotificationMessageView(NotificationMessageView newNotificationMessageView) {
 		if (this.notificationMessageView != null) {
 			this.notificationMessageView.set(null);
 		}
 		this.notificationMessageView.set(this);
 	}
+
+	 */
 
 }

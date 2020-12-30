@@ -41,11 +41,14 @@ public class InvitationSenderView {
 	 * Sets a value to attribute invitationSenderController. 
 	 * @param newInvitationSenderController 
 	 */
+	/*
 	public void setInvitationSenderController(InvitationSenderController newInvitationSenderController) {
 		if (this.invitationSenderController != null) {
 			this.invitationSenderController.set(null);
 		}
 		this.invitationSenderController.set(this);
 	}
+
+	 */
 
 }

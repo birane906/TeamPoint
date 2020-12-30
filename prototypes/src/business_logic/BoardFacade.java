@@ -148,11 +148,12 @@ public class BoardFacade {
 	 * Sets a value to attribute currentBoard. 
 	 * @param newCurrentBoard 
 	 */
+	/*
 	public void setCurrentBoard(Board newCurrentBoard) {
 		if (this.currentBoard != null) {
 			this.currentBoard.set(null);
 		}
 		this.currentBoard.set(this);
 	}
-
+	 */
 }

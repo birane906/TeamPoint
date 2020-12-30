@@ -25,7 +25,8 @@ public class TimelineType extends AbstractType  {
 	 * @param startDate The starting {@link Date} of the {@link TimelineType}
 	 * @param endDate The ending {@link Date} of the {@link TimelineType}
 	 */
-	public TimelineType(Date startDate, Date endDate) {
+	public TimelineType(Date startDate, Date endDate, int id, String nameType, String description) {
+		super(id, nameType, description);
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}

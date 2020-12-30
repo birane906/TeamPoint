@@ -3,7 +3,9 @@
  *******************************************************************************/
 package gui.controller;
 
+import business_logic.InvitationFacade;
 import business_logic.notification.Invitation;
+import gui.view.InvitationView;
 // Start of user code (user defined imports)
 
 // End of user code
@@ -88,12 +90,15 @@ public class InvitationController {
 	 * Sets a value to attribute invitationView. 
 	 * @param newInvitationView 
 	 */
+	/*
 	public void setInvitationView(InvitationView newInvitationView) {
 		if (this.invitationView != null) {
 			this.invitationView.set(null);
 		}
 		this.invitationView.set(this);
 	}
+	
+	 */
 
 	/**
 	 * Returns invitationFacade.

@@ -4,6 +4,7 @@
 package business_logic.notification;
 
 import business_logic.notification.AbstractNotification;
+import business_logic.workspace.Workspace;
 // Start of user code (user defined imports)
 
 // End of user code
@@ -17,7 +18,7 @@ public class Invitation extends AbstractNotification {
 	/**
 	 * Description of the property role.
 	 */
-	private Object role = ;
+	private Object role;
 
 	/**
 	 * Description of the property workspace.

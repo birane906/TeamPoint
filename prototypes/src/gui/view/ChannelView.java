@@ -39,11 +39,14 @@ public class ChannelView {
 	 * Sets a value to attribute channelController. 
 	 * @param newChannelController 
 	 */
+	/*
 	public void setChannelController(ChannelController newChannelController) {
 		if (this.channelController != null) {
 			this.channelController.set(null);
 		}
 		this.channelController.set(this);
 	}
+
+	 */
 
 }

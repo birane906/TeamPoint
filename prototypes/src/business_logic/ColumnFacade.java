@@ -108,11 +108,14 @@ public class ColumnFacade {
 	 * Sets a value to attribute currentColumn. 
 	 * @param newCurrentColumn 
 	 */
+	/*
 	public void setCurrentColumn(Column newCurrentColumn) {
 		if (this.currentColumn != null) {
 			this.currentColumn.set(null);
 		}
 		this.currentColumn.set(this);
 	}
+
+	 */
 
 }

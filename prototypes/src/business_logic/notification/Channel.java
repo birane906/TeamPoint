@@ -3,10 +3,13 @@
  *******************************************************************************/
 package business_logic.notification;
 
-invalid
 // Start of user code (user defined imports)
 
 // End of user code
+
+import business_logic.board.Item;
+
+import java.util.HashSet;
 
 /**
  * Description of Channel.
@@ -44,6 +47,7 @@ public class Channel {
 	 * Sets a value to attribute item. 
 	 * @param newItem 
 	 */
+	/*
 	public void setItem(Item newItem) {
 		if(this.item != null) {
 			this.item.set
@@ -52,6 +56,7 @@ public class Channel {
 		this.item.set
 		(this);
 	}
+	 */
 
 	/**
 	 * Returns messages.
