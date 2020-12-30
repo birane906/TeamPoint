@@ -157,15 +157,15 @@ public class SubscriptionController implements Initializable{
 
 		if(firstNameIsGood == true && nameIsGood == true){
 			if(emailIsGood == true){
-				if(passwordIsGood == true){
+				//if(passwordIsGood == true){
 						if(userFacade.signUp(name,firstName,email,password) == true) {
 							userRegisteredLabel.setText("Votre compte a bien été crééé !");
 						}else{
 							passwordInvalidLabel.setText("Erreur lors de la création de votre compte ");
 						}
-				}else{
-					passwordInvalidLabel.setText("Mot de passe non conforme ! Il doit contenir au moins 8 caractères, un chiffre, une majuscule");
-				}
+				//}else{
+				//	passwordInvalidLabel.setText("Mot de passe non conforme ! Il doit contenir au moins 8 caractères, un chiffre, une majuscule");
+				//}
 			}else{
 				emailInvalidLabel.setText("Adresse Mail invalide !");
 			}
@@ -183,6 +183,6 @@ public class SubscriptionController implements Initializable{
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		File brandingFile = new File("../teampoint_logo/TeamPointLogo2.png");
 		Image brandingImage = new Image(brandingFile.toURI().toString());
-		logoImage.setImage(brandingImage);
+		//logoImage.setImage(brandingImage);
 	}
 }
