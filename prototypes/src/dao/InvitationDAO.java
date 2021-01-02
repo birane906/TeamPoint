@@ -6,7 +6,6 @@ package dao;
 import business_logic.notification.Invitation;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
-import dao.DAO;
 
 import java.util.HashSet;
 // Start of user code (user defined imports)
@@ -34,12 +33,12 @@ public abstract class InvitationDAO implements DAO {
 
 	/**
 	 * create Invitation to a workspace.
-	 * @param workspace 
+	 * @param workspace
 	 * @param user the user we invite
 	 * @param attendance the role we give to the user
 	 * @return an Invitation {@link Invitation}
 	 */
-	public abstract Invitation createInvitation(Workspace workspace, User user, String attendance);
+	public abstract boolean createInvitation(Workspace workspace, User user, String attendance);
 
 	/**
 	 * delete Invitation.

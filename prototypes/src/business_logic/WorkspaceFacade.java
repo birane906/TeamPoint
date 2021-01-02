@@ -3,131 +3,152 @@
  *******************************************************************************/
 package business_logic;
 
-import business_logic.workspace.Workspace;
-import gui.controller.WorkspaceController;
-import business_logic.WorkspaceFacade;
+import business_logic.user.AbstractUserAttendance;
 import business_logic.user.User;
-import java.util.HashSet;
-// Start of user code (user defined imports)
+import business_logic.workspace.Workspace;
+import business_logic.notification.Invitation;
+import dao.DAOFactory;
+import dao.InvitationDAO;
+import dao.UserDAO;
+import dao.WorkspaceDAO;
 
-// End of user code
+import java.util.HashSet;
 
 /**
- * Description of WorkspaceFacade.
- * 
- * @author 
+ * {@link WorkspaceFacade} is a Singleton class. Simplify the use of
+ * business logic subsystem for the GUI layer. Facade pattern.
+ * Contains the business methods.
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class WorkspaceFacade {
-	/**
-	 * Description of the property  .
-	 */
-	private WorkspaceController workspaceController;
 
-	/**
-	 * Description of the property currentWorkspace.
-	 */
 	public Workspace currentWorkspace = null;
 
-	// Start of user code (user defined attributes for WorkspaceFacade)
-
-	// End of user code
+	private WorkspaceFacade() {}
 
 	/**
-	 * The constructor.
+	 * The {@link WorkspaceFacade} <code>static</code> nested class
+	 * guarantees the uniqueness of {@link WorkspaceFacade} instance
 	 */
-	public WorkspaceFacade() {
-		// Start of user code constructor for WorkspaceFacade)
-		super();
-		// End of user code
+	private static class WorkspaceFacadeHolder {
+		/**
+		 * The unique instance of {@link WorkspaceFacade}
+		 */
+		private static final WorkspaceFacade WORKSPACE_FACADE = new WorkspaceFacade();
 	}
 
 	/**
-	 * Description of the method getWorkspaceFacadeInstance.
-	 * @return 
+	 * <code>static</code> method. Gives the unique instance of {@link WorkspaceFacade}
+	 * @return The {@link WorkspaceFacade}
 	 */
 	public static WorkspaceFacade getWorkspaceFacadeInstance() {
-		// Start of user code for method getWorkspaceFacadeInstance
-		WorkspaceFacade getWorkspaceFacadeInstance = null;
-		return getWorkspaceFacadeInstance;
-		// End of user code
+		return WorkspaceFacadeHolder.WORKSPACE_FACADE;
 	}
 
 	/**
-	 * Description of the method deleteWorkspace.
-	 * @param workspace 
+	 * Asks for {@link WorkspaceDAO} to delete a {@link Workspace}
+	 * @param workspace The {@link Workspace} to be deleted
+	 * @return <code>true</code> if the deletion succeed, <code>false</code> otherwise
 	 */
-	public void deleteWorkspace(Workspace workspace) {
-		// Start of user code for method deleteWorkspace
-		// End of user code
+	public boolean deleteWorkspace(Workspace workspace) {
+		if (workspace == null) {
+			return false;
+		}
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		WorkspaceDAO workspaceDAO = daoFactory.createWorkspaceDAO();
+
+		return workspaceDAO.deleteWorkspace(workspace);
 	}
 
 	/**
-	 * Description of the method createWorkspace.
-	 * @param name 
-	 * @return 
+	 * Asks for {@link WorkspaceDAO} to create a {@link Workspace}
+	 * @param name The new {@link Workspace}'s name. Can't be blank
+	 * @return <code>true</code> if the creation succeed, <code>false</code> otherwise
 	 */
-	public Boolean createWorkspace(String name) {
-		// Start of user code for method createWorkspace
-		Boolean createWorkspace = Boolean.FALSE;
-		return createWorkspace;
-		// End of user code
+	public boolean createWorkspace(String name) {
+		if (name.isBlank()) {
+			return false;
+		}
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		WorkspaceDAO workspaceDAO = daoFactory.createWorkspaceDAO();
+
+		UserFacade userFacade = UserFacade.getUserFacadeInstance();
+		User user = userFacade.getCurrentUser();
+
+		Workspace workspace = workspaceDAO.createWorkspace(name, user);
+
+		if (workspaceDAO != null) {
+			currentWorkspace = workspace;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
-	 * Description of the method retrieveWorkspace.
-	 * @param workspace 
-	 * @return 
+	 * Asks for {@link WorkspaceDAO} to load a {@link Workspace} in the <code>currentWorkspace</code> of the {@link WorkspaceFacade}
+	 * @param workspace The {@link Workspace} to be loaded
+	 * @return <code>true</code> if the load succeed, <code>false</code> otherwise
 	 */
 	public Boolean retrieveWorkspace(Workspace workspace) {
-		// Start of user code for method retrieveWorkspace
-		Boolean retrieveWorkspace = Boolean.FALSE;
-		return retrieveWorkspace;
-		// End of user code
+		if (workspace == null) {
+			return false;
+		}
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		WorkspaceDAO workspaceDAO = daoFactory.createWorkspaceDAO();
+
+		workspace = workspaceDAO.retrieveWorkspace(workspace);
+
+		if (workspace != null) {
+			currentWorkspace = workspace;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
-	 * Description of the method getWorkspaceMembers.
-	 * @param workspace 
-	 * @return 
+	 * Asks for {@link WorkspaceDAO} to retrieve all {@link User} in the given {@link Workspace}
+	 * @param workspace The {@link Workspace} considered
+	 * @return <code>true</code> if the retrieval succeed, <code>false</code> otherwise
 	 */
 	public HashSet<User> getWorkspaceMembers(Workspace workspace) {
-		// Start of user code for method getWorkspaceMembers
-		HashSet<User> getWorkspaceMembers = new HashSet<User>();
-		return getWorkspaceMembers;
-		// End of user code
+		if (workspace != null) {
+			DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+			UserDAO userDAO = daoFactory.createUserDAO();
+
+			HashSet<User> users = userDAO.getWorkspaceMembers(workspace);
+
+			if (users != null) {
+				return users;
+			}
+		}
+		return new HashSet<User>();
 	}
 
 	/**
-	 * Description of the method sendInvitation.
-	 * @param users 
-	 * @param workspace 
-	 * @param attendance 
+	 * Asks for {@link WorkspaceDAO} to send an {@link Invitation} to all the given {@link User}
+	 * @param users A {@link HashSet} of {@link User} to send an {@link Invitation}
+	 * @param workspace The {@link Workspace} considered
+	 * @param attendance The {@link AbstractUserAttendance} string description of the {@link Invitation}
+	 * @return <code>true</code> if the {@link Invitation} is sent, <code>false</code> otherwise
 	 */
-	public void sendInvitation(HashSet<User> users, Workspace workspace, String attendance) {
-		// Start of user code for method sendInvitation
-		// End of user code
+	public boolean sendInvitation(HashSet<User> users, Workspace workspace, String attendance) {
+		if (attendance.isBlank() || workspace == null || users.isEmpty()) {
+			return false;
+		}
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		UserFacade userFacade = UserFacade.getUserFacadeInstance();
+		User user = userFacade.getCurrentUser();
+
+		InvitationDAO invitationDAO = daoFactory.createInvitationDAO();
+		return invitationDAO.createInvitation(workspace, user, attendance);
 	}
 
-	/**
-	 * Returns currentWorkspace.
-	 * @return currentWorkspace 
-	 */
 	public Workspace getCurrentWorkspace() {
 		return this.currentWorkspace;
 	}
-
-	/**
-	 * Sets a value to attribute currentWorkspace. 
-	 * @param newCurrentWorkspace 
-	 */
-	/*
-	public void setCurrentWorkspace(Workspace newCurrentWorkspace) {
-		if (this.currentWorkspace != null) {
-			this.currentWorkspace.set(null);
-		}
-		this.currentWorkspace.set(this);
-	}
-
-	 */
 
 }

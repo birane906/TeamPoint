@@ -43,6 +43,12 @@ public abstract class DAOFactory {
 	public abstract ColumnDAO createColumnDAO();
 
 	/**
+	 * Description of the method createInvitationDAO.
+	 * @return
+	 */
+	public abstract InvitationDAO createInvitationDAO();
+
+	/**
 	 * <code>static</code> method. It returns a subtype of {@link DAOFactory} (a concrete factory)
 	 * @return Returns the concrete factory for creating {@link DAO} object family
 	 */
