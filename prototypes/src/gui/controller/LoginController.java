@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import business_logic.UserFacade;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -95,7 +96,7 @@ public class LoginController implements Initializable{
 
 	@FXML
 	public void signUpHyperlinkOnAction(ActionEvent event) throws IOException {
-		Parent tableViewParent = FXMLLoader.load(getClass().getResource("subscription.fxml"));
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/subscription.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
