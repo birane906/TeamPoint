@@ -151,6 +151,11 @@ public class MongoBoardDAO extends BoardDAO {
 		return null;
 	}
 
+	@Override
+	public Permission getDefaultPermission() {
+		return null;
+	}
+
 	// Start of user code (user defined methods for MongoBoardDAO)
 
 	// End of user code
