@@ -68,7 +68,7 @@ public class BoardFacade {
 
         Board board = boardDAO.addBoard(name, workspace, user, permission);
 
-		if (boardDAO != null) {
+		if (board != null) {
 			currentBoard = board;
 			return true;
 		}
@@ -181,7 +181,7 @@ public class BoardFacade {
 	}
 
 	/**
-	 * @return The current board holded by the {@link BoardFacade}
+	 * @return The current board held by the {@link BoardFacade}
 	 */
 	public Board getCurrentBoard() {
 		return this.currentBoard;
