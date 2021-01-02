@@ -1,6 +1,9 @@
 package dao;
 
 import business_logic.user.User;
+import business_logic.workspace.Workspace;
+
+import java.util.HashSet;
 
 /**
  * {@link UserDAO} class implements {@link DAO} interface
@@ -33,4 +36,6 @@ public abstract class UserDAO implements DAO{
 	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code>
 	 */
 	public abstract boolean delete(String email);
+
+	public abstract HashSet<User> getWorkspaceMembers(Workspace workspace);
 }

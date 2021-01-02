@@ -46,8 +46,12 @@ public class MySQLCellDAO extends CellDAO {
 	 * @return the cell created
 	 */
 	@Override
-	// TODO think about all the test before we can add a cell
 	public Cell addCell(Column column, Item item, Object value) {
+
+		if(column == null || item == null || value == null) {
+			return null;
+		}
+
 		// Query statement
 		Statement stmt = null;
 

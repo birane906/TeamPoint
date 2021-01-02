@@ -34,6 +34,15 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	 * @return a boolean according to the success of insert
 	 */
 	public Workspace createWorkspace(String workspaceName, User user) {
+
+		if(user == null) {
+			return null;
+		}
+
+		if(DAO.isNameExist(workspaceName, "workspace")) {
+			return null;
+		}
+
 		// Query statement
 		PreparedStatement prepStmt = null;
 		ResultSet rs = null;

@@ -18,6 +18,8 @@ import business_logic.board.Permission;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.ColumnDAO;
+
+import javax.xml.transform.Result;
 // Start of user code (user defined imports)
 
 // End of user code
@@ -43,10 +45,19 @@ public class MySQLBoardDAO extends BoardDAO {
 
 	@Override
 	public Board addBoard(String name, Workspace workspace, User user, Permission permission) {
+
+		if(name.isBlank() || workspace == null | user == null || permission == null) {
+			return null;
+		}
+
+		if(DAO.isNameExist(name, "board")) {
+			return null;
+		}
+
 		// Query statement
 		PreparedStatement stmt = null;
 				
-		String query = "INSERT INTO workspace"
+		String query = "INSERT INTO board"
 				+ " (userOwner, idPermission, boardName, parentWorkspace) VALUES(?, ?, ?, ?)";
 		
 		try {
@@ -57,13 +68,15 @@ public class MySQLBoardDAO extends BoardDAO {
 			e.printStackTrace();
 		}
 		
-		String req = "INSERT INTO workspace"
+		String req = "INSERT INTO board"
 				+ " (userOwner, idPermission, boardName, parentWorkspace) VALUES("
 				+ DAO.stringFormat(user.getUser_id() + "") + ", " 
-				+ DAO.stringFormat(permission.getIdPermission() + "")
+				+ DAO.stringFormat(permission.getIdPermission() + "") + ", "
 				+ DAO.stringFormat(name) + ", "
-				+ DAO.stringFormat(workspace.getWorkspace_id() + "") + ", " 
+				+ DAO.stringFormat(workspace.getWorkspace_id() + "")
 				+ ")";
+
+		System.out.println(req);
 							
 		try {
 			stmt.execute(req);
@@ -88,10 +101,20 @@ public class MySQLBoardDAO extends BoardDAO {
 
 	@Override
 	public Boolean addItemCollection(String itemCollectionName, Board board) {
+
+		if(board == null || itemCollectionName.isBlank()) {
+			return null;
+		}
+
+		if(DAO.isNameExist(itemCollectionName, "itemCollection")) {
+			return null;
+		}
+
 		// Query statement
 		PreparedStatement stmt = null;
+		int itemCollectionId = -1;
 						
-		String query = "INSERT INTO workspace"
+		String query = "INSERT INTO itemcollection"
 				+ " (idBoard, itemCollectionName) VALUES(?, ?)";
 		try {
 			// Getconnection
@@ -101,18 +124,54 @@ public class MySQLBoardDAO extends BoardDAO {
 			e.printStackTrace();
 		}
 				
-		String req = "INSERT INTO workspace"
+		String req = "INSERT INTO itemcollection"
 				+ " (idBoard, itemCollectionName) VALUES("
 				+ DAO.stringFormat(board.getBoard_id() + "") + ", " 
 				+ DAO.stringFormat(itemCollectionName)
 				+  ")";
-									
+
+		try {
+			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
+		} catch (SQLException e) {
+			return false;
+		}
+
+		// Add the item collection id to board_contains
+
+		try {
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			itemCollectionId = rs.getInt(1);
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		stmt = null;
+
+		query = "INSERT INTO board_contains"
+				+ " (idBoard, idItemCollection, idColumn) VALUES(?, ?, ?)";
+		try {
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		req = "INSERT INTO board_contains"
+				+ " (idBoard, idItemCollection, idColumn) VALUES("
+				+ DAO.stringFormat(board.getBoard_id() + "") + ", "
+				+ DAO.stringFormat(itemCollectionId + "") + ", "
+				+ null
+				+ ")";
+
+		System.out.println(req);
+
 		try {
 			stmt.execute(req);
 		} catch (SQLException e) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -124,10 +183,20 @@ public class MySQLBoardDAO extends BoardDAO {
 
 	@Override
 	public Boolean addItem(ItemCollection itemCollection, String itemLabel) {
+
+		if(itemCollection == null || itemLabel.isBlank()) {
+			return null;
+		}
+
+		if(DAO.isNameExist(itemLabel, "item")) {
+			return null;
+		}
+
 		// Query statement
 		PreparedStatement stmt = null;
-		String query = "INSERT INTO workspace"
+		String query = "INSERT INTO item"
 				+ " (idBoard, idItemCollection, itemName) VALUES(?, ?, ?)";
+		int itemId = -1;
 								
 		try {
 			// Getconnection
@@ -137,13 +206,48 @@ public class MySQLBoardDAO extends BoardDAO {
 			e.printStackTrace();
 		}
 		
-		String req = "INSERT INTO workspace"
+		String req = "INSERT INTO item"
 				+ " (idBoard, idItemCollection, itemName) VALUES("
 				+ DAO.stringFormat(itemCollection.getParentBoard().getBoard_id() + "") + ", " 
 				+ DAO.stringFormat(itemCollection.getItemCollection_id() + "") + ", "
 				+ DAO.stringFormat(itemLabel)
 				+  ")";
 		
+		try {
+			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
+		} catch (SQLException e) {
+			return false;
+		}
+
+		// Add the item id to item_collection_item
+
+		try {
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			itemId = rs.getInt(1);
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		stmt = null;
+
+		query = "INSERT INTO item_collection_item"
+				+ " (idItemCollection, idItem) VALUES(?, ?)";
+		try {
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		req = "INSERT INTO item_collection_item"
+				+ " (idItemCollection, idItem) VALUES("
+				+ DAO.stringFormat(itemCollection.getItemCollection_id() + "") + ", "
+				+ DAO.stringFormat(itemId + "")
+				+ ")";
+
+		System.out.println(req);
+
 		try {
 			stmt.execute(req);
 		} catch (SQLException e) {
@@ -160,7 +264,21 @@ public class MySQLBoardDAO extends BoardDAO {
 	}
 
 	public static void main(String[] args) {
-		
+		MySQLBoardDAO mySQL = new MySQLBoardDAO();
+
+		Workspace parentWorkspace = new Workspace("salut");
+		User boardOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
+		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner);
+		ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
+
+		//Board res = mySQL.addBoard("TestBoard", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
+		//System.out.println(res);
+
+		//Boolean res = mySQL.addItemCollection("testItemCol", parentBoard);
+		//System.out.println(res);
+
+		Boolean res = mySQL.addItem(itemCol, "itemTest");
+		System.out.println(res);
 	}
 
 }

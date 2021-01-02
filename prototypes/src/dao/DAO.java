@@ -4,6 +4,9 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -56,6 +59,58 @@ public interface DAO {
 	
 	public static Connection getConnection() {
 		return JDBCConnector.getJDBCConnectorInstance().getConnection();
+	}
+
+	/**
+	 *
+	 * @param name, table
+	 * @return the column in the database according to a name, if not found return null
+	 */
+	public static boolean isNameExist(String name, String table) {
+
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+
+		String query = "SELECT * "
+				+ "FROM `" + table + "` "
+				+ "WHERE " + table + "Name = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+			return false;
+		}
+
+		String req = "SELECT * "
+				+ "FROM `" + table + "` "
+				+ "WHERE " + table + "Name = " + DAO.stringFormat(name);
+
+		System.out.println(req);
+
+		try {
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO explain connection lost
+			e.printStackTrace();
+			return false;
+		}
+		// if we have a result then move to the next line
+
+		try {
+			assert rs != null;
+			return rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

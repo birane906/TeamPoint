@@ -40,7 +40,7 @@ public abstract class ColumnDAO implements DAO {
 	 * @param typeName the String of the abstractType {@link AbstractType}
 	 * @return a {@link Board}
 	 */
-	public abstract Board addColumn(String columnName, Board board, String typeName);
+	public abstract Column addColumn(String columnName, Board board, String typeName);
 
 	/**
 	 * delete Column.
@@ -55,7 +55,7 @@ public abstract class ColumnDAO implements DAO {
 	 */
 	public abstract ArrayList<AbstractType> getAllColumnTypes();
 	
-	public abstract AbstractType getColumnType(int columnId);
+	public abstract AbstractType getTypeByName(String typeName);
 
 	// Start of user code (user defined methods for ColumnDAO)
 

@@ -4,6 +4,9 @@
 package dao;
 
 import business_logic.user.User;
+import business_logic.workspace.Workspace;
+
+import java.util.HashSet;
 
 /**
  * MongoDB specific DAO for User. This class extends {@link UserDAO}
@@ -22,6 +25,11 @@ public class MongoUserDAO extends UserDAO {
 	public boolean delete(String email) {
 		// TODO user deletion query to the database
 		return false;
+	}
+
+	@Override
+	public HashSet<User> getWorkspaceMembers(Workspace workspace) {
+		return null;
 	}
 
 	@Override

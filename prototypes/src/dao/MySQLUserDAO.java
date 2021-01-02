@@ -4,11 +4,14 @@
 package dao;
 
 import business_logic.user.User;
+import business_logic.workspace.Workspace;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * MySQL specific DAO for User. This class extends {@link UserDAO}
@@ -58,6 +61,11 @@ public class MySQLUserDAO extends UserDAO {
 		} catch (SQLException e) {
 			return false;
 		}
+	}
+
+	@Override
+	public HashSet<User> getWorkspaceMembers(Workspace workspace) {
+		return null;
 	}
 
 	/**
