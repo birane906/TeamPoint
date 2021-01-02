@@ -40,7 +40,7 @@
                 <Image url="@../../../images/parameters.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="11.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="profileImage" fitHeight="46.0" fitWidth="50.0" layoutX="11.0" layoutY="568.0" onMouseClicked="#profileImageClicked" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/profile.png" />
             </image>
