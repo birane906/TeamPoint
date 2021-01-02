@@ -129,10 +129,54 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	 * @return a workspace {@link Workspace}
 	 */
 	public Workspace retrieveWorkspace(Workspace workspace) {
-		// Start of user code for method retrieveWorkspace
-		Workspace retrieveWorkspace = null;
-		return retrieveWorkspace;
-		// End of user code
+
+		if(workspace == null) {
+			return null;
+		}
+
+		String name = "";
+		int id = -1;
+
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "SELECT idWorkspace, workspaceName"
+				+ " FROM workspace "
+				+ "WHERE idWorkspace = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		String req = "SELECT idWorkspace, workspaceName"
+				+ " FROM workspace "
+				+ "WHERE idWorkspace = " + workspace.getWorkspace_id();
+
+		try {
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO explain connection lost
+			e.printStackTrace();
+		}
+
+		// if we have a result then move to the next line
+		try {
+			while(rs.next()){
+				id = rs.getInt("idWorkspace");
+				name = rs.getString("workspaceName");
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		return new Workspace(name, id);
 	}
 
 	/**
@@ -250,10 +294,15 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 		// Retrieve user workspaces
 		try {
-			System.out.println(mySQL.getUserWorkspaces(user));
-			} catch (Exception exception) {
+			HashSet<Workspace> res = mySQL.getUserWorkspaces(user);
+			System.out.println(res);
+
+			System.out.println(mySQL.retrieveWorkspace(res.iterator().next()));
+
+		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
+
 	}
 
 }
