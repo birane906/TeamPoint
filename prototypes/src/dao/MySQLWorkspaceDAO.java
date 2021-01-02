@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import business_logic.user.User;
@@ -108,7 +109,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		// The user has now a workspace
 		
 		return new Workspace(workspaceName);
-	}	
+	}
 
 	/**
 	 * delete Workspace in the database.
@@ -128,20 +129,180 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	 * @return a workspace {@link Workspace}
 	 */
 	public Workspace retrieveWorkspace(Workspace workspace) {
-		// Start of user code for method retrieveWorkspace
-		Workspace retrieveWorkspace = null;
-		return retrieveWorkspace;
-		// End of user code
+
+		if(workspace == null) {
+			return null;
+		}
+
+		String name = "";
+		int id = -1;
+
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "SELECT idWorkspace, workspaceName"
+				+ " FROM workspace "
+				+ "WHERE idWorkspace = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		String req = "SELECT idWorkspace, workspaceName"
+				+ " FROM workspace "
+				+ "WHERE idWorkspace = " + workspace.getWorkspace_id();
+
+		try {
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO explain connection lost
+			e.printStackTrace();
+		}
+
+		// if we have a result then move to the next line
+		try {
+			while(rs.next()){
+				id = rs.getInt("idWorkspace");
+				name = rs.getString("workspaceName");
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		return new Workspace(name, id);
+	}
+
+	/**
+	 * get User Workspaces.
+	 * @param user we want the worksapces from
+	 * @return a collection of workspace
+	 */
+	public HashSet<Workspace> getUserWorkspaces(User user) throws Exception {
+
+		if(user == null) {
+			return null;
+		}
+
+		ArrayList<Integer> resWs = new ArrayList<>();
+
+		HashSet<Workspace> res = new HashSet<>();
+		// query on user_workspace to get workspace id of user
+
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "SELECT idUser, idWorkspace"
+				+ " FROM user_workspace "
+				+ "WHERE idUser = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		String req = "SELECT idWorkspace"
+				+ " FROM user_workspace "
+				+ "WHERE idUser = " + user.getUser_id();
+
+		try {
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO explain connection lost
+			e.printStackTrace();
+		}
+
+		// if we have a result then move to the next line
+		try {
+			while(rs.next()){
+				resWs.add(rs.getInt("idWorkspace"));
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		if (resWs.size() == 0) {
+			// TODO customize Exception
+			throw new Exception("User has no workspace");
+		}
+
+		for (int i = 0; i < resWs.size(); i++) {
+			req = "SELECT idWorkspace, workspaceName"
+					+ " FROM workspace "
+					+ "WHERE idWorkspace = " + resWs.get(i);
+
+			try {
+				if (stmt.execute(req)) {
+					rs = stmt.getResultSet();
+				}
+			} catch (SQLException e) {
+				// TODO explain connection lost
+				e.printStackTrace();
+			}
+
+			// if we have a result then move to the next line
+			try {
+				if (rs.next()) {
+					String name = rs.getString("workspaceName");
+					int id = rs.getInt("idWorkspace");
+
+					Workspace ws = new Workspace(name, id);
+					res.add(ws);
+				}
+			} catch (Exception e) {
+				return null;
+			}
+		}
+
+		return res;
 	}
 
 	public static void main(String[] args) {
 		MySQLWorkspaceDAO mySQL = new MySQLWorkspaceDAO();
+
+		MySQLUserDAO mySQLUserDAO = new MySQLUserDAO();
+
+		User user = null;
+
+		// Login test
+		try {
+			user = mySQLUserDAO.getUser("galoisnicolas@gmail.com", "toto");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(user);
 		
 		User workspaceOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
 		
 		//System.out.println(mySQL.deleteCell(cell));
 		
-		System.out.println(mySQL.createWorkspace("sa", workspaceOwner));
+		//System.out.println(mySQL.createWorkspace("as", workspaceOwner));
+
+		// Retrieve user workspaces
+		try {
+			HashSet<Workspace> res = mySQL.getUserWorkspaces(user);
+			System.out.println(res);
+
+			System.out.println(mySQL.retrieveWorkspace(res.iterator().next()));
+
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+
 	}
 
 }

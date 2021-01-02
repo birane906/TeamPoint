@@ -52,7 +52,9 @@ public abstract class WorkspaceDAO implements DAO {
 	 */
 	public abstract Workspace retrieveWorkspace(Workspace workspace);
 
-	// Start of user code (user defined methods for WorkspaceDAO)
+
+	public abstract HashSet<Workspace> getUserWorkspaces(User user) throws Exception;
+		// Start of user code (user defined methods for WorkspaceDAO)
 
 	// End of user code
 

@@ -34,15 +34,15 @@ public class MySQLInvitationDAO extends InvitationDAO {
 	
 	/**
 	 * create Invitation to a workspace.
-	 * @param workspace 
+	 * @param workspace
 	 * @param user the user we invite
 	 * @param attendance the role we give to the user
 	 * @return an Invitation {@link Invitation}
 	 */
-	public Invitation createInvitation(Workspace workspace, User user, String attendance) {
+	public boolean createInvitation(Workspace workspace, User user, String attendance) {
 		// Start of user code for method createInvitation
 		Invitation createInvitation = null;
-		return createInvitation;
+		return false;
 		// End of user code
 	}
 	 

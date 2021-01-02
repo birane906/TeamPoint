@@ -40,4 +40,9 @@ public class MongoDAOFactory extends DAOFactory {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public InvitationDAO createInvitationDAO() {
+		return null;
+	}
 }

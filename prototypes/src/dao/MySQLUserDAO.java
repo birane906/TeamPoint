@@ -104,6 +104,7 @@ public class MySQLUserDAO extends UserDAO {
 				+ "WHERE email = " + DAO.stringFormat(email) 
 				+ " AND password = " + DAO.stringFormat(password);
 
+
 		try {
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
@@ -131,7 +132,7 @@ public class MySQLUserDAO extends UserDAO {
 			throw new Exception("User not found");
 		}
 
-		String idUser = resultat.get(0);
+		int idUser = Integer.parseInt(resultat.get(0));
 		String name = resultat.get(1);
 		String firstName = resultat.get(2);
 		String emailUser = resultat.get(3);
@@ -177,96 +178,6 @@ public class MySQLUserDAO extends UserDAO {
 		return true;
 	}
 
-	/**
-	 * get User Workspaces.
-	 * @param user we want the worksapces from
-	 * @return a collection of workspace
-	 */
-	public HashSet<Workspace> getUserWorkspaces(User user) throws Exception {
-
-		if(user == null) {
-			return null;
-		}
-
-		ArrayList<Integer> resWs = new ArrayList<>();
-
-		HashSet<Workspace> res = new HashSet<>();
-		// query on user_workspace to get workspace id of user
-
-		// Result from database
-		ResultSet rs = null;
-		// Query statement
-		PreparedStatement stmt = null;
-		String query = "SELECT idUser, idWorkspace"
-				+ " FROM user_workspace "
-				+ "WHERE idUser = ?";
-
-		try {
-			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
-		} catch (SQLException e) {
-			// TODO explain database not found
-			e.printStackTrace();
-		}
-
-		String req = "SELECT idWorkspace"
-				+ " FROM user_workspace "
-				+ "WHERE idUser = " + user.getUser_id();
-
-		try {
-			if (stmt.execute(req)) {
-				rs = stmt.getResultSet();
-			}
-		} catch (SQLException e) {
-			// TODO explain connection lost
-			e.printStackTrace();
-		}
-
-		// if we have a result then move to the next line
-		try {
-			if(rs.next()){
-				resWs.add(rs.getInt("idWorkspace"));
-			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-
-		if (resWs.size() == 0) {
-			// TODO customize Exception
-			throw new Exception("User has no workspace");
-		}
-
-		for (int i = 0; i < resWs.size(); i++) {
-			req = "SELECT idWorkspace"
-					+ " FROM user_workspace "
-					+ "WHERE idUser = " + resWs.get(i);
-
-			try {
-				if (stmt.execute(req)) {
-					rs = stmt.getResultSet();
-				}
-			} catch (SQLException e) {
-				// TODO explain connection lost
-				e.printStackTrace();
-			}
-
-			// if we have a result then move to the next line
-			try {
-				if (rs.next()) {
-					String name = rs.getString("workspaceName");
-					int id = rs.getInt("idWorkspace");
-
-					Workspace ws = new Workspace(name, id);
-					res.add(ws);
-				}
-			} catch (Exception e) {
-				return null;
-			}
-		}
-
-		return res;
-	}
-
 	public static void main(String[] args) {
 		MySQLUserDAO mySQLUserDAO = new MySQLUserDAO();
 
@@ -282,8 +193,6 @@ public class MySQLUserDAO extends UserDAO {
 		
 		System.out.println(user);
 
-
-		// TODO check utility
 		// insert test
 		System.out.println(mySQLUserDAO.signUp("name", "firstName", "emailCreated", "toto"));
 

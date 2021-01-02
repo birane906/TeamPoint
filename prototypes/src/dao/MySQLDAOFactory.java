@@ -52,4 +52,10 @@ public class MySQLDAOFactory extends DAOFactory {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public InvitationDAO createInvitationDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
