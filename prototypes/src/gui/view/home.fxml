@@ -82,7 +82,7 @@
                 <MenuItem mnemonicParsing="false" text="wps2" />
             </items>
         </MenuButton>
-        <ImageView fitHeight="19.0" fitWidth="50.0" layoutX="982.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="9.0" fitWidth="33.0" layoutX="999.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/3points.png" />
             </image>
