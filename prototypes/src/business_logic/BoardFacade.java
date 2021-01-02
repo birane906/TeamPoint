@@ -1,7 +1,11 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic;
+
+import business_logic.board.Board;
+import business_logic.board.Item;
+import business_logic.board.ItemCollection;
+import business_logic.workspace.Workspace;
+import dao.BoardDAO;
+import dao.DAOFactory;
 
 /**
  * {@link BoardFacade} is a Singleton class. Simplify the use of
@@ -47,7 +51,7 @@ public class BoardFacade {
 	 * @return <code>true</code> if the creation succeed, <code>false</code> otherwise
 	 */
 	public Boolean createBoard(String name, Workspace workspace) {
-		if (name.isBlank() or workspace == null) {
+		if (name.isBlank() || workspace == null) {
 			return false;
 		}
 		DAOFactory daoFactory = DAOFactory.getInstance();
@@ -148,7 +152,7 @@ public class BoardFacade {
 	 * @return <code>true</code> if the creation succeed, <code>false</code> otherwise
 	 */
 	public Boolean addItem(String itemLabel, ItemCollection itemCollection) {
-		if (itemLabel.isBlank() or itemCollection == null) {
+		if (itemLabel.isBlank() || itemCollection == null) {
 			return false;
 		}
 		DAOFactory daoFactory = DAOFactory.getInstance();
