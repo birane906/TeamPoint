@@ -33,6 +33,11 @@ public class MongoUserDAO extends UserDAO {
 	}
 
 	@Override
+	public HashSet<Workspace> getUserWorkspaces(User user) throws Exception {
+		return null;
+	}
+
+	@Override
 	public User getUser(String email, String password) throws Exception {
 		//TODO user select where email and pwd query in the database
 		return null;
