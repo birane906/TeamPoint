@@ -84,13 +84,17 @@ public class LoginController implements Initializable{
 	 * email and password
 	 */
 	@FXML
-	public void loginButtonOnAction(ActionEvent event){
+	public void loginButtonOnAction(ActionEvent event) throws IOException{
 		if(emailTextField.getText().isBlank() 
 			|| passwordField.getText().isBlank()
 			|| !userFacade.login(emailTextField.getText(),passwordField.getText())){
 			wrongAuth();
 		}else{
-			System.out.println("validé");
+			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/home.fxml"));
+			Scene tableViewScene = new Scene(tableViewParent);
+			Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+			window.setScene(tableViewScene);
+			window.show();
 		}
 	}
 
