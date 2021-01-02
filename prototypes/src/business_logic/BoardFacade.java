@@ -3,14 +3,16 @@ package business_logic;
 import business_logic.board.Board;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
+import business_logic.board.Permission;
+import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
 import dao.DAOFactory;
 
 /**
  * {@link BoardFacade} is a Singleton class. Simplify the use of
- * buisness logic subsystem for the GUI layer. Facade pattern.
- * Contains the buisness methods.
+ * business logic subsystem for the GUI layer. Facade pattern.
+ * Contains the business methods.
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class BoardFacade {
@@ -54,12 +56,19 @@ public class BoardFacade {
 		if (name.isBlank() || workspace == null) {
 			return false;
 		}
-		DAOFactory daoFactory = DAOFactory.getInstance();
-		BoardDAO boardDAO = daoFactory.createBoardDAO();
 
-		board = boardDAO.createBoard(name, workspace);
+        DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 
-		if (boardDAO != null) {
+        UserFacade userFacade = UserFacade.getUserFacadeInstance();
+        User user  = userFacade.getCurrentUser();
+
+        BoardDAO boardDAO = daoFactory.createBoardDAO();
+
+        Permission permission = boardDAO.getDefaultPermission();
+
+        Board board = boardDAO.addBoard(name, workspace, user, permission);
+
+		if (board != null) {
 			currentBoard = board;
 			return true;
 		}
@@ -78,10 +87,10 @@ public class BoardFacade {
 		if (board == null) {
 			return false;
 		}
-		DAOFactory daoFactory = DAOFactory.getInstance();
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		BoardDAO boardDAO = daoFactory.createBoardDAO();
 		
-		return boardDAO.deleteBoard(board)
+		return boardDAO.deleteBoard(board);
 	}
 
 	/**
@@ -93,7 +102,7 @@ public class BoardFacade {
 		if (board == null) {
 			return false;
 		}
-		DAOFactory daoFactory = DAOFactory.getInstance();
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		BoardDAO boardDAO = daoFactory.createBoardDAO();
 
 		board = boardDAO.retrieveBoard(board);
@@ -114,24 +123,18 @@ public class BoardFacade {
 	 * @return <code>true</code> if the creation succeed, <code>false</code> otherwise
 	 */
 	public Boolean addItemCollection(String itemCollectionName, Board board) {
-		if (itemCollectionName.isBlank() or board == null) {
+		if (itemCollectionName.isBlank() || board == null) {
 			return false;
 		}
-		DAOFactory daoFactory = DAOFactory.getInstance();
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		BoardDAO boardDAO = daoFactory.createBoardDAO();
 
-		ItemCollection itemCollection = boardDAO.addItemCollection(itemCollectionName, board);
+		return boardDAO.addItemCollection(itemCollectionName, board);
 
-		if (itemCollection != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	/**
-	 * Asks for {@link BoardDAO} to delete an {@link ItemColection}
+	 * Asks for {@link BoardDAO} to delete an {@link ItemCollection}
 	 * @param itemCollection The {@link ItemCollection} to be deleted
 	 * @return <code>true</code> if the deletion succeed, <code>false</code> otherwise
 	 */
@@ -139,7 +142,7 @@ public class BoardFacade {
 		if (itemCollection == null) {
 			return false;
 		}
-		DAOFactory daoFactory = DAOFactory.getInstance();
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		BoardDAO boardDAO = daoFactory.createBoardDAO();
 
 		return boardDAO.deleteItemCollection(itemCollection);
@@ -147,7 +150,7 @@ public class BoardFacade {
 
 	/**
 	 * Asks for {@link BoardDAO} to create an {@link Item}
-	 * @param item The new {@link Item}'s name. Can't be blank
+	 * @param itemLabel The new {@link Item}'s name. Can't be blank
 	 * @param itemCollection The {@link ItemCollection} to which belongs the created {@link Item}
 	 * @return <code>true</code> if the creation succeed, <code>false</code> otherwise
 	 */
@@ -155,17 +158,11 @@ public class BoardFacade {
 		if (itemLabel.isBlank() || itemCollection == null) {
 			return false;
 		}
-		DAOFactory daoFactory = DAOFactory.getInstance();
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		BoardDAO boardDAO = daoFactory.createBoardDAO();
 
-		Item item = boardDAO.addItem(itemLabel, itemCollection);
+		return boardDAO.addItem(itemCollection, itemLabel);
 
-		if (item != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	/**
@@ -177,14 +174,14 @@ public class BoardFacade {
 		if (item == null) {
 			return false;
 		}
-		DAOFactory daoFactory = DAOFactory.getInstance();
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		BoardDAO boardDAO = daoFactory.createBoardDAO();
 
 		return boardDAO.deleteItem(item);
 	}
 
 	/**
-	 * @return The current board holded by the {@link BoardFacade}
+	 * @return The current board held by the {@link BoardFacade}
 	 */
 	public Board getCurrentBoard() {
 		return this.currentBoard;
