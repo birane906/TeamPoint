@@ -42,7 +42,7 @@ public class MySQLInvitationDAO extends InvitationDAO {
 	public boolean createInvitation(Workspace workspace, User user, String attendance) {
 		// Start of user code for method createInvitation
 		Invitation createInvitation = null;
-		return createInvitation;
+		return false;
 		// End of user code
 	}
 	 
