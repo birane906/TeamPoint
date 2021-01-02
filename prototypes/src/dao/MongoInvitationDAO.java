@@ -34,12 +34,12 @@ public class MongoInvitationDAO extends InvitationDAO {
 	
 	/**
 	 * Description of the method createInvitation.
-	 * @param workspace 
-	 * @param user 
-	 * @param attendance 
-	 * @return 
+	 * @param workspace
+	 * @param user
+	 * @param attendance
+	 * @return
 	 */
-	public Invitation createInvitation(Workspace workspace, User user, String attendance) {
+	public boolean createInvitation(Workspace workspace, User user, String attendance) {
 		// Start of user code for method createInvitation
 		Invitation createInvitation = null;
 		return createInvitation;
