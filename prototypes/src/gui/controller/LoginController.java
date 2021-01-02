@@ -60,8 +60,7 @@ public class LoginController implements Initializable{
 	@FXML
 	private PasswordField passwordField;
 
-	@FXML
-	private Hyperlink signUpHyperlink;
+
 
 	/**
 	 * The constructor.

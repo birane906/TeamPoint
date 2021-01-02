@@ -1,32 +1,24 @@
 package gui.controller;
 
 
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import business_logic.UserFacade;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Description of HomeController.
  *
  *
  */
-public class HomeController{
+public class ProfileController {
     /**
      * Description of the property userFacade.
      */
@@ -45,19 +37,21 @@ public class HomeController{
     @FXML
     private Button closeButton;
 
+
+    /**
+     * The constructor.
+     */
+    public ProfileController() {
+        userFacade = UserFacade.getUserFacadeInstance();
+    }
+
+
     /**
      * Method which permite to close the window when you click on the close button
      */
     public void closeButtonOnAction(){
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
-    }
-
-    /**
-     * The constructor.
-     */
-    public HomeController() {
-        userFacade = UserFacade.getUserFacadeInstance();
     }
 
 
