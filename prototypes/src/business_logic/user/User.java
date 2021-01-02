@@ -62,7 +62,7 @@ public class User {
 	/**
 	 * The constructor
 	 */
-	
+	/*
 	// TODO find solution for password without stocking it in a user
 	public User(String name, String firstName, String email, String password, String profileDescription, String phoneNumber) {
 		this.name = name;
@@ -72,6 +72,7 @@ public class User {
 		this.profileDescription = profileDescription;
 		this.phoneNumber = phoneNumber;
 	}
+	 */
 	
 	public User(String name, String firstName, String email, String profileDescription, String phoneNumber) {
 		this.name = name;
@@ -204,8 +205,9 @@ public class User {
 	 */
 	public String toString() {
 		String str = "";
-		
-		str += "Name: " + getName();
+
+		str += "ID : " + getUser_id();
+		str += "/ Name: " + getName();
 		str += "/ firstName: " + getFirstName();
 		str += "/ Email: " + getEmail();
 		str += "/ Profile Description: " + getProfileDescription();

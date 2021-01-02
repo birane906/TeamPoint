@@ -38,6 +38,4 @@ public abstract class UserDAO implements DAO{
 	public abstract boolean delete(String email);
 
 	public abstract HashSet<User> getWorkspaceMembers(Workspace workspace);
-
-	public abstract  HashSet<Workspace> getUserWorkspaces(User user) throws Exception;
 }
