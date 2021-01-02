@@ -94,11 +94,9 @@ public class LoginController implements Initializable{
 	}
 
 	@FXML
-	public void signUpHyperlinkOnAction(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("subscription.fxml"));
-		Node node = (Node) event.getSource();
-		Stage stage = (Stage) node.getScene().getWindow();
-		stage.setScene(new Scene(root));
+	public void signUpHyperlinkOnAction(ActionEvent event) throws Exception {
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("subscription.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
 	}
 
 
