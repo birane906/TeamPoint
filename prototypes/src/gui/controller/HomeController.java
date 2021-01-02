@@ -49,16 +49,11 @@ public class HomeController{
 
 
     @FXML
-    public void profileImageClicked(MouseEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/subscription.fxml"));
+    public void profileImageClicked(javafx.scene.input.MouseEvent mouseEvent) throws IOException{
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
     }
-
-
-
-
-
 }
