@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 29 déc. 2020 à 17:51
+-- Généré le :  sam. 02 jan. 2021 à 15:11
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -52,8 +52,8 @@ INSERT INTO `board` (`idBoard`, `userOwner`, `idPermission`, `boardName`, `paren
 
 CREATE TABLE `board_contains` (
   `idBoard` int(10) NOT NULL,
-  `idItemCollection` int(10) NOT NULL,
-  `idColumn` int(10) NOT NULL
+  `idItemCollection` int(10) DEFAULT NULL,
+  `idColumn` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -82,31 +82,12 @@ INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idItemCollection
 -- --------------------------------------------------------
 
 --
--- Structure de la table `celltype`
---
-
-CREATE TABLE `type` (
-  `idType` int(10) NOT NULL,
-  `nameType` varchar(25) NOT NULL,
-  `descriptionType` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `celltype`
---
-
-INSERT INTO `type` (`idType`, `nameType`, `descriptionType`) VALUES
-(0, 'TimeLineType', 'two date'),
-(1, 'textType', 'field of text');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `column`
 --
 
 CREATE TABLE `column` (
   `idColumn` int(10) NOT NULL,
+  `idColumnType` int(10) NOT NULL,
   `idBoard` int(10) NOT NULL,
   `columnName` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -115,8 +96,8 @@ CREATE TABLE `column` (
 -- Déchargement des données de la table `column`
 --
 
-INSERT INTO `column` (`idColumn`, `idBoard`, `columnName`) VALUES
-(0, 0, 'Columntest');
+INSERT INTO `column` (`idColumn`, `idColumnType`, `idBoard`, `columnName`) VALUES
+(0, 0, 0, 'Columntest');
 
 -- --------------------------------------------------------
 
@@ -167,6 +148,26 @@ CREATE TABLE `item_collection_item` (
   `idItemCollection` int(10) NOT NULL,
   `idItem` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `type`
+--
+
+CREATE TABLE `type` (
+  `idType` int(10) NOT NULL,
+  `nameType` varchar(25) NOT NULL,
+  `descriptionType` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `type`
+--
+
+INSERT INTO `type` (`idType`, `nameType`, `descriptionType`) VALUES
+(0, 'TimeLineType', 'two date'),
+(1, 'textType', 'field of text');
 
 -- --------------------------------------------------------
 
@@ -276,17 +277,12 @@ ALTER TABLE `cell`
   ADD KEY `FOREIGN_ITEM_ROW` (`idItem`);
 
 --
--- Index pour la table `celltype`
---
-ALTER TABLE `type`
-  ADD PRIMARY KEY (`idType`);
-
---
 -- Index pour la table `column`
 --
 ALTER TABLE `column`
   ADD PRIMARY KEY (`idColumn`),
-  ADD KEY `FOREIGN_COLUMN_BOARD_KEY` (`idBoard`);
+  ADD KEY `FOREIGN_COLUMN_BOARD_KEY` (`idBoard`),
+  ADD KEY `FOREIGN_COLUMN_TYPE` (`idColumnType`);
 
 --
 -- Index pour la table `item`
@@ -309,6 +305,12 @@ ALTER TABLE `itemcollection`
 ALTER TABLE `item_collection_item`
   ADD KEY `FOREIGN_ITEM__ITEM_COLLECTION` (`idItem`),
   ADD KEY `FOREIGN_ITEM_COLLECTION_ITEM` (`idItemCollection`);
+
+--
+-- Index pour la table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`idType`);
 
 --
 -- Index pour la table `typepermission`
@@ -341,28 +343,47 @@ ALTER TABLE `workspace`
 --
 
 --
--- AUTO_INCREMENT
+-- AUTO_INCREMENT pour la table `board`
+--
+ALTER TABLE `board`
+  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT pour la table `cell`
+--
+ALTER TABLE `cell`
+  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT pour la table `column`
+--
+ALTER TABLE `column`
+  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT pour la table `item`
+--
+ALTER TABLE `item`
+  MODIFY `idItem` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT pour la table `itemcollection`
+--
+ALTER TABLE `itemcollection`
+  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
-ALTER TABLE `board`
-  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
-ALTER TABLE `cell`
-  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
+--
+-- AUTO_INCREMENT pour la table `workspace`
+--
 ALTER TABLE `workspace`
   MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
-ALTER TABLE `column`
-  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
-ALTER TABLE `item`
-  MODIFY `idItem` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
-
-ALTER TABLE `itemCollection`
-  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- Contraintes pour les tables déchargées
 --
@@ -397,7 +418,8 @@ ALTER TABLE `cell`
 -- Contraintes pour la table `column`
 --
 ALTER TABLE `column`
-  ADD CONSTRAINT `FOREIGN_COLUMN_BOARD_KEY` FOREIGN KEY (`idBoard`) REFERENCES `board` (`idBoard`);
+  ADD CONSTRAINT `FOREIGN_COLUMN_BOARD_KEY` FOREIGN KEY (`idBoard`) REFERENCES `board` (`idBoard`),
+  ADD CONSTRAINT `FOREIGN_COLUMN_TYPE` FOREIGN KEY (`idColumnType`) REFERENCES `type` (`idType`);
 
 --
 -- Contraintes pour la table `item`
