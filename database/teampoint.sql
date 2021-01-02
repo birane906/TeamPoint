@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  sam. 02 jan. 2021 à 15:11
--- Version du serveur :  10.4.8-MariaDB
--- Version de PHP :  7.3.10
+-- Généré le : sam. 02 jan. 2021 à 17:07
+-- Version du serveur :  10.4.17-MariaDB
+-- Version de PHP : 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `teampoint`
+-- Base de données : `teampoint`
 --
 
 -- --------------------------------------------------------
@@ -210,7 +209,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `name`, `firstName`, `email`, `password`, `phoneNumber`, `profileDescription`, `birthday`) VALUES
-(1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', 'toto', NULL, NULL, NULL);
+(1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', 'toto', NULL, NULL, NULL),
+(2, 'Bourret', 'Raphael', 'raph@gmail.com', 'Rafael123', '0711112233', NULL, '2020-06-09'),
+(3, 'Macron', 'Emmanuel', 'manu@gmail.com', 'Manunu123', NULL, NULL, NULL),
+(45, 'Azhar', 'Salim', 'salim@gmail.com', 'Salim1234', NULL, NULL, NULL),
+(46, 'Ba', 'Birane', 'birane@gmail.com', 'Papa12345', NULL, NULL, NULL),
+(47, 'Ludd', 'General', 'gege@gmail.com', 'Generallud123', NULL, NULL, NULL),
+(48, 'Musk', 'Elon', 'elon@tesla.com', 'Spacex123', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -223,6 +228,14 @@ CREATE TABLE `user_workspace` (
   `idWorkspace` int(10) NOT NULL,
   `userRole` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `user_workspace`
+--
+
+INSERT INTO `user_workspace` (`idUser`, `idWorkspace`, `userRole`) VALUES
+(46, 52, 'CEO'),
+(48, 53, 'CEO');
 
 -- --------------------------------------------------------
 
@@ -242,7 +255,17 @@ CREATE TABLE `workspace` (
 --
 
 INSERT INTO `workspace` (`idWorkspace`, `idUserOwner`, `workspaceName`, `workspaceCreationDate`) VALUES
-(0, 1, 'Test', '0000-00-00');
+(0, 1, 'Test', '0000-00-00'),
+(44, 46, 'ProjetFAR', '0000-00-00'),
+(45, 3, 'Elysee', '0000-00-00'),
+(46, 1, 'Projet 2', '0000-00-00'),
+(47, 46, 'MonProjet officiel', '0000-00-00'),
+(48, 48, 'RocketWorkspace', '0000-00-00'),
+(49, 46, 'ProjetFAR', '0000-00-00'),
+(50, 3, 'Elysee', '0000-00-00'),
+(51, 1, 'Projet 2', '0000-00-00'),
+(52, 46, 'MonProjet officiel', '0000-00-00'),
+(53, 48, 'RocketWorkspace', '0000-00-00');
 
 --
 -- Index pour les tables déchargées
@@ -376,13 +399,13 @@ ALTER TABLE `itemcollection`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT pour la table `workspace`
 --
 ALTER TABLE `workspace`
-  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- Contraintes pour les tables déchargées
