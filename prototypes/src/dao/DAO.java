@@ -112,5 +112,4 @@ public interface DAO {
 			return false;
 		}
 	}
-
 }

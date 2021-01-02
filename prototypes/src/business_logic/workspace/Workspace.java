@@ -56,6 +56,14 @@ public class Workspace {
 		this.workspaceUsers= new HashSet<AbstractUserAttendance>();
 	}
 
+	public Workspace(String name, int workspace_id){
+		this.workspace_id = workspace_id;
+		this.name = name;
+		this.creationDate = new Date();
+		this.boards = new HashSet<Board>();
+		this.workspaceUsers= new HashSet<AbstractUserAttendance>();
+	}
+
 	/**
 	 * Adds the given board to the collection of boards contained 
 	 * in this workspace. If this workspace already contains 

@@ -87,6 +87,8 @@ public abstract class BoardDAO implements DAO {
 	 */
 	public abstract Boolean deleteItem(Item item);
 
+	public abstract Permission getDefaultPermission();
+
 	// Start of user code (user defined methods for BoardDAO)
 
 	// End of user code

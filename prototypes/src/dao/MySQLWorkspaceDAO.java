@@ -134,18 +134,6 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		// End of user code
 	}
 
-	/**
-	 * get User Workspaces.
-	 * @param user we want the worksapces from
-	 * @return a collection of workspace
-	 */
-	public HashSet<Workspace> getUserWorkspaces(User user) {
-		// Start of user code for method getUserWorkspaces
-		HashSet<Workspace> getUserWorkspaces = new HashSet<Workspace>();
-		return getUserWorkspaces;
-		// End of user code
-	}
-
 	public static void main(String[] args) {
 		MySQLWorkspaceDAO mySQL = new MySQLWorkspaceDAO();
 		

@@ -263,6 +263,15 @@ public class MySQLBoardDAO extends BoardDAO {
 		return null;
 	}
 
+	/**
+	 *
+	 * @return permission with the id 0 in the database
+	 */
+	@Override
+	public Permission getDefaultPermission() {
+		return null;
+	}
+
 	public static void main(String[] args) {
 		MySQLBoardDAO mySQL = new MySQLBoardDAO();
 

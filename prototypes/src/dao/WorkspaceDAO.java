@@ -52,13 +52,6 @@ public abstract class WorkspaceDAO implements DAO {
 	 */
 	public abstract Workspace retrieveWorkspace(Workspace workspace);
 
-	/**
-	 * get User Workspaces.
-	 * @param user we want the worksapces from {@link User}
-	 * @return a collection of workspace {@link Workspace}
-	 */
-	public abstract HashSet<Workspace> getUserWorkspaces(User user);
-
 	// Start of user code (user defined methods for WorkspaceDAO)
 
 	// End of user code
