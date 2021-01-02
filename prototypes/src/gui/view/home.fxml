@@ -15,7 +15,7 @@
                 <Line endX="-72.0" endY="542.2929077148438" layoutX="60.0" layoutY="37.0" startX="-72.0" startY="-93.0" />
                 <Line endX="777.0" endY="-52.0" layoutX="187.0" layoutY="59.0" startX="-198.5" startY="-52.0" />
             </children></AnchorPane>
-        <Label layoutX="111.0" layoutY="25.0" text="Workspace">
+        <Label layoutX="97.0" layoutY="14.0" text="WORKSPACE">
             <font>
                 <Font name="System Bold" size="23.0" />
             </font>
@@ -35,18 +35,18 @@
                 <Image url="@../../../images/4Boxes.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="37.0" fitWidth="33.0" layoutX="18.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="37.0" fitWidth="33.0" layoutX="20.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/parameters.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="10.0" layoutY="556.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="46.0" fitWidth="50.0" layoutX="11.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/profile.png" />
             </image>
         </ImageView>
-        <MenuButton layoutX="405.0" layoutY="22.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
-        <ImageView fitHeight="19.0" fitWidth="50.0" layoutX="982.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+        <MenuButton layoutX="432.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
+        <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="987.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/3points.png" />
             </image>
