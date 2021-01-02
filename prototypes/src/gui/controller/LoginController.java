@@ -1,17 +1,19 @@
 package gui.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import business_logic.UserFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -57,6 +59,8 @@ public class LoginController implements Initializable{
 	@FXML
 	private PasswordField passwordField;
 
+	@FXML
+	private Hyperlink signUpHyperlink;
 
 	/**
 	 * The constructor.
@@ -85,10 +89,19 @@ public class LoginController implements Initializable{
 			|| !userFacade.login(emailTextField.getText(),passwordField.getText())){
 			wrongAuth();
 		}else{
-			//CHANGEMENT DE VUE
 			System.out.println("validé");
 		}
 	}
+
+	@FXML
+	public void signUpHyperlinkOnAction(ActionEvent event) throws IOException {
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("subscription.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+
 
 	/**
 	 * an utility function used

@@ -28,7 +28,6 @@ public class SubscriptionController implements Initializable{
 	 */
 	private UserFacade userFacade;
 
-
 	/**
 	 * Description of the close button
 	 */
