@@ -64,13 +64,12 @@ public class MySQLCellDAO extends CellDAO {
 		}
 		
 		String req = "INSERT INTO cell"
-				+ " (idBoard, idColumn, idItem, idItemCollection, cellValue, idCellType) VALUES("
+				+ " (idBoard, idColumn, idItem, idItemCollection, cellValue) VALUES("
 				+ DAO.stringFormat(column.getParentBoard().getBoard_id() + "") + ", " 
 				+ DAO.stringFormat(column.getColumn_id() + "") + ", " 
 				+ DAO.stringFormat(item.getItem_id() + "") + ", "
 				+ DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "") + ", "
-				+ DAO.stringFormat(value + "") + ", "
-				+ DAO.stringFormat(column.getColumnType() + "")
+				+ DAO.stringFormat(value + "")
 				+ ")";
 		
 		try {
@@ -162,10 +161,10 @@ public class MySQLCellDAO extends CellDAO {
 		
 		Cell cell = new Cell(item, column, "sa");
 		
-		Boolean res = mySQL.deleteCell(cell);
-		System.out.println(res);
+		//Boolean res = mySQL.deleteCell(cell);
+		//System.out.println(res);
 		
-		//System.out.println(mySQL.addCell(column, item, "sa"));
+		System.out.println(mySQL.addCell(column, item, "sa"));
 	}
 
 }
