@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 /**
  * Description of WorkspaceController.
@@ -25,6 +26,7 @@ public class WorkspaceController {
 	 */
 	private UserFacade userFacade;
 
+	HashSet<Workspace> myWorkspaces = userFacade.getWorkspaces();
 
 	/**
 	 * Description of
