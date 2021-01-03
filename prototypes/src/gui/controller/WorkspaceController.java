@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 /**
@@ -138,11 +139,8 @@ public class WorkspaceController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 			HashSet<Workspace> wsl = userFacade.getWorkspaces();
-			ArrayList<Workspace> myWorkspaces = new ArrayList<>(wsl);
-			int workspaceSize = myWorkspaces.size();
-
-			for (int i = 0; i < workspaceSize; i++) {
-				workspaces.getItems().add(new MenuItem(myWorkspaces.get(i).getName()));
+			for(Workspace w : wsl){
+				workspaces.getItems().add(new MenuItem(w.getName()));
 			}
 
 	}
