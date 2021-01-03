@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 02 jan. 2021 à 17:07
--- Version du serveur :  10.4.17-MariaDB
--- Version de PHP : 8.0.0
+-- Généré le :  Dim 03 jan. 2021 à 10:50
+-- Version du serveur :  10.4.8-MariaDB
+-- Version de PHP :  7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `teampoint`
+-- Base de données :  `teampoint`
 --
 
 -- --------------------------------------------------------
@@ -42,18 +43,6 @@ CREATE TABLE `board` (
 
 INSERT INTO `board` (`idBoard`, `userOwner`, `idPermission`, `boardName`, `parentWorkspace`, `boardCreationDate`) VALUES
 (0, 1, 0, 'TestBoard', 0, '0000-00-00');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `board_contains`
---
-
-CREATE TABLE `board_contains` (
-  `idBoard` int(10) NOT NULL,
-  `idItemCollection` int(10) DEFAULT NULL,
-  `idColumn` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -140,17 +129,6 @@ INSERT INTO `itemcollection` (`idItemCollection`, `idBoard`, `itemCollectionName
 -- --------------------------------------------------------
 
 --
--- Structure de la table `item_collection_item`
---
-
-CREATE TABLE `item_collection_item` (
-  `idItemCollection` int(10) NOT NULL,
-  `idItem` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `type`
 --
 
@@ -209,13 +187,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `name`, `firstName`, `email`, `password`, `phoneNumber`, `profileDescription`, `birthday`) VALUES
-(1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', 'toto', NULL, NULL, NULL),
-(2, 'Bourret', 'Raphael', 'raph@gmail.com', 'Rafael123', '0711112233', NULL, '2020-06-09'),
-(3, 'Macron', 'Emmanuel', 'manu@gmail.com', 'Manunu123', NULL, NULL, NULL),
-(45, 'Azhar', 'Salim', 'salim@gmail.com', 'Salim1234', NULL, NULL, NULL),
-(46, 'Ba', 'Birane', 'birane@gmail.com', 'Papa12345', NULL, NULL, NULL),
-(47, 'Ludd', 'General', 'gege@gmail.com', 'Generallud123', NULL, NULL, NULL),
-(48, 'Musk', 'Elon', 'elon@tesla.com', 'Spacex123', NULL, NULL, NULL);
+(1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', 'toto', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -234,8 +206,8 @@ CREATE TABLE `user_workspace` (
 --
 
 INSERT INTO `user_workspace` (`idUser`, `idWorkspace`, `userRole`) VALUES
-(46, 52, 'CEO'),
-(48, 53, 'CEO');
+(1, 44, 'WorkspaceAdmin'),
+(1, 45, 'WorkspaceAdmin');
 
 -- --------------------------------------------------------
 
@@ -256,16 +228,8 @@ CREATE TABLE `workspace` (
 
 INSERT INTO `workspace` (`idWorkspace`, `idUserOwner`, `workspaceName`, `workspaceCreationDate`) VALUES
 (0, 1, 'Test', '0000-00-00'),
-(44, 46, 'ProjetFAR', '0000-00-00'),
-(45, 3, 'Elysee', '0000-00-00'),
-(46, 1, 'Projet 2', '0000-00-00'),
-(47, 46, 'MonProjet officiel', '0000-00-00'),
-(48, 48, 'RocketWorkspace', '0000-00-00'),
-(49, 46, 'ProjetFAR', '0000-00-00'),
-(50, 3, 'Elysee', '0000-00-00'),
-(51, 1, 'Projet 2', '0000-00-00'),
-(52, 46, 'MonProjet officiel', '0000-00-00'),
-(53, 48, 'RocketWorkspace', '0000-00-00');
+(44, 1, 'sa', '2021-01-02'),
+(45, 1, 'as', '2021-01-02');
 
 --
 -- Index pour les tables déchargées
@@ -279,14 +243,6 @@ ALTER TABLE `board`
   ADD KEY `FOREIGN_PARENT_WORKSPACE` (`parentWorkspace`),
   ADD KEY `FOREIGN_USER_OWNER` (`userOwner`),
   ADD KEY `FOREIGN_PERMISSION` (`idPermission`);
-
---
--- Index pour la table `board_contains`
---
-ALTER TABLE `board_contains`
-  ADD KEY `FOREIGN_BOARD` (`idBoard`),
-  ADD KEY `FOREIGN_ITEM_BOARD` (`idItemCollection`),
-  ADD KEY `FOREIGN_COLUMN_BOARD` (`idColumn`);
 
 --
 -- Index pour la table `cell`
@@ -321,13 +277,6 @@ ALTER TABLE `item`
 ALTER TABLE `itemcollection`
   ADD PRIMARY KEY (`idItemCollection`),
   ADD KEY `FOREIGN_BOARD_ITEM_COLLECTION_KEY` (`idBoard`);
-
---
--- Index pour la table `item_collection_item`
---
-ALTER TABLE `item_collection_item`
-  ADD KEY `FOREIGN_ITEM__ITEM_COLLECTION` (`idItem`),
-  ADD KEY `FOREIGN_ITEM_COLLECTION_ITEM` (`idItemCollection`);
 
 --
 -- Index pour la table `type`
@@ -381,31 +330,31 @@ ALTER TABLE `cell`
 -- AUTO_INCREMENT pour la table `column`
 --
 ALTER TABLE `column`
-  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT pour la table `item`
 --
 ALTER TABLE `item`
-  MODIFY `idItem` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idItem` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT pour la table `itemcollection`
 --
 ALTER TABLE `itemcollection`
-  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT pour la table `workspace`
 --
 ALTER TABLE `workspace`
-  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Contraintes pour les tables déchargées
@@ -418,14 +367,6 @@ ALTER TABLE `board`
   ADD CONSTRAINT `FOREIGN_PARENT_WORKSPACE` FOREIGN KEY (`parentWorkspace`) REFERENCES `workspace` (`idWorkspace`),
   ADD CONSTRAINT `FOREIGN_PERMISSION` FOREIGN KEY (`idPermission`) REFERENCES `typepermission` (`idTypePermission`),
   ADD CONSTRAINT `FOREIGN_USER_OWNER` FOREIGN KEY (`userOwner`) REFERENCES `user` (`idUser`);
-
---
--- Contraintes pour la table `board_contains`
---
-ALTER TABLE `board_contains`
-  ADD CONSTRAINT `FOREIGN_BOARD` FOREIGN KEY (`idBoard`) REFERENCES `board` (`idBoard`),
-  ADD CONSTRAINT `FOREIGN_COLUMN_BOARD` FOREIGN KEY (`idColumn`) REFERENCES `column` (`idColumn`),
-  ADD CONSTRAINT `FOREIGN_ITEM_BOARD` FOREIGN KEY (`idItemCollection`) REFERENCES `itemcollection` (`idItemCollection`);
 
 --
 -- Contraintes pour la table `cell`
@@ -457,13 +398,6 @@ ALTER TABLE `item`
 --
 ALTER TABLE `itemcollection`
   ADD CONSTRAINT `FOREIGN_BOARD_ITEM_COLLECTION_KEY` FOREIGN KEY (`idBoard`) REFERENCES `board` (`idBoard`);
-
---
--- Contraintes pour la table `item_collection_item`
---
-ALTER TABLE `item_collection_item`
-  ADD CONSTRAINT `FOREIGN_ITEM_COLLECTION_ITEM` FOREIGN KEY (`idItemCollection`) REFERENCES `itemcollection` (`idItemCollection`),
-  ADD CONSTRAINT `FOREIGN_ITEM__ITEM_COLLECTION` FOREIGN KEY (`idItem`) REFERENCES `item` (`idItem`);
 
 --
 -- Contraintes pour la table `user_workspace`
