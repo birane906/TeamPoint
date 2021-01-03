@@ -14,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,9 +38,10 @@ public class EditBirthdayController {
 	private Label messageLabel;
 
 
+
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-			if(birthdayDP.getValue() != null) {
+			//if(birthdayDP.getValue().isAfter(LocalDate.now())) {
 				//TO DO
 				// TRAITEMENT BDD
 				Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
@@ -47,9 +49,10 @@ public class EditBirthdayController {
 				Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				window.setScene(tableViewScene);
 				window.show();
-			}else{
-				messageLabel.setText("Changement non effectué");
-			}
+				messageLabel.setText("");
+		//	}else{
+			//	messageLabel.setText("Changement non effectué");
+		//	}
 
 	}
 
