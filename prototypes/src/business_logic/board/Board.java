@@ -77,6 +77,15 @@ public class Board {
 		this.name = name;
 	}
 
+	public Board(int idBoard, String nameBoard, User user, Permission permission, Workspace workspace, Date dateBoard) {
+		this.board_id = idBoard;
+		this.name = nameBoard;
+		this.boardOwner = user;
+		this.permission = permission;
+		this.parentWorkspace = workspace;
+		this.creationDate = dateBoard;
+	}
+
 	/**
 	 * Description of the method addColumn.
 	 * @param column 

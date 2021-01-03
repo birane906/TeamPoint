@@ -12,6 +12,8 @@ import business_logic.user.User;
 // Start of user code (user defined imports)
 import business_logic.workspace.Workspace;
 
+import java.util.ArrayList;
+
 // End of user code
 
 /**
@@ -153,6 +155,11 @@ public class MongoBoardDAO extends BoardDAO {
 
 	@Override
 	public Permission getDefaultPermission() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<Board> getBoardsOfWorkspace(Workspace workspace) {
 		return null;
 	}
 

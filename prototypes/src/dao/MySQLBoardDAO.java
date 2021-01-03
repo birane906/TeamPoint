@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import business_logic.board.AbstractType;
 import business_logic.board.Board;
@@ -85,7 +86,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 				
 		return new Board(name, workspace, user);
-	}	
+	}
 
 	@Override
 	public Boolean deleteBoard(Board board) {
@@ -93,9 +94,15 @@ public class MySQLBoardDAO extends BoardDAO {
 		return null;
 	}
 
+	/**
+	 * Create the board with all his columns and items
+	 * @param board that will be retrieved
+	 * @return
+	 */
 	@Override
 	public Board retrieveBoard(Board board) {
-		// TODO Auto-generated method stub
+		// SET parentWorkspace
+
 		return null;
 	}
 
@@ -241,6 +248,188 @@ public class MySQLBoardDAO extends BoardDAO {
 		return new Permission(id, name, descr);
 	}
 
+	/**
+	 * Create all the board for a workspace
+	 * @param workspace
+	 * @return
+	 */
+	@Override
+	public ArrayList<Board> getBoardsOfWorkspace(Workspace workspace) {
+		// GET BOARDS
+		if(workspace == null) {
+			return null;
+		}
+		ArrayList<Board> res = new ArrayList<>();
+
+		int idBoard = -1;
+		String nameBoard = "NONE";
+		int userId = -1;
+		int idType = -1;
+		Date dateBoard;
+
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		Statement stmt = null;
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection().createStatement();
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		String req = "SELECT *"
+				+ " FROM board "
+				+ "WHERE parentWorkspace = " + workspace.getWorkspace_id();
+
+		try {
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO explain connection lost
+			e.printStackTrace();
+		}
+
+		// if we have a result then move to the next line
+		try {
+			while(rs.next()){
+				idBoard = rs.getInt("idBoard");
+				nameBoard = rs.getString("boardName");
+				userId = rs.getInt("userOwner");
+				idType = rs.getInt("idPermission");
+				dateBoard = rs.getDate("boardCreationDate");
+
+				// GET Board Owner
+				User user = null;
+				try {
+					user = getUserById(userId);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				Board newBoard = new Board(idBoard, nameBoard, user, getPermissionById(idType), workspace, dateBoard);
+				res.add(newBoard);
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return res;
+	}
+
+	public User getUserById(int id) throws Exception {
+		if (id == -1) {
+			throw new Exception();
+		}
+		// List of all fields to create an user
+		ArrayList<String> resultat = new ArrayList<String>();
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "SELECT name, firstName, email, phoneNumber,"
+				+ "profileDescription, birthday" + " FROM User "
+				+ "WHERE idUser = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		String req = "SELECT idUser, name, firstName, email, phoneNumber,"
+				+ "profileDescription, birthday" + " FROM User "
+				+ "WHERE idUser = " + DAO.stringFormat(id + "");
+
+		try {
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO explain connection lost
+			e.printStackTrace();
+		}
+
+		// if we have a result then move to the next line
+		if(rs.next()){
+
+			resultat.add(rs.getInt("idUser") + "");
+			resultat.add(rs.getString("name"));
+			resultat.add(rs.getString("firstName"));
+
+			resultat.add(rs.getString("email"));
+
+			resultat.add(rs.getString("profileDescription"));
+			resultat.add(rs.getString("phoneNumber"));
+		}
+
+		if (resultat.size() == 0) {
+			// TODO customize Exception
+			throw new Exception("User not found");
+		}
+
+		int idUser = Integer.parseInt(resultat.get(0));
+		String name = resultat.get(1);
+		String firstName = resultat.get(2);
+		String emailUser = resultat.get(3);
+		String profileDesc = resultat.get(4);
+		String phoneNumber = resultat.get(5);
+
+		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
+	}
+
+	public Permission getPermissionById(int id) {
+		if (id == -1) {
+			return null;
+		}
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "SELECT * "
+				+ " FROM TypePermission "
+				+ "WHERE idTypePermission = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		String req = "SELECT * "
+				+ " FROM TypePermission "
+				+ "WHERE idTypePermission = " + DAO.stringFormat(id + "");
+
+		try {
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO explain connection lost
+			e.printStackTrace();
+		}
+
+		Permission perm = null;
+		try {
+			if(rs.next()) {
+				int idPermission = rs.getInt("idTypePermission");
+				String labelPermission = rs.getString("labelPermission");
+				String descr = rs.getString("description");
+
+				perm = new Permission(idPermission, labelPermission, descr);
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return perm;
+	}
+
 	public static void main(String[] args) {
 		MySQLBoardDAO mySQL = new MySQLBoardDAO();
 
@@ -249,7 +438,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner);
 		ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
 
-		//Board res = mySQL.addBoard("TestBoard", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
+		//Board res = mySQL.addBoard("Boarddaas", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
 		//System.out.println(res);
 
 		//Boolean res = mySQL.addItemCollection("testItemCol", parentBoard);
@@ -258,7 +447,9 @@ public class MySQLBoardDAO extends BoardDAO {
 		//res = mySQL.addItem(itemCol, "itemTest");
 		//System.out.println(res);
 
-		System.out.println(mySQL.getDefaultPermission());
+		//System.out.println(mySQL.getDefaultPermission());
+
+		mySQL.getBoardsOfWorkspace(parentWorkspace);
 	}
 
 }

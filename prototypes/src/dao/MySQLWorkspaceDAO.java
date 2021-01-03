@@ -140,14 +140,11 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		// Result from database
 		ResultSet rs = null;
 		// Query statement
-		PreparedStatement stmt = null;
-		String query = "SELECT idWorkspace, workspaceName"
-				+ " FROM workspace "
-				+ "WHERE idWorkspace = ?";
+		Statement stmt = null;
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection().createStatement();
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
@@ -238,10 +235,10 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			throw new Exception("User has no workspace");
 		}
 
-		for (int i = 0; i < resWs.size(); i++) {
+		for (Integer resW : resWs) {
 			req = "SELECT idWorkspace, workspaceName"
 					+ " FROM workspace "
-					+ "WHERE idWorkspace = " + resWs.get(i);
+					+ "WHERE idWorkspace = " + resW;
 
 			try {
 				if (stmt.execute(req)) {
@@ -265,7 +262,6 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				return null;
 			}
 		}
-
 		return res;
 	}
 
@@ -290,7 +286,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		
 		//System.out.println(mySQL.deleteCell(cell));
 		
-		//System.out.println(mySQL.createWorkspace("as", workspaceOwner));
+		System.out.println(mySQL.createWorkspace("as", workspaceOwner));
 
 		// Retrieve user workspaces
 		try {

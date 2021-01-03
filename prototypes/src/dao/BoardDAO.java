@@ -11,6 +11,8 @@ import business_logic.board.ItemCollection;
 import business_logic.board.Permission;
 import business_logic.user.User;
 import dao.DAO;
+
+import java.util.ArrayList;
 // Start of user code (user defined imports)
 
 // End of user code
@@ -88,6 +90,8 @@ public abstract class BoardDAO implements DAO {
 	public abstract Boolean deleteItem(Item item);
 
 	public abstract Permission getDefaultPermission();
+
+	public abstract ArrayList<Board> getBoardsOfWorkspace(Workspace workspace);
 
 	// Start of user code (user defined methods for BoardDAO)
 
