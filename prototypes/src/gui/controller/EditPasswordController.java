@@ -49,7 +49,7 @@ public class EditPasswordController {
 		Matcher mPassword = ptPassword.matcher(password);
 		boolean passwordIsGood = mPassword.matches();
 
-		if(newPasswordField.getText() == confPasswordField.getText() && !newPasswordField.getText().isBlank() && passwordIsGood) {
+		if(newPasswordField.getText().equals(confPasswordField.getText()) && newPasswordField.getText().isBlank() == false && passwordIsGood == true) {
 
 			//TO DO
 			// TRAITEMENT BDD

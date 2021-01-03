@@ -48,7 +48,7 @@ public class EditEmailController {
 		Matcher m = pt.matcher(text);
 		boolean IsGood = m.matches();
 
-		if(newEmailTextField.getText() == confEmailTextField.getText() ) {
+		if(newEmailTextField.getText().equals(confEmailTextField.getText()) && IsGood == true && !newEmailTextField.getText().isBlank()) {
 
 			//TO DO
 			// TRAITEMENT BDD
