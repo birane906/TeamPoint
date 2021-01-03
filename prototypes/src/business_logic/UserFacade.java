@@ -108,6 +108,8 @@ public class UserFacade {
 
 	}
 
+	
+
 	/**
 	 * Description of the method getCurrentUserEmail.
 	 * @return 

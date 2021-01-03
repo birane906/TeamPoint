@@ -14,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,15 +36,12 @@ public class WorkspaceController {
 
 	HashSet<Workspace> wsl = userFacade.getWorkspaces();
 	ArrayList<Workspace> myWorkspaces = new ArrayList<>(wsl);
+	int size = myWorkspaces.size();
 
+	for(int i; size; i++){
+		workspaces.getItems().add(new MenuItem(myWorkspaces.get(i).getName()));
+	}
 
-
-
-
-
-	MenuItem m1 = new MenuItem("menu item 1");
-	MenuItem m2 = new MenuItem("menu item 2");
-	MenuItem m3 = new MenuItem("menu item 3");
 
 
 	/**
@@ -129,6 +127,7 @@ public class WorkspaceController {
 	 */
 	public void retrieveWorkspace(Workspace workspace) {
 	}
+
 
 
 }
