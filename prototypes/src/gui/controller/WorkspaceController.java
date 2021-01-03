@@ -47,7 +47,10 @@ public class WorkspaceController {
 		stage.close();
 	}
 
+	@FXML
+	public void boxImageClicked(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
 
+	}
 
 
 	@FXML

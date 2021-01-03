@@ -31,7 +31,7 @@
                 <Image url="@../../../images/bellButton.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="26.0" fitWidth="31.0" layoutX="21.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="4boxImage" fitHeight="26.0" fitWidth="31.0" layoutX="21.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#boxImageClicked">
             <image>
                 <Image url="@../../../images/4Boxes.png" />
             </image>
