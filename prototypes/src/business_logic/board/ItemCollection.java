@@ -3,6 +3,7 @@ package business_logic.board;
 import business_logic.board.Board;
 import business_logic.board.Item;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -29,7 +30,7 @@ public class ItemCollection {
 	/**
 	 * Description of the property items.
 	 */
-	public HashSet<Item> items = new HashSet<Item>();
+	public ArrayList<Item> items = new ArrayList<>();
 
 	public ItemCollection(String name, int id, Board parentBoard) {
 		this.itemCollection_id = id;
@@ -42,6 +43,10 @@ public class ItemCollection {
 	 * @param item 
 	 */
 	public void addItem(Item item) {
+	}
+
+	public  void setItems(ArrayList<Item> items) {
+		this.items = items;
 	}
 
 	/**
@@ -103,7 +108,7 @@ public class ItemCollection {
 	 * Returns items.
 	 * @return items 
 	 */
-	public HashSet<Item> getItems() {
+	public ArrayList<Item> getItems() {
 		return this.items;
 	}
 

@@ -3,19 +3,11 @@
  *******************************************************************************/
 package dao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-import business_logic.board.AbstractType;
-import business_logic.board.Board;
-import business_logic.board.Column;
-import business_logic.board.Item;
-import business_logic.board.ItemCollection;
-import business_logic.board.Permission;
+import business_logic.board.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.ColumnDAO;
@@ -99,11 +91,156 @@ public class MySQLBoardDAO extends BoardDAO {
 	 */
 	@Override
 	public Board retrieveBoard(Board board) {
-		// SET parentWorkspace
-
+		if(board == null) {
+			return null;
+		}
 		// CREATE COLUMN, ITEMCOL, ITEM, CELL, PERMISSION, TYPE
 
+		// SET COLUMN TO BOARD
+		board.setColumns(getColumn(board));
+
+		// SET ITEM TO ITEMCOLLECTIONS
+
 		return null;
+	}
+
+	private ArrayList<ItemCollection> getItemCollection(Board board) {
+		// Query statement
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * "
+				+ "FROM itemCollection "
+				+ "WHERE idBoard = " +DAO.stringFormat(board.getBoard_id() + "");
+
+		ArrayList<ItemCollection> itemCollections = new ArrayList<>();
+		int id = -1;
+		String name = "NONE";
+
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		try {
+			if (stmt.execute(query)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		try {
+			while(rs.next()) {
+				id = rs.getInt("idItemCollection");
+				name = rs.getString("itemCollectionName");
+
+				ItemCollection newItemCol = new ItemCollection(name, id, board);
+
+				newItemCol.setItems(getItems(newItemCol));
+
+				itemCollections.add(newItemCol);
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return itemCollections;
+	}
+
+	private ArrayList<Item> getItems(ItemCollection itemCol) {
+		// Query statement
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * "
+				+ "FROM item "
+				+ "WHERE idBoard = " + DAO.stringFormat(itemCol.getParentBoard().getBoard_id() + "")
+				+ " AND idItemCollection = " + DAO.stringFormat(itemCol.getItemCollection_id() + "");
+
+		ArrayList<Item> items = new ArrayList<>();
+		int id = -1;
+		String name = "NONE";
+
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		try {
+			if (stmt.execute(query)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		try {
+			while(rs.next()) {
+				id = rs.getInt("idItem");
+				name = rs.getString("itemName");
+
+				Item item = new Item(itemCol, id, name);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return items;
+	}
+
+	private ArrayList<Column> getColumn(Board board) {
+		// Query statement
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * "
+				+ "FROM `column` "
+				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "");
+
+		ArrayList<Column> col = new ArrayList<>();
+
+		int id = -1;
+		String name = "NONE";
+		int idType = -1;
+
+		try {
+			// Get connection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		try {
+			assert stmt != null;
+			if (stmt.execute(query)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		try {
+			while(rs.next()) {
+				id = rs.getInt("idColumn");
+				name = rs.getString("columnName");
+				idType = rs.getInt("idColumnType");
+
+				Column newCol = new Column(board, name, id, idType);
+
+				col.add(newCol);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return col;
 	}
 
 	@Override
@@ -210,7 +347,6 @@ public class MySQLBoardDAO extends BoardDAO {
 		String query = "SELECT * "
 				+ "FROM typePermission "
 				+ "WHERE idTypePermission = 0";
-		System.out.println(query);
 
 		int id = -1;
 		String name = "NONE", descr = "NONE";
@@ -449,7 +585,8 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		//System.out.println(mySQL.getDefaultPermission());
 
-		mySQL.getBoardsOfWorkspace(parentWorkspace);
-	}
+		//mySQL.getBoardsOfWorkspace(parentWorkspace);
 
+		//System.out.println(mySQL.getItemCollection(parentBoard));
+	}
 }

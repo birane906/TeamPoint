@@ -11,6 +11,7 @@ import business_logic.user.BoardOwner;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 // Start of user code (user defined imports)
@@ -36,12 +37,12 @@ public class Board {
 	/**
 	 * Description of the property itemCollections.
 	 */
-	public HashSet<ItemCollection> itemCollections = new HashSet<ItemCollection>();
+	public ArrayList<ItemCollection> itemCollections = new ArrayList<>();
 
 	/**
 	 * Description of the property columns.
 	 */
-	public HashSet<Column> columns = new HashSet<Column>();
+	public ArrayList<Column> columns = new ArrayList<>();
 
 	/**
 	 * Description of the property permission.
@@ -95,6 +96,10 @@ public class Board {
 		// End of user code
 	}
 
+	public void setColumns(ArrayList<Column> columns) {
+		this.columns = columns;
+	}
+
 	/**
 	 * Description of the method deleteColumn.
 	 * @param column 
@@ -111,6 +116,10 @@ public class Board {
 	public void addItemCollection(ItemCollection itemCollection) {
 		// Start of user code for method addItemCollection
 		// End of user code
+	}
+
+	public void setItemCollections(ArrayList<ItemCollection> itemCollections) {
+		this.itemCollections = itemCollections;
 	}
 
 	/**
@@ -205,7 +214,7 @@ public class Board {
 	 * Returns itemCollections.
 	 * @return itemCollections 
 	 */
-	public HashSet<ItemCollection> getItemCollections() {
+	public ArrayList<ItemCollection> getItemCollections() {
 		return this.itemCollections;
 	}
 
@@ -213,7 +222,7 @@ public class Board {
 	 * Returns columns.
 	 * @return columns 
 	 */
-	public HashSet<Column> getColumns() {
+	public ArrayList<Column> getColumns() {
 		return this.columns;
 	}
 

@@ -107,6 +107,9 @@ public class BoardFacade {
 
 		board = boardDAO.retrieveBoard(board);
 
+		// TODO Appel de setCells du cell DAO
+		// Besoin d'une boucle sur toutes les column et les item
+		// cellDAO.setCell(board, column, item)
 		if (board != null) {
 			currentBoard = board;
 			return true;

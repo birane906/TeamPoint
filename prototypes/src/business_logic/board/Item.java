@@ -3,6 +3,7 @@
  *******************************************************************************/
 package business_logic.board;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 // Start of user code (user defined imports)
@@ -33,7 +34,7 @@ public class Item {
 	/**
 	 * Description of the property cells.
 	 */
-	public HashSet<Cell> cells = new HashSet<Cell>();
+	public HashSet<Cell> cells = new HashSet<>();
 
 	public Item(ItemCollection parentItemCollection, int id, String label) {
 		this.item_id = id;
@@ -94,6 +95,10 @@ public class Item {
 	 */
 	public HashSet<Cell> getCells() {
 		return this.cells;
+	}
+
+	public void addCell(Cell cell) {
+		this.cells.add(cell);
 	}
 
 }

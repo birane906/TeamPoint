@@ -3,6 +3,7 @@
  *******************************************************************************/
 package business_logic.board;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import business_logic.board.Board;
@@ -24,7 +25,7 @@ public class Column {
 	/**
 	 * Description of the property cells.
 	 */
-	public HashSet<Cell> cells = new HashSet<Cell>();
+	public HashSet<Cell> cells = new HashSet<>();
 
 	/**
 	 * Description of the property column_id.
@@ -70,6 +71,10 @@ public class Column {
 		return this.cells;
 	}
 
+	public void setCells(HashSet<Cell> cells) {
+		this.cells = cells;
+	}
+
 	/**
 	 * Returns column_id.
 	 * @return column_id 
@@ -104,6 +109,10 @@ public class Column {
 	
 	public int getColumnType() {
 		return columnTypeId;
+	}
+
+	public void addCell(Cell cell) {
+		this.cells.add(cell);
 	}
 
 }
