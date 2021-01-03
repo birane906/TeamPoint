@@ -53,7 +53,7 @@ public class ProfileController {
      */
     @FXML
     public void editNumberOnAction(ActionEvent event) throws IOException{
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/editNumber.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -67,7 +67,7 @@ public class ProfileController {
      */
     @FXML
     public void editNameOnAction(ActionEvent event) throws IOException{
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/editName.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -81,7 +81,7 @@ public class ProfileController {
      */
     @FXML
     public void editFirstNameOnAction(ActionEvent event) throws IOException{
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/editFirstName.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -95,7 +95,7 @@ public class ProfileController {
      */
     @FXML
     public void editEmailOnAction(ActionEvent event) throws IOException{
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/editEmail.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -108,7 +108,7 @@ public class ProfileController {
      */
     @FXML
     public void editBirthdayOnAction(ActionEvent event) throws IOException{
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/editBirthday.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -121,7 +121,7 @@ public class ProfileController {
      */
     @FXML
     public void editPasswordOnAction(ActionEvent event) throws IOException{
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/editPassword.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
@@ -135,7 +135,7 @@ public class ProfileController {
      */
     @FXML
     public void editDescriptionOnAction(ActionEvent event) throws IOException{
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/editDescription.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
