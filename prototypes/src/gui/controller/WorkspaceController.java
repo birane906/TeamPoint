@@ -34,8 +34,10 @@ public class WorkspaceController {
 
 	HashSet<Workspace> wsl = userFacade.getWorkspaces();
 	ArrayList<Workspace> myWorkspaces = new ArrayList<>(wsl);
+	int workspaceSize = myWorkspaces.size();
 
-	for(int i=0; i < myWorkspaces.size(); i++){}
+
+	for(int i=0; i < workspaceSize; i++){
 		workspaces.getItems().add(new MenuItem(myWorkspaces.get(i).getName()));
 	}
 
