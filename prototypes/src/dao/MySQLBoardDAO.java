@@ -202,7 +202,8 @@ public class MySQLBoardDAO extends BoardDAO {
 		ResultSet rs = null;
 		String query = "SELECT * "
 				+ "FROM typePermission "
-				+ "WHERE idType = 0";
+				+ "WHERE idTypePermission = 0";
+		System.out.println(query);
 
 		int id = -1;
 		String name = "NONE", descr = "NONE";
@@ -216,23 +217,27 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 
 		try {
-			if(stmt.execute(query)) {
+			if (stmt.execute(query)) {
 				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 
+		try {
+			if(rs.next()) {
 				id = rs.getInt("idTypePermission");
 				name = rs.getString("labelPermission");
 				descr = rs.getString("description");
-
 			}
-
-		} catch (SQLException e) {
-			return null;
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
 		}
 
 		if(id == -1) {
 			return null;
 		}
-
 		return new Permission(id, name, descr);
 	}
 
@@ -247,11 +252,13 @@ public class MySQLBoardDAO extends BoardDAO {
 		//Board res = mySQL.addBoard("TestBoard", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
 		//System.out.println(res);
 
-		Boolean res = mySQL.addItemCollection("testItemCol", parentBoard);
-		System.out.println(res);
+		//Boolean res = mySQL.addItemCollection("testItemCol", parentBoard);
+		//System.out.println(res);
 
-		res = mySQL.addItem(itemCol, "itemTest");
-		System.out.println(res);
+		//res = mySQL.addItem(itemCol, "itemTest");
+		//System.out.println(res);
+
+		System.out.println(mySQL.getDefaultPermission());
 	}
 
 }
