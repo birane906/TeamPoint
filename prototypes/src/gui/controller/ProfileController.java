@@ -27,22 +27,12 @@ public class ProfileController {
 
 
     /**
-     * Description of
-     */
-    @FXML
-    private ImageView profileImage;
-
-    /**
      * Description of the close button
      */
     @FXML
     private Button closeButton;
 
-    /**
-     * Description of
-     */
-    @FXML
-    private Button backButton;
+
 
     /**
      * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
@@ -56,6 +46,103 @@ public class ProfileController {
             window.setScene(tableViewScene);
             window.show();
     }
+
+    /**
+     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+     * email and password
+     */
+    @FXML
+    public void editNumberOnAction(ActionEvent event) throws IOException{
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+
+    /**
+     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+     * email and password
+     */
+    @FXML
+    public void editNameOnAction(ActionEvent event) throws IOException{
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+
+    /**
+     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+     * email and password
+     */
+    @FXML
+    public void editFirstNameOnAction(ActionEvent event) throws IOException{
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+
+    /**
+     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+     * email and password
+     */
+    @FXML
+    public void editEmailOnAction(ActionEvent event) throws IOException{
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+    /**
+     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+     * email and password
+     */
+    @FXML
+    public void editBirthdayOnAction(ActionEvent event) throws IOException{
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+    /**
+     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+     * email and password
+     */
+    @FXML
+    public void editPasswordOnAction(ActionEvent event) throws IOException{
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+
+    /**
+     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+     * email and password
+     */
+    @FXML
+    public void editDescriptionOnAction(ActionEvent event) throws IOException{
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+
 
 
     /**

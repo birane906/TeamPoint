@@ -16,7 +16,7 @@
             <Line endX="-71.99998474121094" endY="426.0" layoutX="60.0" layoutY="37.0" startX="-72.0" startY="-93.0" />
             <Line endX="500.20001220703125" endY="-51.99999237060547" layoutX="187.0" layoutY="59.0" startX="-198.5" startY="-52.0" />
 
-            <Hyperlink fx:id="editNumberHyperlink" layoutX="-4.0" layoutY="394.0" prefHeight="28.0" prefWidth="203.0" text="Modifier numéro de téléphone">
+            <Hyperlink fx:id="editNumberHyperlink" layoutX="-4.0" layoutY="394.0" prefHeight="28.0" prefWidth="203.0" text="Modifier numéro de téléphone" onAction="#editNumberOnAction">
                <font>
                   <Font size="14.0" />
                </font>
@@ -25,32 +25,32 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Hyperlink fx:id="editNameHyperlink" layoutX="30.0" layoutY="38.0" text="Modifier nom">
+            <Hyperlink fx:id="editNameHyperlink" layoutX="30.0" layoutY="38.0" text="Modifier nom" onAction="#editNameOnAction">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editFirstNameHyperlink" layoutX="30.0" layoutY="77.0" text="Modifier Prénom">
+            <Hyperlink fx:id="editFirstNameHyperlink" layoutX="30.0" layoutY="77.0" text="Modifier Prénom" onAction="#editFirstNameOnAction">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editEmailHyperlink" layoutX="30.0" layoutY="115.0" text="Modifier adresse mail">
+            <Hyperlink fx:id="editEmailHyperlink" layoutX="30.0" layoutY="115.0" text="Modifier adresse mail" onAction="#editEmailOnAction">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editDescriptionHyperlink" layoutX="30.0" layoutY="159.0" text="Modifier Description">
+            <Hyperlink fx:id="editDescriptionHyperlink" layoutX="30.0" layoutY="159.0" text="Modifier Description" onAction="#editDescriptionOnAction">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editPasswordHyperlink" layoutX="36.0" layoutY="321.0" text="Modifier mot de passe">
+            <Hyperlink fx:id="editPasswordHyperlink" layoutX="36.0" layoutY="321.0" text="Modifier mot de passe" onAction="#editPasswordOnAction">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editBirthdayHyperlink" layoutX="13.0" layoutY="356.0" text="Modifier date de naissance">
+            <Hyperlink fx:id="editBirthdayHyperlink" layoutX="13.0" layoutY="356.0" text="Modifier date de naissance" onAction="#editBirthdayOnAction">
                <font>
                   <Font size="14.0" />
                </font>
