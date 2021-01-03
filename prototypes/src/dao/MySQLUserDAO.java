@@ -151,6 +151,11 @@ public class MySQLUserDAO extends UserDAO {
 	@Override
 	public boolean signUp(String name, String firstname, 
 		String email, String password) {
+
+		if(DAO.isNameExist(email, "user")) {
+			return false;
+		}
+
 		// Query statement
 		PreparedStatement stmt = null;
 
@@ -176,6 +181,10 @@ public class MySQLUserDAO extends UserDAO {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean editUser(String field, String value) {
+		return false;
 	}
 
 	public static void main(String[] args) {
