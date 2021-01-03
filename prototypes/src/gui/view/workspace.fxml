@@ -41,14 +41,14 @@
                 <Image url="@../../../images/profile.png" />
             </image>
         </ImageView>
-        <MenuButton layoutX="432.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
+        <MenuButton fx:id="workspaces" layoutX="432.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
         <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="987.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/3points.png" />
             </image>
         </ImageView>
         <Button fx:id="closeButton" cancelButton="true" layoutX="1018.0" layoutY="7.0" mnemonicParsing="false" onAction="#closeButtonOnAction" prefHeight="5.0" prefWidth="23.0" style="-fx-background-color: #E76A4F;" text="X" textOverrun="CENTER_WORD_ELLIPSIS" />
-      <ImageView fx:id="logout" fitHeight="29.0" fitWidth="31.0" layoutX="22.0" layoutY="574.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#logoutBtn">
+      <ImageView fx:id="logout" fitHeight="29.0" fitWidth="31.0" layoutX="22.0" layoutY="574.0" onMouseClicked="#logoutBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../images/deconnexion.jpg" />
          </image>

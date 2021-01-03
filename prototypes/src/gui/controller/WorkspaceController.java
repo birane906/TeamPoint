@@ -8,11 +8,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Description of WorkspaceController.
@@ -25,6 +30,20 @@ public class WorkspaceController {
 	 * Description of the property userFacade.
 	 */
 	private UserFacade userFacade;
+
+	private MenuButton workspaces;
+
+	HashSet<Workspace> wsl = userFacade.getWorkspaces();
+	ArrayList<Workspace> myWorkspaces = new ArrayList<>(wsl);
+
+
+
+
+
+
+	MenuItem m1 = new MenuItem("menu item 1");
+	MenuItem m2 = new MenuItem("menu item 2");
+	MenuItem m3 = new MenuItem("menu item 3");
 
 
 	/**
