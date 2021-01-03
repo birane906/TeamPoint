@@ -14,7 +14,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7eaed" height="503.0" layoutX="235.0" layoutY="-3.0" stroke="WHITE" strokeType="INSIDE" width="337.0" />
-      <ImageView fx:id="logoImage" fitHeight="77.0" fitWidth="234.0" layoutX="279.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="384.671875" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="287.0" AnchorPane.topAnchor="55.0">
+      <ImageView fx:id="logoImage" fitHeight="77.0" fitWidth="234.0" layoutX="279.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/teampoint.png" />
          </image>

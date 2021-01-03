@@ -19,7 +19,7 @@ public class LoginView extends Application{
 	public void start(Stage primaryStage) throws Exception{
 		Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 		//primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setScene(new Scene(root, 450, 500));
+		primaryStage.setScene(new Scene(root, 800, 500));
 		primaryStage.show();
 	}
 
