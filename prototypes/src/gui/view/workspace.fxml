@@ -31,17 +31,12 @@
                 <Image url="@../../../images/bellButton.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="4boxImage" fitHeight="26.0" fitWidth="31.0" layoutX="21.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#boxImageClicked">
+        <ImageView fx:id="4boxImage" fitHeight="26.0" fitWidth="31.0" layoutX="21.0" layoutY="84.0" onMouseClicked="#boxImageClicked" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/4Boxes.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="37.0" fitWidth="33.0" layoutX="20.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/parameters.png" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="profileImage" fitHeight="46.0" fitWidth="50.0" layoutX="11.0" layoutY="568.0" onMouseClicked="#profileImageClicked" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="profileImage" fitHeight="46.0" fitWidth="50.0" layoutX="12.0" layoutY="521.0" onMouseClicked="#profileImageClicked" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/profile.png" />
             </image>
@@ -53,6 +48,11 @@
             </image>
         </ImageView>
         <Button fx:id="closeButton" cancelButton="true" layoutX="1018.0" layoutY="7.0" mnemonicParsing="false" onAction="#closeButtonOnAction" prefHeight="5.0" prefWidth="23.0" style="-fx-background-color: #E76A4F;" text="X" textOverrun="CENTER_WORD_ELLIPSIS" />
+      <ImageView fx:id="logout" fitHeight="29.0" fitWidth="31.0" layoutX="22.0" layoutY="574.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#logoutBtn">
+         <image>
+            <Image url="@../../../../../../images/deconnexion.jpg" />
+         </image>
+      </ImageView>
 
     </children>
 </AnchorPane>

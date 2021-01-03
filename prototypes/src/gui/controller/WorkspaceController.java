@@ -61,6 +61,17 @@ public class WorkspaceController {
 		window.setScene(tableViewScene);
 		window.show();
 	}
+
+
+	@FXML
+	public void logoutBtn(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+
 	/**
 	 * The constructor.
 	 */
