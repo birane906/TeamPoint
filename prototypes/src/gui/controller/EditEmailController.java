@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,16 +30,10 @@ public class EditEmailController {
 	private UserFacade userFacade;
 
 	@FXML
-	private PasswordField newPasswordField;
+	private TextField newEmailTextField;
 
 	@FXML
-	private PasswordField confPasswordField;
-
-	@FXML
-	private Button validateButton;
-
-	@FXML
-	private Button cancelButton;
+	private TextField confEmailTextField;
 
 	@FXML
 	private Label messageLabel;
@@ -47,13 +42,13 @@ public class EditEmailController {
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 
-		String regexPassword ="^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])\\S{8,}$";
-		String password = newPasswordField.getText();
-		Pattern ptPassword = Pattern.compile(regexPassword);
-		Matcher mPassword = ptPassword.matcher(password);
-		boolean passwordIsGood = mPassword.matches();
+		String regex ="^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+		String text = newEmailTextField.getText();
+		Pattern pt = Pattern.compile(regex);
+		Matcher m = pt.matcher(text);
+		boolean IsGood = m.matches();
 
-		if(newPasswordField.getText() == confPasswordField.getText() && !newPasswordField.getText().isBlank() && passwordIsGood) {
+		if(newEmailTextField.getText() == confEmailTextField.getText() ) {
 
 			//TO DO
 			// TRAITEMENT BDD
@@ -62,6 +57,7 @@ public class EditEmailController {
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window.setScene(tableViewScene);
 			window.show();
+			messageLabel.setText("");
 		}else{
 			messageLabel.setText("Changement non effectué");
 		}

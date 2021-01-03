@@ -37,12 +37,6 @@ public class EditPasswordController {
 	private PasswordField confPasswordField;
 
 	@FXML
-	private Button validateButton;
-
-	@FXML
-	private Button cancelButton;
-
-	@FXML
 	private Label messageLabel;
 
 
