@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  Dim 03 jan. 2021 à 10:50
+-- Généré le :  Dim 03 jan. 2021 à 11:11
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -56,16 +56,16 @@ CREATE TABLE `cell` (
   `idColumn` int(10) NOT NULL,
   `idItem` int(10) NOT NULL,
   `idItemCollection` int(10) NOT NULL,
-  `cellValue` varchar(25) NOT NULL,
-  `idCellType` int(10) NOT NULL
+  `cellValue` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `cell`
 --
 
-INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idItemCollection`, `cellValue`, `idCellType`) VALUES
-(0, 0, 0, 0, 0, 'ValueTest', 0);
+INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idItemCollection`, `cellValue`) VALUES
+(0, 0, 0, 0, 0, 'ValueTest'),
+(44, 0, 0, 0, 0, 'sa');
 
 -- --------------------------------------------------------
 
@@ -249,7 +249,6 @@ ALTER TABLE `board`
 --
 ALTER TABLE `cell`
   ADD PRIMARY KEY (`idCell`),
-  ADD KEY `FOREIGN_CELL_TYPE` (`idCellType`),
   ADD KEY `FOREIGN_CELL_BOARD` (`idBoard`),
   ADD KEY `FOREIGN_COLUMN_CELL` (`idColumn`),
   ADD KEY `FOREIGN_ITEM_COLLECTION_CELL` (`idItemCollection`),
@@ -324,7 +323,7 @@ ALTER TABLE `board`
 -- AUTO_INCREMENT pour la table `cell`
 --
 ALTER TABLE `cell`
-  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT pour la table `column`
@@ -373,7 +372,6 @@ ALTER TABLE `board`
 --
 ALTER TABLE `cell`
   ADD CONSTRAINT `FOREIGN_CELL_BOARD` FOREIGN KEY (`idBoard`) REFERENCES `board` (`idBoard`),
-  ADD CONSTRAINT `FOREIGN_CELL_TYPE` FOREIGN KEY (`idCellType`) REFERENCES `type` (`idType`),
   ADD CONSTRAINT `FOREIGN_COLUMN_CELL` FOREIGN KEY (`idColumn`) REFERENCES `column` (`idColumn`),
   ADD CONSTRAINT `FOREIGN_ITEM_COLLECTION_CELL` FOREIGN KEY (`idItemCollection`) REFERENCES `itemcollection` (`idItemCollection`),
   ADD CONSTRAINT `FOREIGN_ITEM_ROW` FOREIGN KEY (`idItem`) REFERENCES `item` (`idItem`);
