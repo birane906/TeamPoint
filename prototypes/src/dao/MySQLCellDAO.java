@@ -1,6 +1,3 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package dao;
 
 import java.sql.ResultSet;
@@ -18,9 +15,6 @@ import business_logic.board.ItemCollection;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.CellDAO;
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of MySQLCellDAO.
@@ -28,9 +22,6 @@ import dao.CellDAO;
  * @author 
  */
 public class MySQLCellDAO extends CellDAO {
-	// Start of user code (user defined attributes for MySQLCellDAO)
-
-	// End of user code
 
 	/**
 	 * The constructor.
