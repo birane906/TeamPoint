@@ -1,6 +1,3 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package dao;
 
 /**
@@ -29,8 +26,7 @@ public class MySQLDAOFactory extends DAOFactory {
 	 */
 	@Override
 	public BoardDAO createBoardDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new MySQLBoardDAO();
 	}
 
 	/**
@@ -39,8 +35,7 @@ public class MySQLDAOFactory extends DAOFactory {
 	 */
 	@Override
 	public WorkspaceDAO createWorkspaceDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new MySQLWorkspaceDAO();
 	}
 
 	/**
@@ -49,13 +44,11 @@ public class MySQLDAOFactory extends DAOFactory {
 	 */
 	@Override
 	public ColumnDAO createColumnDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new MySQLColumnDAO();
 	}
 
 	@Override
 	public InvitationDAO createInvitationDAO() {
-		// TODO Auto-generated method stub
-		return null;
+		return new MySQLInvitationDAO();
 	}
 }

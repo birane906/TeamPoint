@@ -6,8 +6,10 @@ import java.util.HashSet;
 import business_logic.user.*;
 import business_logic.user.User;
 import dao.DAOFactory;
+import dao.MySQLWorkspaceDAO;
 import dao.UserDAO;
 import business_logic.workspace.Workspace;
+import dao.WorkspaceDAO;
 
 /**
  * {@link UserFacade} is a Singleton class. Simplify the use of 
@@ -140,12 +142,20 @@ public class UserFacade {
 	 * @return workspaces 
 	 */
 	public HashSet<Workspace> getWorkspaces() {
-		return null;
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		WorkspaceDAO workspaceDAO = daoFactory.createWorkspaceDAO();
+		System.out.println(currentUser);
+		try {
+
+			return workspaceDAO.getUserWorkspaces(currentUser);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public static void main(String[] args) {
 		UserFacade userFacade = new UserFacade();
-		
+
 		System.out.println(userFacade.login("galoisnicolas@gmail.com", "toto"));
 		
 		System.out.println(userFacade.signUp("salu", "saas", "mail", "de"));

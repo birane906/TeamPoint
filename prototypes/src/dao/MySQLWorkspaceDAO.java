@@ -182,8 +182,9 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	 * @return a collection of workspace
 	 */
 	public HashSet<Workspace> getUserWorkspaces(User user) throws Exception {
-
+		System.out.println("on est la");
 		if(user == null) {
+			System.out.println("Problem");
 			return null;
 		}
 
@@ -220,6 +221,8 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			// TODO explain connection lost
 			e.printStackTrace();
 		}
+		System.out.println(req);
+
 
 		// if we have a result then move to the next line
 		try {
@@ -259,6 +262,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 					res.add(ws);
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				return null;
 			}
 		}
@@ -274,7 +278,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 		// Login test
 		try {
-			user = mySQLUserDAO.getUser("galoisnicolas@gmail.com", "toto");
+			user = mySQLUserDAO.getUser("raph@gmail.com", "Rafael123");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -286,18 +290,28 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		
 		//System.out.println(mySQL.deleteCell(cell));
 		
-		System.out.println(mySQL.createWorkspace("as", workspaceOwner));
+		//System.out.println(mySQL.createWorkspace("as", workspaceOwner));
 
 		// Retrieve user workspaces
 		try {
+
 			HashSet<Workspace> res = mySQL.getUserWorkspaces(user);
 			System.out.println(res);
 
-			System.out.println(mySQL.retrieveWorkspace(res.iterator().next()));
+			if(res == null){
+				System.out.println("NULL");
+			}else{
+				System.out.println(res);
+			}
+
+			//System.out.println(mySQL.retrieveWorkspace(res.iterator().next()));
+
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
+
+
 
 	}
 

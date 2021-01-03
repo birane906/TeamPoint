@@ -19,10 +19,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Description of WorkspaceController.
@@ -37,11 +34,6 @@ public class WorkspaceController implements Initializable {
 	private UserFacade userFacade;
 	@FXML
 	private MenuButton workspaces;
-
-
-
-
-
 
 
 
@@ -138,10 +130,16 @@ public class WorkspaceController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-			HashSet<Workspace> wsl = userFacade.getWorkspaces();
-			for(Workspace w : wsl){
+
+		Set<Workspace> wsl = new HashSet<>();
+		wsl = userFacade.getWorkspaces();
+		if(wsl != null) {
+			for (Workspace w : wsl) {
 				workspaces.getItems().add(new MenuItem(w.getName()));
 			}
+		}
+
+
 
 	}
 
