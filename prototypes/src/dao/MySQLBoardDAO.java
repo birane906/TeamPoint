@@ -77,8 +77,6 @@ public class MySQLBoardDAO extends BoardDAO {
 				+ DAO.stringFormat(workspace.getWorkspace_id() + "")
 				+ ")";
 
-		System.out.println(req);
-							
 		try {
 			stmt.execute(req);
 		} catch (SQLException e) {
@@ -102,6 +100,8 @@ public class MySQLBoardDAO extends BoardDAO {
 	@Override
 	public Board retrieveBoard(Board board) {
 		// SET parentWorkspace
+
+		// CREATE COLUMN, ITEMCOL, ITEM, CELL, PERMISSION, TYPE
 
 		return null;
 	}
