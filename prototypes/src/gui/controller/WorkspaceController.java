@@ -26,7 +26,6 @@ public class WorkspaceController {
 	 */
 	private UserFacade userFacade;
 
-	HashSet<Workspace> myWorkspaces = userFacade.getWorkspaces();
 
 	/**
 	 * Description of

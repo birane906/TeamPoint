@@ -2,6 +2,7 @@ package gui.controller;
 
 
 import business_logic.UserFacade;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -36,6 +37,25 @@ public class ProfileController {
      */
     @FXML
     private Button closeButton;
+
+    /**
+     * Description of
+     */
+    @FXML
+    private Button backButton;
+
+    /**
+     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+     * email and password
+     */
+    @FXML
+    public void backButtonOnAction(ActionEvent event) throws IOException{
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(tableViewScene);
+            window.show();
+    }
 
 
     /**
