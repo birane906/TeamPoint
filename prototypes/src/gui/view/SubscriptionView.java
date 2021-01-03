@@ -19,7 +19,7 @@ public class SubscriptionView extends Application{
 	 */
 	public void start(Stage primaryStage) throws Exception{
 		Parent root = FXMLLoader.load(getClass().getResource("subscription.fxml"));
-		primaryStage.initStyle(StageStyle.UNDECORATED);
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(new Scene(root, 594, 425));
 		primaryStage.show();
 	}

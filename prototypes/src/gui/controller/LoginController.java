@@ -59,8 +59,7 @@ public class LoginController implements Initializable{
 	@FXML
 	private PasswordField passwordField;
 
-	@FXML
-	private Hyperlink signUpHyperlink;
+
 
 	/**
 	 * The constructor.
@@ -83,19 +82,23 @@ public class LoginController implements Initializable{
 	 * email and password
 	 */
 	@FXML
-	public void loginButtonOnAction(ActionEvent event){
+	public void loginButtonOnAction(ActionEvent event) throws IOException{
 		if(emailTextField.getText().isBlank() 
 			|| passwordField.getText().isBlank()
 			|| !userFacade.login(emailTextField.getText(),passwordField.getText())){
 			wrongAuth();
 		}else{
-			System.out.println("validé");
+			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+			Scene tableViewScene = new Scene(tableViewParent);
+			Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+			window.setScene(tableViewScene);
+			window.show();
 		}
 	}
 
 	@FXML
 	public void signUpHyperlinkOnAction(ActionEvent event) throws IOException {
-		Parent tableViewParent = FXMLLoader.load(getClass().getResource("subscription.fxml"));
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/subscription.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
