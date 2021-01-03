@@ -7,14 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +20,7 @@ import java.util.regex.Pattern;
  * 
  * @author 
  */
-public class EditBirthdayController {
+public class EditNameController {
 
 	/**
 	 * Description of the property userFacade.
@@ -31,30 +28,33 @@ public class EditBirthdayController {
 	private UserFacade userFacade;
 
 	@FXML
-	private DatePicker birthdayDP;
-
+	private TextField newNameTextField;
 
 
 	@FXML
 	private Label messageLabel;
 
 
-
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-			//if(birthdayDP.getValue().isAfter(LocalDate.now())) {
-				//TO DO
-				// TRAITEMENT BDD
-				Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
-				Scene tableViewScene = new Scene(tableViewParent);
-				Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				window.setScene(tableViewScene);
-				window.show();
-				messageLabel.setText("");
-		//	}else{
-			//	messageLabel.setText("Changement non effectué");
-		//	}
 
+		String regex = "^[a-zA-Z]+$";
+		String text = newNameTextField.getText();
+		Pattern pt = Pattern.compile(regex);
+		Matcher m = pt.matcher(text);
+		boolean IsGood = m.matches();
+
+		if(IsGood == true) {
+			//TO DO
+			// TRAITEMENT BDD
+			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
+			Scene tableViewScene = new Scene(tableViewParent);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(tableViewScene);
+			window.show();
+		}else{
+			messageLabel.setText("Changement non effectué");
+		}
 	}
 
 	@FXML
@@ -69,7 +69,7 @@ public class EditBirthdayController {
 	/**
 	 * The constructor.
 	 */
-	public EditBirthdayController() {
+	public EditNameController() {
 		super();
 	}
 

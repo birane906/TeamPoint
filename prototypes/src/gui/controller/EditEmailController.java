@@ -8,13 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +21,7 @@ import java.util.regex.Pattern;
  * 
  * @author 
  */
-public class EditBirthdayController {
+public class EditEmailController {
 
 	/**
 	 * Description of the property userFacade.
@@ -31,30 +29,42 @@ public class EditBirthdayController {
 	private UserFacade userFacade;
 
 	@FXML
-	private DatePicker birthdayDP;
+	private PasswordField newPasswordField;
 
+	@FXML
+	private PasswordField confPasswordField;
 
+	@FXML
+	private Button validateButton;
+
+	@FXML
+	private Button cancelButton;
 
 	@FXML
 	private Label messageLabel;
 
 
-
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-			//if(birthdayDP.getValue().isAfter(LocalDate.now())) {
-				//TO DO
-				// TRAITEMENT BDD
-				Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
-				Scene tableViewScene = new Scene(tableViewParent);
-				Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				window.setScene(tableViewScene);
-				window.show();
-				messageLabel.setText("");
-		//	}else{
-			//	messageLabel.setText("Changement non effectué");
-		//	}
 
+		String regexPassword ="^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])\\S{8,}$";
+		String password = newPasswordField.getText();
+		Pattern ptPassword = Pattern.compile(regexPassword);
+		Matcher mPassword = ptPassword.matcher(password);
+		boolean passwordIsGood = mPassword.matches();
+
+		if(newPasswordField.getText() == confPasswordField.getText() && !newPasswordField.getText().isBlank() && passwordIsGood) {
+
+			//TO DO
+			// TRAITEMENT BDD
+			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
+			Scene tableViewScene = new Scene(tableViewParent);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(tableViewScene);
+			window.show();
+		}else{
+			messageLabel.setText("Changement non effectué");
+		}
 	}
 
 	@FXML
@@ -69,7 +79,7 @@ public class EditBirthdayController {
 	/**
 	 * The constructor.
 	 */
-	public EditBirthdayController() {
+	public EditEmailController() {
 		super();
 	}
 
