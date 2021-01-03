@@ -103,17 +103,16 @@ public class MySQLBoardDAO extends BoardDAO {
 	public Boolean addItemCollection(String itemCollectionName, Board board) {
 
 		if(board == null || itemCollectionName.isBlank()) {
-			return null;
+			return false;
 		}
 
 		if(DAO.isNameExist(itemCollectionName, "itemCollection")) {
-			return null;
+			return false;
 		}
 
 		// Query statement
 		PreparedStatement stmt = null;
-		int itemCollectionId = -1;
-						
+
 		String query = "INSERT INTO itemcollection"
 				+ " (idBoard, itemCollectionName) VALUES(?, ?)";
 		try {
@@ -131,43 +130,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				+  ")";
 
 		try {
-			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
-		} catch (SQLException e) {
-			return false;
-		}
-
-		// Add the item collection id to board_contains
-
-		try {
-			ResultSet rs = stmt.getGeneratedKeys();
-			rs.next();
-			itemCollectionId = rs.getInt(1);
-
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-
-		stmt = null;
-
-		query = "INSERT INTO board_contains"
-				+ " (idBoard, idItemCollection, idColumn) VALUES(?, ?, ?)";
-		try {
-			stmt = DAO.getConnection().prepareStatement(query);
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-
-		req = "INSERT INTO board_contains"
-				+ " (idBoard, idItemCollection, idColumn) VALUES("
-				+ DAO.stringFormat(board.getBoard_id() + "") + ", "
-				+ DAO.stringFormat(itemCollectionId + "") + ", "
-				+ null
-				+ ")";
-
-		System.out.println(req);
-
-		try {
-			stmt.execute(req);
+			stmt.executeUpdate(req);
 		} catch (SQLException e) {
 			return false;
 		}
@@ -185,19 +148,18 @@ public class MySQLBoardDAO extends BoardDAO {
 	public Boolean addItem(ItemCollection itemCollection, String itemLabel) {
 
 		if(itemCollection == null || itemLabel.isBlank()) {
-			return null;
+			return false;
 		}
 
 		if(DAO.isNameExist(itemLabel, "item")) {
-			return null;
+			return false;
 		}
 
 		// Query statement
 		PreparedStatement stmt = null;
 		String query = "INSERT INTO item"
 				+ " (idBoard, idItemCollection, itemName) VALUES(?, ?, ?)";
-		int itemId = -1;
-								
+
 		try {
 			// Getconnection
 			stmt = DAO.getConnection().prepareStatement(query);
@@ -214,42 +176,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				+  ")";
 		
 		try {
-			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
-		} catch (SQLException e) {
-			return false;
-		}
-
-		// Add the item id to item_collection_item
-
-		try {
-			ResultSet rs = stmt.getGeneratedKeys();
-			rs.next();
-			itemId = rs.getInt(1);
-
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-
-		stmt = null;
-
-		query = "INSERT INTO item_collection_item"
-				+ " (idItemCollection, idItem) VALUES(?, ?)";
-		try {
-			stmt = DAO.getConnection().prepareStatement(query);
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-
-		req = "INSERT INTO item_collection_item"
-				+ " (idItemCollection, idItem) VALUES("
-				+ DAO.stringFormat(itemCollection.getItemCollection_id() + "") + ", "
-				+ DAO.stringFormat(itemId + "")
-				+ ")";
-
-		System.out.println(req);
-
-		try {
-			stmt.execute(req);
+			stmt.executeUpdate(req);
 		} catch (SQLException e) {
 			return false;
 		}
@@ -283,10 +210,10 @@ public class MySQLBoardDAO extends BoardDAO {
 		//Board res = mySQL.addBoard("TestBoard", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
 		//System.out.println(res);
 
-		//Boolean res = mySQL.addItemCollection("testItemCol", parentBoard);
-		//System.out.println(res);
+		Boolean res = mySQL.addItemCollection("testItemCol", parentBoard);
+		System.out.println(res);
 
-		Boolean res = mySQL.addItem(itemCol, "itemTest");
+		res = mySQL.addItem(itemCol, "itemTest");
 		System.out.println(res);
 	}
 

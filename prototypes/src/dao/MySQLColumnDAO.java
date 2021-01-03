@@ -64,31 +64,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
-
-		stmt = null;
-
-		query = "INSERT INTO board_contains"
-				+ " (idBoard, idItemCollection, idColumn) VALUES(?, ?, ?)";
-		try {
-			stmt = DAO.getConnection().prepareStatement(query);
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-
-		req = "INSERT INTO board_contains"
-				+ " (idBoard, idItemCollection, idColumn) VALUES("
-				+ DAO.stringFormat(board.getBoard_id() + "") + ", "
-				+ null + ", "
-				+ DAO.stringFormat(columnId + "")
-				+ ")";
-
-		try {
-			stmt.execute(req);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-
 		return new Column(board, columnName, columnId, getTypeByName(typeName).getIdType());
 	}
 
@@ -222,7 +197,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		User boardOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
 		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner);
 
-		Column resAdd = mySQLColumnDAO.addColumn("sasasasa", parentBoard, "TimeLineType");
+		Column resAdd = mySQLColumnDAO.addColumn("asas", parentBoard, "TimeLineType");
 
 		System.out.println(resAdd);
 	}
