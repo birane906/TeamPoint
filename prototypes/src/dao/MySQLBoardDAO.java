@@ -196,7 +196,44 @@ public class MySQLBoardDAO extends BoardDAO {
 	 */
 	@Override
 	public Permission getDefaultPermission() {
-		return null;
+
+		// Query statement
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * "
+				+ "FROM typePermission "
+				+ "WHERE idType = 0";
+
+		int id = -1;
+		String name = "NONE", descr = "NONE";
+
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		try {
+			if(stmt.execute(query)) {
+				rs = stmt.getResultSet();
+
+				id = rs.getInt("idTypePermission");
+				name = rs.getString("labelPermission");
+				descr = rs.getString("description");
+
+			}
+
+		} catch (SQLException e) {
+			return null;
+		}
+
+		if(id == -1) {
+			return null;
+		}
+
+		return new Permission(id, name, descr);
 	}
 
 	public static void main(String[] args) {
