@@ -41,7 +41,7 @@
                 <Image url="@../../../images/profile.png" />
             </image>
         </ImageView>
-        <MenuButton fx:id="workspaces" layoutX="432.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
+        <MenuButton fx:id="workspaces" layoutX="432.0" layoutY="18.0" mnemonicParsing="false" onAction="#fillWorkspaceMenuButton" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
         <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="987.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/3points.png" />

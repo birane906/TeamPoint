@@ -4,6 +4,7 @@ import business_logic.UserFacade;
 import business_logic.workspace.Workspace;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,38 +12,37 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 
 /**
  * Description of WorkspaceController.
  * 
  * @author 
  */
-public class WorkspaceController {
+public class WorkspaceController implements Initializable {
 
 	/**
 	 * Description of the property userFacade.
 	 */
 	private UserFacade userFacade;
+	@FXML
 	private MenuButton workspaces;
 
 
 
-	public void fillWorkspaceMenuButton() {
-		HashSet<Workspace> wsl = userFacade.getWorkspaces();
-		ArrayList<Workspace> myWorkspaces = new ArrayList<>(wsl);
-		int workspaceSize = myWorkspaces.size();
 
-		for (int i = 0; i < workspaceSize; i++) {
-			workspaces.getItems().add(new MenuItem(myWorkspaces.get(i).getName()));
-		}
 
-	}
+
+
 
 
 
@@ -96,7 +96,9 @@ public class WorkspaceController {
 	 */
 	public WorkspaceController() {
 		super();
+		userFacade = UserFacade.getUserFacadeInstance();
 	}
+
 
 	/**
 	 * Description of the method deleteWorkspace.
@@ -130,6 +132,19 @@ public class WorkspaceController {
 	public void retrieveWorkspace(Workspace workspace) {
 	}
 
+	/**
+	 * Method which initialize the login window
+	 */
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+			HashSet<Workspace> wsl = userFacade.getWorkspaces();
+			ArrayList<Workspace> myWorkspaces = new ArrayList<>(wsl);
+			int workspaceSize = myWorkspaces.size();
 
+			for (int i = 0; i < workspaceSize; i++) {
+				workspaces.getItems().add(new MenuItem(myWorkspaces.get(i).getName()));
+			}
+
+	}
 
 }
