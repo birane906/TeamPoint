@@ -29,17 +29,21 @@ public class WorkspaceController {
 	 * Description of the property userFacade.
 	 */
 	private UserFacade userFacade;
-
 	private MenuButton workspaces;
 
-	HashSet<Workspace> wsl = userFacade.getWorkspaces();
-	ArrayList<Workspace> myWorkspaces = new ArrayList<>(wsl);
-	int workspaceSize = myWorkspaces.size();
 
 
-	for(int i=0; i < workspaceSize; i++){
-		workspaces.getItems().add(new MenuItem(myWorkspaces.get(i).getName()));
+	public void fillWorkspaceMenuButton() {
+		HashSet<Workspace> wsl = userFacade.getWorkspaces();
+		ArrayList<Workspace> myWorkspaces = new ArrayList<>(wsl);
+		int workspaceSize = myWorkspaces.size();
+
+		for (int i = 0; i < workspaceSize; i++) {
+			workspaces.getItems().add(new MenuItem(myWorkspaces.get(i).getName()));
+		}
+
 	}
+
 
 
 	/**

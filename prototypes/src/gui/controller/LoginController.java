@@ -35,11 +35,7 @@ public class LoginController implements Initializable{
 	@FXML
 	private Label wrongAuthentification;
 
-	/**
-	 * Description of the close button
-	 */
-	@FXML
-	private Button closeButton;
+
 
 	/**
 	 * Description of our application logo
@@ -69,13 +65,7 @@ public class LoginController implements Initializable{
 	}
 
 
-	/**
-	 * Method which permite to close the window when you click on the close button
-	 */
-	public void closeButtonOnAction(){
-		Stage stage = (Stage) closeButton.getScene().getWindow();
-		stage.close();
-	}
+
 
 	/**
 	 * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
@@ -86,7 +76,7 @@ public class LoginController implements Initializable{
 		if(emailTextField.getText().isBlank() 
 			|| passwordField.getText().isBlank()
 			|| !userFacade.login(emailTextField.getText(),passwordField.getText())){
-			wrongAuth();
+			wrongAuthentification.setText("Email ou mot de passe incorrect");
 		}else{
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
@@ -106,13 +96,7 @@ public class LoginController implements Initializable{
 	}
 
 
-	/**
-	 * an utility function used
-	 */
-	@FXML
-	private void wrongAuth(){
-		wrongAuthentification.setText("Email ou mot de passe incorrect");
-	}
+
 
 	/**
 	 * Method which initialize the login window

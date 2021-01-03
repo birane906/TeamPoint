@@ -33,5 +33,6 @@
             <Font name="System Bold" size="13.0" />
          </font></Button>
       <Label accessibleRole="PARENT" layoutX="260.0" layoutY="403.0" text="Pas de compte TeamPoint ?" AnchorPane.rightAnchor="392.8" AnchorPane.topAnchor="403.0" />
+      <Label fx:id="wrongAuthentification" layoutX="296.0" layoutY="342.0" prefHeight="18.0" prefWidth="222.0" textAlignment="CENTER" textFill="#f50707" />
    </children>
 </AnchorPane>
