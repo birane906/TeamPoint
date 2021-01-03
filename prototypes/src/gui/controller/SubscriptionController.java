@@ -162,8 +162,8 @@ public class SubscriptionController implements Initializable{
 		Matcher mEmail = ptEmail.matcher(email);
 		boolean emailIsGood = mEmail.matches();
 
-		String regexPassword ="^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
-		String password = emailTextField.getText();
+		String regexPassword ="^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])\\S{8,}$";
+		String password = passwordField.getText();
 		Pattern ptPassword = Pattern.compile(regexPassword);
 		Matcher mPassword = ptPassword.matcher(password);
 		boolean passwordIsGood = mPassword.matches();
@@ -171,15 +171,18 @@ public class SubscriptionController implements Initializable{
 
 		if(firstNameIsGood == true && nameIsGood == true){
 			if(emailIsGood == true){
-				//if(passwordIsGood == true){
+				if(passwordIsGood == true){
 						if(userFacade.signUp(name,firstName,email,password) == true) {
 							userRegisteredLabel.setText("Votre compte a bien été crééé !");
+							passwordInvalidLabel.setText("");
+							emailInvalidLabel.setText("");
+							nameFirstNameInvalidLabel.setText("");
 						}else{
 							passwordInvalidLabel.setText("Erreur lors de la création de votre compte ");
 						}
-				//}else{
-				//	passwordInvalidLabel.setText("Mot de passe non conforme ! Il doit contenir au moins 8 caractères, un chiffre, une majuscule");
-				//}
+				}else{
+					passwordInvalidLabel.setText("Mot de passe non conforme ! Il doit contenir au moins 8 caractères, un chiffre, une majuscule");
+				}
 			}else{
 				emailInvalidLabel.setText("Adresse Mail invalide !");
 			}

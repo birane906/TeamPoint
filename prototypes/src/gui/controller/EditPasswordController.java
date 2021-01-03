@@ -15,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Description of WorkspaceController.
@@ -46,7 +48,14 @@ public class EditPasswordController {
 
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-		if(newPasswordField.getText() == confPasswordField.getText() && !newPasswordField.getText().isBlank()) { // ET REGEX BIENSUR
+
+		String regexPassword ="^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])\\S{8,}$";
+		String password = newPasswordField.getText();
+		Pattern ptPassword = Pattern.compile(regexPassword);
+		Matcher mPassword = ptPassword.matcher(password);
+		boolean passwordIsGood = mPassword.matches();
+
+		if(newPasswordField.getText() == confPasswordField.getText() && !newPasswordField.getText().isBlank() && passwordIsGood) {
 
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
