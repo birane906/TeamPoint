@@ -12,26 +12,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginController">
    <children>
-      <ImageView fx:id="logoImage" fitHeight="117.0" fitWidth="200.0" layoutX="125.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="412.4375" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="36.0">
+      <ImageView fx:id="logoImage" fitHeight="117.0" fitWidth="200.0" layoutX="126.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="368.4375" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="124.0" AnchorPane.topAnchor="34.0">
          <image>
             <Image url="@../../../images/teampoint.png" />
          </image>
       </ImageView>
-      <Label layoutX="112.0" layoutY="131.0" text="Connexion">
+      <Label layoutX="109.0" layoutY="137.0" text="SE CONNECTER">
          <font>
-            <Font size="17.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="emailTextField" layoutX="126.0" layoutY="166.0" prefHeight="26.0" prefWidth="200.0" promptText="Adresse e-mail" />
-      <PasswordField fx:id="passwordField" layoutX="126.0" layoutY="201.0" prefHeight="26.0" prefWidth="200.0" promptText="Mot de passe" />
-      <Hyperlink fx:id="passwordForgetHyperLink" layoutX="217.0" layoutY="250.0" text="Mot de passe oublié" />
-      <Hyperlink fx:id="signUpHyperlink" layoutX="86.0" layoutY="374.0" onAction="#signUpHyperlinkOnAction" text="Pas de compte TeamPoint ? Créez vous un compte " />
-      <Button fx:id="loginButton" layoutX="114.0" layoutY="308.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="38.0" prefWidth="224.0" text="SE CONNECTER" />
-      <Label fx:id="wrongAuthentification" alignment="CENTER" layoutX="6.0" layoutY="282.0" prefHeight="16.0" prefWidth="429.0" textFill="#d30b0b" />
-      <Button fx:id="closeButton" cancelButton="true" layoutX="410.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeButtonOnAction" prefHeight="6.0" prefWidth="20.0" style="-fx-background-color: #E76A4F;" text="X" textOverrun="CENTER_WORD_ELLIPSIS">
+      <TextField fx:id="emailTextField" layoutX="110.0" layoutY="165.0" prefHeight="26.0" prefWidth="233.0" promptText="Adresse e-mail" />
+      <PasswordField fx:id="passwordField" layoutX="109.0" layoutY="200.0" prefHeight="26.0" prefWidth="234.0" promptText="Mot de passe" />
+      <Hyperlink fx:id="passwordForgetHyperLink" layoutX="218.0" layoutY="236.0" text="Mot de passe oublié ?" />
+      <Hyperlink fx:id="signUpHyperlink" layoutX="229.0" layoutY="357.0" onAction="#signUpHyperlinkOnAction" text="Créez vous un compte !" />
+      <Button fx:id="loginButton" layoutX="121.0" layoutY="285.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="27.0" prefWidth="200.0" text="SE CONNECTER">
          <font>
-            <Font size="9.0" />
-         </font>
-      </Button>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
+      <Label fx:id="wrongAuthentification" alignment="CENTER" layoutX="6.0" layoutY="282.0" prefHeight="16.0" prefWidth="429.0" textFill="#d30b0b" />
+      <Label layoutX="82.0" layoutY="360.0" text="Pas de compte TeamPoint ?" />
    </children>
 </AnchorPane>
