@@ -3,119 +3,111 @@
  *******************************************************************************/
 package business_logic;
 
-import business_logic.ColumnFacade;
+import business_logic.board.AbstractType;
 import business_logic.board.Board;
 import business_logic.board.Column;
-// Start of user code (user defined imports)
+import dao.ColumnDAO;
+import dao.DAOFactory;
 
-// End of user code
+import java.util.ArrayList;
 
 /**
- * Description of ColumnFacade.
- * 
- * @author 
+ * {@link ColumnFacade} is a Singleton class. Simplify the use of
+ * business logic subsystem for the GUI layer. Facade pattern.
+ * Contains the business methods.
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class ColumnFacade {
 	/**
-	 * Description of the property currentColumn.
+	 * The current {@link Column} loaded in the {@link ColumnFacade}
 	 */
 	public Column currentColumn = null;
 
-	// Start of user code (user defined attributes for ColumnFacade)
-
-	// End of user code
+	/**
+	 * private constructor
+	 */
+	private ColumnFacade() {}
 
 	/**
-	 * The constructor.
+	 * The {@link ColumnFacade} <code>static</code> nested class
+	 * guarantees the uniqueness of {@link ColumnFacade} instance
 	 */
-	public ColumnFacade() {
-		// Start of user code constructor for ColumnFacade)
-		super();
-		// End of user code
+	private static class ColumnFacadeHolder {
+		/**
+		 * The unique instance of {@link ColumnFacade}
+		 */
+		private static final ColumnFacade COLUMN_FACADE = new ColumnFacade();
 	}
 
 	/**
-	 * Description of the method getColumnFacadeInstance.
-	 * @return 
+	 * <code>static</code> method. Gives the unique instance of {@link ColumnFacade}
+	 * @return The {@link ColumnFacade}
 	 */
-	public static ColumnFacade getColumnFacadeInstance() {
-		// Start of user code for method getColumnFacadeInstance
-		ColumnFacade getColumnFacadeInstance = null;
-		return getColumnFacadeInstance;
-		// End of user code
-	}
+	public static ColumnFacade getColumnFacadeInstance() { return ColumnFacadeHolder.COLUMN_FACADE;	}
 
 	/**
-	 * Description of the method addColumn.
-	 * @param columnName 
-	 * @param board 
-	 * @param typeName 
+	 * Asks for {@link ColumnDAO} to create a {@link Column} in the given {@link Board}
+	 * @param columnName The name of the new created {@link Column}
+	 * @param board The {@link Board} of the created {@link Column}
+	 * @param typeName The string description of the {@link AbstractType} of the new created {@link Column}
 	 * @return 
 	 */
 	public Boolean addColumn(String columnName, Board board, String typeName) {
-		// Start of user code for method addColumn
-		Boolean addColumn = Boolean.FALSE;
-		return addColumn;
-		// End of user code
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		ColumnDAO columnDAO = daoFactory.createColumnDAO();
+
+		Column column = columnDAO.addColumn(columnName, board, typeName);
+
+		if (column != null) {
+			BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
+			boardFacade.getCurrentBoard().addColumn(column);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
-	 * Description of the method retrieveColumnTypes.
-	 * @return 
+	 * Asks for {@link ColumnDAO} to retrieve all the {@link AbstractType} of the {@link Column}s
+	 * @return An {@link ArrayList} of the {@link AbstractType} of the {@link Column}s
 	 */
-	public Object retrieveColumnTypes() {
-		return null;
-		// Start of user code for method retrieveColumnTypes
-		// End of user code
+	public ArrayList<AbstractType> retrieveColumnTypes() {
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		ColumnDAO columnDAO = daoFactory.createColumnDAO();
+
+		return columnDAO.getAllColumnTypes();
 	}
 
 	/**
-	 * Description of the method deleteColumn.
-	 * @param column 
-	 * @return 
+	 * Asks for {@link ColumnDAO} to delete a {@link Column}
+	 * @param column The {@link Column} to be deleted
+	 * @return <code>true</code> if the deletion succeed, <code>false</code> otherwise
 	 */
 	public Boolean deleteColumn(Column column) {
-		// Start of user code for method deleteColumn
-		Boolean deleteColumn = Boolean.FALSE;
-		return deleteColumn;
-		// End of user code
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		ColumnDAO columnDAO = daoFactory.createColumnDAO();
+
+		return columnDAO.deleteColumn(column);
 	}
 
 	/**
-	 * Description of the method getColumnType.
-	 * @param column 
-	 * @return 
+	 * Asks for {@link ColumnDAO} to retrieve all the {@link AbstractType} of one {@link Column}
+	 * @param column The given {@link Column}
+	 * @return A string representation of the {@link AbstractType} of the {@link Column}
 	 */
 	public String getColumnType(Column column) {
-		// Start of user code for method getColumnType
-		String getColumnType = "";
-		return getColumnType;
-		// End of user code
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		ColumnDAO columnDAO = daoFactory.createColumnDAO();
+
+		return columnDAO.getColumnType(column).getNameType();
 	}
 
-	// Start of user code (user defined methods for ColumnFacade)
-
-	// End of user code
 	/**
-	 * Returns currentColumn.
-	 * @return currentColumn 
+	 * @return The current column held by the {@link ColumnFacade}
 	 */
 	public Column getCurrentColumn() {
 		return this.currentColumn;
 	}
-
-	/**
-	 * Sets a value to attribute currentColumn. 
-	 * @param newCurrentColumn 
-	 */
-	/*
-	public void setCurrentColumn(Column newCurrentColumn) {
-		if (this.currentColumn != null) {
-			this.currentColumn.set(null);
-		}
-		this.currentColumn.set(this);
-	}
-
-	 */
 
 }
