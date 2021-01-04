@@ -34,7 +34,7 @@ public class Item {
 	/**
 	 * Description of the property cells.
 	 */
-	public HashSet<Cell> cells = new HashSet<>();
+	public ArrayList<Cell> cells = new ArrayList<>();
 
 	public Item(ItemCollection parentItemCollection, int id, String label) {
 		this.item_id = id;
@@ -93,8 +93,12 @@ public class Item {
 	 * Returns cells.
 	 * @return cells 
 	 */
-	public HashSet<Cell> getCells() {
+	public ArrayList<Cell> getCells() {
 		return this.cells;
+	}
+
+	public void setCells(ArrayList<Cell> cells) {
+		this.cells = cells;
 	}
 
 	public void addCell(Cell cell) {

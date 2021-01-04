@@ -42,6 +42,8 @@ public abstract class DAOFactory {
 	 */
 	public abstract ColumnDAO createColumnDAO();
 
+	public abstract  CellDAO createCellDAO();
+
 	/**
 	 * Description of the method createInvitationDAO.
 	 * @return

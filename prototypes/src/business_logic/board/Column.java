@@ -25,7 +25,7 @@ public class Column {
 	/**
 	 * Description of the property cells.
 	 */
-	public HashSet<Cell> cells = new HashSet<>();
+	public ArrayList<Cell> cells = new ArrayList<>();
 
 	/**
 	 * Description of the property column_id.
@@ -67,11 +67,11 @@ public class Column {
 	 * Returns cells.
 	 * @return cells 
 	 */
-	public HashSet<Cell> getCells() {
+	public ArrayList<Cell> getCells() {
 		return this.cells;
 	}
 
-	public void setCells(HashSet<Cell> cells) {
+	public void setCells(ArrayList<Cell> cells) {
 		this.cells = cells;
 	}
 

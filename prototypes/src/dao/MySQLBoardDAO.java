@@ -6,6 +6,7 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 import business_logic.board.*;
 import business_logic.user.User;
@@ -100,8 +101,22 @@ public class MySQLBoardDAO extends BoardDAO {
 		board.setColumns(getColumn(board));
 
 		// SET ITEM TO ITEMCOLLECTIONS
+		board.setItemCollections(getItemCollection(board));
 
-		return null;
+		// SET CELLS
+		for (int i = 0; i < board.getColumns().size(); i++) {
+			for (Column column: board.getColumns()) {
+				board.getColumns().get(i).setCells(getCellsFromColumn(board, column));
+			}
+		}
+
+		for (int i = 0; i < board.getItemCollections().size(); i++) {
+			for (int j = 0; j < board.getItemCollections().get(i).getItems().size(); j++) {
+				board.getItemCollections().get(i).getItems().get(j).setCells(getCellsFromItem(board, board.getItemCollections().get(i).getItems().get(j)));
+			}
+		}
+
+		return board;
 	}
 
 	private ArrayList<ItemCollection> getItemCollection(Board board) {
@@ -241,6 +256,76 @@ public class MySQLBoardDAO extends BoardDAO {
 			e.printStackTrace();
 		}
 		return col;
+	}
+
+	private ArrayList<Cell> getCellsFromColumn(Board board, Column column) {
+
+		ArrayList<Cell> cells = new ArrayList<>();
+
+		for (int i = 0; i < board.getItemCollections().size(); i++) {
+			for (Item item: board.getItemCollections().get(i).getItems()) {
+				cells.add(getCell(board, column, item));
+			}
+		}
+		return cells;
+	}
+
+	private ArrayList<Cell> getCellsFromItem(Board board, Item item) {
+
+		ArrayList<Cell> cells = new ArrayList<>();
+
+		for (Column column: board.getColumns()) {
+			cells.add(getCell(board, column, item));
+		}
+
+		return cells;
+	}
+
+	private Cell getCell(Board board, Column column, Item item) {
+		// GET CELLS FROM DB
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "SELECT cellValue "
+				+ "FROM cell "
+				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "")
+				+ " AND idColumn = " + DAO.stringFormat(column.getColumn_id() + "")
+				+ " AND idItemCollection = " + DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "")
+				+ " AND idItem = " + DAO.stringFormat(item.getItem_id() + "");
+
+		Cell cell = null;
+
+		String value = "NONE";
+
+		try {
+			// Get connection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		try {
+			assert stmt != null;
+			if (stmt.execute(query)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		try {
+			while(rs.next()) {
+				value = rs.getString("cellValue");
+
+				cell = new Cell(item, column, value);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cell;
 	}
 
 	@Override
@@ -588,5 +673,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		//mySQL.getBoardsOfWorkspace(parentWorkspace);
 
 		//System.out.println(mySQL.getItemCollection(parentBoard));
+
+		System.out.println(mySQL.retrieveBoard(parentBoard).getItemCollections().get(0).getItems().get(0).getCells());
 	}
 }

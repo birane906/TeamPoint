@@ -57,7 +57,6 @@ public abstract class CellDAO implements DAO {
 	 * @param board
 	 * @return
 	 */
-	public abstract boolean setCells(Board board, Column column, Item item);
 
 	// Start of user code (user defined methods for CellDAO)
 
