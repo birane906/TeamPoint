@@ -90,6 +90,7 @@ public class MySQLBoardDAO extends BoardDAO {
 	 * @param board that will be retrieved
 	 * @return
 	 */
+	// TODO SET PERMISSION AND TYPE
 	@Override
 	public Board retrieveBoard(Board board) {
 		if(board == null) {
