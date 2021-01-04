@@ -1,7 +1,7 @@
 package gui.controller;
 
 import business_logic.UserFacade;
-import business_logic.board.Board;
+import business_logic.WorkspaceFacade;
 import business_logic.workspace.Workspace;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -131,6 +131,7 @@ public class WorkspaceController implements Initializable {
 	 * @param workspace 
 	 */
 	public void retrieveWorkspace(Workspace workspace) {
+
 	}
 
 	/**
@@ -145,10 +146,28 @@ public class WorkspaceController implements Initializable {
 		inviteMemberImage.setVisible(false);
 		inviteMemberLabel.setVisible(false);
 		Set<Workspace> wsl = userFacade.getWorkspaces();
+
 		if(wsl != null) {
+			//ArrayList<Board>[] tableau = new ArrayList[0];
 			for (Workspace w : wsl) {
-				Set<Board> boards = w.getBoards();
-				workspaces.getItems().add(new MenuItem(w.getName()));
+				MenuItem m = new MenuItem(w.getName());
+				m.setOnAction(new EventHandler<ActionEvent>() {
+					@Override public void handle(ActionEvent e) {
+						WorkspaceFacade workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
+						if(workspaceFacade.retrieveWorkspace(w)){
+							workspaces.setText(m.getText());
+							workspaceName.setText(m.getText());
+							line.setVisible(true);
+							line2.setVisible(true);
+							addBoardImage.setVisible(true);
+							addBoardLabel.setVisible(true);
+							inviteMemberImage.setVisible(true);
+							inviteMemberLabel.setVisible(true);
+						}
+
+					}
+				});
+				workspaces.getItems().add(m);
 			}
 		}
 
@@ -159,7 +178,7 @@ public class WorkspaceController implements Initializable {
 		} else {
 			showing = new ArrayList<>(wspList2);
 		}
-
+/*
 		for (MenuItem m : showing) {
 			m.setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
@@ -171,9 +190,13 @@ public class WorkspaceController implements Initializable {
 					addBoardLabel.setVisible(true);
 					inviteMemberImage.setVisible(true);
 					inviteMemberLabel.setVisible(true);
+
+					for(int i =0; i < 10;i++){
+
+					}
 				}
 			});
-		}
+		} */
 
 
 	}

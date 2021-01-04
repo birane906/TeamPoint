@@ -3,6 +3,7 @@ package business_logic.workspace;
 import business_logic.board.Board;
 import business_logic.user.AbstractUserAttendance;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,7 +40,7 @@ public class Workspace {
 	/**
 	 * The boards inside this workspace
 	 */
-	public Set<Board> boards;
+	public ArrayList<Board> boards;
 
 	/**
 	 * Workspace constructor for a given name give the corresponding
@@ -49,7 +50,7 @@ public class Workspace {
 	public Workspace(String name){
 		this.name = name;
 		this.creationDate = new Date();
-		this.boards = new HashSet<Board>();
+		this.boards = new ArrayList<Board>();
 		this.workspaceUsers= new HashSet<AbstractUserAttendance>();
 	}
 
@@ -57,7 +58,7 @@ public class Workspace {
 		this.workspace_id = workspace_id;
 		this.name = name;
 		this.creationDate = new Date();
-		this.boards = new HashSet<Board>();
+		this.boards = new ArrayList<Board>();
 		this.workspaceUsers= new HashSet<AbstractUserAttendance>();
 	}
 
@@ -86,7 +87,7 @@ public class Workspace {
 	 * Getter for the workspace's boards
 	 * @return a {@link Set} of {@link Board}
 	 */
-	public Set<Board> getBoards() {
+	public ArrayList<Board> getBoards() {
 		return this.boards;
 	}
 
