@@ -3,15 +3,13 @@
  *******************************************************************************/
 package business_logic.board;
 
+import business_logic.board.types.StatusLabel;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Board.

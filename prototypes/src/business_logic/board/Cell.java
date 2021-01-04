@@ -4,11 +4,6 @@
 package business_logic.board;
 
 import business_logic.board.Cell;
-import business_logic.board.Column;
-import business_logic.board.Item;
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Cell.
