@@ -7,11 +7,7 @@ import java.util.HashSet;
 
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
-import dao.UserDAO;
-import dao.WorkspaceDAO;
-// Start of user code (user defined imports)
 
-// End of user code
 
 /**
  * Description of MongoWorkspaceDAO.

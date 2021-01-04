@@ -3,14 +3,11 @@
  *******************************************************************************/
 package dao;
 
-import business_logic.board.AbstractType;
+import business_logic.board.types.Type;
 import business_logic.board.Board;
 import business_logic.board.Column;
 
 import java.util.ArrayList;
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of ColumnDAO.
@@ -18,24 +15,19 @@ import java.util.ArrayList;
  * @author 
  */
 public abstract class ColumnDAO implements DAO {
-	// Start of user code (user defined attributes for ColumnDAO)
-
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
 	public ColumnDAO() {
-		// Start of user code constructor for ColumnDAO)
 		super();
-		// End of user code
 	}
 
 	/**
 	 * add Column to a board.
 	 * @param columnName 
 	 * @param board 
-	 * @param typeName the String of the abstractType {@link AbstractType}
+	 * @param typeName the String of the abstractType {@link Type}
 	 * @return a {@link Board}
 	 */
 	public abstract Column addColumn(String columnName, Board board, String typeName);
@@ -51,11 +43,11 @@ public abstract class ColumnDAO implements DAO {
 	 * getAllColumnTypes .
 	 * @return column types String that describe type of all the column types
 	 */
-	public abstract ArrayList<AbstractType> getAllColumnTypes();
+	public abstract ArrayList<Type> getAllColumnTypes();
 	
-	public abstract AbstractType getTypeByName(String typeName);
+	public abstract Type getTypeByName(String typeName);
 
-	public abstract AbstractType getColumnType(Column column);
+	public abstract Type getColumnType(Column column);
 
 	// Start of user code (user defined methods for ColumnDAO)
 

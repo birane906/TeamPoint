@@ -3,30 +3,16 @@
  *******************************************************************************/
 package dao;
 
-import business_logic.board.*;
-import dao.DAO;
-// Start of user code (user defined imports)
-
-// End of user code
-
+import business_logic.board.Cell;
+import business_logic.board.Column;
+import business_logic.board.Item;
+import business_logic.board.types.Type;
 /**
  * Description of CellDAO.
  * 
  * @author 
  */
 public abstract class CellDAO implements DAO {
-	// Start of user code (user defined attributes for CellDAO)
-
-	// End of user code
-
-	/**
-	 * The constructor.
-	 */
-	public CellDAO() {
-		// Start of user code constructor for CellDAO)
-		super();
-		// End of user code
-	}
 
 	/**
 	 * add Cell.
@@ -44,22 +30,19 @@ public abstract class CellDAO implements DAO {
 	 */
 	// TODO verify if really abstract
 	public abstract Boolean deleteCell(Cell cell);
+
 	/**
 	 * edit Cell.
 	 * @param cell 
 	 * @param value 
 	 * @return a boolean according to the success of update
 	 */
-	public abstract Boolean editCell(Cell cell, AbstractType value);
+	public abstract Boolean editCell(Cell cell, Type value);
 
 	/**
 	 * For every items and column set the cells according to the db
 	 * @param board
 	 * @return
 	 */
-
-	// Start of user code (user defined methods for CellDAO)
-
-	// End of user code
-
+		//TODO decide what to do with this @NicolasGalois
 }

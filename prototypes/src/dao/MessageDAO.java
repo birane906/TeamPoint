@@ -5,7 +5,6 @@ package dao;
 
 import business_logic.notification.Channel;
 import business_logic.notification.Message;
-import dao.DAO;
 import java.util.HashSet;
 // Start of user code (user defined imports)
 

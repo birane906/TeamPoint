@@ -3,20 +3,16 @@
  *******************************************************************************/
 package dao;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 
 import business_logic.board.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
-import dao.ColumnDAO;
-
-import javax.xml.transform.Result;
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of MySQLBoardDAO.
@@ -24,9 +20,6 @@ import javax.xml.transform.Result;
  * @author 
  */
 public class MySQLBoardDAO extends BoardDAO {
-	// Start of user code (user defined attributes for MySQLBoardDAO)
-
-	// End of user code
 
 	/**
 	 * The constructor.
@@ -589,7 +582,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		return perm;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		MySQLBoardDAO mySQL = new MySQLBoardDAO();
 
 		Workspace parentWorkspace = new Workspace("salut");
@@ -613,5 +606,5 @@ public class MySQLBoardDAO extends BoardDAO {
 		//System.out.println(mySQL.getItemCollection(parentBoard));
 
 		System.out.println(mySQL.retrieveBoard(parentBoard).getItemCollections().get(0).getItems().get(0).getCells());
-	}
+	}*/
 }

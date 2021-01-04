@@ -3,18 +3,11 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashSet;
 
-import business_logic.board.AbstractType;
-import business_logic.board.Board;
+import business_logic.board.types.Type;
 import business_logic.board.Cell;
 import business_logic.board.Column;
 import business_logic.board.Item;
-import business_logic.board.ItemCollection;
-import business_logic.user.User;
-import business_logic.workspace.Workspace;
-import dao.CellDAO;
 
 /**
  * Description of MySQLCellDAO.
@@ -129,16 +122,12 @@ public class MySQLCellDAO extends CellDAO {
 	 * @return a boolean according to the success of update
 	 */
 	@Override
-	public Boolean editCell(Cell cell, AbstractType value) {
+	public Boolean editCell(Cell cell, Type value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	// Start of user code (user defined methods for MySQLCellDAO)
-
-	// End of user code
-	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		MySQLCellDAO mySQL = new MySQLCellDAO();
 		
 		
@@ -158,6 +147,6 @@ public class MySQLCellDAO extends CellDAO {
 		//System.out.println(res);
 		
 		System.out.println(mySQL.addCell(column, item, "sa"));
-	}
+	}*/
 
 }

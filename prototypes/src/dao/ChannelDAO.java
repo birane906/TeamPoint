@@ -4,11 +4,7 @@
 package dao;
 
 import business_logic.notification.Channel;
-
-import java.util.Date;
-
 import business_logic.board.Item;
-import dao.DAO;
 // Start of user code (user defined imports)
 
 // End of user code
