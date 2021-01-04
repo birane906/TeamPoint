@@ -1,6 +1,7 @@
 package gui.controller;
 
 import business_logic.UserFacade;
+import business_logic.board.Board;
 import business_logic.workspace.Workspace;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -57,9 +58,6 @@ public class WorkspaceController implements Initializable {
 	private UserFacade userFacade;
 	@FXML
 	private MenuButton workspaces;
-
-
-
 
 
 	/**
@@ -149,6 +147,7 @@ public class WorkspaceController implements Initializable {
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 		if(wsl != null) {
 			for (Workspace w : wsl) {
+				Set<Board> boards = w.getBoards();
 				workspaces.getItems().add(new MenuItem(w.getName()));
 			}
 		}
