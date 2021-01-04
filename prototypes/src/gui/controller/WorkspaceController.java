@@ -2,6 +2,8 @@ package gui.controller;
 
 import business_logic.UserFacade;
 import business_logic.workspace.Workspace;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
@@ -49,19 +52,6 @@ public class WorkspaceController implements Initializable {
 	@FXML
 	private ImageView profileImage;
 
-	/**
-	 * Description of the close button
-	 */
-	@FXML
-	private Button closeButton;
-
-	/**
-	 * Method which permite to close the window when you click on the close button
-	 */
-	public void closeButtonOnAction(){
-		Stage stage = (Stage) closeButton.getScene().getWindow();
-		stage.close();
-	}
 
 	@FXML
 	public void boxImageClicked(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
@@ -141,9 +131,26 @@ public class WorkspaceController implements Initializable {
 				workspaces.getItems().add(new MenuItem(w.getName()));
 			}
 		}
+
+		List<MenuItem> wspList2 = workspaces.getItems();
+		ArrayList<MenuItem> showing;
+		if (wspList2 instanceof ArrayList<?>) {
+			showing = (ArrayList<MenuItem>) wspList2;
+		} else {
+			showing = new ArrayList<>(wspList2);
+		}
+
+		for (MenuItem m : showing) {
+			m.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					line.setVisible(true);
+					workspaces.setText(m.getText());
+				}
+			});
+		}
+
+
 	}
 
-	public void printRest(ContextMenuEvent contextMenuEvent) {
-		line.setVisible(true);
-	}
+
 }
