@@ -14,6 +14,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -28,6 +30,8 @@ import java.util.*;
  */
 public class WorkspaceController implements Initializable {
 
+	@FXML
+	public Line line;
 	/**
 	 * Description of the property userFacade.
 	 */
@@ -130,17 +134,16 @@ public class WorkspaceController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-
+		line.setVisible(false);
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 		if(wsl != null) {
 			for (Workspace w : wsl) {
 				workspaces.getItems().add(new MenuItem(w.getName()));
 			}
 		}
-
-
-
-
 	}
 
+	public void printRest(ContextMenuEvent contextMenuEvent) {
+		line.setVisible(true);
+	}
 }

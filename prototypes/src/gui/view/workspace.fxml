@@ -15,6 +15,7 @@
             <children>
                 <Line endX="-72.0" endY="542.2929077148438" layoutX="60.0" layoutY="37.0" startX="-72.0" startY="-93.0" />
                 <Line endX="777.0" endY="-52.0" layoutX="187.0" layoutY="59.0" startX="-198.5" startY="-52.0" />
+            <Line fx:id="line" endX="-4.20001220703125" endY="497.0" layoutX="173.0" layoutY="87.0" startX="-4.20001220703125" startY="-80.5" />
             </children></AnchorPane>
         <Label layoutX="97.0" layoutY="14.0" text="WORKSPACE">
             <font>
@@ -41,7 +42,7 @@
                 <Image url="@../../../images/profile.png" />
             </image>
         </ImageView>
-        <MenuButton fx:id="workspaces" layoutX="432.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
+        <MenuButton fx:id="workspaces" layoutX="432.0" layoutY="18.0" mnemonicParsing="false" onContextMenuRequested="#printRest" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
         <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="987.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/3points.png" />
