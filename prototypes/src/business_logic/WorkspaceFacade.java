@@ -3,15 +3,14 @@
  *******************************************************************************/
 package business_logic;
 
+import business_logic.board.Board;
+import business_logic.notification.Invitation;
 import business_logic.user.AbstractUserAttendance;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
-import business_logic.notification.Invitation;
-import dao.DAOFactory;
-import dao.InvitationDAO;
-import dao.UserDAO;
-import dao.WorkspaceDAO;
+import dao.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -101,6 +100,13 @@ public class WorkspaceFacade {
 		workspace = workspaceDAO.retrieveWorkspace(workspace);
 
 		if (workspace != null) {
+
+			ArrayList<Board> boards = getBoardsOfWorkspace(workspace);
+
+			for (Board board : boards) {
+				workspace.addBoard(board);
+			}
+
 			currentWorkspace = workspace;
 			return true;
 		}
@@ -126,6 +132,21 @@ public class WorkspaceFacade {
 			}
 		}
 		return new HashSet<User>();
+	}
+
+	/**
+	 * Asks for {@link WorkspaceDAO} to load a {@link Workspace} in the <code>currentWorkspace</code> of the {@link WorkspaceFacade}
+	 * @param workspace The {@link Workspace} to be loaded
+	 * @return An {@link ArrayList} of the {@link Board} bellowing to the given {@link Workspace}
+	 */
+	public ArrayList<Board> getBoardsOfWorkspace(Workspace workspace) {
+		if (workspace != null) {
+			DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+			BoardDAO boardDAO = daoFactory.createBoardDAO();
+
+			return boardDAO.getBoardsOfWorkspace(workspace);
+		}
+		return new ArrayList<Board>();
 	}
 
 	/**
