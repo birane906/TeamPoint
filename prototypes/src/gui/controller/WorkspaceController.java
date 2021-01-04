@@ -2,6 +2,7 @@ package gui.controller;
 
 import business_logic.UserFacade;
 import business_logic.WorkspaceFacade;
+import business_logic.board.Board;
 import business_logic.workspace.Workspace;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -148,13 +149,17 @@ public class WorkspaceController implements Initializable {
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 
 		if(wsl != null) {
-			//ArrayList<Board>[] tableau = new ArrayList[0];
 			for (Workspace w : wsl) {
 				MenuItem m = new MenuItem(w.getName());
 				m.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
 						WorkspaceFacade workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
 						if(workspaceFacade.retrieveWorkspace(w)){
+							ArrayList<Board>boards = workspaceFacade.getCurrentWorkspace().getBoards();
+							for(Board b: boards){
+								//label qui se situe dans le anchor dimensionne et liens
+							}
+
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());
 							line.setVisible(true);
@@ -171,32 +176,6 @@ public class WorkspaceController implements Initializable {
 			}
 		}
 
-		List<MenuItem> wspList2 = workspaces.getItems();
-		ArrayList<MenuItem> showing;
-		if (wspList2 instanceof ArrayList<?>) {
-			showing = (ArrayList<MenuItem>) wspList2;
-		} else {
-			showing = new ArrayList<>(wspList2);
-		}
-/*
-		for (MenuItem m : showing) {
-			m.setOnAction(new EventHandler<ActionEvent>() {
-				@Override public void handle(ActionEvent e) {
-					workspaces.setText(m.getText());
-					workspaceName.setText(m.getText());
-					line.setVisible(true);
-					line2.setVisible(true);
-					addBoardImage.setVisible(true);
-					addBoardLabel.setVisible(true);
-					inviteMemberImage.setVisible(true);
-					inviteMemberLabel.setVisible(true);
-
-					for(int i =0; i < 10;i++){
-
-					}
-				}
-			});
-		} */
 
 
 	}
