@@ -1,7 +1,7 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package business_logic.board;
+package business_logic.board.types;
 import java.util.Date;
 
 /**
@@ -9,7 +9,7 @@ import java.util.Date;
  * 
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public class TimelineType extends AbstractType  {
+public class TimelineType extends Type  {
 	/**
 	 * Starting {@link Date} of the {@link TimelineType}
 	 */
@@ -25,10 +25,10 @@ public class TimelineType extends AbstractType  {
 	 * @param startDate The starting {@link Date} of the {@link TimelineType}
 	 * @param endDate The ending {@link Date} of the {@link TimelineType}
 	 */
-	public TimelineType(Date startDate, Date endDate, int id, String nameType, String description) {
+	public TimelineType(int id, String nameType, String description) {
 		super(id, nameType, description);
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.startDate = null;
+		this.endDate = null;
 	}
 
 	/**

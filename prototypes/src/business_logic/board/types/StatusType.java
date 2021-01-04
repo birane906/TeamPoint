@@ -1,16 +1,17 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package business_logic.board;
+package business_logic.board.types;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Type used in a {@link Column} to specify a status
  *
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public class StatusType extends AbstractType   {
+public class StatusType extends Type   {
 	/**
 	 * The current status of the {@link StatusType}
 	 */
@@ -19,15 +20,16 @@ public class StatusType extends AbstractType   {
 	/**
 	 * All the possible {@link StatusLable} for the {@link StatusType}
 	 */
-	public HashSet<StatusLabel> statusLabels;
+	public Set<StatusLabel> statusLabels;
 
 	/**
 	 * Create a new {@link StatusType} giving a {@link StatusLabel}
 	 * @param currentStatusLabel The {@link StatusLabel} of the new {@link StatusType}
 	 */
-	public StatusType(StatusLabel currentStatusLabel, int id, String nameType, String description) {
+	public StatusType(int id, String nameType, String description) {
 		super(id, nameType, description);
-		this.currentStatusLabel = currentStatusLabel;
+		currentStatusLabel = null;
+		statusLabels = new HashSet<>();
 	}
 	
 	/**
@@ -48,7 +50,7 @@ public class StatusType extends AbstractType   {
 	/**
 	 * @return All the possible {@link StatusLabel} for the {@link StatusType}
 	 */
-	public HashSet<StatusLabel> getStatusLabels() {
+	public Set<StatusLabel> getStatusLabels() {
 		return statusLabels;
 	}
 }
