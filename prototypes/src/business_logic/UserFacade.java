@@ -3,10 +3,9 @@ package business_logic;
 
 import java.util.HashSet;
 
-import business_logic.user.*;
+
 import business_logic.user.User;
 import dao.DAOFactory;
-import dao.MySQLWorkspaceDAO;
 import dao.UserDAO;
 import business_logic.workspace.Workspace;
 import dao.WorkspaceDAO;

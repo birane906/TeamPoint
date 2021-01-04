@@ -3,8 +3,6 @@
  *******************************************************************************/
 package business_logic.notification;
 
-import business_logic.notification.AbstractNotification;
-import business_logic.notification.Message;
 // Start of user code (user defined imports)
 
 // End of user code

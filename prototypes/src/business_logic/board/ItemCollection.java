@@ -1,11 +1,6 @@
 package business_logic.board;
 
-import business_logic.board.Board;
-import business_logic.board.Item;
-
 import java.util.ArrayList;
-import java.util.HashSet;
-
 /**
  * Description of ItemCollection.
  * 

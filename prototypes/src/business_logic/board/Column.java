@@ -4,12 +4,6 @@
 package business_logic.board;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-
-import business_logic.board.Board;
-// Start of user code (user defined imports)
-
-// End of user code
 
 /**
  * Description of Column.

@@ -4,7 +4,6 @@ import business_logic.board.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
-import dao.CellDAO;
 import dao.DAOFactory;
 
 /**
