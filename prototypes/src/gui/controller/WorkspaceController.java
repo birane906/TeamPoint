@@ -180,4 +180,11 @@ public class WorkspaceController implements Initializable {
 	}
 
 
+	public void addBoardClicked(MouseEvent mouseEvent) throws Exception{
+
+	}
+
+	public void inviteMemberClicked(MouseEvent mouseEvent) throws Exception{
+
+	}
 }
