@@ -22,7 +22,6 @@ public class UserFacade {
 	 * <code>currentUser</code> class member {@link User} instance.
 	 * Is null until login method is called
 	 */
-	@SuppressWarnings("unused")
 	private User currentUser =null;
 
 
