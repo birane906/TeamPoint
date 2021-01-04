@@ -131,13 +131,13 @@ public class WorkspaceController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 
-		Set<Workspace> wsl = new HashSet<>();
-		wsl = userFacade.getWorkspaces();
+		Set<Workspace> wsl = userFacade.getWorkspaces();
 		if(wsl != null) {
 			for (Workspace w : wsl) {
 				workspaces.getItems().add(new MenuItem(w.getName()));
 			}
 		}
+
 
 
 
