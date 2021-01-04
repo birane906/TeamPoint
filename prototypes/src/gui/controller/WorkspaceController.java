@@ -10,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
@@ -35,6 +32,25 @@ public class WorkspaceController implements Initializable {
 
 	@FXML
 	public Line line;
+
+	@FXML
+	public Label workspaceName;
+
+	@FXML
+	public ImageView addBoardImage;
+
+	@FXML
+	public ImageView inviteMemberImage;
+
+	@FXML
+	public Label addBoardLabel;
+
+	@FXML
+	public Label inviteMemberLabel;
+
+	@FXML
+	public Line line2;
+
 	/**
 	 * Description of the property userFacade.
 	 */
@@ -125,6 +141,11 @@ public class WorkspaceController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		line.setVisible(false);
+		line2.setVisible(false);
+		addBoardImage.setVisible(false);
+		addBoardLabel.setVisible(false);
+		inviteMemberImage.setVisible(false);
+		inviteMemberLabel.setVisible(false);
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 		if(wsl != null) {
 			for (Workspace w : wsl) {
@@ -143,8 +164,14 @@ public class WorkspaceController implements Initializable {
 		for (MenuItem m : showing) {
 			m.setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
-					line.setVisible(true);
 					workspaces.setText(m.getText());
+					workspaceName.setText(m.getText());
+					line.setVisible(true);
+					line2.setVisible(true);
+					addBoardImage.setVisible(true);
+					addBoardLabel.setVisible(true);
+					inviteMemberImage.setVisible(true);
+					inviteMemberLabel.setVisible(true);
 				}
 			});
 		}
