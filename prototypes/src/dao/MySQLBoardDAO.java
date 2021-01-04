@@ -526,7 +526,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				// GET Board Owner
 				User user = null;
 				try {
-					user = getUserById(userId);
+					user = DAO.getUserById(userId);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -538,69 +538,6 @@ public class MySQLBoardDAO extends BoardDAO {
 			throwables.printStackTrace();
 		}
 		return res;
-	}
-
-	public User getUserById(int id) throws Exception {
-		if (id == -1) {
-			throw new Exception();
-		}
-		// List of all fields to create an user
-		ArrayList<String> resultat = new ArrayList<String>();
-		// Result from database
-		ResultSet rs = null;
-		// Query statement
-		PreparedStatement stmt = null;
-		String query = "SELECT name, firstName, email, phoneNumber,"
-				+ "profileDescription, birthday" + " FROM User "
-				+ "WHERE idUser = ?";
-
-		try {
-			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
-		} catch (SQLException e) {
-			// TODO explain database not found
-			e.printStackTrace();
-		}
-
-		String req = "SELECT idUser, name, firstName, email, phoneNumber,"
-				+ "profileDescription, birthday" + " FROM User "
-				+ "WHERE idUser = " + DAO.stringFormat(id + "");
-
-		try {
-			if (stmt.execute(req)) {
-				rs = stmt.getResultSet();
-			}
-		} catch (SQLException e) {
-			// TODO explain connection lost
-			e.printStackTrace();
-		}
-
-		// if we have a result then move to the next line
-		if(rs.next()){
-
-			resultat.add(rs.getInt("idUser") + "");
-			resultat.add(rs.getString("name"));
-			resultat.add(rs.getString("firstName"));
-
-			resultat.add(rs.getString("email"));
-
-			resultat.add(rs.getString("profileDescription"));
-			resultat.add(rs.getString("phoneNumber"));
-		}
-
-		if (resultat.size() == 0) {
-			// TODO customize Exception
-			throw new Exception("User not found");
-		}
-
-		int idUser = Integer.parseInt(resultat.get(0));
-		String name = resultat.get(1);
-		String firstName = resultat.get(2);
-		String emailUser = resultat.get(3);
-		String profileDesc = resultat.get(4);
-		String phoneNumber = resultat.get(5);
-
-		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
 
 	public Permission getPermissionById(int id) {

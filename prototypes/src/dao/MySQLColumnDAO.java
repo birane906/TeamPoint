@@ -79,7 +79,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 	 */
 	public ArrayList<AbstractType> getAllColumnTypes() {
 		
-		ArrayList<AbstractType> resultat = new ArrayList<AbstractType>();
+		ArrayList<AbstractType> resultat = new ArrayList<>();
 		
 		// Result from database
 		ResultSet rs = null;
@@ -163,7 +163,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 
 		// if we have a result then move to the next line
 
-			
 		try {
 			if(rs.next()){
 					
