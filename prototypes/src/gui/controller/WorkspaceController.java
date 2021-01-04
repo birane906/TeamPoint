@@ -163,7 +163,7 @@ public class WorkspaceController implements Initializable {
 							ArrayList<Board>boards = workspaceFacade.getCurrentWorkspace().getBoards();
 							ObservableList<Board> myBoards = FXCollections.observableArrayList(boards);
 							listBoard.setItems(myBoards);
-
+							listBoard.setCellFactory(lv -> new SimpleListCell());
 
 
 							workspaces.setText(m.getText());
@@ -193,5 +193,18 @@ public class WorkspaceController implements Initializable {
 
 	public void inviteMemberClicked(MouseEvent mouseEvent) throws Exception{
 
+	}
+}
+
+class SimpleListCell extends ListCell<Board> {
+
+	@Override
+	protected void updateItem(Board item, boolean empty) {
+		super.updateItem(item, empty);
+		setText(null);
+		if (!empty && item != null) {
+			final String text = String.format("%s", item.getName());
+			setText(text);
+		}
 	}
 }
