@@ -1,6 +1,7 @@
 package dao;
 
-import business_logic.board.AbstractType;
+import business_logic.board.types.Type;
+import business_logic.board.types.TypeFactory;
 import business_logic.board.Board;
 import business_logic.board.Column;
 import business_logic.user.User;
@@ -77,9 +78,9 @@ public class MySQLColumnDAO extends ColumnDAO {
 	 * getAllColumnTypes .
 	 * @return column abtract types String that describe type of all the column types
 	 */
-	public ArrayList<AbstractType> getAllColumnTypes() {
+	public ArrayList<Type> getAllColumnTypes() {
 		
-		ArrayList<AbstractType> resultat = new ArrayList<>();
+		ArrayList<Type> resultat = new ArrayList<>();
 		
 		// Result from database
 		ResultSet rs = null;
@@ -115,7 +116,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 				String description = rs.getString("descriptionType");
 				
 				
-				resultat.add(new AbstractType(id, typeName, description));
+				resultat.add(TypeFactory.createType(id, typeName, description));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -125,9 +126,9 @@ public class MySQLColumnDAO extends ColumnDAO {
 		return resultat;
 	}
 
-	public AbstractType getTypeByName(String typeName) {
+	public Type getTypeByName(String typeName) {
 		
-		AbstractType resultat = null;
+		Type resultat = null;
 		
 		// Result from database
 		ResultSet rs = null;
@@ -167,10 +168,10 @@ public class MySQLColumnDAO extends ColumnDAO {
 			if(rs.next()){
 					
 				int id = rs.getInt("idType");
-				String nameType = rs.getString("nameType");
+				String dbTypeName = rs.getString("nameType");
 				String description = rs.getString("descriptionType");
 
-				resultat = new AbstractType(id, nameType, description);
+				resultat = TypeFactory.createType(id, dbTypeName, description);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -180,7 +181,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 	}
 
 	@Override
-	public AbstractType getColumnType(Column column) {
+	public Type getColumnType(Column column) {
 		// TODO Auto-generated catch block
 		return null;
 	}
@@ -188,7 +189,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 	public static void main(String[] args) {
 		MySQLColumnDAO mySQLColumnDAO = new MySQLColumnDAO();
 		
-		ArrayList<AbstractType> res = mySQLColumnDAO.getAllColumnTypes();
+		ArrayList<Type> res = mySQLColumnDAO.getAllColumnTypes();
 		
 		for (int i = 0; i < res.size(); i++) {
 			//System.out.println(res.get(i));
