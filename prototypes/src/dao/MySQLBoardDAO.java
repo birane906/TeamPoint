@@ -6,6 +6,7 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 import business_logic.board.*;
 import business_logic.user.User;
@@ -89,6 +90,7 @@ public class MySQLBoardDAO extends BoardDAO {
 	 * @param board that will be retrieved
 	 * @return
 	 */
+	// TODO SET PERMISSION AND TYPE
 	@Override
 	public Board retrieveBoard(Board board) {
 		if(board == null) {
@@ -100,8 +102,22 @@ public class MySQLBoardDAO extends BoardDAO {
 		board.setColumns(getColumn(board));
 
 		// SET ITEM TO ITEMCOLLECTIONS
+		board.setItemCollections(getItemCollection(board));
 
-		return null;
+		// SET CELLS
+		for (int i = 0; i < board.getColumns().size(); i++) {
+			for (Column column: board.getColumns()) {
+				board.getColumns().get(i).setCells(getCellsFromColumn(board, column));
+			}
+		}
+
+		for (int i = 0; i < board.getItemCollections().size(); i++) {
+			for (int j = 0; j < board.getItemCollections().get(i).getItems().size(); j++) {
+				board.getItemCollections().get(i).getItems().get(j).setCells(getCellsFromItem(board, board.getItemCollections().get(i).getItems().get(j)));
+			}
+		}
+
+		return board;
 	}
 
 	private ArrayList<ItemCollection> getItemCollection(Board board) {
@@ -241,6 +257,76 @@ public class MySQLBoardDAO extends BoardDAO {
 			e.printStackTrace();
 		}
 		return col;
+	}
+
+	private ArrayList<Cell> getCellsFromColumn(Board board, Column column) {
+
+		ArrayList<Cell> cells = new ArrayList<>();
+
+		for (int i = 0; i < board.getItemCollections().size(); i++) {
+			for (Item item: board.getItemCollections().get(i).getItems()) {
+				cells.add(getCell(board, column, item));
+			}
+		}
+		return cells;
+	}
+
+	private ArrayList<Cell> getCellsFromItem(Board board, Item item) {
+
+		ArrayList<Cell> cells = new ArrayList<>();
+
+		for (Column column: board.getColumns()) {
+			cells.add(getCell(board, column, item));
+		}
+
+		return cells;
+	}
+
+	private Cell getCell(Board board, Column column, Item item) {
+		// GET CELLS FROM DB
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "SELECT cellValue "
+				+ "FROM cell "
+				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "")
+				+ " AND idColumn = " + DAO.stringFormat(column.getColumn_id() + "")
+				+ " AND idItemCollection = " + DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "")
+				+ " AND idItem = " + DAO.stringFormat(item.getItem_id() + "");
+
+		Cell cell = null;
+
+		String value = "NONE";
+
+		try {
+			// Get connection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		try {
+			assert stmt != null;
+			if (stmt.execute(query)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		try {
+			while(rs.next()) {
+				value = rs.getString("cellValue");
+
+				cell = new Cell(item, column, value);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cell;
 	}
 
 	@Override
@@ -441,7 +527,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				// GET Board Owner
 				User user = null;
 				try {
-					user = getUserById(userId);
+					user = DAO.getUserById(userId);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -453,69 +539,6 @@ public class MySQLBoardDAO extends BoardDAO {
 			throwables.printStackTrace();
 		}
 		return res;
-	}
-
-	public User getUserById(int id) throws Exception {
-		if (id == -1) {
-			throw new Exception();
-		}
-		// List of all fields to create an user
-		ArrayList<String> resultat = new ArrayList<String>();
-		// Result from database
-		ResultSet rs = null;
-		// Query statement
-		PreparedStatement stmt = null;
-		String query = "SELECT name, firstName, email, phoneNumber,"
-				+ "profileDescription, birthday" + " FROM User "
-				+ "WHERE idUser = ?";
-
-		try {
-			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
-		} catch (SQLException e) {
-			// TODO explain database not found
-			e.printStackTrace();
-		}
-
-		String req = "SELECT idUser, name, firstName, email, phoneNumber,"
-				+ "profileDescription, birthday" + " FROM User "
-				+ "WHERE idUser = " + DAO.stringFormat(id + "");
-
-		try {
-			if (stmt.execute(req)) {
-				rs = stmt.getResultSet();
-			}
-		} catch (SQLException e) {
-			// TODO explain connection lost
-			e.printStackTrace();
-		}
-
-		// if we have a result then move to the next line
-		if(rs.next()){
-
-			resultat.add(rs.getInt("idUser") + "");
-			resultat.add(rs.getString("name"));
-			resultat.add(rs.getString("firstName"));
-
-			resultat.add(rs.getString("email"));
-
-			resultat.add(rs.getString("profileDescription"));
-			resultat.add(rs.getString("phoneNumber"));
-		}
-
-		if (resultat.size() == 0) {
-			// TODO customize Exception
-			throw new Exception("User not found");
-		}
-
-		int idUser = Integer.parseInt(resultat.get(0));
-		String name = resultat.get(1);
-		String firstName = resultat.get(2);
-		String emailUser = resultat.get(3);
-		String profileDesc = resultat.get(4);
-		String phoneNumber = resultat.get(5);
-
-		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
 
 	public Permission getPermissionById(int id) {
@@ -588,5 +611,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		//mySQL.getBoardsOfWorkspace(parentWorkspace);
 
 		//System.out.println(mySQL.getItemCollection(parentBoard));
+
+		System.out.println(mySQL.retrieveBoard(parentBoard).getItemCollections().get(0).getItems().get(0).getCells());
 	}
 }

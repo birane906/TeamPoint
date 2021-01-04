@@ -42,6 +42,11 @@ public class MongoDAOFactory extends DAOFactory {
 	}
 
 	@Override
+	public CellDAO createCellDAO() {
+		return null;
+	}
+
+	@Override
 	public InvitationDAO createInvitationDAO() {
 		return null;
 	}

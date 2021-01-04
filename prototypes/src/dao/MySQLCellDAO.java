@@ -134,59 +134,6 @@ public class MySQLCellDAO extends CellDAO {
 		return null;
 	}
 
-	@Override
-	public boolean setCells(Board board, Column column, Item item) {
-		// GET CELLS FROM DB
-
-		Statement stmt = null;
-		ResultSet rs = null;
-		String query = "SELECT cellValue "
-				+ "FROM cell "
-				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "")
-				+ " AND idColumn = " + DAO.stringFormat(column.getColumn_id() + "")
-				+ " AND idItemCollection = " + DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "")
-				+ " AND idItem = " + DAO.stringFormat(item.getItem_id() + "");
-
-		HashSet<Cell> cells = new HashSet<>();
-
-		String value = "NONE";
-
-		try {
-			// Get connection
-			stmt = DAO.getConnection().prepareStatement(query);
-		} catch (SQLException e) {
-			// TODO explain database not found
-			e.printStackTrace();
-		}
-
-		try {
-			assert stmt != null;
-			if (stmt.execute(query)) {
-				rs = stmt.getResultSet();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-
-		try {
-			while(rs.next()) {
-				value = rs.getString("cellValue");
-
-				Cell cell = new Cell(item, column, value);
-				column.addCell(cell);
-				item.addCell(cell);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		// SET CELLS TO COLUMNS
-
-		// SET CELLS TO ITEMS
-		return false;
-	}
-
 	// Start of user code (user defined methods for MySQLCellDAO)
 
 	// End of user code

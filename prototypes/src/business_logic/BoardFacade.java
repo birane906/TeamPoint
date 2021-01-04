@@ -1,12 +1,10 @@
 package business_logic;
 
-import business_logic.board.Board;
-import business_logic.board.Item;
-import business_logic.board.ItemCollection;
-import business_logic.board.Permission;
+import business_logic.board.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
+import dao.CellDAO;
 import dao.DAOFactory;
 
 /**
@@ -107,9 +105,6 @@ public class BoardFacade {
 
 		board = boardDAO.retrieveBoard(board);
 
-		// TODO Appel de setCells du cell DAO
-		// Besoin d'une boucle sur toutes les column et les item
-		// cellDAO.setCell(board, column, item)
 		if (board != null) {
 			currentBoard = board;
 			return true;

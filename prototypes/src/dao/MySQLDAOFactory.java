@@ -48,6 +48,9 @@ public class MySQLDAOFactory extends DAOFactory {
 	}
 
 	@Override
+	public CellDAO createCellDAO(){ return new MySQLCellDAO(); }
+
+	@Override
 	public InvitationDAO createInvitationDAO() {
 		return new MySQLInvitationDAO();
 	}
