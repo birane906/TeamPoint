@@ -4,6 +4,8 @@ import business_logic.UserFacade;
 import business_logic.WorkspaceFacade;
 import business_logic.board.Board;
 import business_logic.workspace.Workspace;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,14 +15,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -55,6 +54,9 @@ public class WorkspaceController implements Initializable {
 
 	@FXML
 	public Label board1;
+
+	@FXML
+	public ListView<Board> listBoard;
 
 	/**
 	 * Description of the property userFacade.
@@ -152,25 +154,17 @@ public class WorkspaceController implements Initializable {
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 
 		if(wsl != null) {
-			board1.setText("aaa");
 			for (Workspace w : wsl) {
 				MenuItem m = new MenuItem(w.getName());
 				m.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
 						WorkspaceFacade workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
 						if(workspaceFacade.retrieveWorkspace(w)){
-							board1.setText("bbb");
 							ArrayList<Board>boards = workspaceFacade.getCurrentWorkspace().getBoards();
-							for(Board b: boards){
-								//label qui se situe dans le anchor dimensionne et liens
-								if(boards != null){
-									board1.setText("bbb");
-								}else{
-									board1.setText("PAYAAA niang");
-								}
+							ObservableList<Board> myBoards = FXCollections.observableArrayList(boards);
+							listBoard.setItems(myBoards);
 
 
-							}
 
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());

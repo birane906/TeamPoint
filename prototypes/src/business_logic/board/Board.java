@@ -3,11 +3,6 @@
  *******************************************************************************/
 package business_logic.board;
 
-import business_logic.board.Column;
-import business_logic.board.Item;
-import business_logic.board.ItemCollection;
-import business_logic.board.StatusLabel;
-import business_logic.user.BoardOwner;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 
