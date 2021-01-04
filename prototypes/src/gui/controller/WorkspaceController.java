@@ -53,6 +53,9 @@ public class WorkspaceController implements Initializable {
 	@FXML
 	public Line line2;
 
+	@FXML
+	public Label board1;
+
 	/**
 	 * Description of the property userFacade.
 	 */
@@ -149,15 +152,24 @@ public class WorkspaceController implements Initializable {
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 
 		if(wsl != null) {
+			board1.setText("aaa");
 			for (Workspace w : wsl) {
 				MenuItem m = new MenuItem(w.getName());
 				m.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
 						WorkspaceFacade workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
 						if(workspaceFacade.retrieveWorkspace(w)){
+							board1.setText("bbb");
 							ArrayList<Board>boards = workspaceFacade.getCurrentWorkspace().getBoards();
 							for(Board b: boards){
 								//label qui se situe dans le anchor dimensionne et liens
+								if(boards != null){
+									board1.setText("bbb");
+								}else{
+									board1.setText("PAYAAA niang");
+								}
+
+
 							}
 
 							workspaces.setText(m.getText());
