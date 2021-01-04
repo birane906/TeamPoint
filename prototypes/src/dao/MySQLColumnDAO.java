@@ -1,16 +1,16 @@
 package dao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
 import business_logic.board.AbstractType;
 import business_logic.board.Board;
 import business_logic.board.Column;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class MySQLColumnDAO extends ColumnDAO {
 
@@ -178,7 +178,13 @@ public class MySQLColumnDAO extends ColumnDAO {
 		}
 		return resultat;
 	}
-	
+
+	@Override
+	public AbstractType getColumnType(Column column) {
+		// TODO Auto-generated catch block
+		return null;
+	}
+
 	public static void main(String[] args) {
 		MySQLColumnDAO mySQLColumnDAO = new MySQLColumnDAO();
 		
