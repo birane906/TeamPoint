@@ -170,69 +170,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			throwables.printStackTrace();
 		}
 
-		Workspace newWorkspace = new Workspace(name, id);
-
-		// SET BOARDS OF WORKSPACE
-
-		ArrayList<Board> boards = getBoard(workspace);
-
-		for (Board board: boards) {
-			newWorkspace.addBoard(board);
-		}
-
-		return newWorkspace;
-	}
-
-	private ArrayList<Board> getBoard(Workspace workspace) {
-		if(workspace == null) {
-			return null;
-		}
-
-		ArrayList<Board> boards = new ArrayList<>();
-		// query on user_workspace to get workspace id of user
-
-		// Result from database
-		ResultSet rs = null;
-		// Query statement
-		Statement stmt = null;
-
-		try {
-			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().createStatement();
-		} catch (SQLException e) {
-			// TODO explain database not found
-			e.printStackTrace();
-		}
-
-		String req = "SELECT *"
-					+ " FROM board "
-					+ "WHERE parentWorkspace = " + DAO.stringFormat(workspace.getWorkspace_id() + "");
-
-		try {
-			if (stmt.execute(req)) {
-				rs = stmt.getResultSet();
-			}
-		} catch (SQLException e) {
-			// TODO explain connection lost
-			e.printStackTrace();
-		}
-
-		// if we have a result then move to the next line
-		try {
-			while(rs.next()) {
-				int idBoard = rs.getInt("idBoard");
-				int idUser = rs.getInt("userOwner");
-				String boardName = rs.getString("boardName");
-
-				Board board = new Board(idBoard, boardName, workspace, DAO.getUserById(idUser));
-				boards.add(board);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-
-		return boards;
+		return new Workspace(name, id);
 	}
 
 	/**
