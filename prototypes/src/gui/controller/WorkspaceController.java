@@ -1,19 +1,22 @@
 package gui.controller;
 
 import business_logic.UserFacade;
+import business_logic.board.Board;
 import business_logic.workspace.Workspace;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -28,6 +31,27 @@ import java.util.*;
  */
 public class WorkspaceController implements Initializable {
 
+	@FXML
+	public Line line;
+
+	@FXML
+	public Label workspaceName;
+
+	@FXML
+	public ImageView addBoardImage;
+
+	@FXML
+	public ImageView inviteMemberImage;
+
+	@FXML
+	public Label addBoardLabel;
+
+	@FXML
+	public Label inviteMemberLabel;
+
+	@FXML
+	public Line line2;
+
 	/**
 	 * Description of the property userFacade.
 	 */
@@ -36,28 +60,12 @@ public class WorkspaceController implements Initializable {
 	private MenuButton workspaces;
 
 
-
-
-
 	/**
 	 * Description of
 	 */
 	@FXML
 	private ImageView profileImage;
 
-	/**
-	 * Description of the close button
-	 */
-	@FXML
-	private Button closeButton;
-
-	/**
-	 * Method which permite to close the window when you click on the close button
-	 */
-	public void closeButtonOnAction(){
-		Stage stage = (Stage) closeButton.getScene().getWindow();
-		stage.close();
-	}
 
 	@FXML
 	public void boxImageClicked(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
@@ -130,17 +138,52 @@ public class WorkspaceController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-
-		Set<Workspace> wsl = new HashSet<>();
-		wsl = userFacade.getWorkspaces();
+		line.setVisible(false);
+		line2.setVisible(false);
+		addBoardImage.setVisible(false);
+		addBoardLabel.setVisible(false);
+		inviteMemberImage.setVisible(false);
+		inviteMemberLabel.setVisible(false);
+		Set<Workspace> wsl = userFacade.getWorkspaces();
 		if(wsl != null) {
 			for (Workspace w : wsl) {
+				Set<Board> boards = w.getBoards();
 				workspaces.getItems().add(new MenuItem(w.getName()));
 			}
 		}
 
+		List<MenuItem> wspList2 = workspaces.getItems();
+		ArrayList<MenuItem> showing;
+		if (wspList2 instanceof ArrayList<?>) {
+			showing = (ArrayList<MenuItem>) wspList2;
+		} else {
+			showing = new ArrayList<>(wspList2);
+		}
+
+		for (MenuItem m : showing) {
+			m.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					workspaces.setText(m.getText());
+					workspaceName.setText(m.getText());
+					line.setVisible(true);
+					line2.setVisible(true);
+					addBoardImage.setVisible(true);
+					addBoardLabel.setVisible(true);
+					inviteMemberImage.setVisible(true);
+					inviteMemberLabel.setVisible(true);
+				}
+			});
+		}
 
 
 	}
 
+
+	public void addBoardClicked(MouseEvent mouseEvent) throws Exception{
+
+	}
+
+	public void inviteMemberClicked(MouseEvent mouseEvent) throws Exception{
+
+	}
 }
