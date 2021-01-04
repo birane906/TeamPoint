@@ -4,7 +4,7 @@
 package business_logic;
 
 import business_logic.CellFacade;
-import business_logic.board.AbstractType;
+import business_logic.board.types.Type;
 import business_logic.board.Cell;
 // Start of user code (user defined imports)
 
@@ -16,10 +16,6 @@ import business_logic.board.Cell;
  * @author 
  */
 public class CellFacade {
-	// Start of user code (user defined attributes for CellFacade)
-
-	// End of user code
-
 	/**
 	 * The constructor.
 	 */
@@ -46,7 +42,7 @@ public class CellFacade {
 	 * @param value 
 	 * @return 
 	 */
-	public Boolean editCell(Cell cell, AbstractType value) {
+	public Boolean editCell(Cell cell, Type value) {
 		// Start of user code for method editCell
 		Boolean editCell = Boolean.FALSE;
 		return editCell;
