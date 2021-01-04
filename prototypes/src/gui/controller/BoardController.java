@@ -3,10 +3,18 @@
  *******************************************************************************/
 package gui.controller;
 
-import business_logic.*;
-import business_logic.board.*;
-import business_logic.workspace.*;
-import gui.view.*;
+import business_logic.BoardFacade;
+import business_logic.CellFacade;
+import business_logic.ColumnFacade;
+import business_logic.board.Board;
+import business_logic.board.Cell;
+import business_logic.board.Column;
+import business_logic.board.Item;
+import business_logic.board.ItemCollection;
+import business_logic.board.types.Type;
+import business_logic.workspace.Workspace;
+import gui.view.CellView;
+
 
 
 /**
@@ -164,7 +172,7 @@ public class BoardController {
 	 * @param value 
 	 * @return 
 	 */
-	public Boolean editCell(Cell cell, AbstractType value) {
+	public Boolean editCell(Cell cell, Type value) {
 		Boolean editCell = Boolean.FALSE;
 		return editCell;
 	}
