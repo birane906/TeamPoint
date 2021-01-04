@@ -1,11 +1,7 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package business_logic.board;
-
-// Start of user code (user defined imports)
-
-// End of user code
+package business_logic.board.types;
 
 import java.util.Date;
 
@@ -14,7 +10,7 @@ import java.util.Date;
  * 
  * @author 
  */
-public class DateType extends AbstractType {
+public class DateType extends Type {
 	/**
 	 * Description of the property date.
 	 */
@@ -31,14 +27,6 @@ public class DateType extends AbstractType {
 		super(id, nameType, description);
 	}
 
-	// Start of user code (user defined attributes for DateType)
-	
-	// End of user code
-	
-	
-	// Start of user code (user defined methods for DateType)
-	
-	// End of user code
 	/**
 	 * Returns date.
 	 * @return date 
@@ -54,7 +42,4 @@ public class DateType extends AbstractType {
 	public void setDate(Date newDate) {
 	    this.date = newDate;
 	}
-
-
-
 }

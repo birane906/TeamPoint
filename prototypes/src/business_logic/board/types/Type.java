@@ -1,42 +1,40 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package business_logic.board;
-
-// Start of user code (user defined imports)
-
-// End of user code
+package business_logic.board.types;
 
 /**
  * Description of AbstractType.
  * 
  * @author 
  */
-// TODO verify if not really abstract
-public class AbstractType {
+
+public abstract class Type {
+
 	/**
 	 * Description of the property description.
 	 */
 	private String description;
+
+	/**
+	 * 
+	 */
 	private String nameType;
+
+	/**
+	 * 
+	 */
 	private int idType;
-
-	// Start of user code (user defined attributes for AbstractType)
-
-	// End of user code
 
 	/**
 	 * The constructor.
 	 */
-	public AbstractType(int id, String nameType, String description) {
+	public Type(int id, String nameType, String description) {
 		this.idType = id;
 		this.description = description;
 		this.nameType = nameType;
 	}
 
-	// Start of user code (user defined methods for AbstractType)
-
-	// End of user code
 	/**
 	 * Returns description.
 	 * @return description 
@@ -78,5 +76,4 @@ public class AbstractType {
 		
 		return str;
 	}
-
 }

@@ -1,7 +1,7 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package business_logic.board;
+package business_logic.board.types;
 
 /**
  * Class used in {@link StatusType} to define its label

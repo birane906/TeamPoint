@@ -1,7 +1,7 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package business_logic.board;
+package business_logic.board.types;
 
 // Start of user code (user defined imports)
 
@@ -12,7 +12,7 @@ package business_logic.board;
  * 
  * @author 
  */
-public class NumberType extends AbstractType {
+public class NumberType extends Type {
 	/**
 	 * Description of the property unit.
 	 */

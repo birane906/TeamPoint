@@ -1,14 +1,15 @@
-package business_logic.board;
-
+package business_logic.board.types;
 
 import java.util.HashSet;
+
+import business_logic.board.Item;
 
 /**
  * Description of DependencyType.
  * 
  * @author 
  */
-public class DependencyType extends AbstractType  {
+public class DependencyType extends Type  {
 	/**
 	 * Description of the property items.
 	 */
@@ -47,7 +48,4 @@ public class DependencyType extends AbstractType  {
 	public HashSet<Item> getItems() {
 		return this.items;
 	}
-
-
-
 }

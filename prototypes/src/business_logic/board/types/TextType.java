@@ -1,14 +1,14 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package business_logic.board;
+package business_logic.board.types;
 
 /**
  * Type used in a {@link Column} to specify a text field
  *
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
-public class TextType extends AbstractType {
+public class TextType extends Type {
 	/**
 	 * The text of the {@link TextType}
 	 */
