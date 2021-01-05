@@ -168,6 +168,15 @@ public class WorkspaceController implements Initializable {
 							ObservableList<Board> myBoards = FXCollections.observableArrayList(boards);
 							listBoard.setItems(myBoards);
 							listBoard.setCellFactory(lv -> new SimpleListCell());
+
+							listBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
+								@Override
+								public void handle(MouseEvent event) {
+									System.out.println("clicked on " + listBoard.getSelectionModel().getSelectedItem());
+								}
+							});
+
+
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());
 							sp.setVisible(true);
@@ -177,6 +186,7 @@ public class WorkspaceController implements Initializable {
 							addBoardLabel.setVisible(true);
 							inviteMemberImage.setVisible(true);
 							inviteMemberLabel.setVisible(true);
+
 
 						}
 
