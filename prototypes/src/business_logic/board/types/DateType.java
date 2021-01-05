@@ -8,23 +8,34 @@ import java.util.Date;
 /**
  * Description of DateType.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class DateType extends Type {
-	/**
-	 * Description of the property date.
-	 */
-	private Date date = new Date();
 
 	/**
-	 * The constructor.
-	 *
-	 * @param id
-	 * @param nameType
-	 * @param description
+	 * A {@link Date}
 	 */
-	public DateType(int id, String nameType, String description) {
-		super(id, nameType, description);
+	private Date date;
+
+	/**
+	 * Constructor for empty date 
+	 * @param id an int
+	 * @param description the type description
+	 */
+	public DateType(int id, String description) {
+		super(id, DateType.class.getSimpleName(), description);
+		this.date = null;
+	}
+
+	/**
+	 * Constructor for filled date
+	 * @param id an int
+	 * @param description the type description
+	 * @param date {@link Date} instance
+	 */
+	public DateType(int id, String description, Date date) {
+		super(id, DateType.class.getSimpleName(), description);
+		this.date = date;
 	}
 
 	/**
