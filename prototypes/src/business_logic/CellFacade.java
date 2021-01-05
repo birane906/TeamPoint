@@ -49,7 +49,7 @@ public class CellFacade {
 	 * @param value The {@link business_logic.board.types.Type} value of the created {@link Cell}
 	 * @return The newly created {@link Cell}, is <code>null</code> id creation failed
 	 */
-	public Cell addCell(Column column, Item item, Type value) {
+	public Cell<? extends Type> addCell(Column<? extends Type> column, Item item, Type value) {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		CellDAO cellDAO = daoFactory.createCellDAO();
 
@@ -61,7 +61,7 @@ public class CellFacade {
 	 * @param cell The {@link Cell} to be deleted
 	 * @return <code>true</code> if the deletion succeed, <code>false</code> otherwise
 	 */
-	public Boolean deleteCell(Cell cell) {
+	public Boolean deleteCell(Cell<? extends Type> cell) {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		CellDAO cellDAO = daoFactory.createCellDAO();
 
@@ -74,7 +74,7 @@ public class CellFacade {
 	 * @param value The new value of the {@link Cell}
 	 * @return <code>true</code> if the edition succeed, <code>false</code> otherwise
 	 */
-	public Boolean editCell(Cell cell, Type value) {
+	public Boolean editCell(Cell<? extends Type> cell, Type value) {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		CellDAO cellDAO = daoFactory.createCellDAO();
 
@@ -86,7 +86,7 @@ public class CellFacade {
 	 * @param cell The {@link Cell} to be edited
 	 * @return <code>true</code> if the clearance succeed, <code>false</code> otherwise
 	 */
-	public Boolean clearCell(Cell cell) {
+	public Boolean clearCell(Cell<? extends Type> cell) {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		CellDAO cellDAO = daoFactory.createCellDAO();
 
