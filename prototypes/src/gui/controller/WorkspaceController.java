@@ -3,6 +3,7 @@ package gui.controller;
 import business_logic.UserFacade;
 import business_logic.WorkspaceFacade;
 import business_logic.board.Board;
+import business_logic.board.ItemCollection;
 import business_logic.workspace.Workspace;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -183,8 +184,12 @@ public class WorkspaceController implements Initializable {
 								public void handle(MouseEvent event) {
 									Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
 									boardLabel.setText(currentBoard.getName());
-									Label l = new Label("AA");
-									sp2.setContent(l);
+
+									ArrayList<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
+									for(int i=0; i < currentItemCollections.size(); i++){
+										sp2.setContent(new Label(currentItemCollections.get(i).getName()));
+									}
+
 								}
 							});
 
