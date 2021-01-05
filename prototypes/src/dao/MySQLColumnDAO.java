@@ -15,6 +15,13 @@ import java.util.ArrayList;
 
 public class MySQLColumnDAO extends ColumnDAO {
 
+	/**
+	 * add a column to a board
+	 * @param columnName
+	 * @param board
+	 * @param typeName the String of the abstractType {@link Type}
+	 * @return
+	 */
 	@Override
 	public Column addColumn(String columnName, Board board, String typeName) {
 
@@ -65,8 +72,33 @@ public class MySQLColumnDAO extends ColumnDAO {
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
 		}
-		return new Column(board, columnName, columnId, getTypeByName(typeName).getIdType());
+
+		// GET the typeId of column
+
+		Statement state = null;
+		req = "SELECT idColumnType FROM `column`"
+				+ "WHERE idColumn = " + DAO.stringFormat(columnId + "");
+		try {
+			state.executeUpdate(req);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		// Add the column id to board_contains
+		int typeId = -1;
+		try {
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			typeId = rs.getInt(1);
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		return new Column(board, columnName, columnId, DAO.getTypeById(typeId));
 	}
+
 
 	@Override
 	public Boolean deleteColumn(Column column) {
@@ -126,6 +158,11 @@ public class MySQLColumnDAO extends ColumnDAO {
 		return resultat;
 	}
 
+	/**
+	 * get the type given a name
+	 * @param typeName can be TimelineType, textType
+	 * @return
+	 */
 	public Type getTypeByName(String typeName) {
 		
 		Type resultat = null;
