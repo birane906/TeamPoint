@@ -1,31 +1,32 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package dao;
+package dao.mongoDB;
 
 import business_logic.user.AbstractUserAttendance;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
+import dao.UserAttendanceDAO;
 
 // Start of user code (user defined imports)
 
 // End of user code
 
 /**
- * Description of MySQLUserAttendanceDAO.
+ * Description of MongoUserAttendanceDAO.
  * 
  * @author Raphael
  */
-public class MySQLUserAttendanceDAO extends UserAttendanceDAO {
-	// Start of user code (user defined attributes for MySQLUserAttendanceDAO)
+public class MongoUserAttendanceDAO extends UserAttendanceDAO {
+	// Start of user code (user defined attributes for MongoUserAttendanceDAO)
 	
 	// End of user code
 	
 	/**
 	 * The constructor.
 	 */
-	public MySQLUserAttendanceDAO() {
-		// Start of user code constructor for MySQLUserAttendanceDAO)
+	public MongoUserAttendanceDAO() {
+		// Start of user code constructor for MongoUserAttendanceDAO)
 		super();
 		// End of user code
 	}
@@ -56,7 +57,7 @@ public class MySQLUserAttendanceDAO extends UserAttendanceDAO {
 		// End of user code
 	}
 	 
-	// Start of user code (user defined methods for MySQLUserAttendanceDAO)
+	// Start of user code (user defined methods for MongoUserAttendanceDAO)
 	
 	// End of user code
 

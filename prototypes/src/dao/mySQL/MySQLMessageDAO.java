@@ -1,41 +1,42 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package dao;
+package dao.mySQL;
 
 import java.util.HashSet;
 
 import business_logic.notification.Channel;
 import business_logic.notification.Message;
+import dao.MessageDAO;
 
 // Start of user code (user defined imports)
 
 // End of user code
 
 /**
- * Description of MongoMessageDAO.
+ * Description of MySQLMessageDAO.
  * 
  * @author Raphael
  */
-public class MongoMessageDAO extends MessageDAO {
-	// Start of user code (user defined attributes for MongoMessageDAO)
+public class MySQLMessageDAO extends MessageDAO {
+	// Start of user code (user defined attributes for MySQLMessageDAO)
 
 	// End of user code
 
 	/**
 	 * The constructor.
 	 */
-	public MongoMessageDAO() {
-		// Start of user code constructor for MongoMessageDAO)
+	public MySQLMessageDAO() {
+		// Start of user code constructor for MySQLMessageDAO)
 		super();
 		// End of user code
 	}
 
 	/**
-	 * Description of the method createMessage.
-	 * @param message 
-	 * @param channel; Channel 
-	 * @return 
+	 * create Message on a channel.
+	 * @param message String
+	 * @param channel {@link Channel}
+	 * @return the message create
 	 */
 	public Message createMessage(String message, Channel channel) {
 		// Start of user code for method createMessage
@@ -45,9 +46,9 @@ public class MongoMessageDAO extends MessageDAO {
 	}
 
 	/**
-	 * Description of the method deleteMessage.
-	 * @param message 
-	 * @return 
+	 * delete a Message.
+	 * @param message that will be deleted
+	 * @return a boolean according to the success of delete
 	 */
 	public Boolean deleteMessage(Message message) {
 		// Start of user code for method deleteMessage
@@ -57,9 +58,9 @@ public class MongoMessageDAO extends MessageDAO {
 	}
 
 	/**
-	 * Description of the method retrieveAllChannelMessages.
-	 * @param channel 
-	 * @return 
+	 * retrieveAllChannelMessages.
+	 * @param channel we want the message from
+	 * @return a hashSet of all messages and their creator {@link User}
 	 */
 	public HashSet<Message> retrieveAllChannelMessages(Channel channel) {
 		// Start of user code for method retrieveAllChannelMessages
@@ -68,7 +69,7 @@ public class MongoMessageDAO extends MessageDAO {
 		// End of user code
 	}
 
-	// Start of user code (user defined methods for MongoMessageDAO)
+	// Start of user code (user defined methods for MySQLMessageDAO)
 
 	// End of user code
 

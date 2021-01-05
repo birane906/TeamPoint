@@ -1,7 +1,7 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package dao;
+package dao.mongoDB;
 
 import business_logic.board.Board;
 import business_logic.board.Column;
@@ -11,6 +11,7 @@ import business_logic.board.Permission;
 import business_logic.user.User;
 // Start of user code (user defined imports)
 import business_logic.workspace.Workspace;
+import dao.BoardDAO;
 
 import java.util.ArrayList;
 

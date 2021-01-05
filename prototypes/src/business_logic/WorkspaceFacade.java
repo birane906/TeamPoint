@@ -9,6 +9,7 @@ import business_logic.user.AbstractUserAttendance;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.*;
+import dao.factory.DAOFactory;
 
 import java.util.ArrayList;
 import java.util.HashSet;

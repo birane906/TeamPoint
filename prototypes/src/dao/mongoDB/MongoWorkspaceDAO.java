@@ -1,12 +1,13 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package dao;
+package dao.mongoDB;
 
 import java.util.HashSet;
 
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
+import dao.WorkspaceDAO;
 
 
 /**

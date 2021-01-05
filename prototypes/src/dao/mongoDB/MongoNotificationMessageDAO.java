@@ -1,42 +1,43 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package dao;
+package dao.mongoDB;
 
 import java.util.HashSet;
 
 import business_logic.notification.Message;
 import business_logic.notification.NotificationMessage;
 import business_logic.user.User;
+import dao.NotificationMessageDAO;
 
 // Start of user code (user defined imports)
 
 // End of user code
 
 /**
- * Description of MySQLNotificationMessageDAO.
+ * Description of MongoNotificationMessageDAO.
  * 
  * @author Raphael
  */
-public class MySQLNotificationMessageDAO extends NotificationMessageDAO {
-	// Start of user code (user defined attributes for MySQLNotificationMessageDAO)
+public class MongoNotificationMessageDAO extends NotificationMessageDAO {
+	// Start of user code (user defined attributes for MongoNotificationMessageDAO)
 	
 	// End of user code
 	
 	/**
 	 * The constructor.
 	 */
-	public MySQLNotificationMessageDAO() {
-		// Start of user code constructor for MySQLNotificationMessageDAO)
+	public MongoNotificationMessageDAO() {
+		// Start of user code constructor for MongoNotificationMessageDAO)
 		super();
 		// End of user code
 	}
 	
 	/**
-	 * create Notification Message. {@link NotificationMessage}
-	 * @param message {@link Message}
-	 * @param user {@link User}
-	 * @return the message
+	 * Description of the method createNotificationMessage.
+	 * @param message 
+	 * @param user 
+	 * @return 
 	 */
 	public Message createNotificationMessage(Message message, User user) {
 		// Start of user code for method createNotificationMessage
@@ -46,9 +47,9 @@ public class MySQLNotificationMessageDAO extends NotificationMessageDAO {
 	}
 	 
 	/**
-	 * delete Notification Message.
+	 * Description of the method deleteNotificationMessage.
 	 * @param notificationMessage 
-	 * @return a boolean according to the success of delete
+	 * @return 
 	 */
 	public Boolean deleteNotificationMessage(NotificationMessage notificationMessage) {
 		// Start of user code for method deleteNotificationMessage
@@ -58,9 +59,9 @@ public class MySQLNotificationMessageDAO extends NotificationMessageDAO {
 	}
 	 
 	/**
-	 * retrieve All User Invitations.
-	 * @param user we want the invitations
-	 * @return a hashset of invitation and roles
+	 * Description of the method retrieveAllUserNotificationMessages.
+	 * @param user 
+	 * @return 
 	 */
 	public HashSet<NotificationMessage> retrieveAllUserNotificationMessages(User user) {
 		// Start of user code for method retrieveAllUserNotificationMessages
@@ -69,7 +70,7 @@ public class MySQLNotificationMessageDAO extends NotificationMessageDAO {
 		// End of user code
 	}
 	 
-	// Start of user code (user defined methods for MySQLNotificationMessageDAO)
+	// Start of user code (user defined methods for MongoNotificationMessageDAO)
 	
 	// End of user code
 

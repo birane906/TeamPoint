@@ -1,43 +1,44 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package dao;
+package dao.mySQL;
 
 import java.util.HashSet;
 
 import business_logic.notification.Invitation;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
+import dao.InvitationDAO;
 
 // Start of user code (user defined imports)
 
 // End of user code
 
 /**
- * Description of MongoInvitationDAO.
+ * Description of MySQLInvitationDAO.
  * 
  * @author Raphael
  */
-public class MongoInvitationDAO extends InvitationDAO {
-	// Start of user code (user defined attributes for MongoInvitationDAO)
+public class MySQLInvitationDAO extends InvitationDAO {
+	// Start of user code (user defined attributes for MySQLInvitationDAO)
 	
 	// End of user code
 	
 	/**
 	 * The constructor.
 	 */
-	public MongoInvitationDAO() {
-		// Start of user code constructor for MongoInvitationDAO)
+	public MySQLInvitationDAO() {
+		// Start of user code constructor for MySQLInvitationDAO)
 		super();
 		// End of user code
 	}
 	
 	/**
-	 * Description of the method createInvitation.
+	 * create Invitation to a workspace.
 	 * @param workspace
-	 * @param user
-	 * @param attendance
-	 * @return
+	 * @param user the user we invite
+	 * @param attendance the role we give to the user
+	 * @return an Invitation {@link Invitation}
 	 */
 	public boolean createInvitation(Workspace workspace, User user, String attendance) {
 		// Start of user code for method createInvitation
@@ -47,9 +48,9 @@ public class MongoInvitationDAO extends InvitationDAO {
 	}
 	 
 	/**
-	 * Description of the method deleteInvitation.
-	 * @param invitation 
-	 * @return 
+	 * delete Invitation.
+	 * @param invitation to be deleted
+	 * @return a boolean according to the success of delete 
 	 */
 	public Boolean deleteInvitation(Invitation invitation) {
 		// Start of user code for method deleteInvitation
@@ -59,9 +60,9 @@ public class MongoInvitationDAO extends InvitationDAO {
 	}
 	 
 	/**
-	 * Description of the method retrieveAllUserInvitations.
-	 * @param user 
-	 * @return 
+	 * retrieve All User Invitations.
+	 * @param user we want the invitations
+	 * @return a hashset of invitation and roles
 	 */
 	public HashSet<Invitation> retrieveAllUserInvitations(User user) {
 		// Start of user code for method retrieveAllUserInvitations
@@ -70,7 +71,7 @@ public class MongoInvitationDAO extends InvitationDAO {
 		// End of user code
 	}
 	 
-	// Start of user code (user defined methods for MongoInvitationDAO)
+	// Start of user code (user defined methods for MySQLInvitationDAO)
 	
 	// End of user code
 
