@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 05 jan. 2021 à 18:48
+-- Généré le :  mar. 05 jan. 2021 à 20:15
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -102,10 +102,10 @@ CREATE TABLE `datetype` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `dependancytype`
+-- Structure de la table `dependencytype`
 --
 
-CREATE TABLE `dependancytype` (
+CREATE TABLE `dependencytype` (
   `idDependancyType` int(10) NOT NULL,
   `idCell` int(10) NOT NULL,
   `idItem` int(10) NOT NULL
@@ -158,7 +158,8 @@ INSERT INTO `itemcollection` (`idItemCollection`, `idBoard`, `itemCollectionName
 
 CREATE TABLE `numbertype` (
   `idNumberType` int(10) NOT NULL,
-  `idCell` int(10) NOT NULL
+  `idCell` int(10) NOT NULL,
+  `number` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -194,8 +195,7 @@ CREATE TABLE `statuslabel` (
 
 CREATE TABLE `statustype` (
   `idStatusType` int(10) NOT NULL,
-  `idCell` int(10) NOT NULL,
-  `colorStatus` varchar(25) NOT NULL
+  `idCell` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -370,11 +370,10 @@ ALTER TABLE `datetype`
   ADD KEY `FOREIGN_CELL_DATETYPE` (`idCell`);
 
 --
--- Index pour la table `dependancytype`
+-- Index pour la table `dependencytype`
 --
-ALTER TABLE `dependancytype`
+ALTER TABLE `dependencytype`
   ADD PRIMARY KEY (`idDependancyType`),
-  ADD KEY `FOREIGN_ITEM_DEP_TYPE` (`idItem`),
   ADD KEY `FOREIGN_CELL_DEP_TYPE` (`idCell`);
 
 --
@@ -410,6 +409,7 @@ ALTER TABLE `persontype`
 -- Index pour la table `statuslabel`
 --
 ALTER TABLE `statuslabel`
+  ADD PRIMARY KEY (`idStatusLabel`),
   ADD KEY `FOREIGN_STATUS_TYPE` (`idStatusType`);
 
 --
@@ -494,9 +494,9 @@ ALTER TABLE `datetype`
   MODIFY `idDateType` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `dependancytype`
+-- AUTO_INCREMENT pour la table `dependencytype`
 --
-ALTER TABLE `dependancytype`
+ALTER TABLE `dependencytype`
   MODIFY `idDependancyType` int(10) NOT NULL AUTO_INCREMENT;
 
 --
@@ -588,11 +588,11 @@ ALTER TABLE `datetype`
   ADD CONSTRAINT `FOREIGN_CELL_DATETYPE` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`);
 
 --
--- Contraintes pour la table `dependancytype`
+-- Contraintes pour la table `dependencytype`
 --
-ALTER TABLE `dependancytype`
+ALTER TABLE `dependencytype`
   ADD CONSTRAINT `FOREIGN_CELL_DEP_TYPE` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`),
-  ADD CONSTRAINT `FOREIGN_ITEM_DEP_TYPE` FOREIGN KEY (`idItem`) REFERENCES `item` (`idItem`);
+  ADD CONSTRAINT `FOREIGN_DEP_TYPE_ITEM` FOREIGN KEY (`idDependancyType`) REFERENCES `item` (`idItem`);
 
 --
 -- Contraintes pour la table `item`
