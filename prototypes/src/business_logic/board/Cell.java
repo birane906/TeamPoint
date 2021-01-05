@@ -4,29 +4,37 @@
 package business_logic.board;
 
 import business_logic.board.Cell;
+import business_logic.board.types.Type;
 
 /**
  * Description of Cell.
  * 
  * @author 
  */
-public class Cell {
+public class Cell<T extends Type> {
+
 	/**
 	 * Description of the property column.
 	 */
-	public Column column = null;
+	public Column<T> column = null;
 
 	/**
 	 * Description of the property value.
 	 */
-	private Object value = null;
+	private T value = null;
 
 	/**
 	 * Description of the property item.
 	 */
 	public Item item = null;
 
-	public Cell(Item item, Column column, Object value) {
+	/**
+	 * 
+	 * @param item
+	 * @param column
+	 * @param value
+	 */
+	public Cell(Item item, Column<T> column, T value) {
 		this.column = column;
 		this.value = value;
 		this.item = item;
@@ -36,7 +44,7 @@ public class Cell {
 	 * Returns column.
 	 * @return column 
 	 */
-	public Column getColumn() {
+	public Column<T> getColumn() {
 		return this.column;
 	}
 
@@ -44,7 +52,7 @@ public class Cell {
 	 * Sets a value to attribute column. 
 	 * @param newColumn 
 	 */
-	public void setColumn(Column newColumn) {
+	public void setColumn(Column<T> newColumn) {
 		this.column = newColumn;
 	}
 
@@ -52,7 +60,7 @@ public class Cell {
 	 * Returns value.
 	 * @return value 
 	 */
-	public Object getValue() {
+	public T getValue() {
 		return this.value;
 	}
 
@@ -60,7 +68,7 @@ public class Cell {
 	 * Sets a value to attribute value. 
 	 * @param newValue 
 	 */
-	public void setValue(Object newValue) {
+	public void setValue(T newValue) {
 		this.value = newValue;
 	}
 

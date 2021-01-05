@@ -6,41 +6,61 @@ package business_logic.board;
 import business_logic.board.types.Type;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Description of Column.
  * 
  * @author 
  */
-public class Column {
+public class Column<T extends Type> {
+
 	/**
 	 * Description of the property name.
 	 */
 	private String name = "";
 
 	/**
-	 * Description of the property cells.
-	 */
-	public ArrayList<Cell> cells = new ArrayList<>();
-
-	/**
 	 * Description of the property column_id.
 	 */
-	public int column_id;
+	private int column_id;
 
 	/**
 	 * Description of the property parentBoard.
 	 */
-	public Board parentBoard;
-	
-	private Type columnType;
+	private Board parentBoard;
 
+	/**
+	 * Description of the property cells.
+	 */
+	public List<Cell<T>> cells;
 
-	public Column(Board parentBoard, String name, int idCol, Type type) {
-		this.column_id = idCol;
+	/**
+	 * Constructor with empty cells
+	 * @param parentBoard the parent Board
+	 * @param name
+	 * @param column_id
+	 */
+	public Column(Board parentBoard, String name, int column_id) {
 		this.parentBoard = parentBoard;
+		this.column_id = column_id;
 		this.name = name;
-		this.columnType = type;
+		this.cells = new ArrayList<>();
+		//need to create the empty cells ?
+	}
+	
+	/**
+	 * Constructor with already existing cells
+	 * @param parentBoard
+	 * @param name
+	 * @param column_id
+	 * @param cells 
+	 */
+	public Column(Board parentBoard, String name, int column_id, List<Cell<T>> cells) {
+		this.parentBoard = parentBoard;
+		this.column_id = column_id;
+		this.name = name;
+		this.cells = cells;
 	}
 	
 	/**
@@ -63,11 +83,11 @@ public class Column {
 	 * Returns cells.
 	 * @return cells 
 	 */
-	public ArrayList<Cell> getCells() {
+	public List<Cell<T>> getCells() {
 		return this.cells;
 	}
 
-	public void setCells(ArrayList<Cell> cells) {
+	public void setCells(List<Cell<T>> cells) {
 		this.cells = cells;
 	}
 
@@ -102,13 +122,8 @@ public class Column {
 	public void setParentBoard(Board newParentBoard) {
 		this.parentBoard = newParentBoard;
 	}
-	
-	public Type getColumnType() {
-		return columnType;
-	}
 
-	public void addCell(Cell cell) {
+	public void addCell(Cell<T> cell) {
 		this.cells.add(cell);
 	}
-
 }
