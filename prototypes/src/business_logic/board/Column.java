@@ -6,41 +6,69 @@ package business_logic.board;
 import business_logic.board.types.Type;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Description of Column.
  * 
  * @author 
  */
-public class Column {
+public class Column<T extends Type> {
+
+	/**
+	 * is equals to T of Column<T>
+	 */
+	private final Type typeParameterClass;
+
 	/**
 	 * Description of the property name.
 	 */
-	private String name = "";
-
-	/**
-	 * Description of the property cells.
-	 */
-	public ArrayList<Cell> cells = new ArrayList<>();
+	private String columnName = "";
 
 	/**
 	 * Description of the property column_id.
 	 */
-	public int column_id;
+	private int column_id;
 
 	/**
 	 * Description of the property parentBoard.
 	 */
-	public Board parentBoard;
-	
-	private Type columnType;
+	private Board parentBoard;
 
+	/**
+	 * Description of the property cells.
+	 */
+	public List<Cell<T>> cells;
 
-	public Column(Board parentBoard, String name, int idCol, Type type) {
-		this.column_id = idCol;
+	/**
+	 * Constructor with empty cells
+	 * @param parentBoard the parent Board {@link Board}
+	 * @param columnName the name of the column {@link String}
+	 * @param column_id int
+	 * @param typeParameterClass is the {@link Type} of the generic parameter 
+	 */
+	public Column(Board parentBoard, String columnName, int column_id, Type typeParameterClass) {
 		this.parentBoard = parentBoard;
-		this.name = name;
-		this.columnType = type;
+		this.column_id = column_id;
+		this.typeParameterClass = typeParameterClass;
+		this.columnName = columnName;
+		this.cells = new ArrayList<>();
+		//need to create the empty cells ?
+	}
+	
+	/**
+	 * Constructor with already existing cells
+	 * @param parentBoard
+	 * @param columnName
+	 * @param column_id
+	 * @param cells 
+	 */
+	public Column(Board parentBoard, String columnName, int column_id, List<Cell<T>> cells, Type typeParameterClass) {
+		this.parentBoard = parentBoard;
+		this.column_id = column_id;
+		this.typeParameterClass = typeParameterClass;
+		this.columnName = columnName;
+		this.cells = cells;
 	}
 	
 	/**
@@ -48,26 +76,26 @@ public class Column {
 	 * @return name 
 	 */
 	public String getName() {
-		return this.name;
+		return this.columnName;
 	}
 
 	/**
-	 * Sets a value to attribute name. 
-	 * @param newName 
+	 * Sets a value to attribute columnName. 
+	 * @param newcolumnName 
 	 */
-	public void setName(String newName) {
-		this.name = newName;
+	public void setcolumnName(String newcolumnName) {
+		this.columnName = newcolumnName;
 	}
 
 	/**
 	 * Returns cells.
 	 * @return cells 
 	 */
-	public ArrayList<Cell> getCells() {
+	public List<Cell<T>> getCells() {
 		return this.cells;
 	}
 
-	public void setCells(ArrayList<Cell> cells) {
+	public void setCells(List<Cell<T>> cells) {
 		this.cells = cells;
 	}
 
@@ -102,13 +130,12 @@ public class Column {
 	public void setParentBoard(Board newParentBoard) {
 		this.parentBoard = newParentBoard;
 	}
-	
-	public Type getColumnType() {
-		return columnType;
-	}
 
-	public void addCell(Cell cell) {
+	public void addCell(Cell<T> cell) {
 		this.cells.add(cell);
 	}
 
+	public Type getColumnType() {
+		return this.typeParameterClass;
+	}
 }
