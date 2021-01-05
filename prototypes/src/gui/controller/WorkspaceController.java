@@ -73,7 +73,7 @@ public class WorkspaceController implements Initializable {
 	public MenuButton ChangeViewMenuButton;
 
 	@FXML
-	public ListView itemCollectionListView;
+	public ListView<ItemCollection> itemCollectionListView;
 
 	/**
 	 * Description of the property userFacade.
@@ -191,7 +191,7 @@ public class WorkspaceController implements Initializable {
 									Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
 									boardLabel.setText(currentBoard.getName());
 
-									ArrayList<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
+									List<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
 									ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
 									itemCollectionListView.setItems(mycurrentIC);
 
