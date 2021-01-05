@@ -98,7 +98,7 @@ public class MySQLCellDAO extends CellDAO {
 		
 		// GET THE COLUMN TYPE
 
-		String type = "";
+		String type = column.getColumnType().getNameType();
 		switch (type) {
 		case "TimelineType":
 			
