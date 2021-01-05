@@ -177,13 +177,14 @@ public class MySQLUserDAO extends UserDAO {
 				+ DAO.stringFormat(password) + ")";
 		try {
 			assert stmt != null;
-			stmt.execute(req);
+			stmt.executeQuery(req);
 		} catch (SQLException e) {
 			return false;
 		}
 		return true;
 	}
 
+	// TODO
 	public boolean editUser(String field, String value) {
 		return false;
 	}

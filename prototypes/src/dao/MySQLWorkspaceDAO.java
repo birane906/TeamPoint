@@ -40,7 +40,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		// Query statement
 		PreparedStatement prepStmt = null;
 		ResultSet rs;
-		int workspaceId = -1;
+		int workspaceId;
 		
 		String query = "INSERT INTO workspace (idUserOwner, workspaceName) "
 				+ "VALUES(?, ?)";
@@ -87,37 +87,34 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			e.printStackTrace();
 		}
 
-		if(workspaceId != -1) {
-			req = "INSERT INTO user_workspace"
-					+ " (idUser, idWorkspace, userRole) VALUES("
-					+ DAO.stringFormat(user.getUser_id() + "") + ", "
-					+ DAO.stringFormat(workspaceId + "") + ", "
-					+ DAO.stringFormat(workspaceAdmin)
-					+ ")";
+		req = "INSERT INTO user_workspace"
+				+ " (idUser, idWorkspace, userRole) VALUES("
+				+ DAO.stringFormat(user.getUser_id() + "") + ", "
+				+ DAO.stringFormat(workspaceId + "") + ", "
+				+ DAO.stringFormat(workspaceAdmin)
+				+ ")";
 
-			try {
-				assert stmt != null;
-				stmt.execute(req);
-			} catch (SQLException e) {
+		try {
+			assert stmt != null;
+			stmt.execute(req);
+		} catch (SQLException e) {
 
-				try {
-					DAO.getConnection().close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-
-				return null;
-			}
-
-			// The user has now a workspace
 			try {
 				DAO.getConnection().close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
-			return new Workspace(workspaceName);
+
+			return null;
 		}
-		return null;
+
+		// The user has now a workspace
+		try {
+			DAO.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new Workspace(workspaceName);
 	}
 
 	/**
@@ -315,7 +312,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 		System.out.println(user);
 		
-		User workspaceOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
+		//User workspaceOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
 		
 		//System.out.println(mySQL.deleteCell(cell));
 		
