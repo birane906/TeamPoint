@@ -4,7 +4,6 @@ import business_logic.BoardFacade;
 import business_logic.board.types.Type;
 import business_logic.workspace.Workspace;
 import dao.MySQLBoardDAO;
-import dao.MySQLWorkspaceDAO;
 
 import java.util.ArrayList;
 
