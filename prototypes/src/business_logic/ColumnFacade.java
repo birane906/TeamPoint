@@ -56,7 +56,7 @@ public class ColumnFacade {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		ColumnDAO columnDAO = daoFactory.createColumnDAO();
 
-		Column<Type> column = columnDAO.addColumn(columnName, board, typeName);
+		Column<? extends Type> column = columnDAO.addColumn(columnName, board, typeName);
 
 		if (column != null) {
 			BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
@@ -84,7 +84,7 @@ public class ColumnFacade {
 	 * @param column The {@link Column} to be deleted
 	 * @return <code>true</code> if the deletion succeed, <code>false</code> otherwise
 	 */
-	public Boolean deleteColumn(Column column) {
+	public Boolean deleteColumn(Column<? extends Type> column) {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		ColumnDAO columnDAO = daoFactory.createColumnDAO();
 
@@ -96,17 +96,14 @@ public class ColumnFacade {
 	 * @param column The given {@link Column}
 	 * @return A string representation of the {@link Type} of the {@link Column}
 	 */
-	public String getColumnType(Column column) {
-		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
-		ColumnDAO columnDAO = daoFactory.createColumnDAO();
-
-		return columnDAO.getColumnType(column).getNameType();
+	public Type getColumnType(Column<? extends Type> column) {
+		return column.getColumnType();
 	}
 
 	/**
 	 * @return The current column held by the {@link ColumnFacade}
 	 */
-	public Column getCurrentColumn() {
+	public Column<? extends Type> getCurrentColumn() {
 		return this.currentColumn;
 	}
 
