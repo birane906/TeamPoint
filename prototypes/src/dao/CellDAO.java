@@ -20,16 +20,14 @@ public abstract class CellDAO implements DAO {
 	 * @param item 
 	 * @return the cell created
 	 */
-	// TODO verify if really abstract
-	public abstract Cell addCell(Column column, Item item, Object value);
+	public abstract Cell<? extends Type> addCell(Column<? extends Type> column, Item item, Type value);
 
 	/**
 	 * delete Cell.
 	 * @param cell 
 	 * @return a boolean according to the success of delete
 	 */
-	// TODO verify if really abstract
-	public abstract Boolean deleteCell(Cell cell);
+	public abstract Boolean deleteCell(Cell<? extends Type> cell);
 
 	/**
 	 * edit Cell.
@@ -37,12 +35,5 @@ public abstract class CellDAO implements DAO {
 	 * @param value 
 	 * @return a boolean according to the success of update
 	 */
-	public abstract Boolean editCell(Cell cell, Type value);
-
-	/**
-	 * For every items and column set the cells according to the db
-	 * @param board
-	 * @return
-	 */
-		//TODO decide what to do with this @NicolasGalois
+	public abstract Boolean editCell(Cell<? extends Type> cell, Type value);
 }
