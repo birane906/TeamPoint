@@ -100,11 +100,22 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		try {
 			stmt.execute(req);
 		} catch (SQLException e) {
+
+			try {
+				DAO.getConnection().close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
 			return null;
 		}
 			
 		// The user has now a workspace
-		
+		try {
+			DAO.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return new Workspace(workspaceName);
 	}
 
@@ -168,6 +179,12 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			}
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
+		}
+
+		try {
+			DAO.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 		return new Workspace(name, id);
@@ -256,9 +273,23 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+
+				try {
+					DAO.getConnection().close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
 				return null;
 			}
 		}
+
+		try {
+			DAO.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return res;
 	}
 

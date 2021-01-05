@@ -63,7 +63,20 @@ public class MySQLCellDAO extends CellDAO {
 		try {
 			stmt.execute(req);
 		} catch (SQLException e) {
+
+			try {
+				DAO.getConnection().close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
 			return null;
+		}
+
+		try {
+			DAO.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		
 		return new Cell(item, column, value);
@@ -108,11 +121,32 @@ public class MySQLCellDAO extends CellDAO {
 
 			while(rs.next()) {
 				rs.deleteRow();
+
+				try {
+					DAO.getConnection().close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
 				return true;
 			}
 			// if rs is empty
+
+			try {
+				DAO.getConnection().close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 			return false;
 		} catch (SQLException e) {
+
+			try {
+				DAO.getConnection().close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
 			return false;
 		}
 	}
@@ -169,7 +203,17 @@ public class MySQLCellDAO extends CellDAO {
 			stmt.executeUpdate();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
+			try {
+				DAO.getConnection().close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			return false;
+		}
+		try {
+			DAO.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return true;
 	}
