@@ -9,8 +9,10 @@ package business_logic.board.types;
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class StatusLabel {
+
 	/**
-	 * The color used to represent the {@link StatusLabel}
+	 * Hexadecimal code used to represent the {@link StatusLabel}
+	 * color
 	 */
 	private String color;
 
@@ -22,7 +24,19 @@ public class StatusLabel {
 	/**
 	 * The {@link StatusType} using the {@link StatusLabel}
 	 */
-	public StatusType statusType;
+	private StatusType statusType;
+
+	/**
+	 * Constructor
+	 * @param color Hexadecimal code as {@link String}
+	 * @param label A {@link String}
+	 * @param statusType The corresponding {@link StatusType}
+	 */
+	public StatusLabel(String color, String label, StatusType statusType){
+		this.statusType = statusType;
+		this.color = color;
+		this.label = label;
+	}
 
 	/**
 	 * @return The color used to represent the {@link StatusLabel}
