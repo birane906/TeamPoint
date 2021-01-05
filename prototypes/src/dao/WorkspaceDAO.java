@@ -15,7 +15,7 @@ import java.util.HashSet;
 public abstract class WorkspaceDAO implements DAO {
 
 	
-	final String workspaceAdmin = "WorkspaceAdmin";
+	public final String workspaceAdmin = "WorkspaceAdmin";
 
 	/**
 	 * The constructor.

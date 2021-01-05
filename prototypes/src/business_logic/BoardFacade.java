@@ -4,7 +4,7 @@ import business_logic.board.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
-import dao.DAOFactory;
+import dao.factory.DAOFactory;
 
 /**
  * {@link BoardFacade} is a Singleton class. Simplify the use of

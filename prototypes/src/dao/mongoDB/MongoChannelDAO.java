@@ -1,30 +1,31 @@
 /*******************************************************************************
  * 2020, All rights reserved.
  *******************************************************************************/
-package dao;
+package dao.mongoDB;
 
 import business_logic.board.Item;
 import business_logic.notification.Channel;
+import dao.ChannelDAO;
 
 // Start of user code (user defined imports)
 
 // End of user code
 
 /**
- * Description of MySQLChannelDAO.
+ * Description of MongoChannelDAO.
  * 
  * @author Raphael
  */
-public class MySQLChannelDAO extends ChannelDAO {
-	// Start of user code (user defined attributes for MySQLChannelDAO)
+public class MongoChannelDAO extends ChannelDAO {
+	// Start of user code (user defined attributes for MongoChannelDAO)
 	
 	// End of user code
 	
 	/**
 	 * The constructor.
 	 */
-	public MySQLChannelDAO() {
-		// Start of user code constructor for MySQLChannelDAO)
+	public MongoChannelDAO() {
+		// Start of user code constructor for MongoChannelDAO)
 		super();
 		// End of user code
 	}
@@ -53,7 +54,7 @@ public class MySQLChannelDAO extends ChannelDAO {
 		// End of user code
 	}
 	 
-	// Start of user code (user defined methods for MySQLChannelDAO)
+	// Start of user code (user defined methods for MongoChannelDAO)
 	
 	// End of user code
 

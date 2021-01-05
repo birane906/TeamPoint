@@ -7,7 +7,7 @@ import business_logic.board.types.Type;
 import business_logic.board.Board;
 import business_logic.board.Column;
 import dao.ColumnDAO;
-import dao.DAOFactory;
+import dao.factory.DAOFactory;
 
 import java.util.ArrayList;
 

@@ -8,7 +8,7 @@ import business_logic.board.Column;
 import business_logic.board.Item;
 import business_logic.board.types.Type;
 import dao.CellDAO;
-import dao.DAOFactory;
+import dao.factory.DAOFactory;
 
 /**
  * {@link CellFacade} is a Singleton class. Simplify the use of

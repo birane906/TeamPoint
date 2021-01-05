@@ -6,7 +6,7 @@ import business_logic.board.types.StatusLabel;
 import business_logic.board.types.StatusType;
 import business_logic.board.types.Type;
 import business_logic.workspace.Workspace;
-import dao.MySQLBoardDAO;
+import dao.mySQL.MySQLBoardDAO;
 
 import java.util.ArrayList;
 
