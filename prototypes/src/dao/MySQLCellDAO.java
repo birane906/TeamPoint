@@ -7,9 +7,6 @@ import java.sql.Statement;
 
 import business_logic.board.*;
 import business_logic.board.types.Type;
-import business_logic.board.types.TypeFactory;
-import business_logic.user.User;
-import business_logic.workspace.Workspace;
 
 /**
  * Description of MySQLCellDAO.
@@ -34,7 +31,7 @@ public class MySQLCellDAO extends CellDAO {
 	 * @return the cell created
 	 */
 	@Override
-	public Cell addCell(Column column, Item item, Object value) {
+	public Cell<? extends Type> addCell(Column<? extends Type> column, Item item, Type value) {
 
 		if(column == null || item == null || value == null) {
 			return null;
@@ -50,7 +47,6 @@ public class MySQLCellDAO extends CellDAO {
 			// Getconnection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 		
@@ -82,8 +78,9 @@ public class MySQLCellDAO extends CellDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return new Cell(item, column, (Type) value);
+		//TODO : Fix DB And Rewrite this part
+		//return new Cell(item, column, (Type) value);
+		return null;
 	}	
 
 	/**
@@ -92,7 +89,7 @@ public class MySQLCellDAO extends CellDAO {
 	 * @return a boolean according to the success of delete
 	 */
 	@Override
-	public Boolean deleteCell(Cell cell) {
+	public Boolean deleteCell(Cell<? extends Type> cell) {
 		
 		if (cell == null) {
 			return false;
@@ -109,7 +106,6 @@ public class MySQLCellDAO extends CellDAO {
 				.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					 ResultSet.CONCUR_UPDATABLE);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -163,7 +159,7 @@ public class MySQLCellDAO extends CellDAO {
 	 * @return a boolean according to the success of update
 	 */
 	@Override
-	public Boolean editCell(Cell cell, Type value) {
+	public Boolean editCell(Cell<? extends Type> cell, Type value) {
 
 		if(cell == null || value == null) {
 			System.out.println("sa");
@@ -185,7 +181,6 @@ public class MySQLCellDAO extends CellDAO {
 			stmt = DAO.getConnection()
 					.prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 			return false;
 		}
@@ -222,7 +217,7 @@ public class MySQLCellDAO extends CellDAO {
 		return true;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		MySQLCellDAO mySQL = new MySQLCellDAO();
 		
 		
@@ -244,5 +239,5 @@ public class MySQLCellDAO extends CellDAO {
 		//System.out.println(mySQL.addCell(column, item, "sa"));
 		//System.out.println(mySQL.editCell(cell, TypeFactory.createType(0, "TimelineType", "DATE")));
 	}
-
+	*/
 }

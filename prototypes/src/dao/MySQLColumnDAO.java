@@ -1,19 +1,15 @@
 package dao;
 
-import business_logic.board.Permission;
 import business_logic.board.types.Type;
 import business_logic.board.types.TypeFactory;
 import business_logic.board.Board;
 import business_logic.board.Column;
-import business_logic.user.User;
-import business_logic.workspace.Workspace;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MySQLColumnDAO extends ColumnDAO {
 
@@ -25,7 +21,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 	 * @return a column {@link Column}
 	 */
 	@Override
-	public Column addColumn(String columnName, Board board, String typeName) {
+	public Column<? extends Type> addColumn(String columnName, Board board, String typeName) {
 
 		if(columnName.isBlank() || board == null || typeName.isBlank()) {
 			return null;
@@ -45,7 +41,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 			// Get connection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -82,6 +77,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		req = "SELECT idColumnType FROM `column`"
 				+ "WHERE idColumn = " + DAO.stringFormat(columnId + "");
 		try {
+			//TODO : NICOLAS
 			assert false;
 			state.executeUpdate(req);
 		} catch (SQLException e) {
@@ -100,13 +96,12 @@ public class MySQLColumnDAO extends ColumnDAO {
 			throwables.printStackTrace();
 		}
 
-		return new Column(board, columnName, columnId, DAO.getTypeById(typeId));
+		return new Column<>(board, columnName, columnId, DAO.getTypeById(typeId));
 	}
 
 
 	@Override
-	public Boolean deleteColumn(Column column) {
-		// TODO Auto-generated method stub
+	public Boolean deleteColumn(Column<? extends Type> column) {
 		return null;
 	}
 
@@ -127,7 +122,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 			// Get connection from JDBCConnector
 			stmt = DAO.getConnection().createStatement();
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -140,7 +134,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
 			e.printStackTrace();
 		}
 
@@ -158,7 +151,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 				resultat.add(TypeFactory.createType(id, typeName, description));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -187,7 +179,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 			// Getconnection from JDBCConnector
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 			return null;
 		}
@@ -201,7 +192,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
 			e.printStackTrace();
 			return null;
 		}
@@ -219,19 +209,12 @@ public class MySQLColumnDAO extends ColumnDAO {
 				resultat = TypeFactory.createType(id, dbTypeName, description);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return resultat;
 	}
 
-	@Override
-	public Type getColumnType(Column column) {
-		// TODO Auto-generated catch block
-		return null;
-	}
-
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		MySQLColumnDAO mySQLColumnDAO = new MySQLColumnDAO();
 		
 		ArrayList<Type> res = mySQLColumnDAO.getAllColumnTypes();
@@ -239,7 +222,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		for (int i = 0; i < res.size(); i++) {
 			//System.out.println(res.get(i));
 		}
-		/*
+		
 		System.out.println(mySQLColumnDAO.getTypeByName("TimeLineType"));
 
 		System.out.println(DAO.isNameExist("Columntest", "column"));
@@ -251,8 +234,6 @@ public class MySQLColumnDAO extends ColumnDAO {
 		Column resAdd = mySQLColumnDAO.addColumn("asas", parentBoard, "TimeLineType");
 
 		System.out.println(resAdd);
-
-		 */
-	}
+	}*/
 
 }
