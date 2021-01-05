@@ -1,6 +1,9 @@
 package business_logic.board;
 
 import business_logic.BoardFacade;
+import business_logic.board.chart.Kanban;
+import business_logic.board.types.StatusLabel;
+import business_logic.board.types.StatusType;
 import business_logic.board.types.Type;
 import business_logic.workspace.Workspace;
 import dao.MySQLBoardDAO;
@@ -39,23 +42,30 @@ public class ViewGeneratorFacade {
         return ViewGeneratorFacade.ViewGeneratorFacadeHolder.VIEW_GENERATOR_FACADE;
     }
 
-    public void generateKanbanView() {
+    public Kanban generateKanbanView() {
         // Recupère tous les statusType du board
         // Récupère tous les item
         // classe les item dans autant de liste qu'il n'y a de statusLabel différent
         // Renvoi les listes avec les noms des type en premier
 
+        Kanban kanban;
+
         System.out.println(currentBoard.getColumns().size());
 
-        ArrayList<Type> types = new ArrayList<>();
+        ArrayList<StatusLabel> types = new ArrayList<>();
         for(int i = 0; i < currentBoard.getColumns().size(); i++) {
-            Type type = currentBoard.getColumns().get(i).getColumnType();
+            Column<? extends Type> col = currentBoard.getColumns().get(i);
+            Type type = col.getColumnType();
 
             if(type.getNameType().equals("StatusType")) {
-                types.add(type);
-                System.out.println(type);
+                StatusType statusType = (StatusType)type;
+
+                types.addAll(statusType.getStatusLabels());
+                System.out.println(statusType.getStatusLabels().get(i).getLabel());
             }
         }
+        //kanban = new Kanban(listItem, types);
+        return null;
     }
 
     public void generateGanttView() {
