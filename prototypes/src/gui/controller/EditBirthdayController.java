@@ -42,7 +42,6 @@ public class EditBirthdayController {
 
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-			//if(birthdayDP.getValue().isAfter(LocalDate.now())) {
 				//TO DO
 				// TRAITEMENT BDD
 				Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
@@ -51,9 +50,7 @@ public class EditBirthdayController {
 				window.setScene(tableViewScene);
 				window.show();
 				messageLabel.setText("");
-		//	}else{
-			//	messageLabel.setText("Changement non effectué");
-		//	}
+
 
 	}
 
@@ -71,6 +68,7 @@ public class EditBirthdayController {
 	 */
 	public EditBirthdayController() {
 		super();
+		userFacade = UserFacade.getUserFacadeInstance();
 	}
 
 

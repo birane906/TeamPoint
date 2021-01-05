@@ -70,6 +70,7 @@ public class EditNumberController {
 	 */
 	public EditNumberController() {
 		super();
+		userFacade = UserFacade.getUserFacadeInstance();
 	}
 
 

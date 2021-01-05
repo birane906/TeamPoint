@@ -77,6 +77,7 @@ public class EditEmailController {
 	 */
 	public EditEmailController() {
 		super();
+		userFacade = UserFacade.getUserFacadeInstance();
 	}
 
 

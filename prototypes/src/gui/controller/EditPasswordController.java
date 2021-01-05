@@ -77,6 +77,7 @@ public class EditPasswordController {
 	 */
 	public EditPasswordController() {
 		super();
+		userFacade = UserFacade.getUserFacadeInstance();
 	}
 
 

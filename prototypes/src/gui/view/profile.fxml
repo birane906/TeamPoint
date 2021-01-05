@@ -93,10 +93,9 @@
       </Label>
       <ImageView fitHeight="69.0" fitWidth="51.0" layoutX="9.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/icon.png" />
+            <Image url="@../../../images/teampointicon.png" />
          </image>
       </ImageView>
-      <Button fx:id="closeButton" cancelButton="true" layoutX="740.0" layoutY="12.0" mnemonicParsing="false" onAction="#closeButtonOnAction" prefHeight="6.0" prefWidth="20.0" style="-fx-background-color: #E76A4F;" text="X" textOverrun="CENTER_WORD_ELLIPSIS" />
-      <Button fx:id="backButton" layoutX="16.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #3AB9E8;" text="&lt;" onAction="#backButtonOnAction" />
+       <Button fx:id="backButton" layoutX="16.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #3AB9E8;" text="&lt;" onAction="#backButtonOnAction" />
    </children>
 </AnchorPane>
