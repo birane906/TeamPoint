@@ -144,11 +144,15 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		// Result from database
 		ResultSet rs = null;
 		// Query statement
-		Statement stmt = null;
+		PreparedStatement stmt = null;
+
+		String query = "SELECT idWorkspace, workspaceName"
+				+ " FROM workspace "
+				+ "WHERE idWorkspace = ?";
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().createStatement();
+			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();

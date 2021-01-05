@@ -41,11 +41,14 @@ public class MySQLCellDAO extends CellDAO {
 		}
 
 		// Query statement
-		Statement stmt = null;
+		PreparedStatement stmt = null;
+
+		String query = "INSERT INTO cell"
+				+ " (idBoard, idColumn, idItem, idItemCollection, cellValue) VALUES(?, ?, ?, ?, ?)";
 
 		try {
 			// Getconnection
-			stmt = DAO.getConnection().createStatement();
+			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
