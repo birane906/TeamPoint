@@ -73,6 +73,7 @@ public class EditFirstNameController {
 	 */
 	public EditFirstNameController() {
 		super();
+		userFacade = UserFacade.getUserFacadeInstance();
 	}
 
 
