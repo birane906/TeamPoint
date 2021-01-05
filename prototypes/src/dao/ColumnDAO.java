@@ -30,14 +30,14 @@ public abstract class ColumnDAO implements DAO {
 	 * @param typeName the String of the abstractType {@link Type}
 	 * @return a {@link Board}
 	 */
-	public abstract Column addColumn(String columnName, Board board, String typeName);
+	public abstract Column<? extends Type> addColumn(String columnName, Board board, String typeName);
 
 	/**
 	 * delete Column.
 	 * @param column 
 	 * @return a boolean according to the success of delete
 	 */
-	public abstract Boolean deleteColumn(Column column);
+	public abstract Boolean deleteColumn(Column<? extends Type> column);
 
 	/**
 	 * getAllColumnTypes .
@@ -46,11 +46,5 @@ public abstract class ColumnDAO implements DAO {
 	public abstract ArrayList<Type> getAllColumnTypes();
 	
 	public abstract Type getTypeByName(String typeName);
-
-	public abstract Type getColumnType(Column column);
-
-	// Start of user code (user defined methods for ColumnDAO)
-
-	// End of user code
 
 }
