@@ -14,7 +14,7 @@ import business_logic.workspace.Workspace;
 /**
  * Description of MySQLCellDAO.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class MySQLCellDAO extends CellDAO {
 
@@ -29,8 +29,8 @@ public class MySQLCellDAO extends CellDAO {
 
 	/**
 	 * add Cell.
-	 * @param column 
-	 * @param item 
+	 * @param column of the cell
+	 * @param item of the cell
 	 * @return the cell created
 	 */
 	@Override
@@ -61,6 +61,7 @@ public class MySQLCellDAO extends CellDAO {
 				+ ")";
 		
 		try {
+			assert stmt != null;
 			stmt.execute(req);
 		} catch (SQLException e) {
 
@@ -84,7 +85,7 @@ public class MySQLCellDAO extends CellDAO {
 
 	/**
 	 * delete Cell.
-	 * @param cell 
+	 * @param cell we must delete
 	 * @return a boolean according to the success of delete
 	 */
 	@Override
@@ -94,7 +95,7 @@ public class MySQLCellDAO extends CellDAO {
 			return false;
 		}
 		// Result from DB
-		ResultSet rs = null;
+		ResultSet rs;
 
 		// Query statement
 		Statement stmt = null;
@@ -117,9 +118,10 @@ public class MySQLCellDAO extends CellDAO {
 				+ " AND idItemCollection = " + DAO.stringFormat(cell.getItem().getParentItemCollection().getItemCollection_id() + "");
 
 		try {
+			assert stmt != null;
 			rs = stmt.executeQuery(req);
 
-			while(rs.next()) {
+			if(rs.next()) {
 				rs.deleteRow();
 
 				try {
@@ -153,8 +155,8 @@ public class MySQLCellDAO extends CellDAO {
 
 	/**
 	 * edit Cell.
-	 * @param cell 
-	 * @param value 
+	 * @param cell we must edit
+	 * @param value of the edition
 	 * @return a boolean according to the success of update
 	 */
 	@Override
@@ -165,11 +167,8 @@ public class MySQLCellDAO extends CellDAO {
 			return false;
 		}
 
-		// Result from DB
-		ResultSet rs = null;
-
 		// Query statement
-		PreparedStatement stmt = null;
+		PreparedStatement stmt;
 
 		String query = "UPDATE cell "
 				+ "SET cellValue = ? "
@@ -179,34 +178,36 @@ public class MySQLCellDAO extends CellDAO {
 				+ " AND idItemCollection = ?";
 
 		try {
-			// Getconnection
+			// Get connection
 			stmt = DAO.getConnection()
 					.prepareStatement(query);
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();
+			return false;
 		}
 
 		try {
+			assert stmt != null;
 			stmt.setObject(1, DAO.stringFormat(cell.getValue() + ""));
 			stmt.setInt(2, cell.getItem().getParentItemCollection().getParentBoard().getBoard_id());
 			stmt.setInt(3, cell.getColumn().getColumn_id());
 			stmt.setInt(4, cell.getItem().getItem_id());
 			stmt.setInt(5, cell.getItem().getParentItemCollection().getItemCollection_id());
 
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-		// execute the java preparedstatement
+		// execute the java prepared statement
 		try {
 			stmt.executeUpdate();
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 			try {
 				DAO.getConnection().close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
 			return false;
 		}
@@ -233,10 +234,10 @@ public class MySQLCellDAO extends CellDAO {
 		Column column = new Column(parentBoard, "sa", 0, DAO.getTypeById(0));
 		
 		Cell cell = new Cell(item, column, "sabusainekoz");
-		
+
 		//Boolean res = mySQL.deleteCell(cell);
 		//System.out.println(res);
-		
+
 		//System.out.println(mySQL.addCell(column, item, "sa"));
 		System.out.println(mySQL.editCell(cell, TypeFactory.createType(0, "TimelineType", "DATE")));
 	}
