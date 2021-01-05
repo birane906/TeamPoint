@@ -1,6 +1,7 @@
 package gui.controller;
 
 import business_logic.UserFacade;
+import business_logic.WorkspaceFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,6 @@ public class createWorkspaceController {
 	private UserFacade userFacade;
 
 
-
 	@FXML
 	private Label messageLabel;
 
@@ -40,12 +40,10 @@ public class createWorkspaceController {
 	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-
-
-
 		if(!workspaceName.getText().isBlank()) {
 			//TO DO
 			// TRAITEMENT BDD creation workspace
+
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
