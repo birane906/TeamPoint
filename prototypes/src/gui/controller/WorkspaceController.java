@@ -69,6 +69,12 @@ public class WorkspaceController implements Initializable {
 	@FXML
 	public ScrollPane sp2;
 
+	@FXML
+	public MenuButton ChangeViewMenuButton;
+
+	@FXML
+	public ListView itemCollectionListView;
+
 	/**
 	 * Description of the property userFacade.
 	 */
@@ -186,9 +192,9 @@ public class WorkspaceController implements Initializable {
 									boardLabel.setText(currentBoard.getName());
 
 									ArrayList<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
-									for(int i=0; i < currentItemCollections.size(); i++){
-										sp2.setContent(new Label(currentItemCollections.get(i).getName()));
-									}
+									ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
+									itemCollectionListView.setItems(mycurrentIC);
+
 
 								}
 							});

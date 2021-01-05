@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
@@ -53,7 +54,11 @@
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </MenuButton>
-            <ScrollPane fx:id="sp2" layoutX="168.0" layoutY="68.0" prefHeight="515.0" prefWidth="795.0" />
+            <ScrollPane fx:id="sp2" layoutX="168.0" layoutY="68.0" prefHeight="515.0" prefWidth="795.0">
+               <content>
+                  <ListView fx:id="itemCollectionListView" />
+               </content>
+            </ScrollPane>
             </children></AnchorPane>
         <Label layoutX="97.0" layoutY="14.0" text="WORKSPACE">
             <font>
