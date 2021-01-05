@@ -1,6 +1,3 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package dao;
 
 import java.sql.Connection;
@@ -28,7 +25,7 @@ public interface DAO {
 	 * @param date from Date java package
 	 * @return the correct String format according to SQL "yyyy-mm-dd"
 	 */
-	public static String dateFormat(Date date) {
+	static String dateFormat(Date date) {
 		
 		if(date == null) {
 			return null;
@@ -37,8 +34,8 @@ public interface DAO {
 		// The ZoneId here has no implication since we only keep the year, month and day
 		ZonedDateTime localDate = date.toInstant().atZone(ZoneId.of("Europe/Paris"));
 		
-		Integer year = localDate.getYear(); // Year
-		String dateFormat = year.toString();
+		int year = localDate.getYear(); // Year
+		String dateFormat = Integer.toString(year);
 		dateFormat += "-";
 		dateFormat += localDate.getMonthValue(); // Month
 		dateFormat += "-";
@@ -49,10 +46,10 @@ public interface DAO {
 	
 	/**
 	 * Format the given string for database query
-	 * @param String str
-	 * @return a null pointer if str null, if not null return "str"
+	 * @param str the String
+	 * @return a null pointer if str null, if not null return "str" : str with double quotes
 	 */
-	public static String stringFormat(String str) {
+	static String stringFormat(String str) {
 		
 		if(str == null) {
 			return null;
@@ -61,7 +58,7 @@ public interface DAO {
 		return "\"" + str + "\"";
 	}
 	
-	public static Connection getConnection() {
+	static Connection getConnection() {
 		return JDBCConnector.getJDBCConnectorInstance().getConnection();
 	}
 
@@ -70,12 +67,12 @@ public interface DAO {
 	 * @param name, table
 	 * @return the column in the database according to a name, if not found return null
 	 */
-	public static boolean isNameExist(String name, String table) {
+	static boolean isNameExist(String name, String table) {
 
 		// Result from database
 		ResultSet rs = null;
 		// Query statement
-		PreparedStatement stmt = null;
+		PreparedStatement stmt;
 
 		String query = "SELECT * "
 				+ "FROM `" + table + "` "
@@ -115,12 +112,12 @@ public interface DAO {
 		}
 	}
 
-	public static User getUserById(int id) throws Exception {
+	static User getUserById(int id) throws Exception {
 		if (id == -1) {
 			throw new Exception();
 		}
 		// List of all fields to create an user
-		ArrayList<String> resultat = new ArrayList<String>();
+		ArrayList<String> resultat = new ArrayList<>();
 		// Result from database
 		ResultSet rs = null;
 		// Query statement
@@ -142,6 +139,7 @@ public interface DAO {
 				+ "WHERE idUser = " + DAO.stringFormat(id + "");
 
 		try {
+			assert stmt != null;
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
@@ -151,6 +149,7 @@ public interface DAO {
 		}
 
 		// if we have a result then move to the next line
+		assert rs != null;
 		if(rs.next()){
 
 			resultat.add(rs.getInt("idUser") + "");
@@ -180,10 +179,10 @@ public interface DAO {
 
 	/**
 	 * create the type given an id
-	 * @param idType
-	 * @return
+	 * @param idType id of the type
+	 * @return the Type {@link Type}
 	 */
-	public static Type getTypeById(int idType) {
+	static Type getTypeById(int idType) {
 		if (idType == -1) {
 			return null;
 		}
@@ -208,6 +207,7 @@ public interface DAO {
 				+ "WHERE idType = " + DAO.stringFormat(idType + "");
 
 		try {
+			assert stmt != null;
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
@@ -218,6 +218,7 @@ public interface DAO {
 
 		Type type = null;
 		try {
+			assert rs != null;
 			if(rs.next()) {
 				int id = rs.getInt("idType");
 				String label = rs.getString("nameType");

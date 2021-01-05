@@ -25,7 +25,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 	 * @return a column {@link Column}
 	 */
 	@Override
-	public Column addColumn(String columnName, Board board, String typeName) {
+	public Column<? extends Type> addColumn(String columnName, Board board, String typeName) {
 
 		if(columnName.isBlank() || board == null || typeName.isBlank()) {
 			return null;
@@ -105,7 +105,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 
 
 	@Override
-	public Boolean deleteColumn(Column column) {
+	public Boolean deleteColumn(Column<? extends Type> column) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -226,7 +226,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 	}
 
 	@Override
-	public Type getColumnType(Column column) {
+	public Type getColumnType(Column<? extends Type> column) {
 		// TODO Auto-generated catch block
 		return null;
 	}
