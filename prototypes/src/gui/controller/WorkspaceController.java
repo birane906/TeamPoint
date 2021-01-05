@@ -52,14 +52,21 @@ public class WorkspaceController implements Initializable {
 	@FXML
 	public Line line2;
 
-	@FXML
-	public Label board1;
 
 	@FXML
 	public ListView<Board> listBoard;
 
 	@FXML
 	public ScrollPane sp;
+
+	@FXML
+	public Label boardLabel;
+
+	@FXML
+	public Line line3;
+
+	@FXML
+	public ScrollPane sp2;
 
 	/**
 	 * Description of the property userFacade.
@@ -150,7 +157,9 @@ public class WorkspaceController implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		line.setVisible(false);
 		line2.setVisible(false);
+		line3.setVisible(false);
 		sp.setVisible(false);
+		sp2.setVisible(false);
 		addBoardImage.setVisible(false);
 		addBoardLabel.setVisible(false);
 		inviteMemberImage.setVisible(false);
@@ -172,7 +181,10 @@ public class WorkspaceController implements Initializable {
 							listBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
 								@Override
 								public void handle(MouseEvent event) {
-									System.out.println("clicked on " + listBoard.getSelectionModel().getSelectedItem());
+									Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
+									boardLabel.setText(currentBoard.getName());
+									Label l = new Label("AA");
+									sp2.setContent(l);
 								}
 							});
 
@@ -180,8 +192,10 @@ public class WorkspaceController implements Initializable {
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());
 							sp.setVisible(true);
+							sp2.setVisible(true);
 							line.setVisible(true);
 							line2.setVisible(true);
+							line3.setVisible(true);
 							addBoardImage.setVisible(true);
 							addBoardLabel.setVisible(true);
 							inviteMemberImage.setVisible(true);
