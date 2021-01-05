@@ -20,17 +20,54 @@ public class TextType extends Type {
 	private int charLimit;
 
 	/**
-	 * Create a {@link TextType} giving a text and a character number limit
-	 * @param text
-	 * @param charLimit
+	 * Constructor for empty TextType 
+	 * charLimit set to 90 (default)
+	 * @param id
+	 * @param description
+	 * @throws Exception
 	 */
-	public TextType(String text, int charLimit, int id, String nameType, String description) throws Exception {
-		super(id, nameType, description);
+	public TextType(int id, String description) throws Exception {
+		super(id, TextType.class.getSimpleName(), description);
+		this.charLimit = 90;
+		if (text.length() > charLimit) {
+			throw new Exception("The text is too long.");
+		}
+		this.text = "";
+	}
+
+	/**
+	 * Constructor for TextType filled
+	 * charactere limit to 90 (default)
+	 * @param id
+	 * @param description
+	 * @param text
+	 * @throws Exception
+	 */
+	public TextType(int id, String description, String text) throws Exception {
+		super(id, TextType.class.getSimpleName(), description);
+		this.charLimit = 90;
 		if (text.length() > charLimit) {
 			throw new Exception("The text is too long.");
 		}
 		this.text = text;
+	}
+
+	/**
+	 * Constructor for TextType filled
+	 * charactere limit choosed by the client
+	 * @param id
+	 * @param description
+	 * @param text
+	 * @param charLimit
+	 * @throws Exception
+	 */
+	public TextType(int id, String description, String text, int charLimit) throws Exception {
+		super(id, TextType.class.getSimpleName(), description);
 		this.charLimit = charLimit;
+		if (text.length() > charLimit) {
+			throw new Exception("The text is too long.");
+		}
+		this.text = text;
 	}
 
 	/**
