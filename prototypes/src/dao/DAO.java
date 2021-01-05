@@ -181,7 +181,7 @@ public interface DAO {
 	/**
 	 * create the type given an id
 	 * @param idType
-	 * @return
+	 * @return a {@link Type}
 	 */
 	public static Type getTypeById(int idType) {
 		if (idType == -1) {

@@ -38,7 +38,7 @@ public class Column<T extends Type> {
 	/**
 	 * Description of the property cells.
 	 */
-	public List<Cell<T>> cells;
+	public List<Cell<? extends Type>> cells;
 
 	/**
 	 * Constructor for {@link Column} with empty cells
@@ -63,7 +63,15 @@ public class Column<T extends Type> {
 	 * @param column_id
 	 * @param cells 
 	 */
-	public Column(Board parentBoard, String columnName, int column_id, List<Cell<T>> cells, Type typeParameterClass) {
+	public Column(Board parentBoard, 
+		String columnName, int column_id, 
+		List<Cell<? extends Type>> cells, Type typeParameterClass) throws Exception {
+		for (Cell<? extends Type> cell : cells) {
+			if (cell.getTypeParameterClass() != typeParameterClass) {
+				throw new Exception("The cells type must be"+
+					"the same as the Column type");
+			}
+		}
 		this.parentBoard = parentBoard;
 		this.column_id = column_id;
 		this.typeParameterClass = typeParameterClass;
@@ -91,11 +99,22 @@ public class Column<T extends Type> {
 	 * Returns cells.
 	 * @return cells 
 	 */
-	public List<Cell<T>> getCells() {
+	public List<Cell<? extends Type>> getCells() {
 		return this.cells;
 	}
 
-	public void setCells(List<Cell<T>> cells) {
+	/**
+	 * Set the column cells 
+	 * @param cells
+	 * @throws Exception if the cells type is not the same as the column
+	 */
+	public void setCells(List<Cell<? extends Type>> cells) throws Exception {
+		for (Cell<? extends Type> cell : cells) {
+			if (cell.getTypeParameterClass() != typeParameterClass) {
+				throw new Exception("The cells type must be"+
+				 "the same as the Column type");
+			}
+		}
 		this.cells = cells;
 	}
 

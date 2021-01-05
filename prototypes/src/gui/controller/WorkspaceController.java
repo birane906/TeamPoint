@@ -27,7 +27,7 @@ import java.util.*;
 /**
  * Description of WorkspaceController.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class WorkspaceController implements Initializable {
 
