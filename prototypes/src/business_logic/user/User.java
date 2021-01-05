@@ -143,6 +143,8 @@ public class User {
 		return password;
 	}
 
+	public void setPassword(String password){ this.password = password; }
+
 	/**
 	 * Returns userAttendances.
 	 * @return userAttendances 
@@ -218,6 +220,10 @@ public class User {
 
 	public int getUser_id() {
 		return user_id;
+	}
+
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 
 }
