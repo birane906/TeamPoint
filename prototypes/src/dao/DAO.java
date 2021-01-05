@@ -58,12 +58,12 @@ public interface DAO {
 		return "\"" + str + "\"";
 	}
 	
-	static Connection getConnection() {
-		return JDBCConnector.getJDBCConnectorInstance().getConnection();
+	static Connection getConnection(int countConnection) {
+		return JDBCConnector.getJDBCConnectorInstance().getConnection(countConnection);
 	}
 	
-	static void closeConnection() {
-		JDBCConnector.getJDBCConnectorInstance().closeConnection();
+	static void closeConnection(int countConnection) {
+		JDBCConnector.getJDBCConnectorInstance().closeConnection(countConnection);
 	}
 
 	/**
@@ -84,9 +84,8 @@ public interface DAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 			return false;
 		}
@@ -100,18 +99,22 @@ public interface DAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
 			e.printStackTrace();
+			closeConnection(0);
 			return false;
 		}
 		// if we have a result then move to the next line
 
 		try {
 			assert rs != null;
+
+			closeConnection(0);
 			return rs.next();
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+
+			closeConnection(0);
 			return false;
 		}
 	}
@@ -132,9 +135,8 @@ public interface DAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = getConnection(1).prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -148,7 +150,6 @@ public interface DAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
 			e.printStackTrace();
 		}
 
@@ -167,7 +168,6 @@ public interface DAO {
 		}
 
 		if (resultat.size() == 0) {
-			// TODO customize Exception
 			throw new Exception("User not found");
 		}
 
@@ -178,6 +178,7 @@ public interface DAO {
 		String profileDesc = resultat.get(4);
 		String phoneNumber = resultat.get(5);
 
+		closeConnection(1);
 		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
 
@@ -200,9 +201,8 @@ public interface DAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = getConnection(1).prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -216,7 +216,6 @@ public interface DAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
 			e.printStackTrace();
 		}
 
@@ -230,9 +229,11 @@ public interface DAO {
 
 				type = TypeFactory.createType(id, label, descr);
 			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+
+		closeConnection(1);
 		return type;
 	}
 

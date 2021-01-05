@@ -38,7 +38,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection
-			stmt = DAO.getConnection()
+			stmt = DAO.getConnection(0)
 				.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					 ResultSet.CONCUR_UPDATABLE);
 		} catch (SQLException e) {
@@ -55,19 +55,17 @@ public class MySQLUserDAO extends UserDAO {
 			if(rs.next()) {
 				rs.deleteRow();
 				
-				DAO.closeConnection();
+				DAO.closeConnection(0);
 				
 				return true;
 			}
 			// if rs is empty
 			
-			DAO.closeConnection();
-			
+			DAO.closeConnection(0);
 			return false;
 		} catch (SQLException e) {
 			
-			DAO.closeConnection();
-			
+			DAO.closeConnection(0);
 			return false;
 		}
 	}
@@ -108,7 +106,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -153,7 +151,7 @@ public class MySQLUserDAO extends UserDAO {
 		String profileDesc = fieldOfUser.get(4);
 		String phoneNumber = fieldOfUser.get(5);
 		
-		DAO.closeConnection();
+		DAO.closeConnection(0);
 		
 		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
@@ -179,7 +177,7 @@ public class MySQLUserDAO extends UserDAO {
 		
 		try {
 			// Getconnection
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -194,14 +192,11 @@ public class MySQLUserDAO extends UserDAO {
 			assert stmt != null;
 			stmt.executeQuery(req);
 		} catch (SQLException e) {
-			
-			DAO.closeConnection();
-			
+
 			return false;
 		}
 		
-		DAO.closeConnection();
-		
+		DAO.closeConnection(0);
 		return true;
 	}
 

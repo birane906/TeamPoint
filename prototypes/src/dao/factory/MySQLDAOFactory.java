@@ -1,7 +1,18 @@
 package dao.factory;
 
-import dao.*;
-import dao.mySQL.*;
+import dao.BoardDAO;
+import dao.ColumnDAO;
+import dao.UserDAO;
+import dao.WorkspaceDAO;
+import dao.CellDAO;
+import dao.InvitationDAO;
+
+import dao.mySQL.MySQLBoardDAO;
+import dao.mySQL.MySQLColumnDAO;
+import dao.mySQL.MySQLUserDAO;
+import dao.mySQL.MySQLWorkspaceDAO;
+import dao.mySQL.MySQLCellDAO;
+import dao.mySQL.MySQLInvitationDAO;
 
 /**
  * Concrete Factory for MySQLDAO products.

@@ -3,6 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * {@link JDBCConnector} is a Singleton class. It holds the {@link Connection} to the database
@@ -14,14 +15,19 @@ public class JDBCConnector {
 	/**
 	 * The database connection
 	 */
-	private Connection connection;
+	private Connection[] connection = new Connection[3];
 
 	private JDBCConnector() {
-		try {
-			this.connection = DriverManager.getConnection(
-				"jdbc:mysql://localhost/TeamPoint?" + "user=root&password=" + "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true" + "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
-		} catch (SQLException e) {
-			e.printStackTrace();
+		for(int i = 0; i < 2; i++) {
+			try {
+				this.connection[i] = (DriverManager.getConnection(
+						"jdbc:mysql://localhost/TeamPoint?" + "user=root&password="
+						+ "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true"
+						+ "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC"));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -47,26 +53,30 @@ public class JDBCConnector {
 	 * Returns the database connection.
 	 * @return Returns a {@link Connection}
 	 */
-	public Connection getConnection() {
-		if(this.connection == null) {
-			initializeConnection();
+	public Connection getConnection(int countConnection) {
+		if(this.connection[countConnection] == null) {
+			initializeConnection(countConnection);
 		}
-		return this.connection;
+		return this.connection[countConnection];
+
 	}
-	
-	public void initializeConnection() {
+
+	public void initializeConnection(int countConnection) {
 		try {
-			this.connection = DriverManager.getConnection(
-				"jdbc:mysql://localhost/TeamPoint?" + "user=root&password=" + "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true" + "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
+			this.connection[countConnection] = DriverManager.getConnection(
+					"jdbc:mysql://localhost/TeamPoint?" + "user=root&password="
+							+ "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true"
+							+ "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void closeConnection() {
+	public void closeConnection(int countConnection) {
 		try {
-			this.connection.close();
-			this.connection = null;
+			this.connection[countConnection].close();
+			this.connection[countConnection] = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

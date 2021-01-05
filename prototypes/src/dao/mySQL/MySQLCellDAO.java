@@ -56,7 +56,7 @@ public class MySQLCellDAO extends CellDAO {
 
 		try {
 			// Getconnection
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -81,13 +81,13 @@ public class MySQLCellDAO extends CellDAO {
 			
 		} catch (SQLException e) {
 
-			DAO.closeConnection();
+			DAO.closeConnection(0);
 
 			return null;
 		}
 		
 
-		DAO.closeConnection();
+		DAO.closeConnection(0);
 		
 		// GET THE COLUMN TYPE
 
@@ -189,7 +189,7 @@ public class MySQLCellDAO extends CellDAO {
 		
 		try {
 			// Getconnection
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -200,13 +200,11 @@ public class MySQLCellDAO extends CellDAO {
 			
 		} catch (SQLException e) {
 
-			DAO.closeConnection();
-
 			return null;
 		}
 		
 
-		DAO.closeConnection();
+		DAO.closeConnection(0);
 		
 		//TODO : Fix DB And Rewrite this part
 		//return new Cell(item, column, (Type) value);
@@ -232,7 +230,7 @@ public class MySQLCellDAO extends CellDAO {
 
 		try {
 			// Getconnection
-			stmt = DAO.getConnection()
+			stmt = DAO.getConnection(0)
 				.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					 ResultSet.CONCUR_UPDATABLE);
 		} catch (SQLException e) {
@@ -253,19 +251,16 @@ public class MySQLCellDAO extends CellDAO {
 			if(rs.next()) {
 				rs.deleteRow();
 
-				DAO.closeConnection();
-
+				DAO.closeConnection(0);
 				return true;
 			}
 			// if rs is empty
 
-			DAO.closeConnection();
-
+			DAO.closeConnection(0);
 			return false;
 		} catch (SQLException e) {
 
-			DAO.closeConnection();
-
+			DAO.closeConnection(0);
 			return false;
 		}
 	}
@@ -296,7 +291,7 @@ public class MySQLCellDAO extends CellDAO {
 
 		try {
 			// Get connection
-			stmt = DAO.getConnection()
+			stmt = DAO.getConnection(0)
 					.prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -320,12 +315,12 @@ public class MySQLCellDAO extends CellDAO {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			DAO.closeConnection();
-			
+
+			DAO.closeConnection(0);
 			return false;
 		}
-		DAO.closeConnection();
-		
+
+		DAO.closeConnection(0);
 		return true;
 	}
 
