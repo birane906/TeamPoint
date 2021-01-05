@@ -186,7 +186,7 @@ public class MySQLCellDAO extends CellDAO {
 		ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
 		Item item = new Item(itemCol, 0, "salut");
 		
-		Column column = new Column(parentBoard, "sa", 0, 0);
+		Column column = new Column(parentBoard, "sa", 0, DAO.getTypeById(0));
 		
 		Cell cell = new Cell(item, column, "sabusainekoz");
 		

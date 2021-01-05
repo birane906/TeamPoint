@@ -3,6 +3,8 @@
  *******************************************************************************/
 package business_logic.board;
 
+import business_logic.board.types.Type;
+
 import java.util.ArrayList;
 
 /**
@@ -31,14 +33,14 @@ public class Column {
 	 */
 	public Board parentBoard;
 	
-	private int columnTypeId;
+	private Type columnType;
 
 
-	public Column(Board parentBoard, String name, int idCol, int idType) {
+	public Column(Board parentBoard, String name, int idCol, Type type) {
 		this.column_id = idCol;
 		this.parentBoard = parentBoard;
 		this.name = name;
-		this.columnTypeId = idType;
+		this.columnType = type;
 	}
 	
 	/**
@@ -101,8 +103,8 @@ public class Column {
 		this.parentBoard = newParentBoard;
 	}
 	
-	public int getColumnType() {
-		return columnTypeId;
+	public Type getColumnType() {
+		return columnType;
 	}
 
 	public void addCell(Cell cell) {

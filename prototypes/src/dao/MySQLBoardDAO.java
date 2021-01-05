@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import business_logic.board.*;
+import business_logic.board.types.Type;
+import business_logic.board.types.TypeFactory;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 
@@ -30,6 +32,14 @@ public class MySQLBoardDAO extends BoardDAO {
 		// End of user code
 	}
 
+	/**
+	 * add a board to a workspace
+	 * @param name of the board
+	 * @param workspace where the user creates the board
+	 * @param user is the board owner, must be the one who creates it
+	 * @param permission
+	 * @return
+	 */
 	@Override
 	public Board addBoard(String name, Workspace workspace, User user, Permission permission) {
 
@@ -81,7 +91,7 @@ public class MySQLBoardDAO extends BoardDAO {
 	/**
 	 * Create the board with all his columns and items
 	 * @param board that will be retrieved
-	 * @return
+	 * @return a complete board with all of his component created (item, itemCollection, column, permission, types, cells)
 	 */
 	// TODO SET PERMISSION AND TYPE
 	@Override
@@ -113,6 +123,11 @@ public class MySQLBoardDAO extends BoardDAO {
 		return board;
 	}
 
+	/**
+	 * get all the item collection from a board
+	 * @param board
+	 * @return an ArrayList<ItemCollection>
+	 */
 	private ArrayList<ItemCollection> getItemCollection(Board board) {
 		// Query statement
 		Statement stmt = null;
@@ -159,6 +174,11 @@ public class MySQLBoardDAO extends BoardDAO {
 		return itemCollections;
 	}
 
+	/**
+	 * get all the item from an item collection
+	 * @param itemCol
+	 * @return
+	 */
 	private ArrayList<Item> getItems(ItemCollection itemCol) {
 		// Query statement
 		Statement stmt = null;
@@ -204,6 +224,11 @@ public class MySQLBoardDAO extends BoardDAO {
 		return items;
 	}
 
+	/**
+	 * get all the column from a board
+	 * @param board
+	 * @return
+	 */
 	private ArrayList<Column> getColumn(Board board) {
 		// Query statement
 		Statement stmt = null;
@@ -242,7 +267,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				name = rs.getString("columnName");
 				idType = rs.getInt("idColumnType");
 
-				Column newCol = new Column(board, name, id, idType);
+				Column newCol = new Column(board, name, id, DAO.getTypeById(idType));
 
 				col.add(newCol);
 			}
@@ -252,6 +277,12 @@ public class MySQLBoardDAO extends BoardDAO {
 		return col;
 	}
 
+	/**
+	 * get all the cells from a column
+	 * @param board
+	 * @param column
+	 * @return
+	 */
 	private ArrayList<Cell> getCellsFromColumn(Board board, Column column) {
 
 		ArrayList<Cell> cells = new ArrayList<>();
@@ -264,6 +295,12 @@ public class MySQLBoardDAO extends BoardDAO {
 		return cells;
 	}
 
+	/**
+	 * get all the cells from an item
+	 * @param board
+	 * @param item
+	 * @return
+	 */
 	private ArrayList<Cell> getCellsFromItem(Board board, Item item) {
 
 		ArrayList<Cell> cells = new ArrayList<>();
@@ -275,6 +312,13 @@ public class MySQLBoardDAO extends BoardDAO {
 		return cells;
 	}
 
+	/**
+	 * get the cell from a column and an item
+	 * @param board
+	 * @param column
+	 * @param item
+	 * @return
+	 */
 	private Cell getCell(Board board, Column column, Item item) {
 		// GET CELLS FROM DB
 
@@ -322,6 +366,12 @@ public class MySQLBoardDAO extends BoardDAO {
 		return cell;
 	}
 
+	/**
+	 * add item collection to a board
+	 * @param itemCollectionName name of the item collection
+	 * @param board where we want the collection to be in
+	 * @return
+	 */
 	@Override
 	public Boolean addItemCollection(String itemCollectionName, Board board) {
 
@@ -367,6 +417,12 @@ public class MySQLBoardDAO extends BoardDAO {
 		return null;
 	}
 
+	/**
+	 * add an item to an item collection
+	 * @param itemCollection the item collection we want the item to be in
+	 * @param itemLabel the name of the item
+	 * @return
+	 */
 	@Override
 	public Boolean addItem(ItemCollection itemCollection, String itemLabel) {
 
@@ -414,7 +470,7 @@ public class MySQLBoardDAO extends BoardDAO {
 	}
 
 	/**
-	 *
+	 * get the default permission which is edit everything
 	 * @return permission with the id 0 in the database
 	 */
 	@Override
@@ -534,7 +590,12 @@ public class MySQLBoardDAO extends BoardDAO {
 		return res;
 	}
 
-	public Permission getPermissionById(int id) {
+	/**
+	 * get the permission given an id
+	 * @param id
+	 * @return Permission
+	 */
+	private Permission getPermissionById(int id) {
 		if (id == -1) {
 			return null;
 		}
@@ -582,7 +643,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		return perm;
 	}
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		MySQLBoardDAO mySQL = new MySQLBoardDAO();
 
 		Workspace parentWorkspace = new Workspace("salut");
@@ -604,7 +665,8 @@ public class MySQLBoardDAO extends BoardDAO {
 		//mySQL.getBoardsOfWorkspace(parentWorkspace);
 
 		//System.out.println(mySQL.getItemCollection(parentBoard));
+		System.out.println(mySQL.getBoardsOfWorkspace(parentWorkspace).get(0).getPermission());
 
-		System.out.println(mySQL.retrieveBoard(parentBoard).getItemCollections().get(0).getItems().get(0).getCells());
-	}*/
+		System.out.println(mySQL.retrieveBoard(parentBoard).getColumns().get(0).getColumnType());
+	}
 }

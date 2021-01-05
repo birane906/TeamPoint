@@ -12,6 +12,8 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+import business_logic.board.types.Type;
+import business_logic.board.types.TypeFactory;
 import business_logic.user.User;
 import database.JDBCConnector;
 
@@ -174,6 +176,59 @@ public interface DAO {
 		String phoneNumber = resultat.get(5);
 
 		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
+	}
+
+	/**
+	 * create the type given an id
+	 * @param idType
+	 * @return
+	 */
+	public static Type getTypeById(int idType) {
+		if (idType == -1) {
+			return null;
+		}
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "SELECT * "
+				+ " FROM Type "
+				+ "WHERE idType = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		String req = "SELECT * "
+				+ " FROM Type "
+				+ "WHERE idType = " + DAO.stringFormat(idType + "");
+
+		try {
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO explain connection lost
+			e.printStackTrace();
+		}
+
+		Type type = null;
+		try {
+			if(rs.next()) {
+				int id = rs.getInt("idType");
+				String label = rs.getString("nameType");
+				String descr = rs.getString("descriptionType");
+
+				type = TypeFactory.createType(id, label, descr);
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		return type;
 	}
 
 }
