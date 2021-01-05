@@ -74,6 +74,12 @@ public class WorkspaceController implements Initializable {
 	public ListView<ItemCollection> itemCollectionListView;
 
 	@FXML
+	public MenuItem createWorkspaceMenuItem;
+
+	@FXML
+	public MenuItem deleteWorkspaceMenuItem;
+
+	@FXML
 	private MenuButton workspaces;
 
 	/**
