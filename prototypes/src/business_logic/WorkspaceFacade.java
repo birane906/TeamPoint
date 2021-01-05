@@ -81,6 +81,7 @@ public class WorkspaceFacade {
 			return true;
 		}
 		else {
+			//TODO: Raph Dead Code
 			return false;
 		}
 	}
