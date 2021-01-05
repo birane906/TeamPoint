@@ -21,7 +21,7 @@ public class ColumnFacade {
 	/**
 	 * The current {@link Column} loaded in the {@link ColumnFacade}
 	 */
-	public Column currentColumn = null;
+	private Column<Type> currentColumn = null;
 
 	/**
 	 * private constructor
@@ -56,7 +56,7 @@ public class ColumnFacade {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		ColumnDAO columnDAO = daoFactory.createColumnDAO();
 
-		Column column = columnDAO.addColumn(columnName, board, typeName);
+		Column<Type> column = columnDAO.addColumn(columnName, board, typeName);
 
 		if (column != null) {
 			BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();

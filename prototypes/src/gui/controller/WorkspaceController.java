@@ -20,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -28,7 +27,7 @@ import java.util.*;
 /**
  * Description of WorkspaceController.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class WorkspaceController implements Initializable {
 
@@ -53,7 +52,6 @@ public class WorkspaceController implements Initializable {
 	@FXML
 	public Line line2;
 
-
 	@FXML
 	public ListView<Board> listBoard;
 
@@ -73,29 +71,31 @@ public class WorkspaceController implements Initializable {
 	public MenuButton ChangeViewMenuButton;
 
 	@FXML
-	public ListView itemCollectionListView;
+	public ListView<ItemCollection> itemCollectionListView;
+
+	@FXML
+	private MenuButton workspaces;
 
 	/**
 	 * Description of the property userFacade.
 	 */
 	private UserFacade userFacade;
-	@FXML
-	private MenuButton workspaces;
+
 
 
 	/**
-	 * Description of
+	 * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
+	 * email and password
 	 */
-	@FXML
-	private ImageView profileImage;
-
-
 	@FXML
 	public void boxImageClicked(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
 
 	}
 
-
+	/**
+	 * Method which permite an user to manage his profile when he clicks the profile button
+	 * @param mouseEvent
+	 */
 	@FXML
 	public void profileImageClicked(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
@@ -105,7 +105,10 @@ public class WorkspaceController implements Initializable {
 		window.show();
 	}
 
-
+	/**
+	 * Method which permite an user to log out when he clicks the log out button
+	 * @param mouseEvent
+	 */
 	@FXML
 	public void logoutBtn(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/login.fxml"));
@@ -116,7 +119,7 @@ public class WorkspaceController implements Initializable {
 	}
 
 	/**
-	 * The constructor.
+	 * The constructor of WorkspaceController.
 	 */
 	public WorkspaceController() {
 		super();
@@ -149,13 +152,7 @@ public class WorkspaceController implements Initializable {
 	public void getUserWorkspaces() {
 	}
 
-	/**
-	 * Description of the method retrieveWorkspace.
-	 * @param workspace 
-	 */
-	public void retrieveWorkspace(Workspace workspace) {
 
-	}
 
 	/**
 	 * Method which initialize the login window
@@ -191,7 +188,7 @@ public class WorkspaceController implements Initializable {
 									Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
 									boardLabel.setText(currentBoard.getName());
 
-									ArrayList<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
+									List<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
 									ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
 									itemCollectionListView.setItems(mycurrentIC);
 

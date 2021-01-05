@@ -112,4 +112,8 @@ public class Item {
 	public void addCell(Cell<? extends Type> cell) {
 		this.cells.add(cell);
 	}
+
+	public void setCells(List<Cell<? extends Type>> cells) {
+		this.cells = cells;
+	}
 }

@@ -32,27 +32,27 @@ public class Board {
 	/**
 	 * The parent {@link Workspace}
 	 */
-	public Workspace parentWorkspace;
+	private Workspace parentWorkspace;
 
 	/**
 	 * The Board {@link ItemCollection}
 	 */
-	public List<ItemCollection> itemCollections;
+	private List<ItemCollection> itemCollections;
 
 	/**
 	 * The Board {@link Column}
 	 */
-	public List<Column<? extends Type>> columns;
+	private List<Column<? extends Type>> columns;
 
 	/**
 	 * The Board {@link Permission}
 	 */
-	public Permission permission;
+	private Permission permission;
 
 	/**
 	 * A {@link User} as a board owner
 	 */
-	public User boardOwner;
+	private User boardOwner;
 
 	/**
 	 * A {@link Date}

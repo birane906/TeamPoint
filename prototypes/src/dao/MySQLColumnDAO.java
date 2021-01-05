@@ -239,7 +239,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		for (int i = 0; i < res.size(); i++) {
 			//System.out.println(res.get(i));
 		}
-		
+		/*
 		System.out.println(mySQLColumnDAO.getTypeByName("TimeLineType"));
 
 		System.out.println(DAO.isNameExist("Columntest", "column"));
@@ -251,6 +251,8 @@ public class MySQLColumnDAO extends ColumnDAO {
 		Column resAdd = mySQLColumnDAO.addColumn("asas", parentBoard, "TimeLineType");
 
 		System.out.println(resAdd);
+
+		 */
 	}
 
 }

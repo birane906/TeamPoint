@@ -60,6 +60,7 @@ public class EditDescriptionController {
 	 */
 	public EditDescriptionController() {
 		super();
+		userFacade = UserFacade.getUserFacadeInstance();
 	}
 
 

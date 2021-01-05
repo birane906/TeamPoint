@@ -83,7 +83,7 @@ public class MySQLCellDAO extends CellDAO {
 			e.printStackTrace();
 		}
 		
-		return new Cell(item, column, value);
+		return new Cell(item, column, (Type) value);
 	}	
 
 	/**
@@ -229,20 +229,20 @@ public class MySQLCellDAO extends CellDAO {
 		Workspace parentWorkspace = new Workspace("salut");
 		
 		User boardOwner = new User("name", "firstName", "email", "profileDescription", "phoneNumber");
-		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner);
+		//Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner);
 		
-		ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
-		Item item = new Item(itemCol, 0, "salut");
+		//ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
+		//Item item = new Item(itemCol, 0, "salut");
 		
-		Column column = new Column(parentBoard, "sa", 0, DAO.getTypeById(0));
+		//Column column = new Column(parentBoard, "sa", 0, DAO.getTypeById(0));
 		
-		Cell cell = new Cell(item, column, "sabusainekoz");
+		//Cell cell = new Cell(item, column, "sabusainekoz");
 
 		//Boolean res = mySQL.deleteCell(cell);
 		//System.out.println(res);
 
 		//System.out.println(mySQL.addCell(column, item, "sa"));
-		System.out.println(mySQL.editCell(cell, TypeFactory.createType(0, "TimelineType", "DATE")));
+		//System.out.println(mySQL.editCell(cell, TypeFactory.createType(0, "TimelineType", "DATE")));
 	}
 
 }
