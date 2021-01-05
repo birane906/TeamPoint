@@ -36,7 +36,10 @@ public class EditFirstNameController {
 	@FXML
 	private Label messageLabel;
 
-
+	/**
+	 * Method which permite an user to validate his first name modification
+	 * @param event
+	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 
@@ -59,6 +62,10 @@ public class EditFirstNameController {
 		}
 	}
 
+	/**
+	 * Method which permite an user to cancel his first name modification
+	 * @param event
+	 */
 	@FXML
 	public void cancelOnAction(ActionEvent event) throws IOException{
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));

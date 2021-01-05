@@ -40,6 +40,10 @@ public class EditPasswordController {
 	private Label messageLabel;
 
 
+	/**
+	 * Method which permite an user to validate his password modification
+	 * @param event
+	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 
@@ -63,6 +67,10 @@ public class EditPasswordController {
 		}
 	}
 
+	/**
+	 * Method which permite an user to cancel his password modification
+	 * @param event
+	 */
 	@FXML
 	public void cancelOnAction(ActionEvent event) throws IOException{
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
