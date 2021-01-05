@@ -58,6 +58,9 @@ public class WorkspaceController implements Initializable {
 	@FXML
 	public ListView<Board> listBoard;
 
+	@FXML
+	public ScrollPane sp;
+
 	/**
 	 * Description of the property userFacade.
 	 */
@@ -147,6 +150,7 @@ public class WorkspaceController implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		line.setVisible(false);
 		line2.setVisible(false);
+		sp.setVisible(false);
 		addBoardImage.setVisible(false);
 		addBoardLabel.setVisible(false);
 		inviteMemberImage.setVisible(false);
@@ -164,16 +168,16 @@ public class WorkspaceController implements Initializable {
 							ObservableList<Board> myBoards = FXCollections.observableArrayList(boards);
 							listBoard.setItems(myBoards);
 							listBoard.setCellFactory(lv -> new SimpleListCell());
-
-
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());
+							sp.setVisible(true);
 							line.setVisible(true);
 							line2.setVisible(true);
 							addBoardImage.setVisible(true);
 							addBoardLabel.setVisible(true);
 							inviteMemberImage.setVisible(true);
 							inviteMemberLabel.setVisible(true);
+
 						}
 
 					}
