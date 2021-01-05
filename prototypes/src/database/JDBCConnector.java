@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import database.JDBCConnector;
-
 /**
  * {@link JDBCConnector} is a Singleton class. It holds the {@link Connection} to the database
  * 
@@ -21,7 +19,7 @@ public class JDBCConnector {
 	private JDBCConnector() {
 		try {
 			this.connection = DriverManager.getConnection(
-				"jdbc:mysql://localhost/TeamPoint?" + "user=root&password=");
+				"jdbc:mysql://localhost/TeamPoint?" + "user=root&password=" + "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true" + "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
 		} catch (SQLException e) {
 			//TODO explain dont get connection with database
 			e.printStackTrace();
