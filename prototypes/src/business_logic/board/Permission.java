@@ -4,7 +4,7 @@ package business_logic.board;
 /**
  * Description of Permission.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class Permission {
 	
@@ -20,6 +20,12 @@ public class Permission {
 	 */
 	private String description;
 	
+	/**
+	 * Constructor
+	 * @param id permission id int
+	 * @param label permission label {@link String}
+	 * @param description permission description {@link String}
+	 */
 	public Permission(int id, String label, String description) {
 		this.idPermission = id;
 		this.label = label;
@@ -35,27 +41,11 @@ public class Permission {
 	}
 
 	/**
-	 * Sets a value to attribute label. 
-	 * @param newLabel 
-	 */
-	public void setLabel(String newLabel) {
-		this.label = newLabel;
-	}
-
-	/**
 	 * Returns description.
 	 * @return description 
 	 */
 	public String getDescription() {
 		return this.description;
-	}
-
-	/**
-	 * Sets a value to attribute description. 
-	 * @param newDescription 
-	 */
-	public void setDescription(String newDescription) {
-		this.description = newDescription;
 	}
 
 	public int getIdPermission() {

@@ -1,12 +1,14 @@
 package business_logic.board;
 
 import java.util.ArrayList;
+import java.util.List;
 /**
  * Description of ItemCollection.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class ItemCollection {
+
 	/**
 	 * Description of the property itemCollection_id.
 	 */
@@ -15,29 +17,51 @@ public class ItemCollection {
 	/**
 	 * Description of the property name.
 	 */
-	private String name = "";
+	private String name;
 
 	/**
 	 * Description of the property parentBoard.
 	 */
-	public Board parentBoard = null;
+	public Board parentBoard;
 
 	/**
 	 * Description of the property items.
 	 */
-	public ArrayList<Item> items = new ArrayList<>();
+	public List<Item> items;
 
+	/**
+	 * Constructor for empty ItemCollection
+	 * @param name
+	 * @param id
+	 * @param parentBoard
+	 */
 	public ItemCollection(String name, int id, Board parentBoard) {
 		this.itemCollection_id = id;
 		this.name = name;
 		this.parentBoard = parentBoard;
+		this.items = new ArrayList<>();
 	}
 	
 	/**
-	 * Description of the method addItem.
+	 * Constructor for ItemCollection with items
+	 * @param name
+	 * @param id
+	 * @param parentBoard
+	 * @param items
+	 */
+	public ItemCollection(String name, int id, Board parentBoard, List<Item> items) {
+		this.itemCollection_id = id;
+		this.name = name;
+		this.parentBoard = parentBoard;
+		this.items = items;
+	}
+
+	/**
+	 * Adds an item to the collection
 	 * @param item 
 	 */
 	public void addItem(Item item) {
+		items.add(item);
 	}
 
 	public  void setItems(ArrayList<Item> items) {
@@ -45,10 +69,11 @@ public class ItemCollection {
 	}
 
 	/**
-	 * Description of the method deleteItem.
+	 * Deletes an item form the collection
 	 * @param item 
 	 */
 	public void deleteItem(Item item) {
+		items.remove(item);
 	}
 
 	/**
@@ -57,14 +82,6 @@ public class ItemCollection {
 	 */
 	public int getItemCollection_id() {
 		return this.itemCollection_id;
-	}
-
-	/**
-	 * Sets a value to attribute itemCollection_id. 
-	 * @param newItemCollection_id 
-	 */
-	public void setItemCollection_id(int newItemCollection_id) {
-		this.itemCollection_id = newItemCollection_id;
 	}
 
 	/**
@@ -103,7 +120,7 @@ public class ItemCollection {
 	 * Returns items.
 	 * @return items 
 	 */
-	public ArrayList<Item> getItems() {
+	public List<Item> getItems() {
 		return this.items;
 	}
 

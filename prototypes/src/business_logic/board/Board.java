@@ -3,103 +3,177 @@
  *******************************************************************************/
 package business_logic.board;
 
-import business_logic.board.types.StatusLabel;
+
+import business_logic.board.types.Type;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 
 /**
  * Description of Board.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class Board {
+
 	/**
-	 * Description of the property parentWorkspace.
+	 * The board_id.
+	 */
+	private int board_id;
+
+	/**
+	 * The {@link Board} name
+	 */
+	private String name;
+
+	/**
+	 * The parent {@link Workspace}
 	 */
 	public Workspace parentWorkspace;
 
 	/**
-	 * Description of the property name.
+	 * The Board {@link ItemCollection}
 	 */
-	private String name = "";
+	public List<ItemCollection> itemCollections;
 
 	/**
-	 * Description of the property itemCollections.
+	 * The Board {@link Column}
 	 */
-	public ArrayList<ItemCollection> itemCollections = new ArrayList<>();
+	public List<Column<? extends Type>> columns;
 
 	/**
-	 * Description of the property columns.
-	 */
-	public ArrayList<Column> columns = new ArrayList<>();
-
-	/**
-	 * Description of the property permission.
+	 * The Board {@link Permission}
 	 */
 	public Permission permission;
 
 	/**
-	 * Description of the property boardOwner.
+	 * A {@link User} as a board owner
 	 */
-	//TODO verify why class BoardOwner
 	public User boardOwner;
 
 	/**
-	 * Description of the property creationDate.
+	 * A {@link Date}
 	 */
-	private Date creationDate = new Date();
+	private Date creationDate;
 
 	/**
-	 * Description of the property board_id.
+	 * Constructor for Board without colums and itemCollection
+	 * @param boardId
+	 * @param boardName
+	 * @param parentWorkspace
+	 * @param boardOwner
+	 * @param creationDate
+	 * @param permission
 	 */
-	private int board_id;
-
-	public Board(int id, String name, Workspace parentWorkspace, User boardOwner) {
-		this.parentWorkspace = parentWorkspace;
-		this.board_id = id;
-		this.boardOwner = boardOwner;
-		this.name = name;
-	}
-	
-	public Board(String name, Workspace parentWorkspace, User boardOwner) {
+	public Board(int boardId, String boardName, Workspace parentWorkspace,
+		User boardOwner, Date creationDate, Permission permission) {
+		this.board_id = boardId;
+		this.name = boardName;
 		this.parentWorkspace = parentWorkspace;
 		this.boardOwner = boardOwner;
-		this.name = name;
-	}
-
-	public Board(int idBoard, String nameBoard, User user, Permission permission, Workspace workspace, Date dateBoard) {
-		this.board_id = idBoard;
-		this.name = nameBoard;
-		this.boardOwner = user;
+		this.creationDate = creationDate;
 		this.permission = permission;
-		this.parentWorkspace = workspace;
-		this.creationDate = dateBoard;
+		this.columns = new ArrayList<>();
+		this.itemCollections = new ArrayList<>();
 	}
 
 	/**
-	 * Description of the method addColumn.
-	 * @param column 
+	 * Constructor for Board without columns
+	 * and with item collection
+	 * @param boardId
+	 * @param boardName
+	 * @param parentWorkspace
+	 * @param boardOwner
+	 * @param creationDate
+	 * @param permission
+	 * @param itemCollections
 	 */
-	public void addColumn(Column column) {
-		// Start of user code for method addColumn
-		// End of user code
+	public Board(int boardId, String boardName, Workspace parentWorkspace, 
+		User boardOwner, Date creationDate, Permission permission,
+		List<ItemCollection> itemCollections) {
+			this.board_id = boardId;
+			this.name = boardName;
+			this.parentWorkspace = parentWorkspace;
+			this.boardOwner = boardOwner;
+			this.creationDate = creationDate;
+			this.permission = permission;
+			this.columns = new ArrayList<>();
+			this.itemCollections = itemCollections;
 	}
 
-	public void setColumns(ArrayList<Column> columns) {
+	/**
+	 * Constructor for Board without item collections
+	 * and with columns
+	 * @param boardName
+	 * @param boardId
+	 * @param parentWorkspace
+	 * @param boardOwner
+	 * @param creationDate
+	 * @param permission
+	 * @param columns
+	 */
+	public Board(String boardName,int boardId, Workspace parentWorkspace, 
+		User boardOwner, Date creationDate, Permission permission,
+		List<Column<? extends Type>> columns) {
+			this.board_id = boardId;
+			this.name = boardName;
+			this.parentWorkspace = parentWorkspace;
+			this.boardOwner = boardOwner;
+			this.creationDate = creationDate;
+			this.permission = permission;
+			this.columns = columns;
+			this.itemCollections = new ArrayList<>();
+	}
+
+	/**
+	 * Constructor for Board with columns and item collections
+	 * @param boardId
+	 * @param boardName
+	 * @param parentWorkspace
+	 * @param boardOwner
+	 * @param creationDate
+	 * @param permission
+	 * @param columns
+	 * @param itemCollections
+	 */
+	public Board(int boardId, String boardName, Workspace parentWorkspace, 
+		User boardOwner, Date creationDate, Permission permission,
+		List<Column<? extends Type>> columns, List<ItemCollection> itemCollections) {
+			this.board_id = boardId;
+			this.name = boardName;
+			this.parentWorkspace = parentWorkspace;
+			this.boardOwner = boardOwner;
+			this.creationDate = creationDate;
+			this.permission = permission;
+			this.columns = columns;
+			this.itemCollections = itemCollections;
+	}
+
+	/**
+	 * Add a {@link Column} to the board's list of columns 
+	 * @param column Column of a subtype of {@link Type} 
+	 */
+	public<X extends Type> void addColumn(Column<X> column) {
+		columns.add(column);
+	}
+
+	/**
+	 * Set the board list of {@link Column}
+	 * @param columns
+	 */
+	public void setColumns(List<Column<? extends Type>> columns) {
 		this.columns = columns;
 	}
 
 	/**
-	 * Description of the method deleteColumn.
-	 * @param column 
+	 * Delete a column from the board columns
+	 * @param column the column to remove
 	 */
-	public void deleteColumn(Column column) {
-		// Start of user code for method deleteColumn
-		// End of user code
+	public void deleteColumn(Column<? extends Type> column) {
+		this.columns.remove(column);
 	}
 
 	/**
@@ -107,8 +181,7 @@ public class Board {
 	 * @param itemCollection 
 	 */
 	public void addItemCollection(ItemCollection itemCollection) {
-		// Start of user code for method addItemCollection
-		// End of user code
+		this.itemCollections.add(itemCollection);
 	}
 
 	public void setItemCollections(ArrayList<ItemCollection> itemCollections) {
@@ -120,71 +193,15 @@ public class Board {
 	 * @param itemCollection 
 	 */
 	public void deleteItemCollection(ItemCollection itemCollection) {
-		// Start of user code for method deleteItemCollection
-		// End of user code
+		itemCollections.remove(itemCollection);
 	}
 
-	/**
-	 * Description of the method addItem.
-	 * @param itemCollection_id 
-	 * @param item 
-	 */
-	public void addItem(int itemCollection_id, Item item) {
-		// Start of user code for method addItem
-		// End of user code
-	}
-
-	/**
-	 * Description of the method deleteItem.
-	 * @param itemCollection_id 
-	 * @param item_id 
-	 */
-	public void deleteItem(int itemCollection_id, int item_id) {
-		// Start of user code for method deleteItem
-		// End of user code
-	}
-
-	/**
-	 * Description of the method getColumnType.
-	 * @param column_id 
-	 * @return 
-	 */
-	public String getColumnType(int column_id) {
-		// Start of user code for method getColumnType
-		String getColumnType = "";
-		return getColumnType;
-		// End of user code
-	}
-
-	/**
-	 * Description of the method getStatusColumnLabels.
-	 * @param column_id 
-	 * @return 
-	 */
-	public HashSet<StatusLabel> getStatusColumnLabels(int column_id) {
-		// Start of user code for method getStatusColumnLabels
-		HashSet<StatusLabel> getStatusColumnLabels = new HashSet<StatusLabel>();
-		return getStatusColumnLabels;
-		// End of user code
-	}
-
-	// Start of user code (user defined methods for Board)
-
-	// End of user code
 	/**
 	 * Returns parentWorkspace.
 	 * @return parentWorkspace 
 	 */
 	public Workspace getParentWorkspace() {
 		return this.parentWorkspace;
-	}
-
-	/**
-	 * Sets a value to attribute parentWorkspace. 
-	 * @param newParentWorkspace 
-	 */
-	public void setParentWorkspace(Workspace newParentWorkspace) {
-		this.parentWorkspace = newParentWorkspace;
 	}
 
 	/**
@@ -196,18 +213,10 @@ public class Board {
 	}
 
 	/**
-	 * Sets a value to attribute name. 
-	 * @param newName 
-	 */
-	public void setName(String newName) {
-		this.name = newName;
-	}
-
-	/**
 	 * Returns itemCollections.
 	 * @return itemCollections 
 	 */
-	public ArrayList<ItemCollection> getItemCollections() {
+	public List<ItemCollection> getItemCollections() {
 		return this.itemCollections;
 	}
 
@@ -215,7 +224,7 @@ public class Board {
 	 * Returns columns.
 	 * @return columns 
 	 */
-	public ArrayList<Column> getColumns() {
+	public List<Column<? extends Type>> getColumns() {
 		return this.columns;
 	}
 
@@ -244,19 +253,6 @@ public class Board {
 	}
 
 	/**
-	 * Sets a value to attribute boardOwner. 
-	 * @param newBoardOwner 
-	 */
-	/*
-	public void setBoardOwner(BoardOwner newBoardOwner) {
-		if (this.boardOwner != null) {
-			this.boardOwner.set(null);
-		}
-		this.boardOwner.set(this);
-	}
-	*/
-
-	/**
 	 * Returns creationDate.
 	 * @return creationDate 
 	 */
@@ -265,26 +261,10 @@ public class Board {
 	}
 
 	/**
-	 * Sets a value to attribute creationDate. 
-	 * @param newCreationDate 
-	 */
-	public void setCreationDate(Date newCreationDate) {
-		this.creationDate = newCreationDate;
-	}
-
-	/**
 	 * Returns board_id.
 	 * @return board_id 
 	 */
 	public int getBoard_id() {
 		return this.board_id;
-	}
-
-	/**
-	 * Sets a value to attribute board_id. 
-	 * @param newBoard_id 
-	 */
-	public void setBoard_id(int newBoard_id) {
-		this.board_id = newBoard_id;
 	}
 }

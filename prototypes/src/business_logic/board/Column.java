@@ -23,7 +23,7 @@ public class Column<T extends Type> {
 	/**
 	 * Description of the property name.
 	 */
-	private String columnName = "";
+	private String columnName;
 
 	/**
 	 * Description of the property column_id.
@@ -41,7 +41,7 @@ public class Column<T extends Type> {
 	public List<Cell<T>> cells;
 
 	/**
-	 * Constructor with empty cells
+	 * Constructor for {@link Column} with empty cells
 	 * @param parentBoard the parent Board {@link Board}
 	 * @param columnName the name of the column {@link String}
 	 * @param column_id int
@@ -53,7 +53,7 @@ public class Column<T extends Type> {
 		this.typeParameterClass = typeParameterClass;
 		this.columnName = columnName;
 		this.cells = new ArrayList<>();
-		//need to create the empty cells ?
+		//TODO : need to create the empty cells ? how to get the right number of cells to create ? what if no items?
 	}
 	
 	/**
