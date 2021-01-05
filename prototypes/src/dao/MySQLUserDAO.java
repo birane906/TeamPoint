@@ -1,6 +1,3 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package dao;
 
 import business_logic.user.User;
@@ -32,7 +29,7 @@ public class MySQLUserDAO extends UserDAO {
 			return false;
 		}
 		// Result from DB
-		ResultSet rs = null;
+		ResultSet rs;
 
 		// Query statement
 		Statement stmt = null;
@@ -51,6 +48,7 @@ public class MySQLUserDAO extends UserDAO {
 			+ "WHERE email = " + DAO.stringFormat(email);
 
 		try {
+			assert stmt != null;
 			rs = stmt.executeQuery(req);
 			if(rs.next()) {
 				rs.deleteRow();
@@ -81,7 +79,7 @@ public class MySQLUserDAO extends UserDAO {
 			throw new Exception();
 		}
 		// List of all fields to create an user
-		ArrayList<String> resultat = new ArrayList<String>();
+		ArrayList<String> fieldOfUser = new ArrayList<>();
 		// Result from database
 		ResultSet rs = null;
 		// Query statement
@@ -106,6 +104,7 @@ public class MySQLUserDAO extends UserDAO {
 
 
 		try {
+			assert stmt != null;
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
@@ -115,29 +114,30 @@ public class MySQLUserDAO extends UserDAO {
 		}
 
 		// if we have a result then move to the next line
+		assert rs != null;
 		if(rs.next()){
-			
-			resultat.add(rs.getInt("idUser") + "");
-			resultat.add(rs.getString("name"));
-			resultat.add(rs.getString("firstName"));
 
-			resultat.add(rs.getString("email"));
+			fieldOfUser.add(rs.getInt("idUser") + "");
+			fieldOfUser.add(rs.getString("name"));
+			fieldOfUser.add(rs.getString("firstName"));
 
-			resultat.add(rs.getString("profileDescription"));
-			resultat.add(rs.getString("phoneNumber"));
+			fieldOfUser.add(rs.getString("email"));
+
+			fieldOfUser.add(rs.getString("profileDescription"));
+			fieldOfUser.add(rs.getString("phoneNumber"));
 		}
 
-		if (resultat.size() == 0) {
+		if (fieldOfUser.size() == 0) {
 			// TODO customize Exception
 			throw new Exception("User not found");
 		}
 
-		int idUser = Integer.parseInt(resultat.get(0));
-		String name = resultat.get(1);
-		String firstName = resultat.get(2);
-		String emailUser = resultat.get(3);
-		String profileDesc = resultat.get(4);
-		String phoneNumber = resultat.get(5);
+		int idUser = Integer.parseInt(fieldOfUser.get(0));
+		String name = fieldOfUser.get(1);
+		String firstName = fieldOfUser.get(2);
+		String emailUser = fieldOfUser.get(3);
+		String profileDesc = fieldOfUser.get(4);
+		String phoneNumber = fieldOfUser.get(5);
 		
 		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
@@ -176,6 +176,7 @@ public class MySQLUserDAO extends UserDAO {
 				+ DAO.stringFormat(email) + ", "
 				+ DAO.stringFormat(password) + ")";
 		try {
+			assert stmt != null;
 			stmt.execute(req);
 		} catch (SQLException e) {
 			return false;
