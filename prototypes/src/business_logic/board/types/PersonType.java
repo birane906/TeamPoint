@@ -11,24 +11,33 @@ import java.util.Set;
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class PersonType extends Type {
+
 	/**
 	 * All the {@link User} of the {@link PersonType}
 	 */
-	public Set<User> users;
-	
+	private Set<User> users;
+
 	/**
-	 * Create an empty {@link PersonType}
+	 * Create an empty {@link PersonType} 
+	 * @param users A set of {@link User}
+	 * @param id an int
 	 */
-	
+	public PersonType(int id, String description) {
+		super(id, PersonType.class.getSimpleName(), description);
+		users = new HashSet<>();
+	}
+
 	/**
 	 * Create a {@link PersonType} giving a set of {@link User}
 	 * @param users A set of {@link User}
+	 * @param id an int
+	 * @param description a description of the type
 	 */
-	public PersonType(int id, String nameType, String description) {
-		super(id, nameType, description);
-		users = new HashSet<>();
+	public PersonType(Set<User> users, int id, String description) {
+		super(id, PersonType.class.getSimpleName(), description);
+		this.users = users;
 	}
-	 
+
 	/**
 	 * @return All the {@link User} of the {@link PersonType}
 	 */
@@ -36,4 +45,7 @@ public class PersonType extends Type {
 		return this.users;
 	}
 
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 }
