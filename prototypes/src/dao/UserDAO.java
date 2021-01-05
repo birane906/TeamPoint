@@ -42,5 +42,7 @@ public abstract class UserDAO implements DAO{
 	 */
 	public abstract boolean delete(String email);
 
+	public abstract User updateUserProfile(User oldUser, User newUser);
+
 	public abstract HashSet<User> getWorkspaceMembers(Workspace workspace);
 }
