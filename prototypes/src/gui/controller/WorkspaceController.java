@@ -168,8 +168,6 @@ public class WorkspaceController implements Initializable {
 							ObservableList<Board> myBoards = FXCollections.observableArrayList(boards);
 							listBoard.setItems(myBoards);
 							listBoard.setCellFactory(lv -> new SimpleListCell());
-
-
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());
 							sp.setVisible(true);
@@ -179,6 +177,7 @@ public class WorkspaceController implements Initializable {
 							addBoardLabel.setVisible(true);
 							inviteMemberImage.setVisible(true);
 							inviteMemberLabel.setVisible(true);
+
 						}
 
 					}
