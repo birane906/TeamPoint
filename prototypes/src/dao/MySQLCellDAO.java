@@ -1,13 +1,15 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import business_logic.board.*;
 import business_logic.board.types.Type;
-import business_logic.board.Cell;
-import business_logic.board.Column;
-import business_logic.board.Item;
+import business_logic.board.types.TypeFactory;
+import business_logic.user.User;
+import business_logic.workspace.Workspace;
 
 /**
  * Description of MySQLCellDAO.
@@ -123,11 +125,56 @@ public class MySQLCellDAO extends CellDAO {
 	 */
 	@Override
 	public Boolean editCell(Cell cell, Type value) {
-		// TODO Auto-generated method stub
-		return null;
+
+		if(cell == null || value == null) {
+			System.out.println("sa");
+			return false;
+		}
+
+		// Result from DB
+		ResultSet rs = null;
+
+		// Query statement
+		PreparedStatement stmt = null;
+
+		String query = "UPDATE cell "
+				+ "SET cellValue = ? "
+				+ "WHERE idBoard = ?"
+				+ " AND idColumn = ? "
+				+ " AND idItem = ?"
+				+ " AND idItemCollection = ?";
+
+		try {
+			// Getconnection
+			stmt = DAO.getConnection()
+					.prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO explain database not found
+			e.printStackTrace();
+		}
+
+		try {
+			stmt.setObject(1, DAO.stringFormat(cell.getValue() + ""));
+			stmt.setInt(2, cell.getItem().getParentItemCollection().getParentBoard().getBoard_id());
+			stmt.setInt(3, cell.getColumn().getColumn_id());
+			stmt.setInt(4, cell.getItem().getItem_id());
+			stmt.setInt(5, cell.getItem().getParentItemCollection().getItemCollection_id());
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		// execute the java preparedstatement
+		try {
+			stmt.executeUpdate();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		MySQLCellDAO mySQL = new MySQLCellDAO();
 		
 		
@@ -141,12 +188,13 @@ public class MySQLCellDAO extends CellDAO {
 		
 		Column column = new Column(parentBoard, "sa", 0, 0);
 		
-		Cell cell = new Cell(item, column, "sa");
+		Cell cell = new Cell(item, column, "sabusainekoz");
 		
 		//Boolean res = mySQL.deleteCell(cell);
 		//System.out.println(res);
 		
-		System.out.println(mySQL.addCell(column, item, "sa"));
-	}*/
+		//System.out.println(mySQL.addCell(column, item, "sa"));
+		System.out.println(mySQL.editCell(cell, TypeFactory.createType(0, "TimelineType", "DATE")));
+	}
 
 }
