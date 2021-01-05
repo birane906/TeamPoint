@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -38,6 +40,23 @@
             <ScrollPane fx:id="sp" layoutX="-9.0" layoutY="115.0" prefHeight="465.0" prefWidth="175.0">
                <content>
                   <ListView fx:id="listBoard" prefHeight="452.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+            <Line fx:id="line3" endX="693.7999267578125" endY="-7.62939453125E-6" layoutX="271.0" layoutY="67.0" startX="-100.0" />
+            <Label fx:id="boardLabel" layoutX="186.0" layoutY="16.0" prefHeight="18.0" prefWidth="163.0" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <MenuButton fx:id="ChangeViewMenuButton" layoutX="416.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <ScrollPane fx:id="sp2" layoutX="168.0" layoutY="68.0" prefHeight="515.0" prefWidth="795.0">
+               <content>
+                  <ListView fx:id="itemCollectionListView" />
                </content>
             </ScrollPane>
             </children></AnchorPane>

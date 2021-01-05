@@ -3,6 +3,7 @@ package gui.controller;
 import business_logic.UserFacade;
 import business_logic.WorkspaceFacade;
 import business_logic.board.Board;
+import business_logic.board.ItemCollection;
 import business_logic.workspace.Workspace;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,14 +53,27 @@ public class WorkspaceController implements Initializable {
 	@FXML
 	public Line line2;
 
-	@FXML
-	public Label board1;
 
 	@FXML
 	public ListView<Board> listBoard;
 
 	@FXML
 	public ScrollPane sp;
+
+	@FXML
+	public Label boardLabel;
+
+	@FXML
+	public Line line3;
+
+	@FXML
+	public ScrollPane sp2;
+
+	@FXML
+	public MenuButton ChangeViewMenuButton;
+
+	@FXML
+	public ListView itemCollectionListView;
 
 	/**
 	 * Description of the property userFacade.
@@ -150,7 +164,9 @@ public class WorkspaceController implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		line.setVisible(false);
 		line2.setVisible(false);
+		line3.setVisible(false);
 		sp.setVisible(false);
+		sp2.setVisible(false);
 		addBoardImage.setVisible(false);
 		addBoardLabel.setVisible(false);
 		inviteMemberImage.setVisible(false);
@@ -168,15 +184,34 @@ public class WorkspaceController implements Initializable {
 							ObservableList<Board> myBoards = FXCollections.observableArrayList(boards);
 							listBoard.setItems(myBoards);
 							listBoard.setCellFactory(lv -> new SimpleListCell());
+
+							listBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
+								@Override
+								public void handle(MouseEvent event) {
+									Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
+									boardLabel.setText(currentBoard.getName());
+
+									ArrayList<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
+									ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
+									itemCollectionListView.setItems(mycurrentIC);
+
+
+								}
+							});
+
+
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());
 							sp.setVisible(true);
+							sp2.setVisible(true);
 							line.setVisible(true);
 							line2.setVisible(true);
+							line3.setVisible(true);
 							addBoardImage.setVisible(true);
 							addBoardLabel.setVisible(true);
 							inviteMemberImage.setVisible(true);
 							inviteMemberLabel.setVisible(true);
+
 
 						}
 
