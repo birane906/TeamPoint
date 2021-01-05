@@ -17,13 +17,6 @@ import java.util.ArrayList;
 public abstract class ColumnDAO implements DAO {
 
 	/**
-	 * The constructor.
-	 */
-	public ColumnDAO() {
-		super();
-	}
-
-	/**
 	 * add Column to a board.
 	 * @param columnName 
 	 * @param board 
