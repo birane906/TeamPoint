@@ -49,15 +49,9 @@ public class ProfileController implements Initializable {
     private UserFacade userFacade;
 
 
-
-
-
-
-
-
     /**
-     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-     * email and password
+     * Method which permite an user to go back to the workspace
+     * @param event
      */
     @FXML
     public void backButtonOnAction(ActionEvent event) throws IOException{
@@ -69,8 +63,8 @@ public class ProfileController implements Initializable {
     }
 
     /**
-     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-     * email and password
+     * Method which permite an user to go back to the workspace
+     * @param event
      */
     @FXML
     public void editNumberOnAction(ActionEvent event) throws IOException{
@@ -83,8 +77,8 @@ public class ProfileController implements Initializable {
 
 
     /**
-     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-     * email and password
+     * Method which permite an user to display a new form to edit his name
+     * @param event
      */
     @FXML
     public void editNameOnAction(ActionEvent event) throws IOException{
@@ -97,8 +91,8 @@ public class ProfileController implements Initializable {
 
 
     /**
-     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-     * email and password
+     * Method which permite an user to display a new form to edit his first name
+     * @param event
      */
     @FXML
     public void editFirstNameOnAction(ActionEvent event) throws IOException{
@@ -111,8 +105,8 @@ public class ProfileController implements Initializable {
 
 
     /**
-     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-     * email and password
+     * Method which permite an user to display a new form to edit his email
+     * @param event
      */
     @FXML
     public void editEmailOnAction(ActionEvent event) throws IOException{
@@ -124,8 +118,8 @@ public class ProfileController implements Initializable {
     }
 
     /**
-     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-     * email and password
+     * Method which permite an user to display a new form to edit his birthday
+     * @param event
      */
     @FXML
     public void editBirthdayOnAction(ActionEvent event) throws IOException{
@@ -137,8 +131,8 @@ public class ProfileController implements Initializable {
     }
 
     /**
-     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-     * email and password
+     * Method which permite an user to display a new form to edit his password
+     * @param event
      */
     @FXML
     public void editPasswordOnAction(ActionEvent event) throws IOException{
@@ -151,8 +145,8 @@ public class ProfileController implements Initializable {
 
 
     /**
-     * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-     * email and password
+     * Method which permite an user to display a new form to edit his description
+     * @param event
      */
     @FXML
     public void editDescriptionOnAction(ActionEvent event) throws IOException{
@@ -164,8 +158,6 @@ public class ProfileController implements Initializable {
     }
 
 
-
-
     /**
      * The constructor.
      */
@@ -174,16 +166,6 @@ public class ProfileController implements Initializable {
     }
 
 
-
-
-    @FXML
-    public void profileImageClicked(javafx.scene.input.MouseEvent mouseEvent) throws IOException{
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
-    }
 
     /**
      * Method which initialize the login window

@@ -83,7 +83,6 @@ public class WorkspaceController implements Initializable {
 
 
 
-
 	/**
 	 * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
 	 * email and password
