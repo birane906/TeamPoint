@@ -30,6 +30,8 @@ public class CreateWorkspaceController {
 	 */
 	private UserFacade userFacade;
 
+	private WorkspaceFacade workspaceFacade;
+
 
 	@FXML
 	private Label messageLabel;
@@ -41,9 +43,7 @@ public class CreateWorkspaceController {
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 		if(!workspaceName.getText().isBlank()) {
-			//TO DO
-			// TRAITEMENT BDD creation workspace
-
+			workspaceFacade.createWorkspace(workspaceName.getText());
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -60,7 +60,7 @@ public class CreateWorkspaceController {
 	 */
 	@FXML
 	public void cancelOnAction(ActionEvent event) throws IOException{
-		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
@@ -73,6 +73,7 @@ public class CreateWorkspaceController {
 	public CreateWorkspaceController() {
 		super();
 		userFacade = UserFacade.getUserFacadeInstance();
+		workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
 	}
 
 

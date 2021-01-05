@@ -39,10 +39,6 @@ public class EditEmailController {
 	private Label messageLabel;
 
 
-	/**
-	 * Method which permite an user to validate his email modification
-	 * @param event
-	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 
@@ -67,10 +63,6 @@ public class EditEmailController {
 		}
 	}
 
-	/**
-	 * Method which permite an user to cancel his email modification
-	 * @param event
-	 */
 	@FXML
 	public void cancelOnAction(ActionEvent event) throws IOException{
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));

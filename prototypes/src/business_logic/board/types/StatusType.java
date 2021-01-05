@@ -1,9 +1,10 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board.types;
 
+import business_logic.board.Column;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,29 +20,29 @@ public class StatusType extends Type {
 	private StatusLabel currentStatusLabel;
 
 	/**
-	 * All the possible {@link StatusLable} for the {@link StatusType}
+	 * All the possible {@link StatusLabel} for the {@link StatusType}
 	 */
-	public Set<StatusLabel> statusLabels;
+	public List<StatusLabel> statusLabels;
 
 	/**
 	 * Constructor for an empty {@link StatusType}
-	 * @param id
-	 * @param description
+	 * @param id of the status
+	 * @param description of the status
 	 */
 	public StatusType(int id, String description) {
 		super(id, StatusType.class.getSimpleName(), description);
 		currentStatusLabel = null;
-		statusLabels = new HashSet<>();
+		statusLabels = new ArrayList<>();
 	}
 	
 	/**
 	 * Constructor for an empty {@link StatusType} with an existing
 	 * set of {@link StatusLabel}
-	 * @param id
-	 * @param description
-	 * @param statusLbls 
+	 * @param id of the status
+	 * @param description of the status
+	 * @param statusLbls set of labels
 	 */
-	public StatusType(int id, String description, Set<StatusLabel> statusLbls) {
+	public StatusType(int id, String description, List<StatusLabel> statusLbls) {
 		super(id, StatusType.class.getSimpleName(), description);
 		currentStatusLabel = null;
 		statusLabels = statusLbls;
@@ -50,12 +51,12 @@ public class StatusType extends Type {
 	/**
 	 * Constructor for an empty {@link StatusType} with an existing
 	 * set of {@link StatusLabel}
-	 * @param id
-	 * @param description
-	 * @param statusLbls 
-	 * @param statusLabel
+	 * @param id of status
+	 * @param description of status
+	 * @param statusLbls set of labels
+	 * @param statusLabel label of the label
 	 */
-	public StatusType(int id, String description, Set<StatusLabel> statusLbls, StatusLabel statusLabel) {
+	public StatusType(int id, String description, List<StatusLabel> statusLbls, StatusLabel statusLabel) {
 		super(id, StatusType.class.getSimpleName(), description);
 		currentStatusLabel = statusLabel;
 		statusLabels = statusLbls;
@@ -79,11 +80,11 @@ public class StatusType extends Type {
 	/**
 	 * @return All the possible {@link StatusLabel} for the {@link StatusType}
 	 */
-	public Set<StatusLabel> getStatusLabels() {
+	public List<StatusLabel> getStatusLabels() {
 		return statusLabels;
 	}
 
-	public void setStatusLabels(Set<StatusLabel> statusLabels) {
+	public void setStatusLabels(List<StatusLabel> statusLabels) {
 		this.statusLabels = statusLabels;
 	}
 }

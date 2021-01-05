@@ -32,10 +32,7 @@ public class EditDescriptionController {
 	private TextArea descriptionTextArea;
 
 
-	/**
-	 * Method which permite an user to validate his description modification
-	 * @param event
-	 */
+
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 
@@ -49,11 +46,6 @@ public class EditDescriptionController {
 
 	}
 
-
-	/**
-	 * Method which permite an user to cancel his description modification
-	 * @param event
-	 */
 	@FXML
 	public void cancelOnAction(ActionEvent event) throws IOException{
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));

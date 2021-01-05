@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  Dim 03 jan. 2021 à 11:11
+-- Généré le :  mar. 05 jan. 2021 à 18:48
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -42,7 +42,8 @@ CREATE TABLE `board` (
 --
 
 INSERT INTO `board` (`idBoard`, `userOwner`, `idPermission`, `boardName`, `parentWorkspace`, `boardCreationDate`) VALUES
-(0, 1, 0, 'TestBoard', 0, '0000-00-00');
+(0, 1, 0, 'TestBoard', 0, '2021-01-05'),
+(44, 1, 0, 'Boarddaas', 0, '2021-01-03');
 
 -- --------------------------------------------------------
 
@@ -55,17 +56,15 @@ CREATE TABLE `cell` (
   `idBoard` int(10) NOT NULL,
   `idColumn` int(10) NOT NULL,
   `idItem` int(10) NOT NULL,
-  `idItemCollection` int(10) NOT NULL,
-  `cellValue` varchar(25) NOT NULL
+  `idItemCollection` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `cell`
 --
 
-INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idItemCollection`, `cellValue`) VALUES
-(0, 0, 0, 0, 0, 'ValueTest'),
-(44, 0, 0, 0, 0, 'sa');
+INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idItemCollection`) VALUES
+(0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -85,7 +84,32 @@ CREATE TABLE `column` (
 --
 
 INSERT INTO `column` (`idColumn`, `idColumnType`, `idBoard`, `columnName`) VALUES
-(0, 0, 0, 'Columntest');
+(0, 0, 0, 'Columntest'),
+(1, 2, 0, 'StatusColTest');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `datetype`
+--
+
+CREATE TABLE `datetype` (
+  `idDateType` int(10) NOT NULL,
+  `idCell` int(10) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `dependancytype`
+--
+
+CREATE TABLE `dependancytype` (
+  `idDependancyType` int(10) NOT NULL,
+  `idCell` int(10) NOT NULL,
+  `idItem` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -129,6 +153,79 @@ INSERT INTO `itemcollection` (`idItemCollection`, `idBoard`, `itemCollectionName
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `numbertype`
+--
+
+CREATE TABLE `numbertype` (
+  `idNumberType` int(10) NOT NULL,
+  `idCell` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `persontype`
+--
+
+CREATE TABLE `persontype` (
+  `idPersonType` int(10) NOT NULL,
+  `idCell` int(10) NOT NULL,
+  `idUser` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `statuslabel`
+--
+
+CREATE TABLE `statuslabel` (
+  `idStatusLabel` int(10) NOT NULL,
+  `idStatusType` int(10) NOT NULL,
+  `label` varchar(25) NOT NULL,
+  `colorStatus` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `statustype`
+--
+
+CREATE TABLE `statustype` (
+  `idStatusType` int(10) NOT NULL,
+  `idCell` int(10) NOT NULL,
+  `colorStatus` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `texttype`
+--
+
+CREATE TABLE `texttype` (
+  `idTextType` int(10) NOT NULL,
+  `idCell` int(10) NOT NULL,
+  `text` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `timelinetype`
+--
+
+CREATE TABLE `timelinetype` (
+  `idTimelineType` int(10) NOT NULL,
+  `idCell` int(10) NOT NULL,
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `type`
 --
 
@@ -143,8 +240,9 @@ CREATE TABLE `type` (
 --
 
 INSERT INTO `type` (`idType`, `nameType`, `descriptionType`) VALUES
-(0, 'TimeLineType', 'two date'),
-(1, 'textType', 'field of text');
+(0, 'TimelineType', 'two date'),
+(1, 'textType', 'field of text'),
+(2, 'StatusType', 'Status: done, current etc');
 
 -- --------------------------------------------------------
 
@@ -187,7 +285,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `name`, `firstName`, `email`, `password`, `phoneNumber`, `profileDescription`, `birthday`) VALUES
-(1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', 'toto', NULL, NULL, NULL);
+(1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', 'toto', NULL, NULL, NULL),
+(55, 'Galois', 'Nico', 'galois@gmail.com', 'Toto1234', NULL, NULL, NULL),
+(56, 'Galois', 'Nico', 'galois@gmail.com', 'Toto1234', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -263,6 +363,21 @@ ALTER TABLE `column`
   ADD KEY `FOREIGN_COLUMN_TYPE` (`idColumnType`);
 
 --
+-- Index pour la table `datetype`
+--
+ALTER TABLE `datetype`
+  ADD PRIMARY KEY (`idDateType`),
+  ADD KEY `FOREIGN_CELL_DATETYPE` (`idCell`);
+
+--
+-- Index pour la table `dependancytype`
+--
+ALTER TABLE `dependancytype`
+  ADD PRIMARY KEY (`idDependancyType`),
+  ADD KEY `FOREIGN_ITEM_DEP_TYPE` (`idItem`),
+  ADD KEY `FOREIGN_CELL_DEP_TYPE` (`idCell`);
+
+--
 -- Index pour la table `item`
 --
 ALTER TABLE `item`
@@ -276,6 +391,47 @@ ALTER TABLE `item`
 ALTER TABLE `itemcollection`
   ADD PRIMARY KEY (`idItemCollection`),
   ADD KEY `FOREIGN_BOARD_ITEM_COLLECTION_KEY` (`idBoard`);
+
+--
+-- Index pour la table `numbertype`
+--
+ALTER TABLE `numbertype`
+  ADD PRIMARY KEY (`idNumberType`),
+  ADD KEY `FOREIGN_CELL_NUMBER_TYPE` (`idCell`);
+
+--
+-- Index pour la table `persontype`
+--
+ALTER TABLE `persontype`
+  ADD PRIMARY KEY (`idPersonType`),
+  ADD KEY `FOREIGN_CELL_PERSONTYPE` (`idCell`);
+
+--
+-- Index pour la table `statuslabel`
+--
+ALTER TABLE `statuslabel`
+  ADD KEY `FOREIGN_STATUS_TYPE` (`idStatusType`);
+
+--
+-- Index pour la table `statustype`
+--
+ALTER TABLE `statustype`
+  ADD PRIMARY KEY (`idStatusType`),
+  ADD KEY `FOREIGN_CELL_STATUS` (`idCell`);
+
+--
+-- Index pour la table `texttype`
+--
+ALTER TABLE `texttype`
+  ADD PRIMARY KEY (`idTextType`),
+  ADD KEY `FOREIGN_CELL_TEXT_TYPE` (`idCell`);
+
+--
+-- Index pour la table `timelinetype`
+--
+ALTER TABLE `timelinetype`
+  ADD PRIMARY KEY (`idTimelineType`),
+  ADD KEY `FOREIGN_CELL_TIMELINE` (`idCell`);
 
 --
 -- Index pour la table `type`
@@ -317,19 +473,31 @@ ALTER TABLE `workspace`
 -- AUTO_INCREMENT pour la table `board`
 --
 ALTER TABLE `board`
-  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT pour la table `cell`
 --
 ALTER TABLE `cell`
-  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT pour la table `column`
 --
 ALTER TABLE `column`
   MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT pour la table `datetype`
+--
+ALTER TABLE `datetype`
+  MODIFY `idDateType` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `dependancytype`
+--
+ALTER TABLE `dependancytype`
+  MODIFY `idDependancyType` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `item`
@@ -344,10 +512,40 @@ ALTER TABLE `itemcollection`
   MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
+-- AUTO_INCREMENT pour la table `numbertype`
+--
+ALTER TABLE `numbertype`
+  MODIFY `idNumberType` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `persontype`
+--
+ALTER TABLE `persontype`
+  MODIFY `idPersonType` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `statustype`
+--
+ALTER TABLE `statustype`
+  MODIFY `idStatusType` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `texttype`
+--
+ALTER TABLE `texttype`
+  MODIFY `idTextType` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `timelinetype`
+--
+ALTER TABLE `timelinetype`
+  MODIFY `idTimelineType` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT pour la table `workspace`
@@ -384,6 +582,19 @@ ALTER TABLE `column`
   ADD CONSTRAINT `FOREIGN_COLUMN_TYPE` FOREIGN KEY (`idColumnType`) REFERENCES `type` (`idType`);
 
 --
+-- Contraintes pour la table `datetype`
+--
+ALTER TABLE `datetype`
+  ADD CONSTRAINT `FOREIGN_CELL_DATETYPE` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`);
+
+--
+-- Contraintes pour la table `dependancytype`
+--
+ALTER TABLE `dependancytype`
+  ADD CONSTRAINT `FOREIGN_CELL_DEP_TYPE` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`),
+  ADD CONSTRAINT `FOREIGN_ITEM_DEP_TYPE` FOREIGN KEY (`idItem`) REFERENCES `item` (`idItem`);
+
+--
 -- Contraintes pour la table `item`
 --
 ALTER TABLE `item`
@@ -396,6 +607,43 @@ ALTER TABLE `item`
 --
 ALTER TABLE `itemcollection`
   ADD CONSTRAINT `FOREIGN_BOARD_ITEM_COLLECTION_KEY` FOREIGN KEY (`idBoard`) REFERENCES `board` (`idBoard`);
+
+--
+-- Contraintes pour la table `numbertype`
+--
+ALTER TABLE `numbertype`
+  ADD CONSTRAINT `FOREIGN_CELL_NUMBER_TYPE` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`);
+
+--
+-- Contraintes pour la table `persontype`
+--
+ALTER TABLE `persontype`
+  ADD CONSTRAINT `FOREIGN_CELL_PERSONTYPE` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`),
+  ADD CONSTRAINT `FOREIGN_PERSONTYPE_USER` FOREIGN KEY (`idPersonType`) REFERENCES `user` (`idUser`);
+
+--
+-- Contraintes pour la table `statuslabel`
+--
+ALTER TABLE `statuslabel`
+  ADD CONSTRAINT `FOREIGN_STATUS_TYPE` FOREIGN KEY (`idStatusType`) REFERENCES `statustype` (`idStatusType`);
+
+--
+-- Contraintes pour la table `statustype`
+--
+ALTER TABLE `statustype`
+  ADD CONSTRAINT `FOREIGN_CELL_STATUS` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`);
+
+--
+-- Contraintes pour la table `texttype`
+--
+ALTER TABLE `texttype`
+  ADD CONSTRAINT `FOREIGN_CELL_TEXT_TYPE` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`);
+
+--
+-- Contraintes pour la table `timelinetype`
+--
+ALTER TABLE `timelinetype`
+  ADD CONSTRAINT `FOREIGN_CELL_TIMELINE` FOREIGN KEY (`idCell`) REFERENCES `cell` (`idCell`);
 
 --
 -- Contraintes pour la table `user_workspace`

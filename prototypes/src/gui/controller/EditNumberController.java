@@ -34,11 +34,6 @@ public class EditNumberController {
 	@FXML
 	private Label messageLabel;
 
-
-	/**
-	 * Method which permite an user to validate his number phone modification
-	 * @param event
-	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 
@@ -61,10 +56,6 @@ public class EditNumberController {
 		}
 	}
 
-	/**
-	 * Method which permite an user to cancel his number phone modification
-	 * @param event
-	 */
 	@FXML
 	public void cancelOnAction(ActionEvent event) throws IOException{
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
