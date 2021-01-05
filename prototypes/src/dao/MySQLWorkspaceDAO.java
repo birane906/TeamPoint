@@ -99,21 +99,14 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			stmt.execute(req);
 		} catch (SQLException e) {
 
-			try {
-				DAO.getConnection().close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			DAO.closeConnection();
 
 			return null;
 		}
 
 		// The user has now a workspace
-		try {
-			DAO.getConnection().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		DAO.closeConnection();
+
 		return new Workspace(workspaceName);
 	}
 
@@ -184,11 +177,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			throwables.printStackTrace();
 		}
 
-		try {
-			DAO.getConnection().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		DAO.closeConnection();
 
 		return new Workspace(name, id);
 	}
@@ -280,21 +269,13 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 
-				try {
-					DAO.getConnection().close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				DAO.closeConnection();
 
 				return null;
 			}
 		}
 
-		try {
-			DAO.getConnection().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		DAO.closeConnection();
 
 		return res;
 	}
@@ -308,7 +289,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 		// Login test
 		try {
-			user = mySQLUserDAO.getUser("raph@gmail.com", "Rafael123");
+			user = mySQLUserDAO.getUser("galoisnicolas@gmail.com", "toto");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -328,13 +309,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			HashSet<Workspace> res = mySQL.getUserWorkspaces(user);
 			System.out.println(res);
 
-			if(res == null){
-				System.out.println("NULL");
-			}else{
-				System.out.println(res);
-			}
-
-			//System.out.println(mySQL.retrieveWorkspace(res.iterator().next()));
+			System.out.println(mySQL.retrieveWorkspace(res.iterator().next()));
 
 
 		} catch (Exception exception) {

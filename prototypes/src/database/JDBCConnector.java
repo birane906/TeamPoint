@@ -21,7 +21,6 @@ public class JDBCConnector {
 			this.connection = DriverManager.getConnection(
 				"jdbc:mysql://localhost/TeamPoint?" + "user=root&password=" + "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true" + "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
 		} catch (SQLException e) {
-			//TODO explain dont get connection with database
 			e.printStackTrace();
 		}
 	}
@@ -49,6 +48,27 @@ public class JDBCConnector {
 	 * @return Returns a {@link Connection}
 	 */
 	public Connection getConnection() {
+		if(this.connection == null) {
+			initializeConnection();
+		}
 		return this.connection;
+	}
+	
+	public void initializeConnection() {
+		try {
+			this.connection = DriverManager.getConnection(
+				"jdbc:mysql://localhost/TeamPoint?" + "user=root&password=" + "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true" + "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void closeConnection() {
+		try {
+			this.connection.close();
+			this.connection = null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

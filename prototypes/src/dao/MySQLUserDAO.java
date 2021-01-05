@@ -52,11 +52,20 @@ public class MySQLUserDAO extends UserDAO {
 			rs = stmt.executeQuery(req);
 			if(rs.next()) {
 				rs.deleteRow();
+				
+				DAO.closeConnection();
+				
 				return true;
 			}
 			// if rs is empty
+			
+			DAO.closeConnection();
+			
 			return false;
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
+			
 			return false;
 		}
 	}
@@ -99,7 +108,6 @@ public class MySQLUserDAO extends UserDAO {
 			// Getconnection from JDBCConnector
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -115,7 +123,6 @@ public class MySQLUserDAO extends UserDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
 			e.printStackTrace();
 		}
 
@@ -134,7 +141,6 @@ public class MySQLUserDAO extends UserDAO {
 		}
 
 		if (fieldOfUser.size() == 0) {
-			// TODO customize Exception
 			throw new Exception("User not found");
 		}
 
@@ -144,6 +150,8 @@ public class MySQLUserDAO extends UserDAO {
 		String emailUser = fieldOfUser.get(3);
 		String profileDesc = fieldOfUser.get(4);
 		String phoneNumber = fieldOfUser.get(5);
+		
+		DAO.closeConnection();
 		
 		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
@@ -171,7 +179,6 @@ public class MySQLUserDAO extends UserDAO {
 			// Getconnection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -185,8 +192,14 @@ public class MySQLUserDAO extends UserDAO {
 			assert stmt != null;
 			stmt.executeQuery(req);
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
+			
 			return false;
 		}
+		
+		DAO.closeConnection();
+		
 		return true;
 	}
 
@@ -204,7 +217,6 @@ public class MySQLUserDAO extends UserDAO {
 		try {
 			user = mySQLUserDAO.getUser("galoisnicolas@gmail.com", "toto");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

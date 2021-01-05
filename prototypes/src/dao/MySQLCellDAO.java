@@ -79,22 +79,13 @@ public class MySQLCellDAO extends CellDAO {
 			
 		} catch (SQLException e) {
 
-			try {
-				DAO.getConnection().close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			DAO.closeConnection();
 
 			return null;
 		}
 		
 
-		try {
-			DAO.getConnection().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+		DAO.closeConnection();
 		
 		// GET THE COLUMN TYPE
 
@@ -207,21 +198,13 @@ public class MySQLCellDAO extends CellDAO {
 			
 		} catch (SQLException e) {
 
-			try {
-				DAO.getConnection().close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			DAO.closeConnection();
 
 			return null;
 		}
 		
 
-		try {
-			DAO.getConnection().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		DAO.closeConnection();
 		
 		//TODO : Fix DB And Rewrite this part
 		//return new Cell(item, column, (Type) value);
@@ -268,30 +251,18 @@ public class MySQLCellDAO extends CellDAO {
 			if(rs.next()) {
 				rs.deleteRow();
 
-				try {
-					DAO.getConnection().close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				DAO.closeConnection();
 
 				return true;
 			}
 			// if rs is empty
 
-			try {
-				DAO.getConnection().close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			DAO.closeConnection();
 
 			return false;
 		} catch (SQLException e) {
 
-			try {
-				DAO.getConnection().close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			DAO.closeConnection();
 
 			return false;
 		}
@@ -347,18 +318,12 @@ public class MySQLCellDAO extends CellDAO {
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				DAO.getConnection().close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			DAO.closeConnection();
+			
 			return false;
 		}
-		try {
-			DAO.getConnection().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		DAO.closeConnection();
+		
 		return true;
 	}
 

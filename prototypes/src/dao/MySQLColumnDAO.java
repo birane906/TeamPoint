@@ -51,11 +51,12 @@ public class MySQLColumnDAO extends ColumnDAO {
 				+ DAO.stringFormat(columnName)
 				+  ")";
 
-
 		try {
 			assert stmt != null;
 			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 			return null;
 		}
@@ -63,24 +64,38 @@ public class MySQLColumnDAO extends ColumnDAO {
 		// Add the column id to board_contains
 
 		try {
+			
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			columnId = rs.getInt(1);
+			DAO.closeConnection();
 
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		} catch (SQLException e) {
+			DAO.closeConnection();
+			e.printStackTrace();
 		}
 
 		// GET the typeId of column
+		
+		query = "SELECT idColumnType FROM `column`"
+				+ "WHERE idColumn = ?";
+		
+		try {
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-		Statement state = null;
+
 		req = "SELECT idColumnType FROM `column`"
 				+ "WHERE idColumn = " + DAO.stringFormat(columnId + "");
 		try {
-			//TODO : NICOLAS
-			assert false;
-			state.executeUpdate(req);
+			
+			stmt.executeUpdate(req);
+		
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 			return null;
 		}
@@ -93,9 +108,12 @@ public class MySQLColumnDAO extends ColumnDAO {
 			typeId = rs.getInt(1);
 
 		} catch (SQLException throwables) {
+			
+			DAO.closeConnection();
 			throwables.printStackTrace();
 		}
-
+		
+		DAO.closeConnection();
 		return new Column<>(board, columnName, columnId, DAO.getTypeById(typeId));
 	}
 
@@ -129,11 +147,14 @@ public class MySQLColumnDAO extends ColumnDAO {
 				+ " FROM type";
 
 		try {
+			
 			assert stmt != null;
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
 
@@ -147,13 +168,14 @@ public class MySQLColumnDAO extends ColumnDAO {
 				String typeName = rs.getString("nameType");
 				String description = rs.getString("descriptionType");
 				
-				
 				resultat.add(TypeFactory.createType(id, typeName, description));
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
 		
+		DAO.closeConnection();
 		return resultat;
 	}
 
@@ -176,9 +198,11 @@ public class MySQLColumnDAO extends ColumnDAO {
 				+ "WHERE nameType = ?";
 
 		try {
-			// Getconnection from JDBCConnector
+			// Get connection from JDBCConnector
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 			return null;
 		}
@@ -192,6 +216,8 @@ public class MySQLColumnDAO extends ColumnDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 			return null;
 		}
@@ -209,6 +235,8 @@ public class MySQLColumnDAO extends ColumnDAO {
 				resultat = TypeFactory.createType(id, dbTypeName, description);
 			}
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
 		return resultat;

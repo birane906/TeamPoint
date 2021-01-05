@@ -61,6 +61,10 @@ public interface DAO {
 	static Connection getConnection() {
 		return JDBCConnector.getJDBCConnectorInstance().getConnection();
 	}
+	
+	static void closeConnection() {
+		JDBCConnector.getJDBCConnectorInstance().closeConnection();
+	}
 
 	/**
 	 *

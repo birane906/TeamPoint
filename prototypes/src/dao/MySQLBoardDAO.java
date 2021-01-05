@@ -70,11 +70,10 @@ public class MySQLBoardDAO extends BoardDAO {
 				+ " (userOwner, idPermission, boardName, parentWorkspace) VALUES(?, ?, ?, ?)";
 
 		try {
-			// Getconnection
+			// Get connection
 			stmt = DAO.getConnection().prepareStatement(query);
 
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -83,11 +82,15 @@ public class MySQLBoardDAO extends BoardDAO {
 				+ ", " + DAO.stringFormat(name) + ", " + DAO.stringFormat(workspace.getWorkspace_id() + "") + ")";
 
 		int boardId = -1;
+		
 		try {
 			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 			return null;
+		
 		}
 
 		// Add the column id to board_contains
@@ -98,8 +101,11 @@ public class MySQLBoardDAO extends BoardDAO {
 			boardId = rs.getInt(1);
 
 		} catch (SQLException throwables) {
+			DAO.closeConnection();
 			throwables.printStackTrace();
 		}
+		
+		DAO.closeConnection();
 
 		return new Board(boardId, name, workspace, user, new Date(), permission);
 	}
@@ -174,7 +180,6 @@ public class MySQLBoardDAO extends BoardDAO {
 			// Getconnection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -184,6 +189,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			DAO.closeConnection();
 			return null;
 		}
 
@@ -199,8 +205,12 @@ public class MySQLBoardDAO extends BoardDAO {
 				itemCollections.add(newItemCol);
 			}
 		} catch (SQLException throwables) {
+			DAO.closeConnection();
 			throwables.printStackTrace();
 		}
+		
+		DAO.closeConnection();
+		
 		return itemCollections;
 	}
 
@@ -223,10 +233,10 @@ public class MySQLBoardDAO extends BoardDAO {
 		String name = "NONE";
 
 		try {
-			// Getconnection
+			// Get connection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
 
@@ -236,6 +246,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			DAO.closeConnection();
 			return null;
 		}
 
@@ -248,8 +259,11 @@ public class MySQLBoardDAO extends BoardDAO {
 				items.add(item);
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
+		
+		DAO.closeConnection();
 
 		return items;
 	}
@@ -277,7 +291,6 @@ public class MySQLBoardDAO extends BoardDAO {
 			// Get connection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -288,6 +301,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			DAO.closeConnection();
 			return null;
 		}
 
@@ -317,6 +331,9 @@ public class MySQLBoardDAO extends BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		DAO.closeConnection();
+		
 		return col;
 	}
 
@@ -381,7 +398,6 @@ public class MySQLBoardDAO extends BoardDAO {
 			// Get connection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -403,8 +419,12 @@ public class MySQLBoardDAO extends BoardDAO {
 
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
+		
+		DAO.closeConnection();
+		
 		return cell;
 	}
 
@@ -431,10 +451,9 @@ public class MySQLBoardDAO extends BoardDAO {
 		String query = "INSERT INTO itemcollection"
 				+ " (idBoard, itemCollectionName) VALUES(?, ?)";
 		try {
-			// Getconnection
+			// Get connection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 				
@@ -444,12 +463,16 @@ public class MySQLBoardDAO extends BoardDAO {
 				+ DAO.stringFormat(itemCollectionName)
 				+  ")";
 
-		try {
+		try {	
 			stmt.executeUpdate(req);
+		
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			return false;
 		}
-
+		
+		DAO.closeConnection();
 		return true;
 	}
 
@@ -482,10 +505,11 @@ public class MySQLBoardDAO extends BoardDAO {
 				+ " (idBoard, idItemCollection, itemName) VALUES(?, ?, ?)";
 
 		try {
-			// Getconnection
+			// Get connection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
+
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
 		
@@ -499,8 +523,12 @@ public class MySQLBoardDAO extends BoardDAO {
 		try {
 			stmt.executeUpdate(req);
 		} catch (SQLException e) {
+			
+			DAO.closeConnection();
 			return false;
 		}
+		
+		DAO.closeConnection();
 		
 		return true;
 	}
@@ -532,7 +560,6 @@ public class MySQLBoardDAO extends BoardDAO {
 			// Getconnection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -541,6 +568,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection();
 			e.printStackTrace();
 			return null;
 		}
@@ -552,12 +580,16 @@ public class MySQLBoardDAO extends BoardDAO {
 				descr = rs.getString("description");
 			}
 		} catch (SQLException throwables) {
+			DAO.closeConnection();
 			throwables.printStackTrace();
 		}
 
 		if(id == -1) {
+			DAO.closeConnection();
 			return null;
 		}
+		
+		DAO.closeConnection();
 		return new Permission(id, name, descr);
 	}
 
@@ -589,7 +621,6 @@ public class MySQLBoardDAO extends BoardDAO {
 			// Getconnection from JDBCConnector
 			stmt = DAO.getConnection().createStatement();
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -602,7 +633,8 @@ public class MySQLBoardDAO extends BoardDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
 
@@ -627,8 +659,13 @@ public class MySQLBoardDAO extends BoardDAO {
 				res.add(newBoard);
 			}
 		} catch (SQLException throwables) {
+		
+			DAO.closeConnection();
 			throwables.printStackTrace();
+		
 		}
+		
+		DAO.closeConnection();
 		return res;
 	}
 
@@ -641,6 +678,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		if (id == -1) {
 			return null;
 		}
+		
 		// Result from database
 		ResultSet rs = null;
 		// Query statement
@@ -650,10 +688,12 @@ public class MySQLBoardDAO extends BoardDAO {
 				+ "WHERE idTypePermission = ?";
 
 		try {
-			// Getconnection from JDBCConnector
+			// Get connection from JDBCConnector
 			stmt = DAO.getConnection().prepareStatement(query);
+			
 		} catch (SQLException e) {
-			// TODO explain database not found
+			
+			DAO.closeConnection();
 			e.printStackTrace();
 		}
 
@@ -666,8 +706,10 @@ public class MySQLBoardDAO extends BoardDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
+			
+			DAO.closeConnection();
 			e.printStackTrace();
+		
 		}
 
 		Permission perm = null;
@@ -679,9 +721,13 @@ public class MySQLBoardDAO extends BoardDAO {
 
 				perm = new Permission(idPermission, labelPermission, descr);
 			}
+			
 		} catch (SQLException throwables) {
+			DAO.closeConnection();
 			throwables.printStackTrace();
 		}
+		
+		DAO.closeConnection();
 		return perm;
 	}
 
