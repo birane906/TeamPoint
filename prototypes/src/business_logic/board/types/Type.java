@@ -6,28 +6,31 @@ package business_logic.board.types;
 /**
  * Description of AbstractType.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 
 public abstract class Type {
 
 	/**
-	 * Description of the property description.
+	 * The type description 
 	 */
 	private String description;
 
 	/**
-	 * 
+	 * The type nameType equals to the name of the subType
 	 */
 	private String nameType;
 
 	/**
-	 * 
+	 * The type id
 	 */
 	private int idType;
 
 	/**
-	 * The constructor.
+	 * 
+	 * @param id type id
+	 * @param nameType type class Name as String
+	 * @param description type description
 	 */
 	public Type(int id, String nameType, String description) {
 		this.idType = id;
@@ -43,30 +46,14 @@ public abstract class Type {
 		return this.description;
 	}
 
-	/**
-	 * Sets a value to attribute description. 
-	 * @param newDescription 
-	 */
-	public void setDescription(String newDescription) {
-		this.description = newDescription;
-	}
-
 	public String getNameType() {
 		return nameType;
-	}
-
-	public void setNameType(String nameType) {
-		this.nameType = nameType;
 	}
 
 	public int getIdType() {
 		return idType;
 	}
 
-	public void setIdType(int idType) {
-		this.idType = idType;
-	}
-	
 	public String toString() {
 		String str = "";
 		
