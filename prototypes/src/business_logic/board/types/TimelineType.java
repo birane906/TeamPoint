@@ -21,12 +21,26 @@ public class TimelineType extends Type  {
 	private Date endDate;
 
 	/**
-	 * Create a new {@link TimelineType} giving 2 {@link Date}
-	 * @param startDate The starting {@link Date} of the {@link TimelineType}
-	 * @param endDate The ending {@link Date} of the {@link TimelineType}
+	 * Create a new empty {@link TimelineType} giving 2 {@link Date}
+	 * Precondition : d1 < d2
+	 * @param id
+	 * @param description
+	 * @param d1 The starting {@link Date} of the {@link TimelineType}
+	 * @param d2 The ending {@link Date} of the {@link TimelineType}
 	 */
-	public TimelineType(int id, String nameType, String description) {
-		super(id, nameType, description);
+	public TimelineType(int id, String description, Date d1, Date d2) throws IllegalArgumentException {
+		super(id, TimelineType.class.getSimpleName(), description);
+		this.startDate = null;
+		this.endDate = null;
+	}
+
+	/**
+	 * Constructor for empty {@link TimelineType} 
+	 * @param id
+	 * @param description
+	 */
+	public TimelineType(int id, String description) {
+		super(id, TimelineType.class.getSimpleName(), description);
 		this.startDate = null;
 		this.endDate = null;
 	}
