@@ -1,5 +1,6 @@
 package dao;
 
+import business_logic.board.Permission;
 import business_logic.board.types.Type;
 import business_logic.board.types.TypeFactory;
 import business_logic.board.Board;
@@ -12,15 +13,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MySQLColumnDAO extends ColumnDAO {
 
 	/**
 	 * add a column to a board
-	 * @param columnName
-	 * @param board
+	 * @param columnName name of column
+	 * @param board the column will be added to
 	 * @param typeName the String of the abstractType {@link Type}
-	 * @return
+	 * @return a column {@link Column}
 	 */
 	@Override
 	public Column addColumn(String columnName, Board board, String typeName) {
@@ -40,7 +42,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		String query = "INSERT INTO 'column'"
 				+ " (idBoard, idColumnType, columnName) VALUES(?, ?, ?)";
 		try {
-			// Getconnection
+			// Get connection
 			stmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
 			// TODO explain database not found
@@ -56,6 +58,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 
 
 		try {
+			assert stmt != null;
 			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,6 +82,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		req = "SELECT idColumnType FROM `column`"
 				+ "WHERE idColumn = " + DAO.stringFormat(columnId + "");
 		try {
+			assert false;
 			state.executeUpdate(req);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,7 +124,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		Statement stmt = null;
 
 		try {
-			// Getconnection from JDBCConnector
+			// Get connection from JDBCConnector
 			stmt = DAO.getConnection().createStatement();
 		} catch (SQLException e) {
 			// TODO explain database not found
@@ -131,6 +135,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 				+ " FROM type";
 
 		try {
+			assert stmt != null;
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
@@ -141,8 +146,10 @@ public class MySQLColumnDAO extends ColumnDAO {
 
 		// if we have a result then move to the next line
 		try {
-			while(rs.next()){
-				
+			while(true){
+				assert rs != null;
+				if (!rs.next()) break;
+
 				int id = rs.getInt("idType");
 				String typeName = rs.getString("nameType");
 				String description = rs.getString("descriptionType");
@@ -161,7 +168,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 	/**
 	 * get the type given a name
 	 * @param typeName can be TimelineType, textType
-	 * @return
+	 * @return the Type of the column {@link Type}
 	 */
 	public Type getTypeByName(String typeName) {
 		
@@ -170,7 +177,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		// Result from database
 		ResultSet rs = null;
 		// Query statement
-		PreparedStatement stmt = null;
+		PreparedStatement stmt;
 
 		String query = "SELECT * "
 				+ "FROM type "
@@ -202,6 +209,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		// if we have a result then move to the next line
 
 		try {
+			assert rs != null;
 			if(rs.next()){
 					
 				int id = rs.getInt("idType");
@@ -238,7 +246,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 
 		Workspace parentWorkspace = new Workspace("salut");
 		User boardOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
-		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner);
+		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "las", "sa"));
 
 		Column resAdd = mySQLColumnDAO.addColumn("asas", parentBoard, "TimeLineType");
 
