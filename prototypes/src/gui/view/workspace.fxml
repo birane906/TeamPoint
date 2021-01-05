@@ -92,8 +92,8 @@
       </ImageView>
       <MenuButton layoutX="998.0" layoutY="19.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="42.0" text="+">
         <items>
-          <MenuItem fx:id="createWorkspaceMenuItem" mnemonicParsing="false" text="Créer un workspace" />
-          <MenuItem fx:id="deleteWorkspaceMenuItem" mnemonicParsing="false" text="Supprimer un workspace" />
+          <MenuItem fx:id="createWorkspaceMenuItem" mnemonicParsing="false" onAction="#goToCreateW" text="Créer un workspace" />
+          <MenuItem fx:id="deleteWorkspaceMenuItem" mnemonicParsing="false" onAction="#goToDeleteW" text="Supprimer un workspace" />
         </items>
       </MenuButton>
 

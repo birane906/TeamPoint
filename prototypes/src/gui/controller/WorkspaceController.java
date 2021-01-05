@@ -111,6 +111,7 @@ public class WorkspaceController implements Initializable {
 		window.show();
 	}
 
+
 	/**
 	 * Method which permite an user to log out when he clicks the log out button
 	 * @param mouseEvent
@@ -133,30 +134,31 @@ public class WorkspaceController implements Initializable {
 	}
 
 
-	/**
-	 * Description of the method deleteWorkspace.
-	 * @return 
-	 */
-	public Boolean deleteWorkspace() {
-		Boolean deleteWorkspace = Boolean.FALSE;
-		return deleteWorkspace;
+
+	public void addBoardClicked(MouseEvent mouseEvent) throws Exception{
+
 	}
 
-	/**
-	 * Description of the method createWorkspace.
-	 * @param name 
-	 * @return 
-	 */
-	public Boolean createWorkspace(String name) {
-		Boolean createWorkspace = Boolean.FALSE;
-		return createWorkspace;
+	public void inviteMemberClicked(MouseEvent mouseEvent) throws Exception{
+
 	}
 
-	/**
-	 * Description of the method getUserWorkspaces.
-	 */
-	public void getUserWorkspaces() {
+	public void goToCreateW(ActionEvent event) throws IOException{
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/createWorkspace.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
 	}
+
+	public void goToDeleteW(ActionEvent event) throws IOException{
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/deleteWorkspace.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+
 
 
 
@@ -175,6 +177,8 @@ public class WorkspaceController implements Initializable {
 		inviteMemberImage.setVisible(false);
 		inviteMemberLabel.setVisible(false);
 		Set<Workspace> wsl = userFacade.getWorkspaces();
+
+
 
 		if(wsl != null) {
 			for (Workspace w : wsl) {
@@ -229,13 +233,6 @@ public class WorkspaceController implements Initializable {
 	}
 
 
-	public void addBoardClicked(MouseEvent mouseEvent) throws Exception{
-
-	}
-
-	public void inviteMemberClicked(MouseEvent mouseEvent) throws Exception{
-
-	}
 }
 
 class SimpleListCell extends ListCell<Board> {

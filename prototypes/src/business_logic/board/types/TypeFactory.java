@@ -17,7 +17,7 @@ public class TypeFactory {
             case "NumberType":
                  return new NumberType(id, description);
             case "PersonType":
-                return new PersonType(id, description);
+               // return new PersonType(id, description);
             case "StatusType":
                 return new StatusType(id, description);
             case "TimelineType":
