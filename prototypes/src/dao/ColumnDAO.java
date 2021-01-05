@@ -1,3 +1,6 @@
+/*******************************************************************************
+ * 2020, All rights reserved.
+ *******************************************************************************/
 package dao;
 
 import business_logic.board.types.Type;
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Description of ColumnDAO.
  * 
- * @author Raphael Bourret, Salim Azharhoussen, Birane Ba, Nicolas Galois
+ * @author 
  */
 public abstract class ColumnDAO implements DAO {
 
@@ -22,8 +25,8 @@ public abstract class ColumnDAO implements DAO {
 
 	/**
 	 * add Column to a board.
-	 * @param columnName name of the column
-	 * @param board which we will add the column
+	 * @param columnName 
+	 * @param board 
 	 * @param typeName the String of the abstractType {@link Type}
 	 * @return a {@link Board}
 	 */
@@ -31,7 +34,7 @@ public abstract class ColumnDAO implements DAO {
 
 	/**
 	 * delete Column.
-	 * @param column which need to be deleted
+	 * @param column 
 	 * @return a boolean according to the success of delete
 	 */
 	public abstract Boolean deleteColumn(Column<? extends Type> column);
@@ -43,11 +46,5 @@ public abstract class ColumnDAO implements DAO {
 	public abstract ArrayList<Type> getAllColumnTypes();
 	
 	public abstract Type getTypeByName(String typeName);
-
-	public abstract Type getColumnType(Column<? extends Type> column);
-
-	// Start of user code (user defined methods for ColumnDAO)
-
-	// End of user code
 
 }
