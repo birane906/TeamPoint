@@ -6,6 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import business_logic.board.*;
+import business_logic.board.types.DateType;
+import business_logic.board.types.DependencyType;
+import business_logic.board.types.NumberType;
+import business_logic.board.types.PersonType;
+import business_logic.board.types.StatusType;
+import business_logic.board.types.TextType;
+import business_logic.board.types.TimelineType;
 import business_logic.board.types.Type;
 
 /**
@@ -37,6 +44,8 @@ public class MySQLCellDAO extends CellDAO {
 			return null;
 		}
 
+		// Resulset
+		ResultSet rs;
 		// Query statement
 		PreparedStatement stmt = null;
 
@@ -58,10 +67,16 @@ public class MySQLCellDAO extends CellDAO {
 				+ DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "") + ", "
 				+ DAO.stringFormat(value + "")
 				+ ")";
+
+		int cellId = -1;
 		
 		try {
 			assert stmt != null;
-			stmt.execute(req);
+			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
+			
+			rs = stmt.getGeneratedKeys();
+			cellId = rs.getInt(1);
+			
 		} catch (SQLException e) {
 
 			try {
@@ -72,12 +87,113 @@ public class MySQLCellDAO extends CellDAO {
 
 			return null;
 		}
+		
 
 		try {
 			DAO.getConnection().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
+		// GET THE COLUMN TYPE
+
+		String type = "";
+		switch (type) {
+		case "TimelineType":
+			
+			TimelineType valTime = (TimelineType) value;
+			
+			query = "INSERT INTO timelinetype (idCell, startDate, endDate)"
+					+ " VALUE (?, ?, ?)";
+			req = "INSERT INTO timelinetype (idCell, startDate, endDate)"
+					+ " VALUE ("
+					+ DAO.stringFormat(cellId + "") + ", "
+					+ DAO.stringFormat(valTime.getEndDate() + "") + ", "
+					+ DAO.stringFormat(valTime.getEndDate() + "")
+					+ ")";
+			break;
+			
+		case "TextType":
+			TextType valText = (TextType) value;
+			
+			query = "INSERT INTO timelinetype (idCell, text)"
+					+ " VALUE (?, ?, ?)";
+			req = "INSERT INTO timelinetype (idCell, text)"
+					+ " VALUE ("
+					+ DAO.stringFormat(cellId + "") + ", "
+					+ DAO.stringFormat(valText.getText())
+					+ ")";
+			break;
+			
+		case "NumberType":
+			NumberType valNumber = (NumberType) value;
+			
+			query = "INSERT INTO numbertype (idCell, number)"
+					+ " VALUE (?, ?, ?)";
+			req = "INSERT INTO numbertype (idCell, number)"
+					+ " VALUE ("
+					+ DAO.stringFormat(cellId + "") + ", "
+					+ DAO.stringFormat(valNumber.getValue() + "")
+					+ ")";
+			break;
+			
+		case "DateType":
+			DateType valDate = (DateType) value;
+			
+			query = "INSERT INTO datetype (idCell, date)"
+					+ " VALUE (?, ?, ?)";
+			req = "INSERT INTO datetype (idCell, date)"
+					+ " VALUE ("
+					+ DAO.stringFormat(cellId + "") + ", "
+					+ DAO.stringFormat(valDate.getDate() + "")
+					+ ")";
+			break;
+			
+		case "PersonType":
+			PersonType valPerson = (PersonType) value;
+			
+			query = "INSERT INTO persontype (idCell, idUser)"
+					+ " VALUE (?, ?, ?)";
+			req = "INSERT INTO persontype (idCell, idUser)"
+					+ " VALUE ("
+					+ DAO.stringFormat(cellId + "") + ", "
+					+ DAO.stringFormat(valPerson.getUser().getUser_id() + "")
+					+ ")";
+			break;
+			
+			//TODO faire requete sur les statuslabel
+		case "StatusType":
+			StatusType valStatus = (StatusType) value;
+			
+			query = "INSERT INTO StatusType (idCell, idUser)"
+					+ " VALUE (?, ?, ?)";
+			req = "INSERT INTO StatusType (idCell, idUser)"
+					+ " VALUE ("
+					+ DAO.stringFormat(cellId + "") + ", "
+					// here
+					+ DAO.stringFormat(valStatus.getStatusLabels()+ "")
+					+ ")";
+			break;
+			
+			// TODO faire req avec tous les items
+		case "DependencyType":
+			DependencyType valDep = (DependencyType) value;
+			
+			query = "INSERT INTO DependencyType (idCell, idUser)"
+					+ " VALUE (?, ?, ?)";
+			req = "INSERT INTO DependencyType (idCell, idUser)"
+					+ " VALUE ("
+					+ DAO.stringFormat(cellId + "") + ", "
+					// here
+					+ DAO.stringFormat(valDep.getItems()+ "")
+					+ ")";
+			break;
+			
+		default:
+			break;
+		}
+		
 		//TODO : Fix DB And Rewrite this part
 		//return new Cell(item, column, (Type) value);
 		return null;

@@ -47,7 +47,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		
 		try {
 			// Getconnection
-			prepStmt = DAO.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			prepStmt = DAO.getConnection().prepareStatement(query);
 		} catch (SQLException e) {
 			// TODO explain database not found
 			e.printStackTrace();

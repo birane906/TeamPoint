@@ -15,16 +15,16 @@ public class PersonType extends Type {
 	/**
 	 * All the {@link User} of the {@link PersonType}
 	 */
-	private Set<User> users;
+	private User user;
 
 	/**
 	 * Create an empty {@link PersonType} 
 	 * @param users A set of {@link User}
 	 * @param id an int
 	 */
-	public PersonType(int id, String description) {
+	public PersonType(int id, String description, User user) {
 		super(id, PersonType.class.getSimpleName(), description);
-		users = new HashSet<>();
+		this.user = user;
 	}
 
 	/**
@@ -33,19 +33,19 @@ public class PersonType extends Type {
 	 * @param id an int
 	 * @param description a description of the type
 	 */
-	public PersonType(Set<User> users, int id, String description) {
+	public PersonType(User user, int id, String description) {
 		super(id, PersonType.class.getSimpleName(), description);
-		this.users = users;
+		this.user = user;
 	}
 
 	/**
 	 * @return All the {@link User} of the {@link PersonType}
 	 */
-	public Set<User> getUsers() {
-		return this.users;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
