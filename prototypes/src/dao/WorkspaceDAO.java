@@ -1,11 +1,7 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package dao;
 
 import business_logic.workspace.Workspace;
 import business_logic.user.User;
-import dao.DAO;
 import java.util.HashSet;
 // Start of user code (user defined imports)
 
@@ -14,7 +10,7 @@ import java.util.HashSet;
 /**
  * Description of WorkspaceDAO.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public abstract class WorkspaceDAO implements DAO {
 
@@ -32,7 +28,7 @@ public abstract class WorkspaceDAO implements DAO {
 
 	/**
 	 * create Workspace in the database and add it to the user workspaces.
-	 * @param workspaceName 
+	 * @param workspaceName of the workspace
 	 * @param user that created it {@link User}
 	 * @return a boolean according to the success of insert
 	 */

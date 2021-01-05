@@ -23,8 +23,13 @@ public abstract class UserDAO implements DAO{
 	/**
 	 * Creates User in the database.
 	 * (Insert query)
-	 * @param obj The object data structure must exist in the database 
-	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code> 
+	 * @param name of user
+	 * @param firstname of user
+	 * @param email of user
+	 * @param password of user
+	 *
+	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code>
+	 *
 	 */
 	// TODO verify doc
 	public abstract boolean signUp(String name, String firstname, String email, String password);
@@ -32,7 +37,7 @@ public abstract class UserDAO implements DAO{
 	/**
 	 * Removes the data corresponding to this object form the database.
 	 * (Delete Query)
-	 * @param obj The object data structure must exist in the database 
+	 * @param email of the user must exist in the database
 	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code>
 	 */
 	public abstract boolean delete(String email);
