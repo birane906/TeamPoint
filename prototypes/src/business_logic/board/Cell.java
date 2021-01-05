@@ -14,6 +14,11 @@ import business_logic.board.types.Type;
 public class Cell<T extends Type> {
 
 	/**
+	 * is equals to T of Cell<T>
+	 */
+	private final Type typeParameterClass;
+
+	/**
 	 * Description of the property column.
 	 */
 	public Column<T> column = null;
@@ -34,10 +39,12 @@ public class Cell<T extends Type> {
 	 * @param column
 	 * @param value
 	 */
-	public Cell(Item item, Column<T> column, T value) {
-		this.column = column;
-		this.value = value;
-		this.item = item;
+	public Cell(Item item, Column<T> column, T value, 
+		Type typeParameterClass) {
+			this.column = column;
+			this.value = value;
+			this.item = item;
+			this.typeParameterClass = typeParameterClass;
 	}
 
 	/**
@@ -78,6 +85,10 @@ public class Cell<T extends Type> {
 	 */
 	public Item getItem() {
 		return this.item;
+	}
+
+	public Type getTypeParameterClass() {
+		return typeParameterClass;
 	}
 
 	/**
