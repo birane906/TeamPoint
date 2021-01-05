@@ -13,15 +13,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Description of WorkspaceController.
  * 
  * @author 
  */
-public class CreateWorkspaceController {
+public class DeleteWorkspaceController {
 
 	@FXML
 	public TextField workspaceName;
@@ -29,6 +27,8 @@ public class CreateWorkspaceController {
 	 * Description of the property userFacade.
 	 */
 	private UserFacade userFacade;
+
+	private WorkspaceFacade workspaceFacade;
 
 
 	@FXML
@@ -41,9 +41,7 @@ public class CreateWorkspaceController {
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 		if(!workspaceName.getText().isBlank()) {
-			//TO DO
-			// TRAITEMENT BDD creation workspace
-
+			workspaceFacade.createWorkspace(workspaceName.getText());
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -60,7 +58,7 @@ public class CreateWorkspaceController {
 	 */
 	@FXML
 	public void cancelOnAction(ActionEvent event) throws IOException{
-		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
@@ -70,9 +68,10 @@ public class CreateWorkspaceController {
 	/**
 	 * The constructor.
 	 */
-	public CreateWorkspaceController() {
+	public DeleteWorkspaceController() {
 		super();
 		userFacade = UserFacade.getUserFacadeInstance();
+		workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
 	}
 
 
