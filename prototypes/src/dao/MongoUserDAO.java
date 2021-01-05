@@ -28,6 +28,12 @@ public class MongoUserDAO extends UserDAO {
 	}
 
 	@Override
+	public User updateUserProfile(User oldUser, User newUser) {
+		// TODO user update query to the database
+		return null;
+	}
+
+	@Override
 	public HashSet<User> getWorkspaceMembers(Workspace workspace) {
 		return null;
 	}

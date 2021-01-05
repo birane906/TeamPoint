@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * 
  * @author 
  */
-public class createWorkspaceController {
+public class CreateWorkspaceController {
 
 	@FXML
 	public TextField workspaceName;
@@ -70,7 +70,7 @@ public class createWorkspaceController {
 	/**
 	 * The constructor.
 	 */
-	public createWorkspaceController() {
+	public CreateWorkspaceController() {
 		super();
 		userFacade = UserFacade.getUserFacadeInstance();
 	}

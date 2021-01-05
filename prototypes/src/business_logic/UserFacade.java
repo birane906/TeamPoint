@@ -1,14 +1,14 @@
 package business_logic;
 
 
-import java.util.HashSet;
-
-
 import business_logic.user.User;
+import business_logic.workspace.Workspace;
 import dao.DAOFactory;
 import dao.UserDAO;
-import business_logic.workspace.Workspace;
 import dao.WorkspaceDAO;
+
+import java.util.Date;
+import java.util.HashSet;
 
 /**
  * {@link UserFacade} is a Singleton class. Simplify the use of 
@@ -82,12 +82,11 @@ public class UserFacade {
 	 */
 	public boolean signUp(String name, String firstname,
 		String email, String password){
-		
-		if (email == null || password == null || name == null 
+
+		if (email == null || password == null || name == null
 			|| firstname == null) {
 			return false;
 		}
-		
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		UserDAO userDAO = daoFactory.createUserDAO();
 		return userDAO.signUp(name, firstname, email, password);
@@ -103,12 +102,128 @@ public class UserFacade {
 			return false;
 		}
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
-		UserDAO userDAO = daoFactory.createUserDAO(); 
+		UserDAO userDAO = daoFactory.createUserDAO();
 		return userDAO.delete(email);
 
 	}
 
-	
+	/**
+	 * Asks for UserDAO to update a {@link User} giving an new {@link User}.
+	 * @param newUser A new {@link User} with same id as current user
+	 * @return <code>true</code> if the update succeed, <code>false</code> otherwise.
+	 */
+	private boolean updateUserProfile(User newUser) {
+		if (newUser == null || currentUser == null || newUser.getUser_id() != currentUser.getUser_id()) {
+			return false;
+		}
+		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
+		UserDAO userDAO = daoFactory.createUserDAO();
+
+		newUser = userDAO.updateUserProfile(currentUser, newUser);
+		if (newUser != null) {
+			currentUser = newUser;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Update the birthday of the current user
+	 * @param birthday The new {@link Date} of the birthday of the {@link User}
+	 * @return <code>true</code> if the update succeed, <code>false</code> otherwise.
+	 */
+	public boolean updateBirthday(Date birthday) {
+		User newUser;
+		try {
+			newUser = (User) currentUser.clone();
+		} catch (CloneNotSupportedException e) {
+			return false;
+		}
+		newUser.setBirthday(birthday);
+		return updateUserProfile(newUser);
+	}
+
+	/**
+	 * Update the description of the current user
+	 * @param description The new description of the {@link User}
+	 * @return <code>true</code> if the update succeed, <code>false</code> otherwise.
+	 */
+	public boolean updateDescription(String description) {
+		User newUser;
+		try {
+			newUser = (User) currentUser.clone();
+		} catch (CloneNotSupportedException e) {
+			return false;
+		}
+		newUser.setProfileDescription(description);
+		return updateUserProfile(newUser);
+	}
+
+	/**
+	 * Update the email of the current user
+	 * @param email The new email of the {@link User}
+	 * @return <code>true</code> if the update succeed, <code>false</code> otherwise.
+	 */
+	public boolean updateEmail(String email) {
+		User newUser;
+		try {
+			newUser = (User) currentUser.clone();
+		} catch (CloneNotSupportedException e) {
+			return false;
+		}
+		newUser.setEmail(email);
+		return updateUserProfile(newUser);
+	}
+
+	/**
+	 * Update the name of the current user
+	 * @param name The new name of the {@link User}
+	 * @return <code>true</code> if the update succeed, <code>false</code> otherwise.
+	 */
+	public boolean updateName(String name) {
+		User newUser;
+		try {
+			newUser = (User) currentUser.clone();
+		} catch (CloneNotSupportedException e) {
+			return false;
+		}
+		newUser.setName(name);
+		return updateUserProfile(newUser);
+	}
+
+	/**
+	 * Update the number of the current user
+	 * @param number The new number of the {@link User}
+	 * @return <code>true</code> if the update succeed, <code>false</code> otherwise.
+	 */
+	public boolean updateNumber(String number) {
+		User newUser;
+		try {
+			newUser = (User) currentUser.clone();
+		} catch (CloneNotSupportedException e) {
+			return false;
+		}
+		newUser.setPhoneNumber(number);
+		return updateUserProfile(newUser);
+	}
+
+	/**
+	 * Update the password of the current user
+	 * @param password The new password of the {@link User}
+	 * @return <code>true</code> if the update succeed, <code>false</code> otherwise.
+	 */
+	public boolean updatePassword(String password) {
+		User newUser;
+		try {
+			newUser = (User) currentUser.clone();
+		} catch (CloneNotSupportedException e) {
+			return false;
+		}
+		newUser.setPassword(password);
+		return updateUserProfile(newUser);
+	}
 
 	/**
 	 * Description of the method getCurrentUserEmail.
