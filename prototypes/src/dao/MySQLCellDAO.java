@@ -194,6 +194,35 @@ public class MySQLCellDAO extends CellDAO {
 			break;
 		}
 		
+		try {
+			// Getconnection
+			stmt = DAO.getConnection().prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			assert stmt != null;
+			stmt.executeUpdate(req);
+			
+		} catch (SQLException e) {
+
+			try {
+				DAO.getConnection().close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
+			return null;
+		}
+		
+
+		try {
+			DAO.getConnection().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		//TODO : Fix DB And Rewrite this part
 		//return new Cell(item, column, (Type) value);
 		return null;
