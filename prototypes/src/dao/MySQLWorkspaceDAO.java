@@ -1,16 +1,12 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package dao;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import business_logic.board.Board;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
-import dao.WorkspaceDAO;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -18,7 +14,7 @@ import dao.WorkspaceDAO;
 /**
  * Description of MySQLWorkspaceDAO.
  * 
- * @author 
+ * @author Raphael Bourret, Salim Azharhoussen, Birane Ba, Nicolas Galois
  */
 public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	// Start of user code (user defined attributes for MySQLWorkspaceDAO)
@@ -27,7 +23,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 	/**
 	 * craete Workspace in the database.
-	 * @param workspaceName 
+	 * @param workspaceName name of workspace
 	 * @param user that created it {@link User}
 	 * @return a boolean according to the success of insert
 	 */
@@ -43,7 +39,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 		// Query statement
 		PreparedStatement prepStmt = null;
-		ResultSet rs = null;
+		ResultSet rs;
 		int workspaceId = -1;
 		
 		String query = "INSERT INTO workspace (idUserOwner, workspaceName) "
@@ -63,6 +59,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				+ DAO.stringFormat(workspaceName) + ")";
 					
 		try {
+			assert prepStmt != null;
 			prepStmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
 			
 			rs = prepStmt.getGeneratedKeys();
@@ -89,34 +86,38 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			// TODO explain database not found
 			e.printStackTrace();
 		}
-				
-		req = "INSERT INTO user_workspace"
-				+ " (idUser, idWorkspace, userRole) VALUES("
-				+ DAO.stringFormat(user.getUser_id() + "") + ", " 
-				+ DAO.stringFormat(workspaceId + "") + ", "
-				+ DAO.stringFormat(workspaceAdmin)
-				+ ")";
-		
-		try {
-			stmt.execute(req);
-		} catch (SQLException e) {
+
+		if(workspaceId != -1) {
+			req = "INSERT INTO user_workspace"
+					+ " (idUser, idWorkspace, userRole) VALUES("
+					+ DAO.stringFormat(user.getUser_id() + "") + ", "
+					+ DAO.stringFormat(workspaceId + "") + ", "
+					+ DAO.stringFormat(workspaceAdmin)
+					+ ")";
 
 			try {
-				DAO.getConnection().close();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				assert stmt != null;
+				stmt.execute(req);
+			} catch (SQLException e) {
+
+				try {
+					DAO.getConnection().close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+
+				return null;
 			}
 
-			return null;
+			// The user has now a workspace
+			try {
+				DAO.getConnection().close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return new Workspace(workspaceName);
 		}
-			
-		// The user has now a workspace
-		try {
-			DAO.getConnection().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return new Workspace(workspaceName);
+		return null;
 	}
 
 	/**
@@ -125,15 +126,13 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 	 * @return a boolean according to the success of insert
 	 */
 	public Boolean deleteWorkspace(Workspace workspace) {
-		// Start of user code for method deleteWorkspace
-		Boolean deleteWorkspace = Boolean.FALSE;
-		return deleteWorkspace;
-		// End of user code
+		// TODO
+		return false;
 	}
 
 	/**
 	 * Description of the method retrieveWorkspace.
-	 * @param workspace 
+	 * @param workspace workpsace {@link Workspace}
 	 * @return a workspace {@link Workspace}
 	 */
 	public Workspace retrieveWorkspace(Workspace workspace) {
@@ -163,6 +162,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				+ "WHERE idWorkspace = " + workspace.getWorkspace_id();
 
 		try {
+			assert stmt != null;
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
@@ -173,7 +173,9 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 		// if we have a result then move to the next line
 		try {
-			while(rs.next()){
+			while(true){
+				assert rs != null;
+				if (!rs.next()) break;
 				id = rs.getInt("idWorkspace");
 				name = rs.getString("workspaceName");
 			}
@@ -226,6 +228,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				+ "WHERE idUser = " + user.getUser_id();
 
 		try {
+			assert stmt != null;
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
@@ -236,7 +239,9 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 		// if we have a result then move to the next line
 		try {
-			while(rs.next()){
+			while(true){
+				assert rs != null;
+				if (!rs.next()) break;
 				resWs.add(rs.getInt("idWorkspace"));
 			}
 		} catch (SQLException throwables) {
