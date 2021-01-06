@@ -188,7 +188,7 @@ public class MySQLUserDAO extends UserDAO {
 				+ DAO.stringFormat(password) + ")";
 		try {
 			assert stmt != null;
-			stmt.executeQuery(req);
+			stmt.executeUpdate(req);
 		} catch (SQLException e) {
 			DAO.closeConnection(0);
 			return false;
