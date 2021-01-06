@@ -71,7 +71,7 @@ public class Column<T extends Type> {
 		String columnName, int column_id, 
 		List<Cell<? extends Type>> cells, Type typeParameterClass) throws Exception {
 		for (Cell<? extends Type> cell : cells) {
-			if (cell != null && cell.getValue().getClass().getSimpleName().equals(typeParameterClass.getClass().getSimpleName())) {
+			if (cell != null && !cell.getValue().getClass().getSimpleName().equals(typeParameterClass.getClass().getSimpleName())) {
 				throw new Exception("The cells type must be"+
 					"the same as the Column type");
 			}
@@ -114,7 +114,7 @@ public class Column<T extends Type> {
 	 */
 	public void setCells(List<Cell<? extends Type>> cells) throws Exception {
 		for (Cell<? extends Type> cell : cells) {
-			if (cell != null && cell.getValue().getClass().getSimpleName().equals(typeParameterClass.getClass().getSimpleName())) {
+			if (cell != null && !cell.getValue().getClass().getSimpleName().equals(typeParameterClass.getClass().getSimpleName())) {
 				throw new Exception("The cells type must be"+
 				 "the same as the Column type");
 			}
