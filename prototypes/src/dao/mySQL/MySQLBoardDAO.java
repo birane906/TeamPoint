@@ -127,7 +127,14 @@ public class MySQLBoardDAO extends BoardDAO {
 			for (Column<? extends Type> column : board.getColumns()) {
 				Column<? extends Type> col = board.getColumns().get(i);
 				try {
-					col.setCells(getCellsFromColumn(board, column));
+
+					List<Cell<? extends Type>> cells = getCellsFromColumn(board, column);
+
+					for (Cell<? extends Type> cell: cells) {
+						System.out.println(cell);
+					}
+
+					col.setCells(cells);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -137,7 +144,12 @@ public class MySQLBoardDAO extends BoardDAO {
 		for (int i = 0; i < board.getItemCollections().size(); i++) {
 			for (int j = 0; j < board.getItemCollections().get(i).getItems().size(); j++) {
 				Item item = board.getItemCollections().get(i).getItems().get(j);
-				item.setCells(getCellsFromItem(board, board.getItemCollections().get(i).getItems().get(j)));
+
+				List<Cell<? extends Type>> cells = getCellsFromItem(board, board.getItemCollections().get(i).getItems().get(j));
+				for (Cell<? extends Type> cell: cells) {
+					System.out.println("Item: " + cell);
+				}
+				item.setCells(cells);
 			}
 		}
 		return board;
@@ -426,7 +438,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			return null;
 		}
 
-		Type type = null;
+		Type type;
 		try {
 			while(true) {
 				assert rs != null;
@@ -435,15 +447,19 @@ public class MySQLBoardDAO extends BoardDAO {
 				typeId = rs.getInt("idType");
 
 				type = getValue(cellId, typeId);
+
+				Cell cell = new Cell(item, column, type, cellId);
+
+				DAO.closeConnection(2);
+
+				return cell;
 			}
 		} catch (SQLException e) {
 
 			DAO.closeConnection(2);
 			e.printStackTrace();
 		}
-		DAO.closeConnection(2);
-
-		return (Cell<T>) new Cell(item, column, type);
+		return null;
 	}
 
 	private Type getValue(int cellId, int typeId) {
