@@ -113,8 +113,6 @@ public interface DAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-
-			closeConnection(0);
 			return false;
 		}
 	}

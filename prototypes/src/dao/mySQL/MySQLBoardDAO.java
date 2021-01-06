@@ -755,22 +755,22 @@ public class MySQLBoardDAO extends BoardDAO {
 		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "", ""));
 		ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
 
-		//Board res = mySQL.addBoard("Boarddaas", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
-		//System.out.println(res);
+		Board res = mySQL.addBoard("Boarddaas", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
+		System.out.println("addboard " + res);
 
-		//Boolean res = mySQL.addItemCollection("testItemCol", parentBoard);
-		//System.out.println(res);
+		Boolean resItemCol = mySQL.addItemCollection("testItemCol", parentBoard);
+		System.out.println("add item col " + resItemCol);
 
-		//res = mySQL.addItem(itemCol, "itemTest");
-		//System.out.println(res);
+		Boolean resItem = mySQL.addItem(itemCol, "itemTest");
+		System.out.println("additem " + resItem);
 
-		//System.out.println(mySQL.getDefaultPermission());
+		System.out.println("perm " + mySQL.getDefaultPermission());
 
 		//mySQL.getBoardsOfWorkspace(parentWorkspace);
 
-		//System.out.println(mySQL.getItemCollection(parentBoard));
-		System.out.println(mySQL.getBoardsOfWorkspace(parentWorkspace));
+		System.out.println("itemcol " + mySQL.getItemCollection(parentBoard));
+		System.out.println("item " + mySQL.getBoardsOfWorkspace(parentWorkspace));
 
-		System.out.println(mySQL.retrieveBoard(parentBoard));
+		System.out.println("retrieve " + mySQL.retrieveBoard(parentBoard));
 	}
 }

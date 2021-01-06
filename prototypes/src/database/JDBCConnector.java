@@ -15,6 +15,7 @@ public class JDBCConnector {
 	/**
 	 * The database connection
 	 */
+	// surtout pas final
 	private Connection[] connection = new Connection[3];
 
 	private JDBCConnector() {
@@ -54,8 +55,12 @@ public class JDBCConnector {
 	 * @return Returns a {@link Connection}
 	 */
 	public Connection getConnection(int countConnection) {
-		if(this.connection[countConnection] == null) {
-			initializeConnection(countConnection);
+		try {
+			if(this.connection[countConnection].isClosed()) {
+				initializeConnection(countConnection);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return this.connection[countConnection];
 
@@ -76,7 +81,6 @@ public class JDBCConnector {
 	public void closeConnection(int countConnection) {
 		try {
 			this.connection[countConnection].close();
-			this.connection[countConnection] = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
