@@ -103,13 +103,15 @@ public interface DAO {
 			closeConnection(0);
 			return false;
 		}
-		// if we have a result then move to the next line
 
 		try {
 			assert rs != null;
 
-			closeConnection(0);
-			return rs.next();
+			if(rs.next()) {
+				closeConnection(0);
+				return true;
+			}
+			return false;
 
 		} catch (SQLException e) {
 			DAO.closeConnection(0);

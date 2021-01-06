@@ -293,11 +293,11 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 
 		System.out.println(user);
 		
-		//User workspaceOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
+		User workspaceOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
 		
 		//System.out.println(mySQL.deleteCell(cell));
 		
-		//System.out.println(mySQL.createWorkspace("as", workspaceOwner));
+		System.out.println(mySQL.createWorkspace("as", workspaceOwner));
 
 		// Retrieve user workspaces
 		try {

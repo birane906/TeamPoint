@@ -60,6 +60,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 
 		if (DAO.isNameExist(name, "board")) {
+			System.out.println("here");
 			return null;
 		}
 
@@ -132,6 +133,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		// CREATE COLUMN, ITEMCOL, ITEM, CELL, PERMISSION, TYPE
 
 		// SET COLUMN TO BOARD
+		System.out.println("col " + getColumns(board));
 		board.setColumns(getColumns(board));
 
 		// SET ITEM TO ITEMCOLLECTIONS
@@ -310,33 +312,37 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		try {
 			assert rs != null;
-			if (!rs.next()) {
+			if (rs.next()) {
 
 				id = rs.getInt("idColumn");
 				name = rs.getString("columnName");
 				idType = rs.getInt("idColumnType");
 				Type t = DAO.getTypeById(idType);
 
-				switch (Objects.requireNonNull(t).getNameType()) {
+				// ici le test renvoi true mais ne rentre pas dans le case
+				System.out.println(t.getNameType().equals("TimelineType"));
+// TODO Switch case renvoie tjr dans default
+				switch (t.getNameType()) {
 					case "DateType":
 						col.add(new Column<DateType>(board, name, id, t));
-
+						break;
 					case "DependencyType":
 						col.add(new Column<DependencyType>(board, name, id, t));
-
+						break;
 					case "NumberType":
 						col.add(new Column<NumberType>(board, name, id, t));
-
+						break;
 					case "PersonType":
 						col.add(new Column<PersonType>(board, name, id, t));
-
+						break;
 					case "StatusType":
 						col.add(new Column<StatusType>(board, name, id, t));
-
+						break;
 					case "TimelineType":
 						col.add(new Column<TimelineType>(board, name, id, t));
-
+						break;
 					default:
+						System.out.println("hehehehehehe");
 						return null;
 				}
 			}
@@ -396,6 +402,7 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		Statement stmt = null;
 		ResultSet rs = null;
+		// TODO adpater la query avec la base
 		String query = "SELECT cellValue "
 				+ "FROM cell "
 				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "")
@@ -413,32 +420,37 @@ public class MySQLBoardDAO extends BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+/*
 		try {
 			assert stmt != null;
+
 			if (stmt.execute(query)) {
 				rs = stmt.getResultSet();
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DAO.closeConnection(2);
 			return null;
 		}
-
+*/
+		/*
 		try {
 			while(true) {
 				assert rs != null;
 				if (!rs.next()) break;
 				//TODO : Fix DB And Rewrite this part
-				/*value = rs.getBlob("cellValue").;
-				cell = new Cell(item, column, value);*/
+				value = rs.getBlob("cellValue").;
+				cell = new Cell(item, column, value);
 			}
-		} catch (SQLException e) {
+		//} catch (SQLException e) {
 
-			DAO.closeConnection(2);
-			e.printStackTrace();
-		}
-		
+		//	DAO.closeConnection(2);
+		//	e.printStackTrace();
+		//}
+		 */
+
+
 		DAO.closeConnection(2);
 		
 		return cell;
@@ -596,9 +608,9 @@ public class MySQLBoardDAO extends BoardDAO {
 				name = rs.getString("labelPermission");
 				descr = rs.getString("description");
 			}
-		} catch (SQLException throwables) {
+		} catch (SQLException e) {
 			DAO.closeConnection(0);
-			throwables.printStackTrace();
+			e.printStackTrace();
 		}
 
 		if(id == -1) {
@@ -764,18 +776,18 @@ public class MySQLBoardDAO extends BoardDAO {
 		Board res = mySQL.addBoard("Boarddaas", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
 		System.out.println("addboard " + res);
 
-		Boolean resItemCol = mySQL.addItemCollection("testItemCol", parentBoard);
-		System.out.println("add item col " + resItemCol);
+		//Boolean resItemCol = mySQL.addItemCollection("testItemCol", parentBoard);
+		//System.out.println("add item col " + resItemCol);
 
-		Boolean resItem = mySQL.addItem(itemCol, "itemTest");
-		System.out.println("additem " + resItem);
+		//Boolean resItem = mySQL.addItem(itemCol, "itemTest");
+		//System.out.println("additem " + resItem);
 
-		System.out.println("perm " + mySQL.getDefaultPermission());
+		//System.out.println("perm " + mySQL.getDefaultPermission());
 
 		//mySQL.getBoardsOfWorkspace(parentWorkspace);
 
-		System.out.println("itemcol " + mySQL.getItemCollection(parentBoard));
-		System.out.println("item " + mySQL.getBoardsOfWorkspace(parentWorkspace));
+		//System.out.println("itemcol " + mySQL.getItemCollection(parentBoard));
+		//System.out.println("item " + mySQL.getBoardsOfWorkspace(parentWorkspace));
 
 		System.out.println("retrieve " + mySQL.retrieveBoard(parentBoard));
 	}

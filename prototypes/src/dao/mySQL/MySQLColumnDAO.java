@@ -1,9 +1,12 @@
 package dao.mySQL;
 
+import business_logic.board.Permission;
 import business_logic.board.types.Type;
 import business_logic.board.types.TypeFactory;
 import business_logic.board.Board;
 import business_logic.board.Column;
+import business_logic.user.User;
+import business_logic.workspace.Workspace;
 import dao.ColumnDAO;
 import dao.DAO;
 
@@ -12,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MySQLColumnDAO extends ColumnDAO {
 
@@ -94,7 +98,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 				+ "WHERE idColumn = " + DAO.stringFormat(columnId + "");
 		try {
 			
-			stmt.executeUpdate(req);
+			stmt.execute(req);
 		
 		} catch (SQLException e) {
 			
@@ -245,7 +249,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		return resultat;
 	}
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		MySQLColumnDAO mySQLColumnDAO = new MySQLColumnDAO();
 		
 		ArrayList<Type> res = mySQLColumnDAO.getAllColumnTypes();
@@ -254,17 +258,17 @@ public class MySQLColumnDAO extends ColumnDAO {
 			//System.out.println(res.get(i));
 		}
 		
-		System.out.println(mySQLColumnDAO.getTypeByName("TimeLineType"));
+		//System.out.println(mySQLColumnDAO.getTypeByName("TimeLineType"));
 
-		System.out.println(DAO.isNameExist("Columntest", "column"));
+		//System.out.println(DAO.isNameExist("Columntest", "column"));
 
 		Workspace parentWorkspace = new Workspace("salut");
 		User boardOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
-		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "las", "sa"));
+		Board parentBoard = new Board(69, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "las", "sa"));
 
 		Column resAdd = mySQLColumnDAO.addColumn("asas", parentBoard, "TimeLineType");
 
 		System.out.println(resAdd);
-	}*/
+	}
 
 }

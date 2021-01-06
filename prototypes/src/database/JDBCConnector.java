@@ -56,7 +56,7 @@ public class JDBCConnector {
 	 */
 	public Connection getConnection(int countConnection) {
 		try {
-			if(this.connection[countConnection].isClosed()) {
+			if(this.connection[countConnection] == null || this.connection[countConnection].isClosed()) {
 				initializeConnection(countConnection);
 			}
 		} catch (SQLException e) {
