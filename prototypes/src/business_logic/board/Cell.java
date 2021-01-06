@@ -35,8 +35,8 @@ public class Cell<T extends Type> {
 	 * @param item
 	 * @param column
 	 * @param value
+	 * @param idCell
 	 */
-
 	public Cell(Item item, Column<T> column, T value, int idCell) {
 		this.column = column;
 		this.value = value;
@@ -44,6 +44,11 @@ public class Cell<T extends Type> {
 		this.cellId = idCell;
 	}
 
+	public Cell(Item item, Column<T> column, T value) {
+		this.column = column;
+		this.value = value;
+		this.item = item;
+	}
 	/**
 	 * Returns column.
 	 * @return column 
