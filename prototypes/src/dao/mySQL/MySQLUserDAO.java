@@ -56,7 +56,6 @@ public class MySQLUserDAO extends UserDAO {
 				rs.deleteRow();
 				
 				DAO.closeConnection(0);
-				
 				return true;
 			}
 			// if rs is empty
@@ -116,7 +115,6 @@ public class MySQLUserDAO extends UserDAO {
 				+ "WHERE email = " + DAO.stringFormat(email) 
 				+ " AND password = " + DAO.stringFormat(password);
 
-
 		try {
 			assert stmt != null;
 			if (stmt.execute(req)) {
@@ -141,6 +139,7 @@ public class MySQLUserDAO extends UserDAO {
 		}
 
 		if (fieldOfUser.size() == 0) {
+			DAO.closeConnection(0);
 			throw new Exception("User not found");
 		}
 
@@ -152,7 +151,6 @@ public class MySQLUserDAO extends UserDAO {
 		String phoneNumber = fieldOfUser.get(5);
 		
 		DAO.closeConnection(0);
-		
 		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
 
@@ -192,7 +190,7 @@ public class MySQLUserDAO extends UserDAO {
 			assert stmt != null;
 			stmt.executeQuery(req);
 		} catch (SQLException e) {
-
+			DAO.closeConnection(0);
 			return false;
 		}
 		

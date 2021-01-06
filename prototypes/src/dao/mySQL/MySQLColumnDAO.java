@@ -85,6 +85,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 		try {
 			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 		}
 
@@ -109,10 +110,10 @@ public class MySQLColumnDAO extends ColumnDAO {
 			rs.next();
 			typeId = rs.getInt(1);
 
-		} catch (SQLException throwables) {
+		} catch (SQLException e) {
 			
 			DAO.closeConnection(0);
-			throwables.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		DAO.closeConnection(0);

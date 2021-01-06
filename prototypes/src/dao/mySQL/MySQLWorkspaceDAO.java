@@ -51,7 +51,6 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			// Getconnection
 			prepStmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 		
@@ -71,6 +70,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			DAO.closeConnection(0);
 			return null;
 		}
 		
@@ -101,13 +101,11 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		} catch (SQLException e) {
 
 			DAO.closeConnection(0);
-
 			return null;
 		}
 
 		// The user has now a workspace
 		DAO.closeConnection(0);
-
 		return new Workspace(workspaceName);
 	}
 
@@ -161,6 +159,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 
@@ -173,8 +172,9 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				id = rs.getInt("idWorkspace");
 				name = rs.getString("workspaceName");
 			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		} catch (SQLException e) {
+			DAO.closeConnection(0);
+			e.printStackTrace();
 		}
 
 		DAO.closeConnection(0);
@@ -221,6 +221,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 
@@ -232,6 +233,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 				resWs.add(rs.getInt("idWorkspace"));
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 
@@ -249,6 +251,7 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 					rs = stmt.getResultSet();
 				}
 			} catch (SQLException e) {
+				DAO.closeConnection(0);
 				e.printStackTrace();
 			}
 

@@ -102,13 +102,12 @@ public class MySQLBoardDAO extends BoardDAO {
 			boardId = rs.getInt(1);
 
 		} catch (SQLException e) {
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 		
 		DAO.closeConnection(0);
-
 		Board board = new Board(boardId, name, workspace, user, new Date(), permission);
-
 		return retrieveBoard(board);
 	}
 
@@ -248,6 +247,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(1);
 			e.printStackTrace();
 			return null;
 		}
@@ -263,6 +263,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				items.add(item);
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(1);
 			e.printStackTrace();
 		}
 		
@@ -303,6 +304,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			DAO.closeConnection(1);
 			return null;
 		}
 
@@ -339,6 +341,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				}
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(1);
 			e.printStackTrace();
 		}
 
@@ -418,6 +421,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			DAO.closeConnection(2);
 			return null;
 		}
 
@@ -535,7 +539,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			assert stmt != null;
 			stmt.executeUpdate(req);
 		} catch (SQLException e) {
-			
+			DAO.closeConnection(0);
 			return false;
 		}
 		
@@ -581,6 +585,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			DAO.closeConnection(0);
 			return null;
 		}
 
@@ -646,7 +651,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 
@@ -677,7 +682,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				res.add(newBoard);
 			}
 		} catch (SQLException e) {
-
+			DAO.closeConnection(0);
 			e.printStackTrace();
 			return null;
 		}
@@ -709,6 +714,7 @@ public class MySQLBoardDAO extends BoardDAO {
 			stmt = DAO.getConnection(1).prepareStatement(query);
 			
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 		}
 

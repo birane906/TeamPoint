@@ -112,6 +112,7 @@ public interface DAO {
 			return rs.next();
 
 		} catch (SQLException e) {
+			DAO.closeConnection(0);
 			e.printStackTrace();
 			return false;
 		}
@@ -132,7 +133,7 @@ public interface DAO {
 				+ "WHERE idUser = ?";
 
 		try {
-			// Getconnection from JDBCConnector
+			// Get connection from JDBCConnector
 			stmt = getConnection(1).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -148,6 +149,7 @@ public interface DAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(1);
 			e.printStackTrace();
 		}
 
@@ -166,6 +168,7 @@ public interface DAO {
 		}
 
 		if (resultat.size() == 0) {
+			DAO.closeConnection(1);
 			throw new Exception("User not found");
 		}
 
@@ -214,6 +217,7 @@ public interface DAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(1);
 			e.printStackTrace();
 		}
 
@@ -228,6 +232,7 @@ public interface DAO {
 				type = TypeFactory.createType(id, label, descr);
 			}
 		} catch (SQLException e) {
+			DAO.closeConnection(1);
 			e.printStackTrace();
 		}
 

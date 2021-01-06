@@ -82,7 +82,6 @@ public class MySQLCellDAO extends CellDAO {
 		} catch (SQLException e) {
 
 			DAO.closeConnection(0);
-
 			return null;
 		}
 		
@@ -199,10 +198,9 @@ public class MySQLCellDAO extends CellDAO {
 			stmt.executeUpdate(req);
 			
 		} catch (SQLException e) {
-
+			DAO.closeConnection(0);
 			return null;
 		}
-		
 
 		DAO.closeConnection(0);
 		
@@ -275,7 +273,6 @@ public class MySQLCellDAO extends CellDAO {
 	public Boolean editCell(Cell<? extends Type> cell, Type value) {
 
 		if(cell == null || value == null) {
-			System.out.println("sa");
 			return false;
 		}
 
@@ -307,6 +304,7 @@ public class MySQLCellDAO extends CellDAO {
 			stmt.setInt(5, cell.getItem().getParentItemCollection().getItemCollection_id());
 
 		} catch (SQLException e) {
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 
