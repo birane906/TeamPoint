@@ -9,31 +9,26 @@ import business_logic.board.types.Type;
 /**
  * Description of Cell.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class Cell<T extends Type> {
-
-	/**
-	 * is equals to T of Cell<T>
-	 */
-	private Type typeParameterClass;
 
 	private int cellId;
 
 	/**
 	 * Description of the property column.
 	 */
-	public Column<T> column = null;
+	private Column<T> column;
 
 	/**
 	 * Description of the property value.
 	 */
-	private T value = null;
+	private T value;
 
 	/**
 	 * Description of the property item.
 	 */
-	public Item item = null;
+	private Item item;
 
 	/**
 	 * 
@@ -47,14 +42,6 @@ public class Cell<T extends Type> {
 		this.value = value;
 		this.item = item;
 		this.cellId = idCell;
-	}
-
-	public Cell(Item item, Column<T> column, T value, 
-		Type typeParameterClass) {
-			this.column = column;
-			this.value = value;
-			this.item = item;
-			this.typeParameterClass = typeParameterClass;
 	}
 
 	/**
@@ -95,10 +82,6 @@ public class Cell<T extends Type> {
 	 */
 	public Item getItem() {
 		return this.item;
-	}
-
-	public Type getTypeParameterClass() {
-		return typeParameterClass;
 	}
 
 	/**
