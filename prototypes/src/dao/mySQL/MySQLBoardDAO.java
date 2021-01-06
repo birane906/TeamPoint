@@ -396,22 +396,19 @@ public class MySQLBoardDAO extends BoardDAO {
 	 * @param item we want the cell from
 	 * @return a cell
 	 */
-	private Cell<? extends Type> getCell(Board board, Column<? extends Type> column, Item item) {
+	private <T extends Type> Cell<T> getCell(Board board, Column<T> column, Item item) {
 		// GET CELLS FROM DB
 
 		Statement stmt = null;
 		ResultSet rs = null;
-		// TODO adpater la query avec la base
-		String query = "SELECT cellValue "
+		String query = "SELECT cellId, tableValueName "
 				+ "FROM cell "
-				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "")
-				+ " AND idColumn = " + DAO.stringFormat(column.getColumn_id() + "")
-				+ " AND idItemCollection = " + DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "")
-				+ " AND idItem = " + DAO.stringFormat(item.getItem_id() + "");
+				+ "WHERE idBoard = ?"
+				+ " AND idColumn = ?"
+				+ " AND idItemCollection = ?"
+				+ " AND idItem = ?";
 
 		Cell<? extends Type> cell = null;
-
-		//Type value;
 
 		try {
 			// Get connection
@@ -419,11 +416,21 @@ public class MySQLBoardDAO extends BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-/*
+
+		String req = "SELECT cellId, tableValueName "
+				+ "FROM cell "
+				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "")
+				+ " AND idColumn = " + DAO.stringFormat(column.getColumn_id() + "")
+				+ " AND idItemCollection = " + DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "")
+				+ " AND idItem = " + DAO.stringFormat(item.getItem_id() + "");
+
+		int cellId = -1;
+		String tableName = "";
+
 		try {
 			assert stmt != null;
 
-			if (stmt.execute(query)) {
+			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
 
@@ -432,27 +439,47 @@ public class MySQLBoardDAO extends BoardDAO {
 			DAO.closeConnection(2);
 			return null;
 		}
-*/
-		/*
+
 		try {
 			while(true) {
 				assert rs != null;
 				if (!rs.next()) break;
-				//TODO : Fix DB And Rewrite this part
-				value = rs.getBlob("cellValue").;
-				cell = new Cell(item, column, value);
+				cellId = rs.getInt("cellId");
+				tableName = rs.getString("tableValueName");
 			}
-		//} catch (SQLException e) {
+		} catch (SQLException e) {
 
-		//	DAO.closeConnection(2);
-		//	e.printStackTrace();
-		//}
-		 */
-
-
+			DAO.closeConnection(2);
+			e.printStackTrace();
+		}
 		DAO.closeConnection(2);
-		
-		return cell;
+
+		Type type = getValue(cellId, tableName);
+		return null;
+		//return cell;
+	}
+
+	private <T extends Type> T getValue(int cellId, String tableName) {
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		// TODO switch case
+		String query = "SELECT cellId, tableValueName "
+				+ "FROM cell "
+				+ "WHERE idBoard = ?"
+				+ " AND idColumn = ?"
+				+ " AND idItemCollection = ?"
+				+ " AND idItem = ?";
+
+		Cell<T> cell = null;
+
+		try {
+			// Get connection
+			stmt = DAO.getConnection(3).prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**

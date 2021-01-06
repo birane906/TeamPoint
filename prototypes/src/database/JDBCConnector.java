@@ -16,10 +16,10 @@ public class JDBCConnector {
 	 * The database connection
 	 */
 	// surtout pas final
-	private Connection[] connection = new Connection[3];
+	private Connection[] connection = new Connection[4];
 
 	private JDBCConnector() {
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 3; i++) {
 			try {
 				this.connection[i] = (DriverManager.getConnection(
 						"jdbc:mysql://localhost/TeamPoint?" + "user=root&password="
