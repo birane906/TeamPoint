@@ -1,5 +1,10 @@
 package dao;
 
+import business_logic.board.types.Type;
+import business_logic.board.types.TypeFactory;
+import business_logic.user.User;
+import database.JDBCConnector;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +13,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-
-import business_logic.board.types.Type;
-import business_logic.board.types.TypeFactory;
-import business_logic.user.User;
-import database.JDBCConnector;
 
 /**
  * DAO interface
@@ -80,7 +80,7 @@ public interface DAO {
 
 		String query = "SELECT * "
 				+ "FROM `" + table + "` "
-				+ "WHERE " + table + "Name = ?";
+				+ "WHERE " + "Name = ?";
 
 		try {
 			// Getconnection from JDBCConnector
@@ -92,7 +92,7 @@ public interface DAO {
 
 		String req = "SELECT * "
 				+ "FROM `" + table + "` "
-				+ "WHERE " + table + "Name = " + DAO.stringFormat(name);
+				+ "WHERE " + "Name = " + DAO.stringFormat(name);
 
 		try {
 			if (stmt.execute(req)) {
