@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 05 jan. 2021 à 20:15
+-- Généré le :  mer. 06 jan. 2021 à 12:54
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -43,7 +43,7 @@ CREATE TABLE `board` (
 
 INSERT INTO `board` (`idBoard`, `userOwner`, `idPermission`, `boardName`, `parentWorkspace`, `boardCreationDate`) VALUES
 (0, 1, 0, 'TestBoard', 0, '2021-01-05'),
-(44, 1, 0, 'Boarddaas', 0, '2021-01-03');
+(69, 1, 0, 'Boarddaas', 0, '2021-01-06');
 
 -- --------------------------------------------------------
 
@@ -53,6 +53,7 @@ INSERT INTO `board` (`idBoard`, `userOwner`, `idPermission`, `boardName`, `paren
 
 CREATE TABLE `cell` (
   `idCell` int(10) NOT NULL,
+  `tableValueName` varchar(25) NOT NULL,
   `idBoard` int(10) NOT NULL,
   `idColumn` int(10) NOT NULL,
   `idItem` int(10) NOT NULL,
@@ -63,8 +64,40 @@ CREATE TABLE `cell` (
 -- Déchargement des données de la table `cell`
 --
 
-INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idItemCollection`) VALUES
-(0, 0, 0, 0, 0);
+INSERT INTO `cell` (`idCell`, `tableValueName`, `idBoard`, `idColumn`, `idItem`, `idItemCollection`) VALUES
+(0, '', 0, 0, 0, 0),
+(46, 'TimelineType', 0, 0, 0, 0),
+(47, 'TimelineType', 0, 0, 0, 0),
+(48, 'TimelineType', 0, 0, 0, 0),
+(49, 'TimelineType', 0, 0, 0, 0),
+(50, 'TimelineType', 0, 0, 0, 0),
+(51, 'TimelineType', 0, 0, 0, 0),
+(52, 'TimelineType', 0, 0, 0, 0),
+(53, 'TimelineType', 0, 0, 0, 0),
+(54, 'TimelineType', 0, 0, 0, 0),
+(55, 'TimelineType', 0, 0, 0, 0),
+(56, 'TimelineType', 0, 0, 0, 0),
+(57, 'TimelineType', 0, 0, 0, 0),
+(58, 'TimelineType', 0, 0, 0, 0),
+(59, 'TimelineType', 0, 0, 0, 0),
+(60, 'TimelineType', 0, 0, 0, 0),
+(61, 'TimelineType', 0, 0, 0, 0),
+(62, 'TimelineType', 0, 0, 0, 0),
+(63, 'TimelineType', 0, 0, 0, 0),
+(64, 'TimelineType', 0, 0, 0, 0),
+(65, 'TimelineType', 0, 0, 0, 0),
+(66, 'TimelineType', 0, 0, 0, 0),
+(67, 'TextType', 0, 0, 0, 0),
+(68, 'TextType', 0, 0, 0, 0),
+(69, 'TextType', 0, 0, 0, 0),
+(70, 'TextType', 0, 0, 0, 0),
+(71, 'TextType', 0, 0, 0, 0),
+(72, 'TextType', 0, 0, 0, 0),
+(73, 'TextType', 0, 0, 0, 0),
+(74, 'TextType', 0, 0, 0, 0),
+(75, 'TextType', 0, 0, 0, 0),
+(76, 'TextType', 0, 0, 0, 0),
+(77, 'TextType', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -85,7 +118,8 @@ CREATE TABLE `column` (
 
 INSERT INTO `column` (`idColumn`, `idColumnType`, `idBoard`, `columnName`) VALUES
 (0, 0, 0, 'Columntest'),
-(1, 2, 0, 'StatusColTest');
+(1, 2, 0, 'StatusColTest'),
+(53, 0, 69, 'asas');
 
 -- --------------------------------------------------------
 
@@ -129,7 +163,18 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`idItem`, `idBoard`, `idItemCollection`, `itemName`) VALUES
-(0, 0, 0, 'Item Test');
+(0, 0, 0, 'Item Test'),
+(45, 0, 0, 'itemTest'),
+(46, 0, 0, 'itemTest'),
+(47, 0, 0, 'itemTest'),
+(48, 0, 0, 'itemTest'),
+(49, 0, 0, 'itemTest'),
+(50, 0, 0, 'itemTest'),
+(51, 0, 0, 'itemTest'),
+(52, 0, 0, 'itemTest'),
+(53, 0, 0, 'itemTest'),
+(54, 0, 0, 'itemTest'),
+(55, 0, 0, 'itemTest');
 
 -- --------------------------------------------------------
 
@@ -148,7 +193,18 @@ CREATE TABLE `itemcollection` (
 --
 
 INSERT INTO `itemcollection` (`idItemCollection`, `idBoard`, `itemCollectionName`) VALUES
-(0, 0, 'collection Test');
+(0, 0, 'collection Test'),
+(45, 0, 'testItemCol'),
+(46, 0, 'testItemCol'),
+(47, 0, 'testItemCol'),
+(48, 0, 'testItemCol'),
+(49, 0, 'testItemCol'),
+(50, 0, 'testItemCol'),
+(51, 0, 'testItemCol'),
+(52, 0, 'testItemCol'),
+(53, 0, 'testItemCol'),
+(54, 0, 'testItemCol'),
+(55, 0, 'testItemCol');
 
 -- --------------------------------------------------------
 
@@ -207,8 +263,22 @@ CREATE TABLE `statustype` (
 CREATE TABLE `texttype` (
   `idTextType` int(10) NOT NULL,
   `idCell` int(10) NOT NULL,
-  `text` int(11) NOT NULL
+  `text` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `texttype`
+--
+
+INSERT INTO `texttype` (`idTextType`, `idCell`, `text`) VALUES
+(1, 70, 'dada'),
+(2, 71, 'dada'),
+(3, 72, 'dada'),
+(4, 73, 'dada'),
+(5, 74, 'dada'),
+(6, 75, 'dada'),
+(7, 76, 'dada'),
+(8, 77, 'ddededdedede');
 
 -- --------------------------------------------------------
 
@@ -307,7 +377,8 @@ CREATE TABLE `user_workspace` (
 
 INSERT INTO `user_workspace` (`idUser`, `idWorkspace`, `userRole`) VALUES
 (1, 44, 'WorkspaceAdmin'),
-(1, 45, 'WorkspaceAdmin');
+(1, 45, 'WorkspaceAdmin'),
+(1, 46, 'WorkspaceAdmin');
 
 -- --------------------------------------------------------
 
@@ -329,7 +400,8 @@ CREATE TABLE `workspace` (
 INSERT INTO `workspace` (`idWorkspace`, `idUserOwner`, `workspaceName`, `workspaceCreationDate`) VALUES
 (0, 1, 'Test', '0000-00-00'),
 (44, 1, 'sa', '2021-01-02'),
-(45, 1, 'as', '2021-01-02');
+(45, 1, 'as', '2021-01-02'),
+(46, 1, 'as', '2021-01-06');
 
 --
 -- Index pour les tables déchargées
@@ -473,19 +545,19 @@ ALTER TABLE `workspace`
 -- AUTO_INCREMENT pour la table `board`
 --
 ALTER TABLE `board`
-  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT pour la table `cell`
 --
 ALTER TABLE `cell`
-  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idCell` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT pour la table `column`
 --
 ALTER TABLE `column`
-  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT pour la table `datetype`
@@ -503,13 +575,13 @@ ALTER TABLE `dependencytype`
 -- AUTO_INCREMENT pour la table `item`
 --
 ALTER TABLE `item`
-  MODIFY `idItem` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idItem` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT pour la table `itemcollection`
 --
 ALTER TABLE `itemcollection`
-  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT pour la table `numbertype`
@@ -533,7 +605,7 @@ ALTER TABLE `statustype`
 -- AUTO_INCREMENT pour la table `texttype`
 --
 ALTER TABLE `texttype`
-  MODIFY `idTextType` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTextType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `timelinetype`
@@ -551,7 +623,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `workspace`
 --
 ALTER TABLE `workspace`
-  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Contraintes pour les tables déchargées
