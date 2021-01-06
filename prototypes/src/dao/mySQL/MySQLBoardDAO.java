@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import business_logic.board.Board;
 import business_logic.board.Cell;
@@ -33,15 +32,6 @@ import dao.DAO;
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class MySQLBoardDAO extends BoardDAO {
-
-	/**
-	 * The constructor.
-	 */
-	public MySQLBoardDAO() {
-		// Start of user code constructor for MySQLBoardDAO)
-		super();
-		// End of user code
-	}
 
 	/**
 	 * add a board to a workspace
@@ -321,25 +311,36 @@ public class MySQLBoardDAO extends BoardDAO {
 
 				// ici le test renvoi true mais ne rentre pas dans le case
 				System.out.println(t.getNameType().equals("TimelineType"));
-// TODO Switch case renvoie tjr dans default
 				switch (t.getNameType()) {
 					case "DateType":
+						int x = 20;
 						col.add(new Column<DateType>(board, name, id, t));
+						System.out.println(x);
 						break;
 					case "DependencyType":
+						int y =12;
 						col.add(new Column<DependencyType>(board, name, id, t));
+						System.out.println(y);
 						break;
 					case "NumberType":
+						int xX = 0;
 						col.add(new Column<NumberType>(board, name, id, t));
+						System.out.println(xX);
 						break;
 					case "PersonType":
+						int yy = 10;
 						col.add(new Column<PersonType>(board, name, id, t));
+						System.out.println(yy);
 						break;
 					case "StatusType":
+						int b = 1;
 						col.add(new Column<StatusType>(board, name, id, t));
+						System.out.println(b);
 						break;
 					case "TimelineType":
+						int sa = 11;
 						col.add(new Column<TimelineType>(board, name, id, t));
+						System.out.println(sa);
 						break;
 					default:
 						System.out.println("hehehehehehe");
@@ -791,7 +792,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		return perm;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		MySQLBoardDAO mySQL = new MySQLBoardDAO();
 
 		Workspace parentWorkspace = new Workspace("salut");
@@ -800,12 +801,12 @@ public class MySQLBoardDAO extends BoardDAO {
 		ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
 
 		Board res = mySQL.addBoard("Boarddaas", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
-		System.out.println("addboard " + res);
+		//	System.out.println("addboard " + res);
 
-		//Boolean resItemCol = mySQL.addItemCollection("testItemCol", parentBoard);
+		Boolean resItemCol = mySQL.addItemCollection("testItemCol", parentBoard);
 		//System.out.println("add item col " + resItemCol);
 
-		//Boolean resItem = mySQL.addItem(itemCol, "itemTest");
+		Boolean resItem = mySQL.addItem(itemCol, "itemTest");
 		//System.out.println("additem " + resItem);
 
 		//System.out.println("perm " + mySQL.getDefaultPermission());
@@ -816,5 +817,5 @@ public class MySQLBoardDAO extends BoardDAO {
 		//System.out.println("item " + mySQL.getBoardsOfWorkspace(parentWorkspace));
 
 		System.out.println("retrieve " + mySQL.retrieveBoard(parentBoard));
-	}
+	}*/
 }
