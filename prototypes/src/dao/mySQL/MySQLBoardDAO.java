@@ -396,7 +396,6 @@ public class MySQLBoardDAO extends BoardDAO {
 	 * @param item we want the cell from
 	 * @return a cell
 	 */
-	// TODO faire triple connection
 	private Cell<? extends Type> getCell(Board board, Column<? extends Type> column, Item item) {
 		// GET CELLS FROM DB
 

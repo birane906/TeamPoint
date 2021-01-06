@@ -53,7 +53,8 @@ public class CellFacade {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		CellDAO cellDAO = daoFactory.createCellDAO();
 
-		return cellDAO.addCell(column, item, value);
+		return null;
+		//return cellDAO.addCell(column, item, value);
 	}
 
 	/**
@@ -78,7 +79,8 @@ public class CellFacade {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		CellDAO cellDAO = daoFactory.createCellDAO();
 
-		return cellDAO.editCell(cell, value);
+		return null;
+		//return cellDAO.editCell(cell, value);
 	}
 
 	/**

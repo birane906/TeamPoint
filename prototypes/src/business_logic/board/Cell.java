@@ -16,7 +16,9 @@ public class Cell<T extends Type> {
 	/**
 	 * is equals to T of Cell<T>
 	 */
-	private final Type typeParameterClass;
+	private Type typeParameterClass;
+
+	private int cellId;
 
 	/**
 	 * Description of the property column.
@@ -39,6 +41,14 @@ public class Cell<T extends Type> {
 	 * @param column
 	 * @param value
 	 */
+
+	public Cell(Item item, Column<T> column, T value, int idCell) {
+		this.column = column;
+		this.value = value;
+		this.item = item;
+		this.cellId = idCell;
+	}
+
 	public Cell(Item item, Column<T> column, T value, 
 		Type typeParameterClass) {
 			this.column = column;
@@ -107,5 +117,9 @@ public class Cell<T extends Type> {
 		str += " value: " + getValue();
 		
 		return str;
+	}
+
+	public int getCellId() {
+		return cellId;
 	}
 }
