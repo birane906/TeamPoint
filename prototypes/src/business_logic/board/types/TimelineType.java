@@ -34,6 +34,12 @@ public class TimelineType extends Type  {
 		this.endDate = null;
 	}
 
+	public TimelineType(Date startDate, Date endDate) {
+		super(TimelineType.class.getSimpleName(), "Two date");
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
 	/**
 	 * Constructor for empty {@link TimelineType} 
 	 * @param id

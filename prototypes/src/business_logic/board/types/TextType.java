@@ -1,6 +1,3 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board.types;
 
 /**
@@ -45,6 +42,15 @@ public class TextType extends Type {
 	 */
 	public TextType(int id, String description, String text) throws Exception {
 		super(id, TextType.class.getSimpleName(), description);
+		this.charLimit = 90;
+		if (text.length() > charLimit) {
+			throw new Exception("The text is too long.");
+		}
+		this.text = text;
+	}
+
+	public TextType(String text) throws Exception {
+		super(TextType.class.getSimpleName(), "text");
 		this.charLimit = 90;
 		if (text.length() > charLimit) {
 			throw new Exception("The text is too long.");

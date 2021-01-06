@@ -44,6 +44,12 @@ public class NumberType extends Type {
 		this.value = value;
 	}
 
+	public NumberType(String unit, Integer value){
+		super(NumberType.class.getSimpleName(), "Number");
+		this.unit = unit;
+		this.value = value;
+	}
+
 	/**
 	 * Constructor for filled {@link NumberType} without unit
 	 * @param id {@link NumberType}

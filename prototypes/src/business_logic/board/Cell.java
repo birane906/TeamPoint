@@ -3,7 +3,6 @@
  *******************************************************************************/
 package business_logic.board;
 
-import business_logic.board.Cell;
 import business_logic.board.types.Type;
 
 /**
@@ -36,8 +35,7 @@ public class Cell<T extends Type> {
 	public Item item = null;
 
 	/**
-	 * 
-	 * @param item
+	 *  @param item
 	 * @param column
 	 * @param value
 	 */
@@ -49,12 +47,10 @@ public class Cell<T extends Type> {
 		this.cellId = idCell;
 	}
 
-	public Cell(Item item, Column<T> column, T value, 
-		Type typeParameterClass) {
+	public Cell(Item item, Column<T> column, T value) {
 			this.column = column;
 			this.value = value;
 			this.item = item;
-			this.typeParameterClass = typeParameterClass;
 	}
 
 	/**
