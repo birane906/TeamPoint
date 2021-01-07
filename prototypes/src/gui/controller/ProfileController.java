@@ -172,7 +172,6 @@ public class ProfileController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        editBirthdayLabel.setText(userFacade.getCurrentUser().getBirthday().toString());
         editDescriptionLabel.setText(userFacade.getCurrentUser().getProfileDescription());
         editEmailLabel.setText(userFacade.getCurrentUser().getEmail());
         editFirstNameLabel.setText(userFacade.getCurrentUser().getFirstName());

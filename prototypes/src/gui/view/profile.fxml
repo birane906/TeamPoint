@@ -16,71 +16,61 @@
             <Line endX="-71.99998474121094" endY="426.0" layoutX="60.0" layoutY="37.0" startX="-72.0" startY="-93.0" />
             <Line endX="500.20001220703125" endY="-51.99999237060547" layoutX="187.0" layoutY="59.0" startX="-198.5" startY="-52.0" />
 
-            <Hyperlink fx:id="editNumberHyperlink" layoutX="-4.0" layoutY="394.0" prefHeight="28.0" prefWidth="203.0" text="Modifier numéro de téléphone" onAction="#editNumberOnAction">
+            <Hyperlink fx:id="editNumberHyperlink" layoutX="-4.0" layoutY="365.0" onAction="#editNumberOnAction" prefHeight="28.0" prefWidth="203.0" text="Modifier numéro de téléphone">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Label fx:id="editNumberLabel" layoutX="200.0" layoutY="398.0" prefHeight="20.0" prefWidth="230.0" text="&quot;email généré inséré ici&quot;">
+            <Label fx:id="editNumberLabel" layoutX="200.0" layoutY="368.0" prefHeight="20.0" prefWidth="230.0">
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <Hyperlink fx:id="editNameHyperlink" layoutX="30.0" layoutY="38.0" text="Modifier nom" onAction="#editNameOnAction">
+            <Hyperlink fx:id="editNameHyperlink" layoutX="30.0" layoutY="38.0" onAction="#editNameOnAction" text="Modifier nom">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editFirstNameHyperlink" layoutX="30.0" layoutY="77.0" text="Modifier Prénom" onAction="#editFirstNameOnAction">
+            <Hyperlink fx:id="editFirstNameHyperlink" layoutX="30.0" layoutY="77.0" onAction="#editFirstNameOnAction" text="Modifier Prénom">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editEmailHyperlink" layoutX="30.0" layoutY="115.0" text="Modifier adresse mail" onAction="#editEmailOnAction">
+            <Hyperlink fx:id="editEmailHyperlink" layoutX="30.0" layoutY="115.0" onAction="#editEmailOnAction" text="Modifier adresse mail">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editDescriptionHyperlink" layoutX="30.0" layoutY="159.0" text="Modifier Description" onAction="#editDescriptionOnAction">
+            <Hyperlink fx:id="editDescriptionHyperlink" layoutX="30.0" layoutY="159.0" onAction="#editDescriptionOnAction" text="Modifier Description">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editPasswordHyperlink" layoutX="36.0" layoutY="321.0" text="Modifier mot de passe" onAction="#editPasswordOnAction">
+            <Hyperlink fx:id="editPasswordHyperlink" layoutX="36.0" layoutY="321.0" onAction="#editPasswordOnAction" text="Modifier mot de passe">
                <font>
                   <Font size="14.0" />
                </font>
             </Hyperlink>
-            <Hyperlink fx:id="editBirthdayHyperlink" layoutX="13.0" layoutY="356.0" text="Modifier date de naissance" onAction="#editBirthdayOnAction">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Hyperlink>
-            <Label fx:id="editNameLabel" layoutX="200.0" layoutY="41.0" prefHeight="18.0" prefWidth="230.0" text="Label">
+            <Label fx:id="editNameLabel" layoutX="200.0" layoutY="41.0" prefHeight="18.0" prefWidth="230.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="editFirstNameLabel" layoutX="200.0" layoutY="80.0" prefHeight="18.0" prefWidth="230.0" text="Label">
+            <Label fx:id="editFirstNameLabel" layoutX="200.0" layoutY="80.0" prefHeight="18.0" prefWidth="230.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="editEmailLabel" layoutX="200.0" layoutY="118.0" prefHeight="18.0" prefWidth="230.0" text="Label">
+            <Label fx:id="editEmailLabel" layoutX="200.0" layoutY="118.0" prefHeight="18.0" prefWidth="230.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="editDescriptionLabel" layoutX="207.0" layoutY="159.0" prefHeight="151.0" prefWidth="428.0" text="Label">
+            <Label fx:id="editDescriptionLabel" layoutX="207.0" layoutY="159.0" prefHeight="151.0" prefWidth="428.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <Label layoutX="200.0" layoutY="324.0" prefHeight="18.0" prefWidth="230.0" text="***********">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="editBirthdayLabel" layoutX="200.0" layoutY="360.0" prefHeight="18.0" prefWidth="230.0" text="Label">
                <font>
                   <Font size="14.0" />
                </font>
@@ -96,6 +86,6 @@
             <Image url="@../../../images/teampointicon.png" />
          </image>
       </ImageView>
-       <Button fx:id="backButton" layoutX="16.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #3AB9E8;" text="&lt;" onAction="#backButtonOnAction" />
+       <Button fx:id="backButton" layoutX="16.0" layoutY="76.0" mnemonicParsing="false" onAction="#backButtonOnAction" prefHeight="26.0" prefWidth="35.0" style="-fx-background-color: #3AB9E8;" text="&lt;" />
    </children>
 </AnchorPane>
