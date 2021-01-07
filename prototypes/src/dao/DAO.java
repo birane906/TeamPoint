@@ -95,7 +95,7 @@ public interface DAO {
 
 		String req = "SELECT * "
 				+ "FROM `" + table + "` "
-				+ "WHERE " + "Name = " + DAO.stringFormat(name);
+				+ "WHERE " + table + "Name = " + DAO.stringFormat(name);
 
 		try {
 			if (stmt.execute(req)) {
