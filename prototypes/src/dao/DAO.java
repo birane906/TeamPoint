@@ -72,8 +72,6 @@ public interface DAO {
 	 * @param name, table
 	 * @return the column in the database according to a name, if not found return null
 	 */
-	// TODO ne marche pas avec la table user parcequ'on veut verifier l'email
-	// TODO faire un if user then req = ...
 	static boolean isNameExist(String name, String table) {
 
 		// Result from database
