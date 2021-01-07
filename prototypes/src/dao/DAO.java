@@ -83,7 +83,7 @@ public interface DAO {
 
 		String query = "SELECT * "
 				+ "FROM `" + table + "` "
-				+ "WHERE " + "Name = ?";
+				+ "WHERE " + table + "Name = ?";
 
 		try {
 			// Getconnection from JDBCConnector
