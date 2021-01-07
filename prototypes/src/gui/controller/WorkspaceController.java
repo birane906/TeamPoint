@@ -1,5 +1,6 @@
 package gui.controller;
 
+import business_logic.BoardFacade;
 import business_logic.UserFacade;
 import business_logic.WorkspaceFacade;
 import business_logic.board.Board;
@@ -40,14 +41,11 @@ public class WorkspaceController implements Initializable {
 	@FXML
 	public ImageView addBoardImage;
 
-	@FXML
-	public ImageView inviteMemberImage;
 
 	@FXML
 	public Label addBoardLabel;
 
-	@FXML
-	public Label inviteMemberLabel;
+
 
 	@FXML
 	public Line line2;
@@ -83,6 +81,9 @@ public class WorkspaceController implements Initializable {
 	public MenuButton addDelete;
 
 	@FXML
+	public MenuButton itemCollectionMenuButton;
+
+	@FXML
 	private MenuButton workspaces;
 
 	/**
@@ -92,14 +93,7 @@ public class WorkspaceController implements Initializable {
 
 
 
-	/**
-	 * Method which permite to connect into TeamPoint when the user clicks on the login button and provides the right
-	 * email and password
-	 */
-	@FXML
-	public void boxImageClicked(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
 
-	}
 
 	/**
 	 * Method which permite an user to manage his profile when he clicks the profile button
@@ -147,9 +141,6 @@ public class WorkspaceController implements Initializable {
 
 	}
 
-	public void inviteMemberClicked(MouseEvent mouseEvent) throws Exception{
-
-	}
 
 	public void goToCreateW(ActionEvent mouseEvent) throws IOException{
 
@@ -176,14 +167,6 @@ public class WorkspaceController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
-
-
-
-
-		ChangeViewMenuButton.setVisible(false);
 		line.setVisible(false);
 		line2.setVisible(false);
 		line3.setVisible(false);
@@ -191,9 +174,8 @@ public class WorkspaceController implements Initializable {
 		sp2.setVisible(false);
 		addBoardImage.setVisible(false);
 		addBoardLabel.setVisible(false);
-		inviteMemberImage.setVisible(false);
-		inviteMemberLabel.setVisible(false);
 		Set<Workspace> wsl = userFacade.getWorkspaces();
+
 
 
 
@@ -215,15 +197,21 @@ public class WorkspaceController implements Initializable {
 									Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
 									boardLabel.setText(currentBoard.getName());
 
-									List<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
-									ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
-									itemCollectionListView.setItems(mycurrentIC);
+									BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
+									if(boardFacade.retrieveBoard(currentBoard)) {
+										List<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
+										ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
+
+										for (ItemCollection ic : mycurrentIC) {
+											MenuItem mic = new MenuItem(ic.getName());
+											itemCollectionMenuButton.getItems().add(mic);
+										}
+									}
 
 
 								}
 							});
 
-							ChangeViewMenuButton.setVisible(true);
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());
 							sp.setVisible(true);
@@ -233,8 +221,6 @@ public class WorkspaceController implements Initializable {
 							line3.setVisible(true);
 							addBoardImage.setVisible(true);
 							addBoardLabel.setVisible(true);
-							inviteMemberImage.setVisible(true);
-							inviteMemberLabel.setVisible(true);
 
 
 						}
