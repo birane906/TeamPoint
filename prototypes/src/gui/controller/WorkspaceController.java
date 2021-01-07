@@ -80,6 +80,9 @@ public class WorkspaceController implements Initializable {
 	public MenuItem deleteWorkspaceMenuItem;
 
 	@FXML
+	public MenuButton addDelete;
+
+	@FXML
 	private MenuButton workspaces;
 
 	/**
@@ -143,10 +146,21 @@ public class WorkspaceController implements Initializable {
 
 	}
 
-	public void goToCreateW(ActionEvent event) throws IOException{
+	public void goToCreateW(ActionEvent mouseEvent) throws IOException{
+
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/createWorkspace.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) addDelete.getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
 	}
 
 	public void goToDeleteW(ActionEvent event) throws IOException{
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/deleteWorkspace.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) addDelete.getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
 	}
 
 
@@ -158,31 +172,13 @@ public class WorkspaceController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 
-		/*
-		createWorkspaceMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent e) {
-				Parent tableViewParent = null;
-				try {
-					tableViewParent = FXMLLoader.load(getClass().getResource("../view/createWorkspace.fxml"));
-				} catch (IOException ioException) {
-					ioException.printStackTrace();
-				}
-				Scene tableViewScene = new Scene(tableViewParent);
-				Stage window = (Stage) ((Node)e.getSource()).getScene().getWindow();
-				window.setScene(tableViewScene);
-				window.show();
-
-			}
-		});
-
-
-		 */
 
 
 
 
+
+
+		ChangeViewMenuButton.setVisible(false);
 		line.setVisible(false);
 		line2.setVisible(false);
 		line3.setVisible(false);
@@ -222,7 +218,7 @@ public class WorkspaceController implements Initializable {
 								}
 							});
 
-
+							ChangeViewMenuButton.setVisible(true);
 							workspaces.setText(m.getText());
 							workspaceName.setText(m.getText());
 							sp.setVisible(true);
