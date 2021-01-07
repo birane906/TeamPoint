@@ -198,6 +198,7 @@ public class WorkspaceController implements Initializable {
 							listBoard.setCellFactory(lv -> new SimpleListCell());
 
 							listBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
 								@Override
 								public void handle(MouseEvent event) {
 									Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
