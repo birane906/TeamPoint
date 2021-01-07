@@ -28,7 +28,7 @@ import org.w3c.dom.Text;
 public class MySQLBoardDAO extends BoardDAO {
 
 	/**
-	 * add a board to a workspace
+	 * create the board given a name and add it to a workspace
 	 * 
 	 * @param name       of the board
 	 * @param workspace  where the user creates the board
@@ -124,38 +124,6 @@ public class MySQLBoardDAO extends BoardDAO {
 		// GET CELLS OF a board
 		setCells(board);
 
-		//Map<Integer, Integer> hash = new HashMap<>();
-
-		//hash.put(id, cells);
-		// si y'a ça on peut faire une requete sur cell
-		// pour savoir toute les cell qui ont des values
-		// et remplir ses value
-
-/*
-		// SET CELLS
-		for (int i = 0; i < board.getColumns().size(); i++) {
-			Column<? extends Type> col = board.getColumns().get(i);
-			try {
-
-				List<Cell<? extends Type>> cells = getCellsFromColumn(board, col);
-				col.setCells(cells);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		// ici il fait plein de requete mais sur des ids (col, item et itemCol) qui n'ont pas de cellule
-		for (int i = 0; i < board.getItemCollections().size(); i++) {
-			for (int j = 0; j < board.getItemCollections().get(i).getItems().size(); j++) {
-				Item item = board.getItemCollections().get(i).getItems().get(j);
-
-				List<Cell<? extends Type>> cells = getCellsFromItem(board, board.getItemCollections().get(i).getItems().get(j));
-				item.setCells(cells);
-				System.out.println(board.getItemCollections().get(i).getItems().get(j).getCells());
-
-			}
- */
 		return board;
 	}
 
@@ -227,7 +195,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						}
 
 						DateType typeDate = (DateType) type;
-						Cell<? extends Type> cellDate = new Cell<DateType>(item, clmDate, typeDate, idCell);
+						Cell<? extends Type> cellDate = new Cell<>(item, clmDate, typeDate, idCell);
 						cells.add(cellDate);
 
 						break;
@@ -241,7 +209,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						}
 
 						DependencyType dependencyType = (DependencyType) type;
-						Cell<? extends Type> cellDep = new Cell<DependencyType>(item, clmDep, dependencyType, idCell);
+						Cell<? extends Type> cellDep = new Cell<>(item, clmDep, dependencyType, idCell);
 						cells.add(cellDep);
 
 						break;
@@ -255,7 +223,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						}
 
 						NumberType numType = (NumberType) type;
-						Cell<? extends Type> cellNum = new Cell<NumberType>(item, clmNum, numType, idCell);
+						Cell<? extends Type> cellNum = new Cell<>(item, clmNum, numType, idCell);
 						cells.add(cellNum);
 
 						break;
@@ -269,7 +237,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						}
 
 						PersonType personType = (PersonType) type;
-						Cell<? extends Type> cellPer = new Cell<PersonType>(item, clmPer, personType, idCell);
+						Cell<? extends Type> cellPer = new Cell<>(item, clmPer, personType, idCell);
 						cells.add(cellPer);
 
 						break;
@@ -283,7 +251,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						}
 
 						StatusType statusType = (StatusType) type;
-						Cell<? extends Type> cellStat = new Cell<StatusType>(item, clmStat, statusType, idCell);
+						Cell<? extends Type> cellStat = new Cell<>(item, clmStat, statusType, idCell);
 						cells.add(cellStat);
 
 						break;
@@ -297,7 +265,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						}
 
 						TimelineType timelineType = (TimelineType) type;
-						Cell<? extends Type> cellTime = new Cell<TimelineType>(item, clmTime, timelineType, idCell);
+						Cell<? extends Type> cellTime = new Cell<>(item, clmTime, timelineType, idCell);
 						cells.add(cellTime);
 
 						break;
@@ -312,7 +280,7 @@ public class MySQLBoardDAO extends BoardDAO {
 
 						TextType textType = (TextType) type;
 
-						Cell<? extends Type> cellText = new Cell<TextType>(item, clmText, textType, idCell);
+						Cell<? extends Type> cellText = new Cell<>(item, clmText, textType, idCell);
 						cells.add(cellText);
 
 						break;
@@ -553,113 +521,6 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		DAO.closeConnection(1);
 		return col;
-	}
-
-	/**
-	 * get all the cells from a column
-	 * @param board we want the column from
-	 * @param column we want the columns from
-	 * @return a List of cells
-	 */
-	private List<Cell<? extends Type>> getCellsFromColumn(Board board, Column<? extends Type> column) {
-
-		ArrayList<Cell<? extends Type>> cells = new ArrayList<>();
-
-		for (int i = 0; i < board.getItemCollections().size(); i++) {
-			for (Item item: board.getItemCollections().get(i).getItems()) {
-				cells.add(getCell(board, column, item));
-			}
-		}
-		return cells;
-	}
-
-	/**
-	 * get all the cells from an item
-	 * @param board we want the items from
-	 * @param item we want the items from
-	 * @return a List of cells
-	 */
-	private List<Cell<? extends Type>> getCellsFromItem(Board board, Item item) {
-
-		ArrayList<Cell<? extends Type>> cells = new ArrayList<>();
-
-		for (Column<? extends Type> column: board.getColumns()) {
-			cells.add(getCell(board, column, item));
-		}
-		return cells;
-	}
-
-	/**
-	 * get the cell from a column and an item
-	 * @param board we want the cell from
-	 * @param column we want the cell from
-	 * @param item we want the cell from
-	 * @return a cell
-	 */
-	private <T extends Type> Cell<T> getCell(Board board, Column<T> column, Item item) {
-		// GET CELLS FROM DB
-
-		Statement stmt = null;
-		ResultSet rs = null;
-		String query = "SELECT idCell "
-				+ "FROM cell "
-				+ "WHERE idBoard = ?"
-				+ " AND idColumn = ?"
-				+ " AND idItemCollection = ?"
-				+ " AND idItem = ?";
-
-		try {
-			// Get connection
-			stmt = DAO.getConnection(2).prepareStatement(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		String req = "SELECT idCell, idType "
-				+ "FROM cell "
-				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "")
-				+ " AND idColumn = " + DAO.stringFormat(column.getColumn_id() + "")
-				+ " AND idItemCollection = " + DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "")
-				+ " AND idItem = " + DAO.stringFormat(item.getItem_id() + "");
-
-		int cellId = -1;
-		int typeId = -1;
-
-		try {
-			assert stmt != null;
-
-			if (stmt.execute(req)) {
-				rs = stmt.getResultSet();
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			DAO.closeConnection(2);
-			return null;
-		}
-
-		Type type;
-		try {
-			while(true) {
-				assert rs != null;
-				if (!rs.next()) break;
-
-				cellId = rs.getInt("idCell");
-				typeId = rs.getInt("idType");
-
-				type = getValue(cellId, typeId);
-
-				Cell cell = new Cell(item, column, type, cellId);
-
-				DAO.closeConnection(2);
-				return cell;
-			}
-		} catch (SQLException e) {
-
-			DAO.closeConnection(2);
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	private Type getValue(int cellId, int typeId) {
@@ -1060,7 +921,6 @@ public class MySQLBoardDAO extends BoardDAO {
 	 * @return permission with the id 0 in the database
 	 */
 	@Override
-	// TODO verify if double connection ou simple
 	public Permission getDefaultPermission() {
 
 		// Query statement
