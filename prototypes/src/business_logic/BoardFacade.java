@@ -1,9 +1,12 @@
 package business_logic;
 
 import business_logic.board.*;
+import business_logic.board.types.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
+import dao.CellDAO;
+import dao.ColumnDAO;
 import dao.factory.DAOFactory;
 
 /**
@@ -49,7 +52,6 @@ public class BoardFacade {
 	 * @param workspace The {@link Workspace} to which belongs the created {@link Board}
 	 * @return <code>true</code> if the creation succeed, <code>false</code> otherwise
 	 */
-	// TODO ajout des quatre column de type PersonType, TimelineType, StatusType, DependencyType
 	public Boolean createBoard(String name, Workspace workspace) {
 		if (name.isBlank() || workspace == null) {
 			return false;
@@ -61,18 +63,47 @@ public class BoardFacade {
         User user  = userFacade.getCurrentUser();
 
         BoardDAO boardDAO = daoFactory.createBoardDAO();
-
         Permission permission = boardDAO.getDefaultPermission();
 
         Board board = boardDAO.addBoard(name, workspace, user, permission);
 
-		if (board != null) {
-			currentBoard = board;
-			return true;
+        if (board == null) {
+        	return false;
 		}
-		else {
-			return false;
+
+		ColumnDAO columnDAO = daoFactory.createColumnDAO();
+
+		Column<PersonType> personTypeColumn = (Column<PersonType>) columnDAO.addColumn("Person", board, "PersonType");
+		Column<TimelineType> timelineTypeColumn = (Column<TimelineType>) columnDAO.addColumn("Timeline", board, "TimelineType");
+		Column<StatusType> statusTypeColumn = (Column<StatusType>) columnDAO.addColumn("Status", board, "StatusType");
+		Column<DependencyType> dependencyTypeColumn = (Column<DependencyType>) columnDAO.addColumn("Dependency", board, "DependencyType");
+
+		board.addColumn(personTypeColumn);
+		board.addColumn(timelineTypeColumn);
+		board.addColumn(statusTypeColumn);
+		board.addColumn(dependencyTypeColumn);
+
+		CellDAO cellDAO = daoFactory.createCellDAO();
+
+		Column[] defaultColumn = {
+			personTypeColumn,
+			timelineTypeColumn,
+			statusTypeColumn,
+			dependencyTypeColumn
+		};
+
+		for (Column column : defaultColumn) {
+			for (ItemCollection itemCollection : board.getItemCollections()) {
+				for (Item item : itemCollection.getItems()) {
+					Cell cell = cellDAO.addCell(column, item, null);
+					item.addCell(cell);
+					column.addCell(cell);
+				}
+			}
 		}
+
+		currentBoard = board;
+		return true;
 
 	}
 
