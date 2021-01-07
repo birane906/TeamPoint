@@ -19,6 +19,7 @@ public class StatusType extends Type {
 	 */
 	private StatusLabel currentStatusLabel;
 
+	// TODO faire label StatusLabel
 	public String label;
 
 	/**

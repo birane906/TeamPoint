@@ -4,9 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import business_logic.UserFacade;
 import business_logic.board.Board;
@@ -20,6 +18,7 @@ import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
 import dao.DAO;
+import org.w3c.dom.Text;
 
 /**
  * Description of MySQLBoardDAO.
@@ -122,9 +121,19 @@ public class MySQLBoardDAO extends BoardDAO {
 		// SET ITEM TO ITEMCOLLECTIONS
 		board.setItemCollections(getItemCollection(board));
 
+		// GET CELLS OF a board
+		setCells(board);
+
+		//Map<Integer, Integer> hash = new HashMap<>();
+
+		//hash.put(id, cells);
+		// si y'a ça on peut faire une requete sur cell
+		// pour savoir toute les cell qui ont des values
+		// et remplir ses value
+
+/*
 		// SET CELLS
 		for (int i = 0; i < board.getColumns().size(); i++) {
-		//for (Column<? extends Type> column : board.getColumns()) {
 			Column<? extends Type> col = board.getColumns().get(i);
 			try {
 
@@ -135,18 +144,206 @@ public class MySQLBoardDAO extends BoardDAO {
 				e.printStackTrace();
 			}
 		}
-		//}
 
+		// ici il fait plein de requete mais sur des ids (col, item et itemCol) qui n'ont pas de cellule
 		for (int i = 0; i < board.getItemCollections().size(); i++) {
 			for (int j = 0; j < board.getItemCollections().get(i).getItems().size(); j++) {
 				Item item = board.getItemCollections().get(i).getItems().get(j);
 
 				List<Cell<? extends Type>> cells = getCellsFromItem(board, board.getItemCollections().get(i).getItems().get(j));
-
 				item.setCells(cells);
+				System.out.println(board.getItemCollections().get(i).getItems().get(j).getCells());
+
+			}
+ */
+		return board;
+	}
+
+	public void setCells(Board board) {
+		// Query statement
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "SELECT * "
+				+ "FROM cell "
+				+ "WHERE idBoard = ?";
+
+		try {
+			// Get connection
+			stmt = DAO.getConnection(0).prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		String req = "SELECT * "
+				+ "FROM cell "
+				+ "WHERE idBoard = " +DAO.stringFormat(board.getBoard_id() + "");
+
+		try {
+			assert stmt != null;
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DAO.closeConnection(0);
+			return;
+		}
+
+		List<Cell> cells = new ArrayList<>();
+
+		try {
+			while(true) {
+				assert rs != null;
+
+				if (!rs.next()) break;
+
+				int idCell = rs.getInt("idCell");
+				int idColumn = rs.getInt("idColumn");
+				int idItem = rs.getInt("idItem");
+				int idItemCollection = rs.getInt("idItemCollection");
+				int idType = rs.getInt("idType");
+
+
+				Item item = null;
+				for (ItemCollection itmCol: board.getItemCollections()){
+					for (Item itm: itmCol.getItems()) {
+						if(itm.getItem_id() == idItem) {
+							item = itm;
+						}
+					}
+				}
+
+				Type type = getValue(idCell, idType);
+
+				switch (type.getNameType()) {
+					case "DateType":
+						int x = 20;
+
+						Column<DateType> clmDate = null;
+						for (Column<? extends Type> col: board.getColumns()) {
+							if(col.getColumn_id() == idColumn) {
+								clmDate = (Column<DateType>) col;
+							}
+						}
+
+						DateType typeDate = (DateType) type;
+						Cell<? extends Type> cellDate = new Cell<DateType>(item, clmDate, typeDate, idCell);
+						cells.add(cellDate);
+
+						break;
+					case "DependencyType":
+						int y = 12;
+						Column<DependencyType> clmDep = null;
+						for (Column<? extends Type> col: board.getColumns()) {
+							if(col.getColumn_id() == idColumn) {
+								clmDep = (Column<DependencyType>) col;
+							}
+						}
+
+						DependencyType dependencyType = (DependencyType) type;
+						Cell<? extends Type> cellDep = new Cell<DependencyType>(item, clmDep, dependencyType, idCell);
+						cells.add(cellDep);
+
+						break;
+					case "NumberType":
+						int xX = 0;
+						Column<NumberType> clmNum = null;
+						for (Column<? extends Type> col: board.getColumns()) {
+							if(col.getColumn_id() == idColumn) {
+								clmNum = (Column<NumberType>) col;
+							}
+						}
+
+						NumberType numType = (NumberType) type;
+						Cell<? extends Type> cellNum = new Cell<NumberType>(item, clmNum, numType, idCell);
+						cells.add(cellNum);
+
+						break;
+					case "PersonType":
+						int yy = 10;
+						Column<PersonType> clmPer = null;
+						for (Column<? extends Type> col: board.getColumns()) {
+							if(col.getColumn_id() == idColumn) {
+								clmPer = (Column<PersonType>) col;
+							}
+						}
+
+						PersonType personType = (PersonType) type;
+						Cell<? extends Type> cellPer = new Cell<PersonType>(item, clmPer, personType, idCell);
+						cells.add(cellPer);
+
+						break;
+					case "StatusType":
+						int b = 1;
+						Column<StatusType> clmStat = null;
+						for (Column<? extends Type> col: board.getColumns()) {
+							if(col.getColumn_id() == idColumn) {
+								clmStat = (Column<StatusType>) col;
+							}
+						}
+
+						StatusType statusType = (StatusType) type;
+						Cell<? extends Type> cellStat = new Cell<StatusType>(item, clmStat, statusType, idCell);
+						cells.add(cellStat);
+
+						break;
+					case "TimelineType":
+						int sa = 11;
+						Column<TimelineType> clmTime = null;
+						for (Column<? extends Type> col: board.getColumns()) {
+							if(col.getColumn_id() == idColumn) {
+								clmTime = (Column<TimelineType>) col;
+							}
+						}
+
+						TimelineType timelineType = (TimelineType) type;
+						Cell<? extends Type> cellTime = new Cell<TimelineType>(item, clmTime, timelineType, idCell);
+						cells.add(cellTime);
+
+						break;
+					case "TextType":
+						int sasasa = 12;
+						Column<TextType> clmText = null;
+						for (Column<? extends Type> col: board.getColumns()) {
+							if(col.getColumn_id() == idColumn) {
+								clmText = (Column<TextType>) col;
+							}
+						}
+
+						TextType textType = (TextType) type;
+
+						Cell<? extends Type> cellText = new Cell<TextType>(item, clmText, textType, idCell);
+						cells.add(cellText);
+
+						break;
+					default:
+				}
+			}
+
+		} catch (SQLException e) {
+			DAO.closeConnection(0);
+			e.printStackTrace();
+		}
+
+		for (Column<? extends Type> col: board.getColumns()) {
+			for (Cell cell: cells) {
+				if(cell.getColumn().getColumn_id() == col.getColumn_id()) {
+					col.addCell(cell);
+				}
 			}
 		}
-		return board;
+
+		for (ItemCollection itemCollection: board.getItemCollections()) {
+			for (Item item: itemCollection.getItems()) {
+				for (Cell cell: cells) {
+					if(cell.getItem().getItem_id() == item.getItem_id()) {
+						item.addCell(cell);
+					}
+				}
+			}
+		}
+
+		DAO.closeConnection(0);
 	}
 
 	/**
@@ -219,8 +416,8 @@ public class MySQLBoardDAO extends BoardDAO {
 		ResultSet rs = null;
 		String query = "SELECT * "
 				+ "FROM item "
-				+ "WHERE idBoard = " + DAO.stringFormat(itemCol.getParentBoard().getBoard_id() + "")
-				+ " AND idItemCollection = " + DAO.stringFormat(itemCol.getItemCollection_id() + "");
+				+ "WHERE idBoard = ?"
+				+ " AND idItemCollection = ?";
 
 		ArrayList<Item> items = new ArrayList<>();
 		int id;
@@ -233,9 +430,14 @@ public class MySQLBoardDAO extends BoardDAO {
 			e.printStackTrace();
 		}
 
+		String req = "SELECT * "
+				+ "FROM item "
+				+ "WHERE idBoard = " + DAO.stringFormat(itemCol.getParentBoard().getBoard_id() + "")
+				+ " AND idItemCollection = " + DAO.stringFormat(itemCol.getItemCollection_id() + "");
+
 		try {
 			assert stmt != null;
-			if (stmt.execute(query)) {
+			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
@@ -442,8 +644,6 @@ public class MySQLBoardDAO extends BoardDAO {
 				assert rs != null;
 				if (!rs.next()) break;
 
-				System.out.println(req);
-
 				cellId = rs.getInt("idCell");
 				typeId = rs.getInt("idType");
 
@@ -507,7 +707,6 @@ public class MySQLBoardDAO extends BoardDAO {
 
 				break;
 			case 4: //personType
-
 				query = "SELECT idUser " +
 						"FROM persontype" +
 						" WHERE idCell = ?";
@@ -517,7 +716,6 @@ public class MySQLBoardDAO extends BoardDAO {
 
 				break;
 			case 5: // dateType
-
 				query = "SELECT date" +
 						" FROM datetype" +
 						" WHERE idCell = ?";
@@ -531,7 +729,8 @@ public class MySQLBoardDAO extends BoardDAO {
 				query = "SELECT idItem" +
 						" FROM dependencytype" +
 						" WHERE idCell = ?";
-				req = "SELECT text" +
+				req = "SELECT idItem" +
+						" FROM dependencytype" +
 						" WHERE idCell = " + DAO.stringFormat(cellId + "");
 
 				break;
@@ -607,6 +806,7 @@ public class MySQLBoardDAO extends BoardDAO {
 					e.printStackTrace();
 				}
 
+				// TODO faire label StatusLabel
 				return new StatusType(label);
 
 			case 3: // numberType
@@ -1061,6 +1261,8 @@ public class MySQLBoardDAO extends BoardDAO {
 		Workspace parentWorkspace = new Workspace("salut");
 		User boardOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
 		Board parentBoard = new Board(75, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "", ""));
+
+		/*
 		ItemCollection itemCol = new ItemCollection("test", 1, parentBoard);
 		ItemCollection itemCol2 = new ItemCollection("test", 59, parentBoard);
 
@@ -1078,7 +1280,7 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		parentBoard.addItemCollection(itemCol2);
 		parentBoard.addItemCollection(itemCol);
-
+*/
 		//Board res = mySQL.addBoard("Boarddaas", parentWorkspace, boardOwner, new Permission(0, "Perm", "desc"));
 		//	System.out.println("addboard " + res);
 
@@ -1097,13 +1299,8 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		Board boardRetrieved = mySQL.retrieveBoard(parentBoard);
 
-		System.out.println("retrieve " + boardRetrieved);
+		//System.out.println("retrieve " + boardRetrieved.getItemCollections().get(1).getItems().get(0).getCells().get(0));
 
-		for (Column<? extends Type> col: boardRetrieved.getColumns()) {
-			for (int i = 0; i < col.getCells().size(); i++) {
-				System.out.print(col.getCells().get(i) + " / ");
-			}
-			System.out.println();
-		}
+		System.out.println(boardRetrieved);
 	}
 }

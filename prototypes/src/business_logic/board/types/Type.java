@@ -58,14 +58,4 @@ public abstract class Type {
 	public int getIdType() {
 		return idType;
 	}
-
-	public String toString() {
-		String str = "";
-		
-		str += getIdType() + "/ ";
-		str += getNameType() + "/ ";
-		str += getDescription();
-		
-		return str;
-	}
 }

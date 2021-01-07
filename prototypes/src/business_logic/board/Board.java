@@ -267,4 +267,14 @@ public class Board {
 	public int getBoard_id() {
 		return this.board_id;
 	}
+
+	public String toString() {
+		String str = "";
+
+		for (Column col: columns) {
+			str += col.toString();
+		}
+		return str;
+	}
+
 }

@@ -99,11 +99,11 @@ public class Cell<T extends Type> {
 	
 	public String toString() {
 		String str = "";
-		
-		str += "column: " + getColumn().getName();
-		str += " item: " + getItem().getLabel();
+
+		str += "id: " + getCellId();
 		str += " value: " + getValue();
-		
+		str += "\n";
+
 		return str;
 	}
 

@@ -1,7 +1,7 @@
 package business_logic.board.types;
 
 /**
- * Type used in a {@link Column} to specify a text field
+ * Type used in a {@link } to specify a text field
  *
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
@@ -109,6 +109,8 @@ public class TextType extends Type {
 	    this.charLimit = newCharLimit;
 	}
 
-
+	public String toString() {
+		return getText();
+	}
 
 }

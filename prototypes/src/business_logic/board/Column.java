@@ -161,4 +161,15 @@ public class Column<T extends Type> {
 	public Type getColumnType() {
 		return this.typeParameterClass;
 	}
+
+	public String toString() {
+		String str = "";
+
+		str += "<<" + column_id + ">>\n";
+
+		for (Cell cell: cells) {
+			str += cell.toString();
+		}
+		return str;
+	}
 }
