@@ -212,6 +212,15 @@ public class WorkspaceController implements Initializable {
 
 										for (ItemCollection ic : mycurrentIC) {
 											MenuItem mic = new MenuItem(ic.getName());
+											mic.setOnAction(new EventHandler<ActionEvent>() {
+												@Override
+												public void handle(ActionEvent e) {
+													List<Item> myItems = ic.getItems();
+													boardTableView.getItems().add("Tache");
+
+												}
+											});
+
 											itemCollectionMenuButton.getItems().add(mic);
 										}
 
@@ -259,11 +268,6 @@ public class WorkspaceController implements Initializable {
 
 										//list of list of cells
 
-
-
-										for (Item item: current ) {
-
-										}
 
 
 
