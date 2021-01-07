@@ -248,7 +248,6 @@ public class WorkspaceController implements Initializable {
 }
 
 class SimpleListCell extends ListCell<Board> {
-
 	@Override
 	protected void updateItem(Board item, boolean empty) {
 		super.updateItem(item, empty);

@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -33,13 +34,13 @@ import java.util.ResourceBundle;
  * 
  * @author 
  */
-public class DeleteWorkspaceController {
+public class DeleteWorkspaceController implements Initializable{
 
 	@FXML
 	public TextField workspaceName;
 
 	@FXML
-	public ListView workspaceListView;
+	public ListView<Workspace> workspaceListView;
 	/**
 	 * Description of the property userFacade.
 	 */
@@ -57,18 +58,7 @@ public class DeleteWorkspaceController {
 	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-		HashSet<Workspace> workspaces = userFacade.getWorkspaces();
-		ObservableList<Workspace> myWorkspaces = FXCollections.observableArrayList(workspaces);
-		workspaceListView.setItems(myWorkspaces);
-		workspaceListView.setCellFactory(lv -> new SimpleListCell());
 
-		workspaceListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Workspace currentWorkspace = (Workspace) workspaceListView.getSelectionModel().getSelectedItem();
-				workspaceFacade.deleteWorkspace(currentWorkspace);
-			}
-		});
 	}
 
 	/**
@@ -94,4 +84,32 @@ public class DeleteWorkspaceController {
 	}
 
 
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+		HashSet<Workspace> workspaces = userFacade.getWorkspaces();
+		ObservableList<Workspace> myWorkspaces = FXCollections.observableArrayList(workspaces);
+		workspaceListView.setItems(myWorkspaces);
+		workspaceListView.setCellFactory(lv -> new SimpleCell());
+
+		workspaceListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				Workspace currentWorkspace = (Workspace) workspaceListView.getSelectionModel().getSelectedItem();
+				workspaceFacade.deleteWorkspace(currentWorkspace);
+			}
+		});
+	}
+}
+
+
+class SimpleCell extends ListCell<Workspace> {
+	@Override
+	protected void updateItem(Workspace item, boolean empty) {
+		super.updateItem(item, empty);
+		setText(null);
+		if (!empty && item != null) {
+			final String text = String.format("%s", item.getName());
+			setText(text);
+		}
+	}
 }
