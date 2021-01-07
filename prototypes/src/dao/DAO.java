@@ -72,8 +72,6 @@ public interface DAO {
 	 * @param name, table
 	 * @return the column in the database according to a name, if not found return null
 	 */
-	// TODO ne marche pas avec la table user parcequ'on veut verifier l'email
-	// TODO faire un if user then req = ...
 	static boolean isNameExist(String name, String table) {
 
 		// Result from database
@@ -81,9 +79,27 @@ public interface DAO {
 		// Query statement
 		PreparedStatement stmt;
 
-		String query = "SELECT * "
-				+ "FROM `" + table + "` "
-				+ "WHERE " + table + "Name = ?";
+		String query, req;
+
+		if(table.equals("user")) {
+			query = "SELECT * " +
+					"FROM user " +
+					"WHERE email = ?";
+
+			req = "SELECT * " +
+					"FROM user " +
+					"WHERE email " + DAO.stringFormat(name);
+		}
+		else {
+			query = "SELECT * "
+					+ "FROM `" + table + "` "
+					+ "WHERE " + table + "Name = ?";
+
+			req = "SELECT * "
+					+ "FROM `" + table + "` "
+					+ "WHERE " + table + "Name = " + DAO.stringFormat(name);
+		}
+
 
 		try {
 			// Getconnection from JDBCConnector
@@ -92,11 +108,6 @@ public interface DAO {
 			e.printStackTrace();
 			return false;
 		}
-
-		String req = "SELECT * "
-				+ "FROM `" + table + "` "
-				+ "WHERE " + table + "Name = " + DAO.stringFormat(name);
-
 
 		try {
 			if (stmt.execute(req)) {
