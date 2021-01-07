@@ -4,8 +4,11 @@ import business_logic.BoardFacade;
 import business_logic.UserFacade;
 import business_logic.WorkspaceFacade;
 import business_logic.board.Board;
+import business_logic.board.Column;
 import business_logic.board.ItemCollection;
+import business_logic.board.types.*;
 import business_logic.workspace.Workspace;
+import dao.DAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -82,6 +85,9 @@ public class WorkspaceController implements Initializable {
 
 	@FXML
 	public MenuButton itemCollectionMenuButton;
+
+	@FXML
+	public TableView boardTableView;
 
 	@FXML
 	private MenuButton workspaces;
@@ -206,8 +212,81 @@ public class WorkspaceController implements Initializable {
 											MenuItem mic = new MenuItem(ic.getName());
 											itemCollectionMenuButton.getItems().add(mic);
 										}
-									}
 
+										//SET COLUMNS
+										List<Column<? extends Type>> currentColumns = currentBoard.getColumns();
+										ObservableList<Column<? extends Type>> mycurrentCC = FXCollections.observableArrayList(currentColumns);
+
+										for (Column<? extends Type> c : mycurrentCC) {
+
+											switch(c.getColumnType().getNameType()) {
+												case "StatusType":
+													TableColumn<StatusType, String> tableColumnStatus= new TableColumn<>("Statut");
+													boardTableView.getColumns().add(tableColumnStatus);
+													break;
+
+												case "TimelineType":
+													TableColumn<TimelineType, String> tableColumnTimeline= new TableColumn<>("Timeline");
+													boardTableView.getColumns().add(tableColumnTimeline);
+													break;
+												case y:
+													// code block
+													break;
+												default:
+													// code block
+											}
+
+											TableColumn<StatusType, String> tc= new TableColumn<StatusType, String>("Statut");
+											boardTableView.getColumns().add(tc);
+
+
+											switch (t.getNameType()) {
+												case "DateType":
+													int x = 20;
+													col.add(new Column<DateType>(board, name, id, t));
+													break;
+												case "DependencyType":
+													int y = 12;
+													col.add(new Column<DependencyType>(board, name, id, t));
+													break;
+												case "NumberType":
+													int xX = 0;
+													col.add(new Column<NumberType>(board, name, id, t));
+													break;
+												case "PersonType":
+													int yy = 10;
+													col.add(new Column<PersonType>(board, name, id, t));
+													break;
+												case "StatusType":
+													int b = 1;
+													col.add(new Column<StatusType>(board, name, id, t));
+													break;
+												case "TimelineType":
+													int sa = 11;
+													col.add(new Column<TimelineType>(board, name, id, t));
+													break;
+												case "TextType":
+													int sasasa = 12;
+													col.add(new Column<TextType>(board, name, id, t));
+												default:
+											}
+
+
+
+										}
+
+
+
+
+
+
+
+
+
+
+
+
+									}
 
 								}
 							});

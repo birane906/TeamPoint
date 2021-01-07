@@ -5,7 +5,6 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -50,14 +49,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="918.0">
                            <children>
                               <MenuButton fx:id="itemCollectionMenuButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="197.0" text="Sélectionner un item collection" />
-                              <TableView fx:id="boardTableView" layoutX="13.0" layoutY="58.0" prefHeight="418.0" prefWidth="730.0">
-                                <columns>
-                                  <TableColumn prefWidth="96.0" text="Statut" />
-                                  <TableColumn prefWidth="108.79998779296875" text="Timeline" />
-                                    <TableColumn prefWidth="100.79995727539062" text="Dependency" />
-                                    <TableColumn prefWidth="113.5999755859375" text="Personne" />
-                                </columns>
-                              </TableView>
+                              <TableView fx:id="boardTableView" layoutX="13.0" layoutY="68.0" prefHeight="410.0" prefWidth="726.0" />
                            </children>
                         </AnchorPane>
                     </content>
