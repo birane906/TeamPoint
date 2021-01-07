@@ -97,6 +97,7 @@ public interface DAO {
 				+ "FROM `" + table + "` "
 				+ "WHERE " + table + "Name = " + DAO.stringFormat(name);
 
+
 		try {
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();

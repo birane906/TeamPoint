@@ -139,6 +139,11 @@ public class WorkspaceController implements Initializable {
 
 
 	public void addBoardClicked(MouseEvent mouseEvent) throws Exception{
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/createBoard.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
 
 	}
 
@@ -248,7 +253,6 @@ public class WorkspaceController implements Initializable {
 }
 
 class SimpleListCell extends ListCell<Board> {
-
 	@Override
 	protected void updateItem(Board item, boolean empty) {
 		super.updateItem(item, empty);
