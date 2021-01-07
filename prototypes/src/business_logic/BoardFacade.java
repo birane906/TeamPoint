@@ -52,7 +52,6 @@ public class BoardFacade {
 	 * @param workspace The {@link Workspace} to which belongs the created {@link Board}
 	 * @return <code>true</code> if the creation succeed, <code>false</code> otherwise
 	 */
-	// TODO ajout des quatre column de type PersonType, TimelineType, StatusType, DependencyType
 	public Boolean createBoard(String name, Workspace workspace) {
 		if (name.isBlank() || workspace == null) {
 			return false;
