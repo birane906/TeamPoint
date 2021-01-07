@@ -9,7 +9,6 @@ import business_logic.board.Item;
 import business_logic.board.ItemCollection;
 import business_logic.board.types.*;
 import business_logic.workspace.Workspace;
-import dao.DAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
@@ -88,7 +88,7 @@ public class WorkspaceController implements Initializable {
 	public MenuButton itemCollectionMenuButton;
 
 	@FXML
-	public TableView boardTableView;
+	public TableView boardTableView = new TableView();
 
 	@FXML
 	private MenuButton workspaces;
@@ -189,108 +189,107 @@ public class WorkspaceController implements Initializable {
 		if(wsl != null) {
 			for (Workspace w : wsl) {
 				MenuItem m = new MenuItem(w.getName());
-				m.setOnAction(new EventHandler<ActionEvent>() {
-					@Override public void handle(ActionEvent e) {
-						WorkspaceFacade workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
-						if(workspaceFacade.retrieveWorkspace(w)){
-							ArrayList<Board>boards = workspaceFacade.getCurrentWorkspace().getBoards();
-							ObservableList<Board> myBoards = FXCollections.observableArrayList(boards);
-							listBoard.setItems(myBoards);
-							listBoard.setCellFactory(lv -> new SimpleListCell());
+				m.setOnAction(e -> {
+					WorkspaceFacade workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
+					if(workspaceFacade.retrieveWorkspace(w)){
+						ArrayList<Board>boards = workspaceFacade.getCurrentWorkspace().getBoards();
+						ObservableList<Board> myBoards = FXCollections.observableArrayList(boards);
+						listBoard.setItems(myBoards);
+						listBoard.setCellFactory(lv -> new SimpleListCell());
 
-							listBoard.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						listBoard.setOnMouseClicked(event -> {
+							Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
+							boardLabel.setText(currentBoard.getName());
 
-								@Override
-								public void handle(MouseEvent event) {
-									Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
-									boardLabel.setText(currentBoard.getName());
+							BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
+							if(boardFacade.retrieveBoard(currentBoard)) {
+								List<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
+								ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
 
-									BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
-									if(boardFacade.retrieveBoard(currentBoard)) {
-										List<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
-										ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
+								for (ItemCollection ic : mycurrentIC) {
+									MenuItem mic = new MenuItem(ic.getName());
+									mic.setOnAction(e1 -> {
+										List<Item> items = ic.getItems();
 
-										for (ItemCollection ic : mycurrentIC) {
-											MenuItem mic = new MenuItem(ic.getName());
-											mic.setOnAction(new EventHandler<ActionEvent>() {
-												@Override
-												public void handle(ActionEvent e) {
-													List<Item> myItems = ic.getItems();
-													boardTableView.getItems().add("Tache");
+										ObservableList<Item> itemsObs = FXCollections.observableArrayList(items);
+										boardTableView.setItems(itemsObs);
 
-												}
-											});
-
-											itemCollectionMenuButton.getItems().add(mic);
-										}
-
-										//SET COLUMNS
-										List<Column<? extends Type>> currentColumns = currentBoard.getColumns();
-										ObservableList<Column<? extends Type>> mycurrentCC = FXCollections.observableArrayList(currentColumns);
-
-
-										TableColumn<String, String> task = new TableColumn<>("Tâche");
-										boardTableView.getColumns().add(task);
-
-
-										for (Column<? extends Type> c : mycurrentCC) {
+										for (Column<? extends Type> c: currentBoard.getColumns()) {
 											switch (c.getColumnType().getNameType()) {
 												case "DateType":
-													TableColumn<DateType, String> dateType = new TableColumn<>("DateType");
-													boardTableView.getColumns().add(dateType);
+
+													Cell<DateType> cells = (Cell<DateType>)c.getCells();
+													ObservableList<Cell<DateType>> cellsDate = FXCollections.observableArrayList(cells);
+													boardTableView.setItems(cellsDate);
 													break;
-												case "DependencyType":
-													TableColumn<DependencyType, String> dependency = new TableColumn<>("DependencyType");
-													boardTableView.getColumns().add(dependency);
-													break;
-												case "NumberType":
-													TableColumn<NumberType, String> number = new TableColumn<>("NumberType");
-													boardTableView.getColumns().add(number);
-													break;
-												case "PersonType":
-													TableColumn<PersonType, String> person = new TableColumn<>("PersonType");
-													boardTableView.getColumns().add(person);
-													break;
-												case "StatusType":
-													TableColumn<StatusType, String> status = new TableColumn<>("StatusType");
-													boardTableView.getColumns().add(status);
-													break;
-												case "TimelineType":
-													TableColumn<TimelineType, String> timelineType = new TableColumn<>("TimelineType");
-													boardTableView.getColumns().add(timelineType);
-													break;
-												case "TextType":
-													TableColumn<TextType, String> text = new TableColumn<>("TextType");
-													boardTableView.getColumns().add(text);
-												default:
 											}
+
 										}
 
-										//list of list of cells
 
-
-
-
-
-									}
-
+									});
+									itemCollectionMenuButton.getItems().add(mic);
 								}
-							});
 
-							workspaces.setText(m.getText());
-							workspaceName.setText(m.getText());
-							sp.setVisible(true);
-							sp2.setVisible(true);
-							line.setVisible(true);
-							line2.setVisible(true);
-							line3.setVisible(true);
-							addBoardImage.setVisible(true);
-							addBoardLabel.setVisible(true);
+								//SET COLUMNS
 
+								TableColumn<Item, String> task = new TableColumn<>("Tâche");
+								task.setCellValueFactory(new PropertyValueFactory<>("label"));
+								boardTableView.getColumns().add(task);
 
-						}
+								for (Column<? extends Type> c : currentBoard.getColumns()) {
+									switch (c.getColumnType().getNameType()) {
+										case "DateType":
+
+											TableColumn<DateType, String> dateType = new TableColumn<>("DateType");
+											task.setCellValueFactory(new PropertyValueFactory<>("date"));
+											boardTableView.getColumns().add(dateType);
+
+											break;
+
+										case "DependencyType":
+											TableColumn<DependencyType, String> dependency = new TableColumn<>("DependencyType");
+											boardTableView.getColumns().add(dependency);
+											break;
+										case "NumberType":
+											TableColumn<NumberType, String> number = new TableColumn<>("NumberType");
+											boardTableView.getColumns().add(number);
+											break;
+										case "PersonType":
+											TableColumn<PersonType, String> person = new TableColumn<>("PersonType");
+											boardTableView.getColumns().add(person);
+											break;
+										case "StatusType":
+											TableColumn<StatusType, String> status = new TableColumn<>("StatusType");
+											boardTableView.getColumns().add(status);
+											break;
+										case "TimelineType":
+											TableColumn<TimelineType, String> timelineType = new TableColumn<>("TimelineType");
+											boardTableView.getColumns().add(timelineType);
+											break;
+										case "TextType":
+											TableColumn<TextType, String> text = new TableColumn<>("TextType");
+											boardTableView.getColumns().add(text);
+										default:
+									}
+								}
+							}
+
+						});
+
+						workspaces.setText(m.getText());
+						workspaceName.setText(m.getText());
+						sp.setVisible(true);
+						sp2.setVisible(true);
+						line.setVisible(true);
+						line2.setVisible(true);
+						line3.setVisible(true);
+						addBoardImage.setVisible(true);
+						addBoardLabel.setVisible(true);
+
 
 					}
+
 				});
 				workspaces.getItems().add(m);
 			}
