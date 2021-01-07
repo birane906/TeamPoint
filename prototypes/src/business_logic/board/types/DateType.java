@@ -38,6 +38,11 @@ public class DateType extends Type {
 		this.date = date;
 	}
 
+	public DateType(Date date) {
+		super(DateType.class.getSimpleName(), "date");
+		this.date = date;
+	}
+
 	/**
 	 * Returns date.
 	 * @return date 

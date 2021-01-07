@@ -3,6 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * {@link JDBCConnector} is a Singleton class. It holds the {@link Connection} to the database
@@ -14,14 +15,20 @@ public class JDBCConnector {
 	/**
 	 * The database connection
 	 */
-	private Connection connection;
+	// surtout pas final
+	private Connection[] connection = new Connection[4];
 
 	private JDBCConnector() {
-		try {
-			this.connection = DriverManager.getConnection(
-				"jdbc:mysql://localhost/TeamPoint?" + "user=root&password=" + "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true" + "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
-		} catch (SQLException e) {
-			e.printStackTrace();
+		for(int i = 0; i < 3; i++) {
+			try {
+				this.connection[i] = (DriverManager.getConnection(
+						"jdbc:mysql://localhost/TeamPoint?" + "user=root&password="
+						+ "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true"
+						+ "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC"));
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -47,26 +54,33 @@ public class JDBCConnector {
 	 * Returns the database connection.
 	 * @return Returns a {@link Connection}
 	 */
-	public Connection getConnection() {
-		if(this.connection == null) {
-			initializeConnection();
-		}
-		return this.connection;
-	}
-	
-	public void initializeConnection() {
+	public Connection getConnection(int countConnection) {
 		try {
-			this.connection = DriverManager.getConnection(
-				"jdbc:mysql://localhost/TeamPoint?" + "user=root&password=" + "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true" + "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
+			if(this.connection[countConnection] == null || this.connection[countConnection].isClosed()) {
+				initializeConnection(countConnection);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return this.connection[countConnection];
+
+	}
+
+	public void initializeConnection(int countConnection) {
+		try {
+			this.connection[countConnection] = DriverManager.getConnection(
+					"jdbc:mysql://localhost/TeamPoint?" + "user=root&password="
+							+ "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true"
+							+ "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void closeConnection() {
+	public void closeConnection(int countConnection) {
 		try {
-			this.connection.close();
-			this.connection = null;
+			this.connection[countConnection].close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

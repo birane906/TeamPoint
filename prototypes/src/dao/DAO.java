@@ -1,5 +1,11 @@
 package dao;
 
+import business_logic.board.Item;
+import business_logic.board.types.Type;
+import business_logic.board.types.TypeFactory;
+import business_logic.user.User;
+import database.JDBCConnector;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +14,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-
-import business_logic.board.types.Type;
-import business_logic.board.types.TypeFactory;
-import business_logic.user.User;
-import database.JDBCConnector;
 
 /**
  * DAO interface
@@ -58,12 +59,12 @@ public interface DAO {
 		return "\"" + str + "\"";
 	}
 	
-	static Connection getConnection() {
-		return JDBCConnector.getJDBCConnectorInstance().getConnection();
+	static Connection getConnection(int countConnection) {
+		return JDBCConnector.getJDBCConnectorInstance().getConnection(countConnection);
 	}
 	
-	static void closeConnection() {
-		JDBCConnector.getJDBCConnectorInstance().closeConnection();
+	static void closeConnection(int countConnection) {
+		JDBCConnector.getJDBCConnectorInstance().closeConnection(countConnection);
 	}
 
 	/**
@@ -71,6 +72,8 @@ public interface DAO {
 	 * @param name, table
 	 * @return the column in the database according to a name, if not found return null
 	 */
+	// TODO ne marche pas avec la table user parcequ'on veut verifier l'email
+	// TODO faire un if user then req = ...
 	static boolean isNameExist(String name, String table) {
 
 		// Result from database
@@ -80,37 +83,41 @@ public interface DAO {
 
 		String query = "SELECT * "
 				+ "FROM `" + table + "` "
-				+ "WHERE " + table + "Name = ?";
+				+ "WHERE " + "Name = ?";
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 			return false;
 		}
 
 		String req = "SELECT * "
 				+ "FROM `" + table + "` "
-				+ "WHERE " + table + "Name = " + DAO.stringFormat(name);
+				+ "WHERE " + "Name = " + DAO.stringFormat(name);
 
 		try {
 			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
 			e.printStackTrace();
+			closeConnection(0);
 			return false;
 		}
-		// if we have a result then move to the next line
 
 		try {
 			assert rs != null;
-			return rs.next();
+
+			if(rs.next()) {
+				closeConnection(0);
+				return true;
+			}
+			return false;
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			DAO.closeConnection(0);
 			e.printStackTrace();
 			return false;
 		}
@@ -131,10 +138,9 @@ public interface DAO {
 				+ "WHERE idUser = ?";
 
 		try {
-			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			// Get connection from JDBCConnector
+			stmt = getConnection(1).prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -148,7 +154,7 @@ public interface DAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
+			DAO.closeConnection(1);
 			e.printStackTrace();
 		}
 
@@ -167,7 +173,7 @@ public interface DAO {
 		}
 
 		if (resultat.size() == 0) {
-			// TODO customize Exception
+			DAO.closeConnection(1);
 			throw new Exception("User not found");
 		}
 
@@ -178,6 +184,7 @@ public interface DAO {
 		String profileDesc = resultat.get(4);
 		String phoneNumber = resultat.get(5);
 
+		closeConnection(1);
 		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
 
@@ -188,6 +195,7 @@ public interface DAO {
 	 */
 	static Type getTypeById(int idType) {
 		if (idType == -1) {
+			System.out.println("dednufiezjks");
 			return null;
 		}
 		// Result from database
@@ -200,9 +208,8 @@ public interface DAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = getConnection(2).prepareStatement(query);
 		} catch (SQLException e) {
-			// TODO explain database not found
 			e.printStackTrace();
 		}
 
@@ -216,11 +223,10 @@ public interface DAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			// TODO explain connection lost
+			DAO.closeConnection(2);
 			e.printStackTrace();
 		}
 
-		Type type = null;
 		try {
 			assert rs != null;
 			if(rs.next()) {
@@ -228,12 +234,16 @@ public interface DAO {
 				String label = rs.getString("nameType");
 				String descr = rs.getString("descriptionType");
 
-				type = TypeFactory.createType(id, label, descr);
-			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-		return type;
-	}
+				closeConnection(2);
 
+				return TypeFactory.createType(id, label, descr);
+
+			}
+		} catch (SQLException e) {
+			DAO.closeConnection(2);
+			e.printStackTrace();
+		}
+		System.out.println("here");
+		return null;
+	}
 }

@@ -38,6 +38,11 @@ public abstract class Type {
 		this.nameType = nameType;
 	}
 
+	public Type(String nameType, String description) {
+		this.nameType = nameType;
+		this.description = description;
+	}
+
 	/**
 	 * Returns description.
 	 * @return description 
@@ -52,15 +57,5 @@ public abstract class Type {
 
 	public int getIdType() {
 		return idType;
-	}
-
-	public String toString() {
-		String str = "";
-		
-		str += getIdType() + "/ ";
-		str += getNameType() + "/ ";
-		str += getDescription();
-		
-		return str;
 	}
 }

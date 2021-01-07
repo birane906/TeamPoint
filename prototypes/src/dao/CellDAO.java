@@ -20,14 +20,14 @@ public abstract class CellDAO implements DAO {
 	 * @param item 
 	 * @return the cell created
 	 */
-	public abstract Cell<? extends Type> addCell(Column<? extends Type> column, Item item, Type value);
+	public abstract <T extends Type> Cell<T> addCell(Column<T> column, Item item, T value);
 
 	/**
 	 * delete Cell.
 	 * @param cell 
 	 * @return a boolean according to the success of delete
 	 */
-	public abstract Boolean deleteCell(Cell<? extends Type> cell);
+	public abstract <T extends Type> Boolean deleteCell(Cell<T> cell);
 
 	/**
 	 * edit Cell.
@@ -35,5 +35,5 @@ public abstract class CellDAO implements DAO {
 	 * @param value 
 	 * @return a boolean according to the success of update
 	 */
-	public abstract Boolean editCell(Cell<? extends Type> cell, Type value);
+	public abstract <T extends Type> Boolean editCell(Cell<T> cell, T value);
 }

@@ -38,7 +38,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection
-			stmt = DAO.getConnection()
+			stmt = DAO.getConnection(0)
 				.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					 ResultSet.CONCUR_UPDATABLE);
 		} catch (SQLException e) {
@@ -55,19 +55,16 @@ public class MySQLUserDAO extends UserDAO {
 			if(rs.next()) {
 				rs.deleteRow();
 				
-				DAO.closeConnection();
-				
+				DAO.closeConnection(0);
 				return true;
 			}
 			// if rs is empty
 			
-			DAO.closeConnection();
-			
+			DAO.closeConnection(0);
 			return false;
 		} catch (SQLException e) {
 			
-			DAO.closeConnection();
-			
+			DAO.closeConnection(0);
 			return false;
 		}
 	}
@@ -108,7 +105,7 @@ public class MySQLUserDAO extends UserDAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -117,7 +114,6 @@ public class MySQLUserDAO extends UserDAO {
 				+ "profileDescription, birthday" + " FROM User "
 				+ "WHERE email = " + DAO.stringFormat(email) 
 				+ " AND password = " + DAO.stringFormat(password);
-
 
 		try {
 			assert stmt != null;
@@ -143,6 +139,7 @@ public class MySQLUserDAO extends UserDAO {
 		}
 
 		if (fieldOfUser.size() == 0) {
+			DAO.closeConnection(0);
 			throw new Exception("User not found");
 		}
 
@@ -153,8 +150,7 @@ public class MySQLUserDAO extends UserDAO {
 		String profileDesc = fieldOfUser.get(4);
 		String phoneNumber = fieldOfUser.get(5);
 		
-		DAO.closeConnection();
-		
+		DAO.closeConnection(0);
 		return new User(idUser, name, firstName, emailUser, profileDesc, phoneNumber);
 	}
 
@@ -179,7 +175,7 @@ public class MySQLUserDAO extends UserDAO {
 		
 		try {
 			// Getconnection
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -192,16 +188,13 @@ public class MySQLUserDAO extends UserDAO {
 				+ DAO.stringFormat(password) + ")";
 		try {
 			assert stmt != null;
-			stmt.executeQuery(req);
+			stmt.executeUpdate(req);
 		} catch (SQLException e) {
-			
-			DAO.closeConnection();
-			
+			DAO.closeConnection(0);
 			return false;
 		}
 		
-		DAO.closeConnection();
-		
+		DAO.closeConnection(0);
 		return true;
 	}
 

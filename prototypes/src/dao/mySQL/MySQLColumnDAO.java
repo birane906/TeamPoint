@@ -1,9 +1,12 @@
 package dao.mySQL;
 
+import business_logic.board.Permission;
 import business_logic.board.types.Type;
 import business_logic.board.types.TypeFactory;
 import business_logic.board.Board;
 import business_logic.board.Column;
+import business_logic.user.User;
+import business_logic.workspace.Workspace;
 import dao.ColumnDAO;
 import dao.DAO;
 
@@ -12,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MySQLColumnDAO extends ColumnDAO {
 
@@ -41,7 +45,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 				+ " (idBoard, idColumnType, columnName) VALUES(?, ?, ?)";
 		try {
 			// Get connection
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +62,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
 		} catch (SQLException e) {
 			
-			DAO.closeConnection();
+			DAO.closeConnection(0);
 			e.printStackTrace();
 			return null;
 		}
@@ -70,10 +74,10 @@ public class MySQLColumnDAO extends ColumnDAO {
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			columnId = rs.getInt(1);
-			DAO.closeConnection();
+			DAO.closeConnection(0);
 
 		} catch (SQLException e) {
-			DAO.closeConnection();
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 
@@ -83,8 +87,9 @@ public class MySQLColumnDAO extends ColumnDAO {
 				+ "WHERE idColumn = ?";
 		
 		try {
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(0).prepareStatement(query);
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 		}
 
@@ -93,11 +98,11 @@ public class MySQLColumnDAO extends ColumnDAO {
 				+ "WHERE idColumn = " + DAO.stringFormat(columnId + "");
 		try {
 			
-			stmt.executeUpdate(req);
+			stmt.execute(req);
 		
 		} catch (SQLException e) {
 			
-			DAO.closeConnection();
+			DAO.closeConnection(0);
 			e.printStackTrace();
 			return null;
 		}
@@ -109,13 +114,13 @@ public class MySQLColumnDAO extends ColumnDAO {
 			rs.next();
 			typeId = rs.getInt(1);
 
-		} catch (SQLException throwables) {
+		} catch (SQLException e) {
 			
-			DAO.closeConnection();
-			throwables.printStackTrace();
+			DAO.closeConnection(0);
+			e.printStackTrace();
 		}
 		
-		DAO.closeConnection();
+		DAO.closeConnection(0);
 		return new Column<>(board, columnName, columnId, DAO.getTypeById(typeId));
 	}
 
@@ -140,7 +145,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 
 		try {
 			// Get connection from JDBCConnector
-			stmt = DAO.getConnection().createStatement();
+			stmt = DAO.getConnection(0).createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -156,7 +161,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 			}
 		} catch (SQLException e) {
 			
-			DAO.closeConnection();
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 
@@ -173,11 +178,11 @@ public class MySQLColumnDAO extends ColumnDAO {
 				resultat.add(TypeFactory.createType(id, typeName, description));
 			}
 		} catch (SQLException e) {
-			DAO.closeConnection();
+			DAO.closeConnection(0);
 			e.printStackTrace();
 		}
 		
-		DAO.closeConnection();
+		DAO.closeConnection(0);
 		return resultat;
 	}
 
@@ -201,10 +206,10 @@ public class MySQLColumnDAO extends ColumnDAO {
 
 		try {
 			// Get connection from JDBCConnector
-			stmt = DAO.getConnection().prepareStatement(query);
+			stmt = DAO.getConnection(1).prepareStatement(query);
 		} catch (SQLException e) {
 			
-			DAO.closeConnection();
+			DAO.closeConnection(1);
 			e.printStackTrace();
 			return null;
 		}
@@ -219,7 +224,7 @@ public class MySQLColumnDAO extends ColumnDAO {
 			}
 		} catch (SQLException e) {
 			
-			DAO.closeConnection();
+			DAO.closeConnection(1);
 			e.printStackTrace();
 			return null;
 		}
@@ -238,13 +243,13 @@ public class MySQLColumnDAO extends ColumnDAO {
 			}
 		} catch (SQLException e) {
 			
-			DAO.closeConnection();
+			DAO.closeConnection(1);
 			e.printStackTrace();
 		}
 		return resultat;
 	}
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		MySQLColumnDAO mySQLColumnDAO = new MySQLColumnDAO();
 		
 		ArrayList<Type> res = mySQLColumnDAO.getAllColumnTypes();
@@ -253,17 +258,17 @@ public class MySQLColumnDAO extends ColumnDAO {
 			//System.out.println(res.get(i));
 		}
 		
-		System.out.println(mySQLColumnDAO.getTypeByName("TimeLineType"));
+		//System.out.println(mySQLColumnDAO.getTypeByName("TimeLineType"));
 
-		System.out.println(DAO.isNameExist("Columntest", "column"));
+		//System.out.println(DAO.isNameExist("Columntest", "column"));
 
 		Workspace parentWorkspace = new Workspace("salut");
 		User boardOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
-		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "las", "sa"));
+		Board parentBoard = new Board(69, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "las", "sa"));
 
 		Column resAdd = mySQLColumnDAO.addColumn("asas", parentBoard, "TimeLineType");
 
 		System.out.println(resAdd);
-	}*/
+	}
 
 }

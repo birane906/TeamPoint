@@ -9,44 +9,46 @@ import business_logic.board.types.Type;
 /**
  * Description of Cell.
  * 
- * @author 
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class Cell<T extends Type> {
 
-	/**
-	 * is equals to T of Cell<T>
-	 */
-	private final Type typeParameterClass;
+	private int cellId;
 
 	/**
 	 * Description of the property column.
 	 */
-	public Column<T> column = null;
+	private Column<T> column;
 
 	/**
 	 * Description of the property value.
 	 */
-	private T value = null;
+	private T value;
 
 	/**
 	 * Description of the property item.
 	 */
-	public Item item = null;
+	private Item item;
 
 	/**
 	 * 
 	 * @param item
 	 * @param column
 	 * @param value
+	 * @param idCell
 	 */
-	public Cell(Item item, Column<T> column, T value, 
-		Type typeParameterClass) {
-			this.column = column;
-			this.value = value;
-			this.item = item;
-			this.typeParameterClass = typeParameterClass;
+	public Cell(Item item, Column<T> column, T value, int idCell) {
+		this.column = column;
+		this.value = value;
+		this.item = item;
+		this.cellId = idCell;
 	}
 
+	public Cell(Item item, Column<T> column, T value) {
+		this.column = column;
+		this.value = value;
+		this.item = item;
+	}
 	/**
 	 * Returns column.
 	 * @return column 
@@ -87,10 +89,6 @@ public class Cell<T extends Type> {
 		return this.item;
 	}
 
-	public Type getTypeParameterClass() {
-		return typeParameterClass;
-	}
-
 	/**
 	 * Sets a value to attribute item. 
 	 * @param newItem 
@@ -101,11 +99,15 @@ public class Cell<T extends Type> {
 	
 	public String toString() {
 		String str = "";
-		
-		str += "column: " + getColumn().getName();
-		str += " item: " + getItem().getLabel();
+
+		str += "id: " + getCellId();
 		str += " value: " + getValue();
-		
+		str += "\n";
+
 		return str;
+	}
+
+	public int getCellId() {
+		return cellId;
 	}
 }

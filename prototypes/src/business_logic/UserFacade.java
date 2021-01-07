@@ -6,6 +6,7 @@ import business_logic.workspace.Workspace;
 import dao.factory.DAOFactory;
 import dao.UserDAO;
 import dao.WorkspaceDAO;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -17,6 +18,8 @@ import java.util.HashSet;
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class UserFacade {
+
+	private static final String SALT = "$2a$10$BcCrQI./VvJa3V61g8pv1u";
 
 	/**
 	 * <code>currentUser</code> class member {@link User} instance.
@@ -64,8 +67,9 @@ public class UserFacade {
 		}
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		UserDAO userDAO = daoFactory.createUserDAO();
+ 		String passwd = BCrypt.hashpw(password, SALT);
 		try {
-			this.currentUser = userDAO.getUser(email, password);
+			this.currentUser = userDAO.getUser(email, passwd);
 		} catch (Exception e) {
 			return false;
 		}
@@ -89,7 +93,8 @@ public class UserFacade {
 		}
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		UserDAO userDAO = daoFactory.createUserDAO();
-		return userDAO.signUp(name, firstname, email, password);
+		String passwd = BCrypt.hashpw(password, SALT);
+		return userDAO.signUp(name, firstname, email, passwd);
 	}
 
 	/**

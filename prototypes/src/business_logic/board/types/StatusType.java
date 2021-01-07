@@ -19,6 +19,9 @@ public class StatusType extends Type {
 	 */
 	private StatusLabel currentStatusLabel;
 
+	// TODO faire label StatusLabel
+	public String label;
+
 	/**
 	 * All the possible {@link StatusLabel} for the {@link StatusType}
 	 */
@@ -33,6 +36,11 @@ public class StatusType extends Type {
 		super(id, StatusType.class.getSimpleName(), description);
 		currentStatusLabel = null;
 		statusLabels = new ArrayList<>();
+	}
+
+	public StatusType(String label) {
+		super(StatusLabel.class.getSimpleName(), "Status type");
+		this.label = label;
 	}
 	
 	/**
