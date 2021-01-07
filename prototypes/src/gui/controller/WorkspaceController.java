@@ -5,6 +5,7 @@ import business_logic.UserFacade;
 import business_logic.WorkspaceFacade;
 import business_logic.board.Board;
 import business_logic.board.Column;
+import business_logic.board.Item;
 import business_logic.board.ItemCollection;
 import business_logic.board.types.*;
 import business_logic.workspace.Workspace;
@@ -218,8 +219,12 @@ public class WorkspaceController implements Initializable {
 										List<Column<? extends Type>> currentColumns = currentBoard.getColumns();
 										ObservableList<Column<? extends Type>> mycurrentCC = FXCollections.observableArrayList(currentColumns);
 
-										for (Column<? extends Type> c : mycurrentCC) {
 
+										TableColumn<String, String> task = new TableColumn<>("Tâche");
+										boardTableView.getColumns().add(task);
+
+
+										for (Column<? extends Type> c : mycurrentCC) {
 											switch (c.getColumnType().getNameType()) {
 												case "DateType":
 													TableColumn<DateType, String> dateType = new TableColumn<>("DateType");
@@ -252,13 +257,13 @@ public class WorkspaceController implements Initializable {
 											}
 										}
 
+										//list of list of cells
 
 
 
+										for (Item item: current ) {
 
-
-
-
+										}
 
 
 
