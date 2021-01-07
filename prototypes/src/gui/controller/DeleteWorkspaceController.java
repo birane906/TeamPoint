@@ -58,6 +58,14 @@ public class DeleteWorkspaceController implements Initializable{
 	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
+		Workspace currentWorkspace = workspaceListView.getSelectionModel().getSelectedItem();
+		System.out.println(currentWorkspace.toString());
+		workspaceFacade.deleteWorkspace(currentWorkspace);
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
 
 	}
 
@@ -91,13 +99,6 @@ public class DeleteWorkspaceController implements Initializable{
 		workspaceListView.setItems(myWorkspaces);
 		workspaceListView.setCellFactory(lv -> new SimpleCell());
 
-		workspaceListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Workspace currentWorkspace = (Workspace) workspaceListView.getSelectionModel().getSelectedItem();
-				workspaceFacade.deleteWorkspace(currentWorkspace);
-			}
-		});
 	}
 }
 
