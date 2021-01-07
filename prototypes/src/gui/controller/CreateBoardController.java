@@ -1,5 +1,6 @@
 package gui.controller;
 
+import business_logic.BoardFacade;
 import business_logic.UserFacade;
 import business_logic.WorkspaceFacade;
 import javafx.event.ActionEvent;
@@ -22,13 +23,15 @@ import java.io.IOException;
 public class CreateBoardController {
 
 	@FXML
-	public TextField workspaceName;
+	public TextField boardName;
 	/**
 	 * Description of the property userFacade.
 	 */
 	private UserFacade userFacade;
 
 	private WorkspaceFacade workspaceFacade;
+
+	private BoardFacade boardFacade;
 
 
 	@FXML
@@ -40,8 +43,9 @@ public class CreateBoardController {
 	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-		if(!workspaceName.getText().isBlank()) {
-			workspaceFacade.createWorkspace(workspaceName.getText());
+		if(!boardName.getText().isBlank()) {
+
+			boardFacade.createBoard(boardName.getText(),workspaceFacade.getCurrentWorkspace());
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -72,6 +76,7 @@ public class CreateBoardController {
 		super();
 		userFacade = UserFacade.getUserFacadeInstance();
 		workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
+		boardFacade = BoardFacade.getBoardFacadeInstance();
 	}
 
 
