@@ -219,60 +219,36 @@ public class WorkspaceController implements Initializable {
 
 										for (Column<? extends Type> c : mycurrentCC) {
 
-											switch(c.getColumnType().getNameType()) {
-												case "StatusType":
-													TableColumn<StatusType, String> tableColumnStatus= new TableColumn<>("Statut");
-													boardTableView.getColumns().add(tableColumnStatus);
-													break;
-
-												case "TimelineType":
-													TableColumn<TimelineType, String> tableColumnTimeline= new TableColumn<>("Timeline");
-													boardTableView.getColumns().add(tableColumnTimeline);
-													break;
-												case y:
-													// code block
-													break;
-												default:
-													// code block
-											}
-
-											TableColumn<StatusType, String> tc= new TableColumn<StatusType, String>("Statut");
-											boardTableView.getColumns().add(tc);
-
-
-											switch (t.getNameType()) {
+											switch (c.getColumnType().getNameType()) {
 												case "DateType":
-													int x = 20;
-													col.add(new Column<DateType>(board, name, id, t));
+													TableColumn<DateType, String> dateType = new TableColumn<>("DateType");
+													boardTableView.getColumns().add(dateType);
 													break;
 												case "DependencyType":
-													int y = 12;
-													col.add(new Column<DependencyType>(board, name, id, t));
+													TableColumn<DependencyType, String> dependency = new TableColumn<>("DependencyType");
+													boardTableView.getColumns().add(dependency);
 													break;
 												case "NumberType":
-													int xX = 0;
-													col.add(new Column<NumberType>(board, name, id, t));
+													TableColumn<NumberType, String> number = new TableColumn<>("NumberType");
+													boardTableView.getColumns().add(number);
 													break;
 												case "PersonType":
-													int yy = 10;
-													col.add(new Column<PersonType>(board, name, id, t));
+													TableColumn<PersonType, String> person = new TableColumn<>("PersonType");
+													boardTableView.getColumns().add(person);
 													break;
 												case "StatusType":
-													int b = 1;
-													col.add(new Column<StatusType>(board, name, id, t));
+													TableColumn<StatusType, String> status = new TableColumn<>("StatusType");
+													boardTableView.getColumns().add(status);
 													break;
 												case "TimelineType":
-													int sa = 11;
-													col.add(new Column<TimelineType>(board, name, id, t));
+													TableColumn<TimelineType, String> timelineType = new TableColumn<>("TimelineType");
+													boardTableView.getColumns().add(timelineType);
 													break;
 												case "TextType":
-													int sasasa = 12;
-													col.add(new Column<TextType>(board, name, id, t));
+													TableColumn<TextType, String> text = new TableColumn<>("TextType");
+													boardTableView.getColumns().add(text);
 												default:
 											}
-
-
-
 										}
 
 
