@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 07 jan. 2021 à 00:10
+-- Généré le :  jeu. 07 jan. 2021 à 03:55
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -314,7 +314,7 @@ CREATE TABLE `type` (
 
 INSERT INTO `type` (`idType`, `nameType`, `descriptionType`) VALUES
 (0, 'TimelineType', 'two date'),
-(1, 'textType', 'field of text'),
+(1, 'TextType', 'field of text'),
 (2, 'StatusType', 'Status: done, current etc'),
 (3, 'NumberType', 'number unit'),
 (4, 'PersonType', 'User'),
