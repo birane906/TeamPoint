@@ -38,6 +38,11 @@ public abstract class Type {
 		this.nameType = nameType;
 	}
 
+	public Type(String nameType, String description) {
+		this.nameType = nameType;
+		this.description = description;
+	}
+
 	/**
 	 * Returns description.
 	 * @return description 

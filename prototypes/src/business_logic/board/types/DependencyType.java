@@ -14,7 +14,7 @@ public class DependencyType extends Type  {
 	/**
 	 * The items that must be completed before the current item
 	 */
-	public Set<Item> items;
+	public Set<Item> items = new HashSet<Item>();
 
 	/**
 	 * Constructor  for empty {@link DependencyType}
@@ -38,7 +38,12 @@ public class DependencyType extends Type  {
 		this.items = items;
 	}
 
-	/**
+    public DependencyType(Item item) {
+        super(DependencyType.class.getSimpleName(), "User");
+        this.addItem(item);
+    }
+
+    /**
 	 * Description of the method addItem.
 	 * @param item 
 	 */

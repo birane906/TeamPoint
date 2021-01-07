@@ -33,8 +33,8 @@ public class PersonType extends Type {
 	 * @param id an int
 	 * @param description a description of the type
 	 */
-	public PersonType(User user, int id, String description) {
-		super(id, PersonType.class.getSimpleName(), description);
+	public PersonType(User user) {
+		super(PersonType.class.getSimpleName(), "User");
 		this.user = user;
 	}
 

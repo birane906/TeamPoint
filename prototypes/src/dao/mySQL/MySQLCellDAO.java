@@ -51,7 +51,7 @@ public class MySQLCellDAO extends CellDAO {
 		PreparedStatement stmt = null;
 
 		String query = "INSERT INTO cell"
-				+ " (tableValueName, idBoard, idColumn, idItem, idItemCollection, cellValue) VALUES(?, ?, ?, ?, ?)";
+				+ " (idBoard, idColumn, idItem, idType, idItemCollection) VALUES(?, ?, ?, ?, ?)";
 
 		try {
 			// Get connection
@@ -61,11 +61,11 @@ public class MySQLCellDAO extends CellDAO {
 		}
 		
 		String req = "INSERT INTO cell"
-				+ " (tableValueName, idBoard, idColumn, idItem, idItemCollection) VALUES("
-				+ DAO.stringFormat(value.getNameType()) + ", "
-				+ DAO.stringFormat(column.getParentBoard().getBoard_id() + "") + ", " 
+				+ " (idBoard, idColumn, idItem, idType, idItemCollection) VALUES("
+				+ DAO.stringFormat(column.getParentBoard().getBoard_id() + "") + ", "
 				+ DAO.stringFormat(column.getColumn_id() + "") + ", " 
 				+ DAO.stringFormat(item.getItem_id() + "") + ", "
+				+ DAO.stringFormat(column.getColumnType().getIdType() + "") + ", "
 				+ DAO.stringFormat(item.getParentItemCollection().getItemCollection_id() + "")
 				+ ")";
 
@@ -106,7 +106,6 @@ public class MySQLCellDAO extends CellDAO {
 					+ DAO.stringFormat(valTime.getStartDate() + "") + ", "
 					+ DAO.stringFormat(valTime.getEndDate() + "")
 					+ ")";
-
 			break;
 
 		case "TextType":
@@ -149,7 +148,7 @@ public class MySQLCellDAO extends CellDAO {
 			PersonType valPerson = (PersonType) value;
 
 			query = "INSERT INTO persontype (idCell, idUser)"
-					+ " VALUE (?, ?, ?)";
+					+ " VALUE (?, ?)";
 			req = "INSERT INTO persontype (idCell, idUser)"
 					+ " VALUE ("
 					+ DAO.stringFormat(cellId + "") + ", "
@@ -162,7 +161,7 @@ public class MySQLCellDAO extends CellDAO {
 			StatusType valStatus = (StatusType) value;
 
 			query = "INSERT INTO StatusType (idCell, idUser)"
-					+ " VALUE (?, ?, ?)";
+					+ " VALUE (?, ?)";
 			req = "INSERT INTO StatusType (idCell, idUser)"
 					+ " VALUE ("
 					+ DAO.stringFormat(cellId + "") + ", "
@@ -211,7 +210,7 @@ public class MySQLCellDAO extends CellDAO {
 		}
 
 		DAO.closeConnection(0);
-		return new Cell<T>(item, column, value, idCell);
+		return new Cell(item, column, value, idCell);
 	}
 
 	/**
@@ -486,14 +485,14 @@ public class MySQLCellDAO extends CellDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Cell<TextType> cell = new Cell<TextType>(item, column, textType, 0);
+		Cell<TextType> cell = new Cell(item, column, textType, 0);
 
 		//Boolean res = mySQL.deleteCell(cell);
 		//System.out.println(res);
 
-		System.out.println(new Date());
+		//System.out.println(new Date());
 
 		System.out.println(mySQL.addCell(column, item, textType));
-		System.out.println(mySQL.editCell(cell, textType));
+		//System.out.println(mySQL.editCell(cell, textType));
 	}
 }
