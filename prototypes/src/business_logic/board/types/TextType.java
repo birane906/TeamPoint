@@ -26,9 +26,6 @@ public class TextType extends Type {
 	public TextType(int id, String description) throws Exception {
 		super(id, TextType.class.getSimpleName(), description);
 		this.charLimit = 90;
-		if (text.length() > charLimit) {
-			throw new Exception("The text is too long.");
-		}
 		this.text = "";
 	}
 

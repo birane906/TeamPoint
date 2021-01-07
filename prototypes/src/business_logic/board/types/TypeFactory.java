@@ -17,11 +17,17 @@ public class TypeFactory {
             case "NumberType":
                  return new NumberType(id, description);
             case "PersonType":
-               // return new PersonType(id, description);
+                return new PersonType(id, description);
             case "StatusType":
                 return new StatusType(id, description);
             case "TimelineType":
                 return new TimelineType(id, description);
+            case "TextType":
+                try {
+                    return new TextType(id, description);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             default:
                 return null;
         }

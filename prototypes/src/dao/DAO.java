@@ -195,6 +195,7 @@ public interface DAO {
 	 */
 	static Type getTypeById(int idType) {
 		if (idType == -1) {
+			System.out.println("dednufiezjks");
 			return null;
 		}
 		// Result from database
@@ -207,7 +208,7 @@ public interface DAO {
 
 		try {
 			// Getconnection from JDBCConnector
-			stmt = getConnection(1).prepareStatement(query);
+			stmt = getConnection(2).prepareStatement(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -222,11 +223,10 @@ public interface DAO {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
-			DAO.closeConnection(1);
+			DAO.closeConnection(2);
 			e.printStackTrace();
 		}
 
-		Type type = null;
 		try {
 			assert rs != null;
 			if(rs.next()) {
@@ -234,14 +234,16 @@ public interface DAO {
 				String label = rs.getString("nameType");
 				String descr = rs.getString("descriptionType");
 
-				type = TypeFactory.createType(id, label, descr);
+				closeConnection(2);
+
+				return TypeFactory.createType(id, label, descr);
+
 			}
 		} catch (SQLException e) {
-			DAO.closeConnection(1);
+			DAO.closeConnection(2);
 			e.printStackTrace();
 		}
-
-		closeConnection(1);
-		return type;
+		System.out.println("here");
+		return null;
 	}
 }

@@ -124,31 +124,25 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		// SET CELLS
 		for (int i = 0; i < board.getColumns().size(); i++) {
-			for (Column<? extends Type> column : board.getColumns()) {
-				Column<? extends Type> col = board.getColumns().get(i);
-				try {
+		//for (Column<? extends Type> column : board.getColumns()) {
+			Column<? extends Type> col = board.getColumns().get(i);
+			try {
 
-					List<Cell<? extends Type>> cells = getCellsFromColumn(board, column);
+				List<Cell<? extends Type>> cells = getCellsFromColumn(board, col);
+				col.setCells(cells);
 
-					for (Cell<? extends Type> cell: cells) {
-						System.out.println(cell);
-					}
-
-					col.setCells(cells);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
+		//}
 
 		for (int i = 0; i < board.getItemCollections().size(); i++) {
 			for (int j = 0; j < board.getItemCollections().get(i).getItems().size(); j++) {
 				Item item = board.getItemCollections().get(i).getItems().get(j);
 
 				List<Cell<? extends Type>> cells = getCellsFromItem(board, board.getItemCollections().get(i).getItems().get(j));
-				for (Cell<? extends Type> cell: cells) {
-					System.out.println("Item: " + cell);
-				}
+
 				item.setCells(cells);
 			}
 		}
@@ -169,8 +163,6 @@ public class MySQLBoardDAO extends BoardDAO {
 				+ "WHERE idBoard = ?";
 
 		ArrayList<ItemCollection> itemCollections = new ArrayList<>();
-		int id = -1;
-		String name = "NONE";
 
 		try {
 			// Get connection
@@ -199,8 +191,8 @@ public class MySQLBoardDAO extends BoardDAO {
 				assert rs != null;
 
 				if (!rs.next()) break;
-				id = rs.getInt("idItemCollection");
-				name = rs.getString("itemCollectionName");
+				int id = rs.getInt("idItemCollection");
+				String name = rs.getString("itemCollectionName");
 
 				ItemCollection newItemCol = new ItemCollection(name, id, board);
 
@@ -282,7 +274,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		ResultSet rs = null;
 		String query = "SELECT * "
 				+ "FROM `column` "
-				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "");
+				+ "WHERE idBoard = ?";
 
 		ArrayList<Column<? extends Type>> col = new ArrayList<>();
 
@@ -297,9 +289,13 @@ public class MySQLBoardDAO extends BoardDAO {
 			e.printStackTrace();
 		}
 
+		String req = "SELECT * "
+				+ "FROM `column` "
+				+ "WHERE idBoard = " + DAO.stringFormat(board.getBoard_id() + "");
+
 		try {
 			assert stmt != null;
-			if (stmt.execute(query)) {
+			if (stmt.execute(req)) {
 				rs = stmt.getResultSet();
 			}
 		} catch (SQLException e) {
@@ -310,7 +306,7 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		try {
 			assert rs != null;
-			if (rs.next()) {
+			while (rs.next()) {
 
 				id = rs.getInt("idColumn");
 				name = rs.getString("columnName");
@@ -323,7 +319,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						col.add(new Column<DateType>(board, name, id, t));
 						break;
 					case "DependencyType":
-						int y =12;
+						int y = 12;
 						col.add(new Column<DependencyType>(board, name, id, t));
 						break;
 					case "NumberType":
@@ -342,8 +338,10 @@ public class MySQLBoardDAO extends BoardDAO {
 						int sa = 11;
 						col.add(new Column<TimelineType>(board, name, id, t));
 						break;
+					case "TextType":
+						int sasasa = 12;
+						col.add(new Column<TextType>(board, name, id, t));
 					default:
-						return null;
 				}
 			}
 		} catch (SQLException e) {
@@ -443,6 +441,9 @@ public class MySQLBoardDAO extends BoardDAO {
 			while(true) {
 				assert rs != null;
 				if (!rs.next()) break;
+
+				System.out.println(req);
+
 				cellId = rs.getInt("idCell");
 				typeId = rs.getInt("idType");
 
@@ -451,7 +452,6 @@ public class MySQLBoardDAO extends BoardDAO {
 				Cell cell = new Cell(item, column, type, cellId);
 
 				DAO.closeConnection(2);
-
 				return cell;
 			}
 		} catch (SQLException e) {
@@ -1064,6 +1064,18 @@ public class MySQLBoardDAO extends BoardDAO {
 		ItemCollection itemCol = new ItemCollection("test", 1, parentBoard);
 		ItemCollection itemCol2 = new ItemCollection("test", 59, parentBoard);
 
+		Column<NumberType> colNumber = new Column<>(parentBoard, "testCol", 1, new NumberType(3, "number"));
+		Column<DateType> colDate = new Column<>(parentBoard, "testCol", 2, new DateType(5, "date"));
+		Column<DependencyType> colDep = new Column<>(parentBoard, "", 3, new DependencyType(6, "000"));
+		Column<PersonType> colPer = new Column<>(parentBoard, "", 4, new PersonType(4, ""));
+		Column<StatusType> colStat = new Column<>(parentBoard, "", 5, new StatusType(2, ""));
+		Column<TimelineType> colTime = new Column<>(parentBoard, "", 6, new TimelineType(0, ""));
+		try {
+			Column<TextType> colText = new Column<>(parentBoard, "", 54, new TextType(1, ""));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		parentBoard.addItemCollection(itemCol2);
 		parentBoard.addItemCollection(itemCol);
 
@@ -1083,6 +1095,15 @@ public class MySQLBoardDAO extends BoardDAO {
 		//System.out.println("itemcol " + mySQL.getItemCollection(parentBoard));
 		//System.out.println("item " + mySQL.getBoardsOfWorkspace(parentWorkspace));
 
-		System.out.println("retrieve " + mySQL.retrieveBoard(parentBoard).getColumns().get(0));
+		Board boardRetrieved = mySQL.retrieveBoard(parentBoard);
+
+		System.out.println("retrieve " + boardRetrieved);
+
+		for (Column<? extends Type> col: boardRetrieved.getColumns()) {
+			for (int i = 0; i < col.getCells().size(); i++) {
+				System.out.print(col.getCells().get(i) + " / ");
+			}
+			System.out.println();
+		}
 	}
 }

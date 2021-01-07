@@ -22,9 +22,9 @@ public class PersonType extends Type {
 	 * @param users A set of {@link User}
 	 * @param id an int
 	 */
-	public PersonType(int id, String description, User user) {
+
+	public PersonType(int id, String description) {
 		super(id, PersonType.class.getSimpleName(), description);
-		this.user = user;
 	}
 
 	/**
