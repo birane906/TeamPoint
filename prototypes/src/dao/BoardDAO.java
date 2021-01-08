@@ -73,8 +73,15 @@ public abstract class BoardDAO implements DAO {
 	 */
 	public abstract Boolean deleteItem(Item item);
 
-	//TODO docs
+	/**
+	 * @return The default {@link Permission} for a {@link Board}
+	 */
 	public abstract Permission getDefaultPermission();
 
+	/**
+	 * Retrieve all the {@link Board} for a {@link Workspace}
+	 * @param workspace The given {@link Workspace}
+	 * @return An {@link ArrayList} of all the {@link Board} of the {@link Workspace}
+	 */
 	public abstract ArrayList<Board> getBoardsOfWorkspace(Workspace workspace);
 }

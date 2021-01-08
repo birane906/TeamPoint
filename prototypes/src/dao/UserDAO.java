@@ -21,17 +21,16 @@ public abstract class UserDAO implements DAO{
 	public abstract User getUser(String email, String password) throws Exception;
 
 	/**
-	 * Creates User in the database.
+	 * Creates an User in the database.
 	 * (Insert query)
-	 * @param name of user
-	 * @param firstname of user
-	 * @param email of user
-	 * @param password of user
+	 * @param name The name of the {@link User}
+	 * @param firstname The first name of the {@link User}
+	 * @param email The email of the {@link User}
+	 * @param password The hashed password of the {@link User}
 	 *
-	 * @return Returns <code>true</code> if the operation succeed otherwise <code>false</code>
+	 * @return Returns <code>true</code> if the operation succeed, <code>false</code> otherwise
 	 *
 	 */
-	// TODO verify doc
 	public abstract boolean signUp(String name, String firstname, String email, String password);
 
 	/**
@@ -42,7 +41,18 @@ public abstract class UserDAO implements DAO{
 	 */
 	public abstract boolean delete(String email);
 
+	/**
+	 * Update the values of an {@link User}
+	 * @param oldUser The {@link User} to be updated
+	 * @param newUser The new {@link User} holding the changed values
+	 * @return The {@link User} updated if the operation succeed, <code>null</code> otherwise
+	 */
 	public abstract User updateUserProfile(User oldUser, User newUser);
 
+	/**
+	 * Retrieve all the {@link User} of a {@link Workspace}
+	 * @param workspace The given {@link Workspace}
+	 * @return A {@link HashSet} of the {@link User} of the {@link Workspace}
+	 */
 	public abstract HashSet<User> getWorkspaceMembers(Workspace workspace);
 }
