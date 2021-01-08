@@ -1,24 +1,19 @@
 package dao.mySQL;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.*;
-
-import business_logic.UserFacade;
-import business_logic.board.Board;
-import business_logic.board.Cell;
-import business_logic.board.Column;
-import business_logic.board.Item;
-import business_logic.board.ItemCollection;
-import business_logic.board.Permission;
+import business_logic.board.*;
 import business_logic.board.types.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
 import dao.DAO;
-import org.w3c.dom.Text;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Description of MySQLBoardDAO.
@@ -438,7 +433,7 @@ public class MySQLBoardDAO extends BoardDAO {
 	 * @param board we want the columns
 	 * @return an ArrayList of columns
 	 */
-	private ArrayList<Column<? extends Type>> getColumns(Board board) {
+	private ArrayList<Column> getColumns(Board board) {
 		// Query statement
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -446,7 +441,7 @@ public class MySQLBoardDAO extends BoardDAO {
 				+ "FROM `column` "
 				+ "WHERE idBoard = ?";
 
-		ArrayList<Column<? extends Type>> col = new ArrayList<>();
+		ArrayList<Column> col = new ArrayList<>();
 
 		int id;
 		String name;

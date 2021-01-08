@@ -42,7 +42,7 @@ public class Board {
 	/**
 	 * The Board {@link Column}
 	 */
-	private List<Column<? extends Type>> columns;
+	private List<Column> columns;
 
 	/**
 	 * The Board {@link Permission}
@@ -117,7 +117,7 @@ public class Board {
 	 */
 	public Board(String boardName,int boardId, Workspace parentWorkspace, 
 		User boardOwner, Date creationDate, Permission permission,
-		List<Column<? extends Type>> columns) {
+		List<Column> columns) {
 			this.board_id = boardId;
 			this.name = boardName;
 			this.parentWorkspace = parentWorkspace;
@@ -141,7 +141,7 @@ public class Board {
 	 */
 	public Board(int boardId, String boardName, Workspace parentWorkspace, 
 		User boardOwner, Date creationDate, Permission permission,
-		List<Column<? extends Type>> columns, List<ItemCollection> itemCollections) {
+		List<Column> columns, List<ItemCollection> itemCollections) {
 			this.board_id = boardId;
 			this.name = boardName;
 			this.parentWorkspace = parentWorkspace;
@@ -164,7 +164,7 @@ public class Board {
 	 * Set the board list of {@link Column}
 	 * @param columns
 	 */
-	public void setColumns(List<Column<? extends Type>> columns) {
+	public void setColumns(List<Column> columns) {
 		this.columns = columns;
 	}
 
@@ -224,7 +224,7 @@ public class Board {
 	 * Returns columns.
 	 * @return columns 
 	 */
-	public List<Column<? extends Type>> getColumns() {
+	public List<Column> getColumns() {
 		return this.columns;
 	}
 

@@ -158,6 +158,12 @@ public class Column<T extends Type> {
 		this.cells.add(cell);
 	}
 
+	public Cell<T> addEmptyCell(Item item) {
+		Cell cell = new Cell<T>(item, this, null);
+		this.cells.add(cell);
+		return cell;
+	}
+
 	public Type getColumnType() {
 		return this.typeParameterClass;
 	}

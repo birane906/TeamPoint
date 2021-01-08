@@ -3,10 +3,10 @@
  *******************************************************************************/
 package business_logic.board;
 
+import business_logic.board.types.Type;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import business_logic.board.types.Type;
 
 /**
  * Description of Item.
@@ -46,7 +46,14 @@ public class Item {
 		this.parentItemCollection = parentItemCollection;
 		this.label = label;
 		this.cells = new ArrayList<>();
-		//TODO : need to create the empty cells? how to get the right number ? what if no columns?
+		//TODO : check for bugs
+
+		List<Column> columns = parentItemCollection.getParentBoard().getColumns();
+
+		for (Column column : columns) {
+			Cell cell = column.addEmptyCell(this);
+			this.cells.add(cell);
+		}
 	}
 
 	/**
