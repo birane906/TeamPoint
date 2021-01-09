@@ -7,6 +7,7 @@ import business_logic.board.Board;
 import business_logic.board.Column;
 import business_logic.board.Item;
 import business_logic.board.ItemCollection;
+import business_logic.board.Cell;
 import business_logic.board.types.*;
 import business_logic.workspace.Workspace;
 import javafx.collections.FXCollections;
@@ -209,6 +210,7 @@ public class WorkspaceController implements Initializable {
 								for (ItemCollection ic : mycurrentIC) {
 									MenuItem mic = new MenuItem(ic.getName());
 									mic.setOnAction(e1 -> {
+										boardTableView = new TableView();
 										List<Item> items = ic.getItems();
 
 										ObservableList<Item> itemsObs = FXCollections.observableArrayList(items);
@@ -218,15 +220,91 @@ public class WorkspaceController implements Initializable {
 											switch (c.getColumnType().getNameType()) {
 												case "DateType":
 
-													Cell<DateType> cells = (Cell<DateType>)c.getCells();
+													List<Cell<DateType>> cells = new ArrayList<>();
+
+													for (Cell<? extends Type> cell: c.getCells()) {
+														cells.add((Cell<DateType>) cell);
+													}
+
+													System.out.println(cells);
+
 													ObservableList<Cell<DateType>> cellsDate = FXCollections.observableArrayList(cells);
 													boardTableView.setItems(cellsDate);
 													break;
+
+												case "DependencyType":
+													int y =5;
+													List<Cell<DependencyType>> cellsDep = new ArrayList<>();
+
+													for (Cell<? extends Type> cell: c.getCells()) {
+														cellsDep.add((Cell<DependencyType>) cell);
+													}
+
+													ObservableList<Cell<DependencyType>> cellsDepe = FXCollections.observableArrayList(cellsDep);
+													boardTableView.setItems(cellsDepe);
+													break;
+
+												case "NumberType":
+													int u = 78;
+													List<Cell<NumberType>> cellsNum = new ArrayList<>();
+
+													for (Cell<? extends Type> cell: c.getCells()) {
+														cellsNum.add((Cell<NumberType>) cell);
+													}
+
+													ObservableList<Cell<NumberType>> cellsNume = FXCollections.observableArrayList(cellsNum);
+													boardTableView.setItems(cellsNume);
+													break;
+
+												case "PersonType":
+													int v = 79;
+													List<Cell<PersonType>> cellsPerso = new ArrayList<>();
+
+													for (Cell<? extends Type> cell: c.getCells()) {
+														cellsPerso.add((Cell<PersonType>) cell);
+													}
+
+													ObservableList<Cell<PersonType>> cellsPers = FXCollections.observableArrayList(cellsPerso);
+													boardTableView.setItems(cellsPers);
+													break;
+
+												case "StatusType":
+													int aa = 798;
+													List<Cell<StatusType>> cellsStat = new ArrayList<>();
+
+													for (Cell<? extends Type> cell: c.getCells()) {
+														cellsStat.add((Cell<StatusType>) cell);
+													}
+
+													ObservableList<Cell<StatusType>> cellsStatus = FXCollections.observableArrayList(cellsStat);
+													boardTableView.setItems(cellsStatus);
+													break;
+
+												case "TimelineType":
+													int de = 1;
+													List<Cell<TimelineType>> cellsTL = new ArrayList<>();
+
+													for (Cell<? extends Type> cell: c.getCells()) {
+														cellsTL.add((Cell<TimelineType>) cell);
+													}
+
+													ObservableList<Cell<TimelineType>> cellsTLine = FXCollections.observableArrayList(cellsTL);
+													boardTableView.setItems(cellsTLine);
+													break;
+
+												case "TextType":
+													int des = -1;
+													List<Cell<TextType>> cellsTex = new ArrayList<>();
+
+													for (Cell<? extends Type> cell: c.getCells()) {
+														cellsTex.add((Cell<TextType>) cell);
+													}
+
+													ObservableList<Cell<TextType>> cellsText = FXCollections.observableArrayList(cellsTex);
+													boardTableView.setItems(cellsText);
+													break;
 											}
-
 										}
-
-
 									});
 									itemCollectionMenuButton.getItems().add(mic);
 								}
@@ -237,38 +315,50 @@ public class WorkspaceController implements Initializable {
 								task.setCellValueFactory(new PropertyValueFactory<>("label"));
 								boardTableView.getColumns().add(task);
 
-								for (Column<? extends Type> c : currentBoard.getColumns()) {
+								for (Column c : currentBoard.getColumns()) {
 									switch (c.getColumnType().getNameType()) {
 										case "DateType":
 
-											TableColumn<DateType, String> dateType = new TableColumn<>("DateType");
-											task.setCellValueFactory(new PropertyValueFactory<>("date"));
+											TableColumn<Cell<DateType>, String> dateType = new TableColumn<>("DateType");
+											task.setCellValueFactory(new PropertyValueFactory<>("value"));
 											boardTableView.getColumns().add(dateType);
 
 											break;
 
 										case "DependencyType":
-											TableColumn<DependencyType, String> dependency = new TableColumn<>("DependencyType");
+											TableColumn<Cell<DependencyType>, String> dependency = new TableColumn<>("DependencyType");
+											task.setCellValueFactory(new PropertyValueFactory<>("value"));
+
 											boardTableView.getColumns().add(dependency);
 											break;
 										case "NumberType":
-											TableColumn<NumberType, String> number = new TableColumn<>("NumberType");
+											TableColumn<Cell<NumberType>, String> number = new TableColumn<>("NumberType");
+											task.setCellValueFactory(new PropertyValueFactory<>("value"));
+
 											boardTableView.getColumns().add(number);
 											break;
 										case "PersonType":
-											TableColumn<PersonType, String> person = new TableColumn<>("PersonType");
+											TableColumn<Cell<PersonType>, String> person = new TableColumn<>("PersonType");
+											task.setCellValueFactory(new PropertyValueFactory<>("value"));
+
 											boardTableView.getColumns().add(person);
 											break;
 										case "StatusType":
-											TableColumn<StatusType, String> status = new TableColumn<>("StatusType");
+											TableColumn<Cell<StatusType>, String> status = new TableColumn<>("StatusType");
+											task.setCellValueFactory(new PropertyValueFactory<>("value"));
+
 											boardTableView.getColumns().add(status);
 											break;
 										case "TimelineType":
-											TableColumn<TimelineType, String> timelineType = new TableColumn<>("TimelineType");
+											TableColumn<Cell<TimelineType>, String> timelineType = new TableColumn<>("TimelineType");
+											task.setCellValueFactory(new PropertyValueFactory<>("value"));
+
 											boardTableView.getColumns().add(timelineType);
 											break;
 										case "TextType":
-											TableColumn<TextType, String> text = new TableColumn<>("TextType");
+											TableColumn<Cell<TextType>, String> text = new TableColumn<>("TextType");
+											task.setCellValueFactory(new PropertyValueFactory<>("value"));
+
 											boardTableView.getColumns().add(text);
 										default:
 									}
