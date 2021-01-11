@@ -1,6 +1,8 @@
-package business_logic.board;
+package business_logic;
 
 import business_logic.BoardFacade;
+import business_logic.board.Board;
+import business_logic.board.Column;
 import business_logic.board.chart.Kanban;
 import business_logic.board.types.StatusLabel;
 import business_logic.board.types.StatusType;
