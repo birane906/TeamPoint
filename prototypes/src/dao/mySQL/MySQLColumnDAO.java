@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-
+//Birane
 public class MySQLColumnDAO extends ColumnDAO {
 
 	/**
