@@ -97,8 +97,8 @@ public class MySQLColumnDAO extends ColumnDAO {
 		req = "SELECT idColumnType FROM `column`"
 				+ "WHERE idColumn = " + DAO.stringFormat(columnId + "");
 		try {
-			
-			stmt.execute(req);
+
+			ResultSet rs = stmt.execute(req);
 		
 		} catch (SQLException e) {
 			

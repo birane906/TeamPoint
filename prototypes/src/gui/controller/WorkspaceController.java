@@ -100,6 +100,12 @@ public class WorkspaceController implements Initializable {
 	public ImageView addItemCollectionImage;
 
 	@FXML
+	public ImageView addColumnImage;
+
+	@FXML
+	public Label addColumnLabel;
+
+	@FXML
 	private MenuButton workspaces;
 
 	/**
@@ -181,6 +187,14 @@ public class WorkspaceController implements Initializable {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/deleteWorkspace.fxml"));
 		Scene tableViewScene = new Scene(tableViewParent);
 		Stage window = (Stage) addDelete.getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+
+	public void addColumnClicked(MouseEvent mouseEvent) throws Exception{
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/createColumn.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
 		window.show();
 	}
@@ -424,6 +438,7 @@ public class WorkspaceController implements Initializable {
 
 
 	}
+
 
 
 }
