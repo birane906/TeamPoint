@@ -50,78 +50,33 @@ public class MySQLColumnDAO extends ColumnDAO {
 			e.printStackTrace();
 		}
 
+		Type type = getTypeByName(typeName);
+
 		String req = "INSERT INTO `column`"
 				+ " (idBoard, idColumnType, columnName) VALUES ("
 				+ DAO.stringFormat(board.getBoard_id() + "") + ", "
-				+ DAO.stringFormat(getTypeByName(typeName).getIdType() + "") + ", "
+				+ DAO.stringFormat(type.getIdType() + "") + ", "
 				+ DAO.stringFormat(columnName)
 				+  ")";
+
+		System.out.println(req);
 
 		try {
 			assert stmt != null;
 			stmt.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
-		} catch (SQLException e) {
-			
-			DAO.closeConnection(0);
-			e.printStackTrace();
-			return null;
-		}
-
-		// Add the column id to board_contains
-
-		try {
-			
 			ResultSet rs = stmt.getGeneratedKeys();
+
 			rs.next();
 			columnId = rs.getInt(1);
-			DAO.closeConnection(0);
-
-		} catch (SQLException e) {
-			DAO.closeConnection(0);
-			e.printStackTrace();
-		}
-
-		// GET the typeId of column
-		
-		query = "SELECT idColumnType FROM `column`"
-				+ "WHERE idColumn = ?";
-		
-		try {
-			stmt = DAO.getConnection(0).prepareStatement(query);
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-
-		req = "SELECT idColumnType FROM `column`"
-				+ "WHERE idColumn = " + DAO.stringFormat(columnId + "");
-		try {
-			
-			stmt.execute(req);
-		
 		} catch (SQLException e) {
 			
 			DAO.closeConnection(0);
 			e.printStackTrace();
 			return null;
-		}
-
-		// Add the column id to board_contains
-		int typeId = -1;
-		try {
-			ResultSet rs = stmt.getGeneratedKeys();
-			rs.next();
-			typeId = rs.getInt(1);
-
-		} catch (SQLException e) {
-			
-			DAO.closeConnection(0);
-			e.printStackTrace();
 		}
 		
 		DAO.closeConnection(0);
-		return new Column<>(board, columnName, columnId, DAO.getTypeById(typeId));
+		return new Column<>(board, columnName, columnId, type);
 	}
 
 
@@ -264,11 +219,11 @@ public class MySQLColumnDAO extends ColumnDAO {
 
 		Workspace parentWorkspace = new Workspace("salut");
 		User boardOwner = new User(1, "name", "firstName", "email", "profileDescription", "phoneNumber");
-		Board parentBoard = new Board(69, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "las", "sa"));
+		Board parentBoard = new Board(75, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "las", "sa"));
 
-		Column resAdd = mySQLColumnDAO.addColumn("asas", parentBoard, "TimeLineType");
+		Column resAdd = mySQLColumnDAO.addColumn("fffff", parentBoard, "TimeLineType");
 
-		System.out.println(resAdd);
+		System.out.println(resAdd.getColumn_id());
 	}
 
 }
