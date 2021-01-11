@@ -10,6 +10,7 @@ import business_logic.board.ItemCollection;
 import business_logic.board.Cell;
 import business_logic.board.types.*;
 import business_logic.workspace.Workspace;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -326,9 +327,8 @@ public class WorkspaceController implements Initializable {
 								for (Column c : currentBoard.getColumns()) {
 									switch (c.getColumnType().getNameType()) {
 										case "DateType":
-
 											TableColumn<Cell<DateType>, String> dateType = new TableColumn<>("DateType");
-			//								task.setCellValueFactory(new PropertyValueFactory<>("value"));
+											task.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()));
 											boardTableView.getColumns().add(dateType);
 
 											break;

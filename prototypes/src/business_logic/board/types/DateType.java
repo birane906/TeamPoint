@@ -58,4 +58,11 @@ public class DateType extends Type {
 	public void setDate(Date newDate) {
 	    this.date = newDate;
 	}
+
+	public String toString(){
+		return this.date.toString();
+	}
+
+
+
 }
