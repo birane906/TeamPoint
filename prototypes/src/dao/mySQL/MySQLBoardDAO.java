@@ -731,15 +731,14 @@ public class MySQLBoardDAO extends BoardDAO {
 					assert rs != null;
 					if (rs.next()) {
 						itemId = rs.getInt("idItem");
+						Item item = getItemById(itemId);
+
+						return new DependencyType(item);
 					}
 				} catch (SQLException e) {
 					DAO.closeConnection(3);
 					e.printStackTrace();
 				}
-
-				Item item = getItemById(itemId);
-
-				return new DependencyType(item);
 
 			default:
 				break;

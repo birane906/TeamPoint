@@ -25,7 +25,7 @@ public class StatusType extends Type {
 	/**
 	 * All the possible {@link StatusLabel} for the {@link StatusType}
 	 */
-	public List<StatusLabel> statusLabels;
+	public List<StatusLabel> statusLabels = new ArrayList<>();
 
 	/**
 	 * Constructor for an empty {@link StatusType}
@@ -40,7 +40,7 @@ public class StatusType extends Type {
 
 	public StatusType(String label) {
 		super(StatusLabel.class.getSimpleName(), "Status type");
-		this.label = label;
+		this.statusLabels.add(new StatusLabel(label, "color", this));
 	}
 	
 	/**
@@ -98,6 +98,10 @@ public class StatusType extends Type {
 
 	public String toString() {
 		String str = "";
+		if(getStatusLabels().size() == 0) {
+			return label;
+		}
+
 		for (int i = 0; i < getStatusLabels().size(); i++) {
 			str += label;
 			str += "/";
