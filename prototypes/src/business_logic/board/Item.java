@@ -128,4 +128,8 @@ public class Item {
 	public void setCells(List<Cell<? extends Type>> cells) {
 		this.cells = cells;
 	}
+
+	public String toString() {
+		return this.label;
+	}
 }
