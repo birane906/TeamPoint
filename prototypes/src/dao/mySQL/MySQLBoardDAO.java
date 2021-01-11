@@ -236,7 +236,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						cells.add(cellPer);
 
 						break;
-					case "StatusType":
+					case "StatusLabel":
 						int b = 1;
 						Column<StatusType> clmStat = null;
 						for (Column<? extends Type> col: board.getColumns()) {
@@ -247,6 +247,7 @@ public class MySQLBoardDAO extends BoardDAO {
 
 						StatusType statusType = (StatusType) type;
 						Cell<? extends Type> cellStat = new Cell<>(item, clmStat, statusType, idCell);
+
 						cells.add(cellStat);
 
 						break;
@@ -788,8 +789,6 @@ public class MySQLBoardDAO extends BoardDAO {
 				String colorStatus = rs.getString("colorStatus");
 				name = rs.getString("label");
 
-				System.out.println(name);
-
 				return new StatusLabel(name, colorStatus);
 			}
 		} catch (SQLException e) {
@@ -1208,6 +1207,6 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		//System.out.println("retrieve " + boardRetrieved.getItemCollections().get(1).getItems().get(0).getCells().get(0));
 
-		System.out.println(boardRetrieved);
+		//System.out.println(boardRetrieved);
 	}
 }
