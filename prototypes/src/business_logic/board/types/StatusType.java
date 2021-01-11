@@ -3,9 +3,7 @@ package business_logic.board.types;
 import business_logic.board.Column;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Type used in a {@link Column} to specify a status
@@ -18,9 +16,6 @@ public class StatusType extends Type {
 	 * The current status of the {@link StatusType}
 	 */
 	private StatusLabel currentStatusLabel;
-
-	// TODO faire label StatusLabel
-	public String label;
 
 	/**
 	 * All the possible {@link StatusLabel} for the {@link StatusType}
@@ -97,13 +92,12 @@ public class StatusType extends Type {
 	}
 
 	public String toString() {
-		String str = "";
+		StringBuilder str = new StringBuilder();
 
 		for (StatusLabel statusLabel: getStatusLabels()) {
-			str += statusLabel;
-			str += "/";
+			str.append(statusLabel);
+			str.append("/");
 		}
-		System.out.println("str");
-		return str;
+		return str.toString();
 	}
 }

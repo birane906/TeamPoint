@@ -1,9 +1,7 @@
 package business_logic.board.types;
 
+import business_logic.board.Column;
 import business_logic.user.User;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Type used in a {@link Column} to specify a set of {@link User}
@@ -28,9 +26,7 @@ public class PersonType extends Type {
 
 	/**
 	 * Create a {@link PersonType} giving a set of {@link User}
-	 * @param users A set of {@link User}
-	 * @param id an int
-	 * @param description a description of the type
+	 * @param user A {@link User}
 	 */
 	public PersonType(User user) {
 		super(PersonType.class.getSimpleName(), "User");
