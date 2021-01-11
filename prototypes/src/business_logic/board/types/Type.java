@@ -3,6 +3,8 @@
  *******************************************************************************/
 package business_logic.board.types;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Description of AbstractType.
  * 
@@ -25,6 +27,9 @@ public abstract class Type {
 	 * The type id
 	 */
 	private int idType;
+
+	public SimpleStringProperty simpleStringProperty = new SimpleStringProperty();
+
 
 	/**
 	 * 
@@ -57,5 +62,9 @@ public abstract class Type {
 
 	public int getIdType() {
 		return idType;
+	}
+
+	public SimpleStringProperty toStringProperty() {
+		return this.simpleStringProperty;
 	}
 }

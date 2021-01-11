@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import business_logic.board.Item;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Description of DependencyType.
@@ -65,5 +66,14 @@ public class DependencyType extends Type  {
 	 */
 	public Set<Item> getItems() {
 		return this.items;
+	}
+
+	public String toString() {
+		return this.items.toString();
+	}
+
+	public SimpleStringProperty toStringProperty(){
+		simpleStringProperty.setValue(this.toString());
+		return simpleStringProperty;
 	}
 }

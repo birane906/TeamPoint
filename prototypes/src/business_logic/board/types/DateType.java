@@ -3,6 +3,9 @@
  *******************************************************************************/
 package business_logic.board.types;
 
+import com.mysql.cj.conf.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.Date;
 
 /**
@@ -63,6 +66,9 @@ public class DateType extends Type {
 		return this.date.toString();
 	}
 
-
+	public SimpleStringProperty toStringProperty(){
+		simpleStringProperty.setValue(this.toString());
+		return simpleStringProperty;
+	}
 
 }
