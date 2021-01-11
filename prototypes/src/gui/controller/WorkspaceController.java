@@ -158,6 +158,16 @@ public class WorkspaceController implements Initializable {
 	}
 
 
+	public void addItemCollectionClicked(MouseEvent mouseEvent) throws Exception{
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/createItemCollection.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+
+	}
+
+
 	public void goToCreateW(ActionEvent mouseEvent) throws IOException{
 
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/createWorkspace.fxml"));
