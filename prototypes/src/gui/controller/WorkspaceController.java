@@ -215,6 +215,7 @@ public class WorkspaceController implements Initializable {
 		sp2.setVisible(false);
 		addBoardImage.setVisible(false);
 		addBoardLabel.setVisible(false);
+		boardTableView.setEditable(true);
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 
 		if(wsl != null) {
