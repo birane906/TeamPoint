@@ -1,10 +1,10 @@
 package business_logic.board.types;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import business_logic.board.Item;
 import javafx.beans.property.SimpleStringProperty;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Description of DependencyType.
@@ -69,7 +69,11 @@ public class DependencyType extends Type  {
 	}
 
 	public String toString() {
-		return this.items.toString();
+		String rep = "";
+		for (Item item : this.items) {
+			rep += item.toString() + "; ";
+		}
+		return rep;
 	}
 
 	public SimpleStringProperty toStringProperty(){
