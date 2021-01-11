@@ -44,9 +44,8 @@ public class CreateItemCollectionController {
 	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-		if(!boardName.getText().isBlank()) {
-
-			boardFacade.createBoard(boardName.getText(),workspaceFacade.getCurrentWorkspace());
+		if(!itemCollectionName.getText().isBlank()) {
+			boardFacade.addItemCollection(itemCollectionName.getText(), boardFacade.currentBoard);
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
