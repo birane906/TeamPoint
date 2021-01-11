@@ -95,4 +95,13 @@ public class StatusType extends Type {
 	public void setStatusLabels(List<StatusLabel> statusLabels) {
 		this.statusLabels = statusLabels;
 	}
+
+	public String toString() {
+		String str = "";
+		for (int i = 0; i < getStatusLabels().size(); i++) {
+			str += label;
+			str += "/";
+		}
+		return str;
+	}
 }

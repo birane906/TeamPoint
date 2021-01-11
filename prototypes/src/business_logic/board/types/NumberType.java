@@ -96,4 +96,8 @@ public class NumberType extends Type {
 	public void setValue(Integer value) {
 		this.value = value;
 	}
+
+	public String toString() {
+		return getValue() + " " + getUnit();
+	}
 }

@@ -19,7 +19,6 @@ public class PersonType extends Type {
 
 	/**
 	 * Create an empty {@link PersonType} 
-	 * @param users A set of {@link User}
 	 * @param id an int
 	 */
 
@@ -47,5 +46,9 @@ public class PersonType extends Type {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String toString() {
+		return user.getUser_id() + "";
 	}
 }

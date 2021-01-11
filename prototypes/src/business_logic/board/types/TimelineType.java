@@ -5,7 +5,7 @@ package business_logic.board.types;
 import java.util.Date;
 
 /**
- * Type used in a {@link Column} to specify a duration between a start date and an end date
+ * Type used in a to specify a duration between a start date and an end date
  * 
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
@@ -80,6 +80,10 @@ public class TimelineType extends Type  {
 	 */
 	public void setEndDate(Date endDate) {
 	    this.endDate = endDate;
+	}
+
+	public String toString() {
+		return startDate + ">" + endDate;
 	}
 
 }

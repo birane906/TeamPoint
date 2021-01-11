@@ -83,4 +83,8 @@ public class StatusLabel {
 		this.statusType = newStatusType;
 	}
 
+	public String toString() {
+		return label;
+	}
+
 }
