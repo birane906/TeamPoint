@@ -758,7 +758,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		PreparedStatement stmt = null;
 		String query = "SELECT * "
 				+ " FROM Item "
-				+ "WHERE idType = ?";
+				+ "WHERE idItem = ?";
 
 		try {
 			// Getconnection from JDBCConnector
@@ -786,8 +786,8 @@ public class MySQLBoardDAO extends BoardDAO {
 		try {
 			assert rs != null;
 			if(rs.next()) {
-				int idBoard = rs.getInt("idType");
-				int idItemCol = rs.getInt("idBoard");
+				int idBoard = rs.getInt("idBoard");
+				int idItemCol = rs.getInt("idItemCollection");
 				name = rs.getString("itemName");
 
 				return new Item(itemId, name);
