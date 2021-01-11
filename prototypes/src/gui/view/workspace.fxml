@@ -53,6 +53,12 @@
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy></TableView>
+                              <ImageView fx:id="addItemCollectionImage" fitHeight="20.0" fitWidth="27.0" layoutX="230.0" layoutY="16.0" onMouseClicked="#addBoardClicked" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../Mockups/plusButton.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="addItemCollectionLabel" layoutX="257.0" layoutY="15.0" onMouseClicked="#addBoardClicked" prefHeight="18.0" prefWidth="141.0" text="Ajouter un item collection" />
                            </children>
                         </AnchorPane>
                     </content>

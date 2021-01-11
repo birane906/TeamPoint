@@ -94,6 +94,12 @@ public class WorkspaceController implements Initializable {
 	public TableView<Cell<? extends Type>> boardTableView = new TableView<>();
 
 	@FXML
+    public Label addItemCollectionLabel;
+
+	@FXML
+	public ImageView addItemCollectionImage;
+
+	@FXML
 	private MenuButton workspaces;
 
 	/**
