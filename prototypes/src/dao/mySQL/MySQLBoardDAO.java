@@ -737,8 +737,7 @@ public class MySQLBoardDAO extends BoardDAO {
 					e.printStackTrace();
 				}
 
-				//Item item = new Item(itemId, "label", );
-				Item item = null;
+				Item item = getItemById(itemId);
 
 				return new DependencyType(item);
 
@@ -783,23 +782,23 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 
 		Type type = null;
+		String name = "";
 		try {
 			assert rs != null;
 			if(rs.next()) {
 				int idBoard = rs.getInt("idType");
 				int idItemCol = rs.getInt("idBoard");
-				String name = rs.getString("itemName");
+				name = rs.getString("itemName");
 
-				// TODO faire requete pour avoir board
+				return new Item(itemId, name);
 			}
 		} catch (SQLException e) {
 			DAO.closeConnection(4);
 			e.printStackTrace();
 		}
-		Item item = null;
 
 		DAO.closeConnection(4);
-		return item;
+		return null;
 	}
 
 	/**

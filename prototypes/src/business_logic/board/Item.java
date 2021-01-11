@@ -56,6 +56,11 @@ public class Item {
 		}
 	}
 
+	public Item(int id, String label) {
+		this.item_id = id;
+		this.label = label;
+	}
+
 	/**
 	 * Constructor Item with cells
 	 * @param id
