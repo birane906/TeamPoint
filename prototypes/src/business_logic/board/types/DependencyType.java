@@ -1,10 +1,9 @@
 package business_logic.board.types;
 
+import business_logic.board.Item;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import business_logic.board.Item;
-import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Description of DependencyType.
@@ -15,24 +14,24 @@ public class DependencyType extends Type  {
 	/**
 	 * The items that must be completed before the current item
 	 */
-	public Set<Item> items = new HashSet<Item>();
+	public Set<Item> items = new HashSet<>();
 
 	/**
 	 * Constructor  for empty {@link DependencyType}
 	 *
-	 * @param id
-	 * @param description
+	 * @param id of the type
+	 * @param description of the type
 	 */
 	public DependencyType(int id, String description) {
 		super(id, DependencyType.class.getSimpleName(), description);
-		items = new HashSet<Item>();
+		items = new HashSet<>();
 	}
 
 	/**
 	 * Constructor  for empty {@link DependencyType}
-	 * @param id
-	 * @param description
-	 * @param items
+	 * @param id of the type
+	 * @param description of the type
+	 * @param items that depends on the types
 	 */
 	public DependencyType(int id, String description, Set<Item> items) {
 		super(id, DependencyType.class.getSimpleName(), description);
@@ -46,7 +45,7 @@ public class DependencyType extends Type  {
 
     /**
 	 * Description of the method addItem.
-	 * @param item 
+	 * @param item of the type
 	 */
 	public void addItem(Item item) {
 		this.items.add(item);
@@ -54,7 +53,7 @@ public class DependencyType extends Type  {
 	 
 	/**
 	 * Description of the method removeItem.
-	 * @param item 
+	 * @param item of the type
 	 */
 	public void removeItem(Item item) {
 		this.items.remove(item);
@@ -69,11 +68,11 @@ public class DependencyType extends Type  {
 	}
 
 	public String toString() {
-		return this.items.toString();
-	}
+		StringBuilder rep = new StringBuilder();
 
-	public SimpleStringProperty toStringProperty(){
-		simpleStringProperty.setValue(this.toString());
-		return simpleStringProperty;
+		for (Item item : this.items) {
+			rep.append(item.toString()).append("; ");
+		}
+		return rep.toString();
 	}
 }

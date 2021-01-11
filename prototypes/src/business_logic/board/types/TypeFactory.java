@@ -3,10 +3,10 @@ package business_logic.board.types;
 public class TypeFactory {
     /**
      * 
-     * @param id
+     * @param id of the type
      * @param name must be the Class class.getSimpleName()
-     * @param description
-     * @return
+     * @param description of the type
+     * @return of the type
      */
     public static Type createType(int id, String name, String description){
         switch (name) {

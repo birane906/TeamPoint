@@ -56,6 +56,11 @@ public class Item {
 		}
 	}
 
+	public Item(int id, String label) {
+		this.item_id = id;
+		this.label = label;
+	}
+
 	/**
 	 * Constructor Item with cells
 	 * @param id
@@ -122,5 +127,9 @@ public class Item {
 
 	public void setCells(List<Cell<? extends Type>> cells) {
 		this.cells = cells;
+	}
+
+	public String toString() {
+		return this.label;
 	}
 }

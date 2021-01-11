@@ -19,11 +19,10 @@ public class TextType extends Type {
 	/**
 	 * Constructor for empty TextType 
 	 * charLimit set to 90 (default)
-	 * @param id
-	 * @param description
-	 * @throws Exception
+	 * @param id of the type
+	 * @param description of the type
 	 */
-	public TextType(int id, String description) throws Exception {
+	public TextType(int id, String description) {
 		super(id, TextType.class.getSimpleName(), description);
 		this.charLimit = 90;
 		this.text = "";
@@ -32,10 +31,10 @@ public class TextType extends Type {
 	/**
 	 * Constructor for TextType filled
 	 * charactere limit to 90 (default)
-	 * @param id
-	 * @param description
-	 * @param text
-	 * @throws Exception
+	 * @param id of the type
+	 * @param description of the type
+	 * @param text of the type
+	 * @throws Exception if the text size is over the charLimi
 	 */
 	public TextType(int id, String description, String text) throws Exception {
 		super(id, TextType.class.getSimpleName(), description);
@@ -58,11 +57,11 @@ public class TextType extends Type {
 	/**
 	 * Constructor for TextType filled
 	 * charactere limit choosed by the client
-	 * @param id
-	 * @param description
-	 * @param text
-	 * @param charLimit
-	 * @throws Exception
+	 * @param id of the type
+	 * @param description of the type
+	 * @param text of the type
+	 * @param charLimit of the type
+	 * @throws Exception if the text sier is over the charLimit
 	 */
 	public TextType(int id, String description, String text, int charLimit) throws Exception {
 		super(id, TextType.class.getSimpleName(), description);

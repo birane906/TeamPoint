@@ -1,10 +1,4 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board.types;
-
-import com.mysql.cj.conf.StringProperty;
-import javafx.beans.property.SimpleStringProperty;
 
 import java.util.Date;
 
@@ -64,11 +58,6 @@ public class DateType extends Type {
 
 	public String toString(){
 		return this.date.toString();
-	}
-
-	public SimpleStringProperty toStringProperty(){
-		simpleStringProperty.setValue(this.toString());
-		return simpleStringProperty;
 	}
 
 }

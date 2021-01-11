@@ -1,6 +1,3 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board.types;
 
 /**
@@ -83,7 +80,7 @@ public class NumberType extends Type {
 	
 	/**
 	 * Sets a value to attribute unit. 
-	 * @param newUnit 
+	 * @param newUnit of the type
 	 */
 	public void setUnit(String newUnit) {
 	    this.unit = newUnit;
@@ -95,5 +92,9 @@ public class NumberType extends Type {
 
 	public void setValue(Integer value) {
 		this.value = value;
+	}
+
+	public String toString() {
+		return getValue() + " " + getUnit();
 	}
 }

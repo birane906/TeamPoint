@@ -236,7 +236,7 @@ public class MySQLBoardDAO extends BoardDAO {
 						cells.add(cellPer);
 
 						break;
-					case "StatusType":
+					case "StatusLabel":
 						int b = 1;
 						Column<StatusType> clmStat = null;
 						for (Column<? extends Type> col: board.getColumns()) {
@@ -247,6 +247,7 @@ public class MySQLBoardDAO extends BoardDAO {
 
 						StatusType statusType = (StatusType) type;
 						Cell<? extends Type> cellStat = new Cell<>(item, clmStat, statusType, idCell);
+
 						cells.add(cellStat);
 
 						break;
@@ -650,20 +651,19 @@ public class MySQLBoardDAO extends BoardDAO {
 
 				break;
 			case 2: //Status Type
-				String label = "";
 
+				int statusId = -1;
 				try {
 					assert rs != null;
 					if (rs.next()) {
-						label = rs.getString("statuslabelid");
+						statusId = rs.getInt("statuslabelid");
 					}
 				} catch (SQLException e) {
 					DAO.closeConnection(3);
 					e.printStackTrace();
 				}
 
-				// TODO faire label StatusLabel
-				return new StatusType(label);
+				return new StatusType(getStatusLabelById(statusId).getLabel());
 
 			case 3: // numberType
 				String unit = "";
@@ -731,21 +731,72 @@ public class MySQLBoardDAO extends BoardDAO {
 					assert rs != null;
 					if (rs.next()) {
 						itemId = rs.getInt("idItem");
+						Item item = getItemById(itemId);
+
+						return new DependencyType(item);
 					}
 				} catch (SQLException e) {
 					DAO.closeConnection(3);
 					e.printStackTrace();
 				}
 
-				//Item item = new Item(itemId, "label", );
-				Item item = null;
-
-				return new DependencyType(item);
-
 			default:
 				break;
 		}
 
+		return null;
+	}
+
+	private StatusLabel getStatusLabelById(int statusId) {
+		if (statusId == -1) {
+			return null;
+		}
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "SELECT * "
+				+ " FROM statusLabel "
+				+ "WHERE idStatusLabel = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection(4).prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		String req = "SELECT * "
+				+ " FROM statusLabel "
+				+ "WHERE idStatusLabel = " + DAO.stringFormat(statusId + "");
+
+		try {
+			assert stmt != null;
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			DAO.closeConnection(4);
+			e.printStackTrace();
+		}
+
+		Type type = null;
+		String name = "";
+		try {
+			assert rs != null;
+			if(rs.next()) {
+				int idStatusLabel = rs.getInt("idStatusLabel");
+				String colorStatus = rs.getString("colorStatus");
+				name = rs.getString("label");
+
+				return new StatusLabel(name, colorStatus);
+			}
+		} catch (SQLException e) {
+			DAO.closeConnection(4);
+			e.printStackTrace();
+		}
+
+		DAO.closeConnection(4);
 		return null;
 	}
 
@@ -759,7 +810,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		PreparedStatement stmt = null;
 		String query = "SELECT * "
 				+ " FROM Item "
-				+ "WHERE idType = ?";
+				+ "WHERE idItem = ?";
 
 		try {
 			// Getconnection from JDBCConnector
@@ -783,23 +834,23 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 
 		Type type = null;
+		String name = "";
 		try {
 			assert rs != null;
 			if(rs.next()) {
-				int idBoard = rs.getInt("idType");
-				int idItemCol = rs.getInt("idBoard");
-				String name = rs.getString("itemName");
+				int idBoard = rs.getInt("idBoard");
+				int idItemCol = rs.getInt("idItemCollection");
+				name = rs.getString("itemName");
 
-				// TODO faire requete pour avoir board
+				return new Item(itemId, name);
 			}
 		} catch (SQLException e) {
 			DAO.closeConnection(4);
 			e.printStackTrace();
 		}
-		Item item = null;
 
 		DAO.closeConnection(4);
-		return item;
+		return null;
 	}
 
 	/**
@@ -1156,6 +1207,6 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		//System.out.println("retrieve " + boardRetrieved.getItemCollections().get(1).getItems().get(0).getCells().get(0));
 
-		System.out.println(boardRetrieved);
+		//System.out.println(boardRetrieved);
 	}
 }
