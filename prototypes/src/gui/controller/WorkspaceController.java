@@ -262,42 +262,7 @@ public class WorkspaceController implements Initializable {
 								boardTableView.getColumns().add(task);
 
 								for (Column<? extends Type> c : currentBoard.getColumns()) {
-									TableColumn<Item, String> tableColumn;
-									switch (c.getColumnType().getNameType()) {
-										case "DateType":
-											tableColumn = new TableColumn<>("DateType");
-											break;
-
-										case "DependencyType":
-											tableColumn = new TableColumn<>("DependencyType");
-											break;
-
-										case "NumberType":
-											tableColumn = new TableColumn<>("NumberType");
-			//								task.setCellValueFactory(new PropertyValueFactory<>("value"));
-											break;
-										case "PersonType":
-											tableColumn = new TableColumn<>("PersonType");
-			//								task.setCellValueFactory(new PropertyValueFactory<>("value"));
-											break;
-										case "StatusType":
-											tableColumn = new TableColumn<>("StatusType");
-		//									task.setCellValueFactory(new PropertyValueFactory<>("value"));
-											break;
-										case "TimelineType":
-											tableColumn = new TableColumn<>("TimelineType");
-		//									task.setCellValueFactory(new PropertyValueFactory<>("value"));
-											break;
-										case "TextType":
-											tableColumn = new TableColumn<>("TextType");
-		//									task.setCellValueFactory(new PropertyValueFactory<>("value"));
-
-											//boardTableView.getColumns().add(text);
-//										default:
-											break;
-										default:
-											tableColumn = new TableColumn<>("");
-									}
+									TableColumn<Item, String> tableColumn = new TableColumn<>(c.getName());
 									tableColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Item, String>, ObservableValue<String>>() {
 										@Override
 										public ObservableValue<String> call(TableColumn.CellDataFeatures<Item, String> itemData) {
