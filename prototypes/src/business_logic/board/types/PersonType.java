@@ -45,6 +45,6 @@ public class PersonType extends Type {
 	}
 
 	public String toString() {
-		return user.getUser_id() + "";
+		return user.getName() + "";
 	}
 }
