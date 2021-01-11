@@ -75,9 +75,4 @@ public class DependencyType extends Type  {
 		}
 		return rep;
 	}
-
-	public SimpleStringProperty toStringProperty(){
-		simpleStringProperty.setValue(this.toString());
-		return simpleStringProperty;
-	}
 }

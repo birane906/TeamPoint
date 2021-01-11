@@ -28,9 +28,6 @@ public abstract class Type {
 	 */
 	private int idType;
 
-	public SimpleStringProperty simpleStringProperty = new SimpleStringProperty();
-
-
 	/**
 	 * 
 	 * @param id type id
@@ -62,9 +59,5 @@ public abstract class Type {
 
 	public int getIdType() {
 		return idType;
-	}
-
-	public SimpleStringProperty toStringProperty() {
-		return this.simpleStringProperty;
 	}
 }

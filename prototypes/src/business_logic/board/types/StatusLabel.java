@@ -1,6 +1,3 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board.types;
 
 /**
@@ -36,6 +33,11 @@ public class StatusLabel {
 		this.statusType = statusType;
 		this.color = color;
 		this.label = label;
+	}
+
+	public StatusLabel(String label, String color) {
+		this.label = label;
+		this.color = color;
 	}
 
 	/**

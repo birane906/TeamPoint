@@ -40,7 +40,7 @@ public class StatusType extends Type {
 
 	public StatusType(String label) {
 		super(StatusLabel.class.getSimpleName(), "Status type");
-		this.statusLabels.add(new StatusLabel(label, "color", this));
+		this.statusLabels.add(new StatusLabel("color", label, this));
 	}
 	
 	/**
@@ -98,14 +98,12 @@ public class StatusType extends Type {
 
 	public String toString() {
 		String str = "";
-		if(getStatusLabels().size() == 0) {
-			return label;
-		}
 
-		for (int i = 0; i < getStatusLabels().size(); i++) {
-			str += label;
+		for (StatusLabel statusLabel: getStatusLabels()) {
+			str += statusLabel;
 			str += "/";
 		}
+		System.out.println("str");
 		return str;
 	}
 }

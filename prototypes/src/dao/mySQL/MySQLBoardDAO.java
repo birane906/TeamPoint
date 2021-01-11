@@ -650,20 +650,19 @@ public class MySQLBoardDAO extends BoardDAO {
 
 				break;
 			case 2: //Status Type
-				String label = "";
 
+				int statusId = -1;
 				try {
 					assert rs != null;
 					if (rs.next()) {
-						label = rs.getString("statuslabelid");
+						statusId = rs.getInt("statuslabelid");
 					}
 				} catch (SQLException e) {
 					DAO.closeConnection(3);
 					e.printStackTrace();
 				}
 
-				// TODO faire label StatusLabel
-				return new StatusType(label);
+				return new StatusType(getStatusLabelById(statusId).getLabel());
 
 			case 3: // numberType
 				String unit = "";
@@ -744,6 +743,61 @@ public class MySQLBoardDAO extends BoardDAO {
 				break;
 		}
 
+		return null;
+	}
+
+	private StatusLabel getStatusLabelById(int statusId) {
+		if (statusId == -1) {
+			return null;
+		}
+		// Result from database
+		ResultSet rs = null;
+		// Query statement
+		PreparedStatement stmt = null;
+		String query = "SELECT * "
+				+ " FROM statusLabel "
+				+ "WHERE idStatusLabel = ?";
+
+		try {
+			// Getconnection from JDBCConnector
+			stmt = DAO.getConnection(4).prepareStatement(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		String req = "SELECT * "
+				+ " FROM statusLabel "
+				+ "WHERE idStatusLabel = " + DAO.stringFormat(statusId + "");
+
+		try {
+			assert stmt != null;
+			if (stmt.execute(req)) {
+				rs = stmt.getResultSet();
+			}
+		} catch (SQLException e) {
+			DAO.closeConnection(4);
+			e.printStackTrace();
+		}
+
+		Type type = null;
+		String name = "";
+		try {
+			assert rs != null;
+			if(rs.next()) {
+				int idStatusLabel = rs.getInt("idStatusLabel");
+				String colorStatus = rs.getString("colorStatus");
+				name = rs.getString("label");
+
+				System.out.println(name);
+
+				return new StatusLabel(name, colorStatus);
+			}
+		} catch (SQLException e) {
+			DAO.closeConnection(4);
+			e.printStackTrace();
+		}
+
+		DAO.closeConnection(4);
 		return null;
 	}
 
