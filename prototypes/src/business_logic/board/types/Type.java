@@ -1,9 +1,4 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board.types;
-
-import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Description of AbstractType.

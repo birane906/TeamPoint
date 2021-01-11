@@ -1,6 +1,3 @@
-/*******************************************************************************
- * 2020, All rights reserved.
- *******************************************************************************/
 package business_logic.board.types;
 import java.util.Date;
 
@@ -23,8 +20,8 @@ public class TimelineType extends Type  {
 	/**
 	 * Create a new empty {@link TimelineType} giving 2 {@link Date}
 	 * Precondition : d1 < d2
-	 * @param id
-	 * @param description
+	 * @param id of the type
+	 * @param description of the type
 	 * @param d1 The starting {@link Date} of the {@link TimelineType}
 	 * @param d2 The ending {@link Date} of the {@link TimelineType}
 	 */
@@ -42,8 +39,8 @@ public class TimelineType extends Type  {
 
 	/**
 	 * Constructor for empty {@link TimelineType} 
-	 * @param id
-	 * @param description
+	 * @param id of the type
+	 * @param description of the type
 	 */
 	public TimelineType(int id, String description) {
 		super(id, TimelineType.class.getSimpleName(), description);
