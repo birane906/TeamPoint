@@ -187,6 +187,7 @@ public class WorkspaceController implements Initializable {
 
 
 
+
 		if(wsl != null) {
 			for (Workspace w : wsl) {
 				MenuItem m = new MenuItem(w.getName());
@@ -201,12 +202,15 @@ public class WorkspaceController implements Initializable {
 						listBoard.setOnMouseClicked(event -> {
 							Board currentBoard = listBoard.getSelectionModel().getSelectedItem();
 							boardLabel.setText(currentBoard.getName());
+							boardTableView.getColumns().clear();
+							boardTableView.getItems().clear();
 
 							BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
 							if(boardFacade.retrieveBoard(currentBoard)) {
 								List<ItemCollection> currentItemCollections = currentBoard.getItemCollections();
 								ObservableList<ItemCollection> mycurrentIC = FXCollections.observableArrayList(currentItemCollections);
 
+								itemCollectionMenuButton.getItems().clear();
 								for (ItemCollection ic : mycurrentIC) {
 									MenuItem mic = new MenuItem(ic.getName());
 									mic.setOnAction(e1 -> {
@@ -308,7 +312,9 @@ public class WorkspaceController implements Initializable {
 
  */
 									});
+
 									itemCollectionMenuButton.getItems().add(mic);
+
 								}
 
 								//SET COLUMNS
