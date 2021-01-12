@@ -66,12 +66,12 @@
                                  </image>
                               </ImageView>
                               <Label fx:id="addColumnLabel" layoutX="653.0" layoutY="46.0" onMouseClicked="#addColumnClicked" prefHeight="18.0" prefWidth="111.0" text="Ajouter une colonne" />
-                              <ImageView fx:id="addItemImage" fitHeight="20.0" fitWidth="27.0" layoutX="15.0" layoutY="459.0" onMouseClicked="#addItemCollectionClicked" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="addItemImage" fitHeight="20.0" fitWidth="27.0" layoutX="15.0" layoutY="459.0" onMouseClicked="#addItemClicked" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../Mockups/plusButton.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="addItemLabel" layoutX="42.0" layoutY="458.0" onMouseClicked="#addItemCollectionClicked" prefHeight="18.0" prefWidth="94.0" text="Ajouter une item" />
+                              <Label fx:id="addItemLabel" layoutX="42.0" layoutY="458.0" onMouseClicked="#addItemClicked" prefHeight="18.0" prefWidth="94.0" text="Ajouter une item" />
                            </children>
                         </AnchorPane>
                     </content>

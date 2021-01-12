@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateItemController">
+   <children>
+      <Label layoutX="42.0" layoutY="23.0" text="Ajouter une item">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="validateButton" layoutX="189.0" layoutY="325.0" mnemonicParsing="false" onAction="#validateOnAction" text="VALIDER" />
+      <Button fx:id="cancelButton" layoutX="383.0" layoutY="325.0" mnemonicParsing="false" onAction="#cancelOnAction" text="ANNULER" />
+      <Label fx:id="messageLabel" layoutX="64.0" layoutY="153.0" prefHeight="18.0" prefWidth="222.0" textFill="#e20a0a" />
+      <TextField fx:id="statusTypeTextField" layoutX="363.0" layoutY="220.0" prefHeight="26.0" prefWidth="211.0" promptText="Status Type" />
+      <TextField fx:id="dependencyTypeTextField" layoutX="64.0" layoutY="113.0" prefHeight="26.0" prefWidth="211.0" promptText="Dependency Type" />
+      <TextField fx:id="numberTypeTextField" layoutX="363.0" layoutY="113.0" prefHeight="26.0" prefWidth="211.0" promptText="Number Type" />
+      <TextField fx:id="textTypeTextField" layoutX="363.0" layoutY="67.0" prefHeight="26.0" prefWidth="211.0" promptText="Text Type" />
+      <TextField fx:id="personTypeTextField" layoutX="64.0" layoutY="158.0" prefHeight="26.0" prefWidth="211.0" promptText="Person Type" />
+      <TextField fx:id="timelineTypeTextField" layoutX="64.0" layoutY="220.0" prefHeight="26.0" prefWidth="211.0" promptText="Timeline Type" />
+      <DatePicker fx:id="dateTypeDT" layoutX="363.0" layoutY="158.0" prefHeight="26.0" prefWidth="211.0" promptText="Date Type" />
+      <TextField fx:id="itemLabel" layoutX="64.0" layoutY="68.0" prefHeight="26.0" prefWidth="211.0" promptText="Nom de l'item" />
+      <MenuButton fx:id="itemCollectionMenuButton" layoutX="71.0" layoutY="270.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="199.0" text="Item collection">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>

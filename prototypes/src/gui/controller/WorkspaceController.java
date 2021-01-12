@@ -12,6 +12,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -200,6 +201,14 @@ public class WorkspaceController implements Initializable {
 		window.show();
 	}
 
+	public void addItemClicked(MouseEvent mouseEvent) throws Exception{
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/createItem.fxml"));
+		Scene tableViewScene = new Scene(tableViewParent);
+		Stage window = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+
 
 
 
@@ -260,6 +269,18 @@ public class WorkspaceController implements Initializable {
 
 								TableColumn<Item, String> task = new TableColumn<>("Tâche");
 								task.setCellValueFactory(new PropertyValueFactory<>("label"));
+								task.setOnEditCommit(
+										new EventHandler<TableColumn.CellEditEvent<Item, String>>() {
+											@Override
+											public void handle(TableColumn.CellEditEvent<Item, String> itemStringCellEditEvent) {
+												((Item) itemStringCellEditEvent.getTableView().getItems().get(
+														itemStringCellEditEvent.getTablePosition().getRow())
+												).setLabel(itemStringCellEditEvent.getNewValue());
+											}
+
+
+										}
+								);
 								boardTableView.getColumns().add(task);
 
 								for (Column<? extends Type> c : currentBoard.getColumns()) {
@@ -301,6 +322,7 @@ public class WorkspaceController implements Initializable {
 		}
 
 	}
+
 
 }
 

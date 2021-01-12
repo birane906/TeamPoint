@@ -1,33 +1,43 @@
 package gui.controller;
 
-import business_logic.BoardFacade;
-import business_logic.ColumnFacade;
-import business_logic.UserFacade;
-import business_logic.WorkspaceFacade;
+import business_logic.*;
+import business_logic.board.Cell;
+import business_logic.board.Column;
+import business_logic.board.Item;
+import business_logic.board.ItemCollection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Description of WorkspaceController.
  * 
  * @author 
  */
-public class CreateItemController {
+public class CreateItemController implements Initializable {
+
 
 	@FXML
-	public TextField columnName;
-
-	@FXML
-	public TextField type;
+	public TextField statusTypeTextField;
+	public TextField dependencyTypeTextField;
+	public TextField textTypeTextField;
+	public TextField timelineTypeTextField;
+	public DatePicker dateTypeDT;
+	public TextField personTypeTextField;
+	public TextField numberTypeTextField;
+	public TextField itemLabel;
+	public MenuButton itemCollectionMenuButton;
 
 
 	/**
@@ -41,6 +51,12 @@ public class CreateItemController {
 
 	private ColumnFacade columnFacade;
 
+	private CellFacade cellFacade;
+
+	private ItemCollection currentItemCollection;
+
+
+
 
 
 	@FXML
@@ -52,25 +68,47 @@ public class CreateItemController {
 	 */
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-		if(!columnName.getText().isBlank() && !type.getText().isBlank()) {
-			//ArrayList<Type> listTypes = columnFacade.retrieveColumnTypes();
-			/*for (Type t : listTypes) {
-				MenuItem mic = new MenuItem(t.getNameType());
-				mic.setOnAction(e1 -> {
-					String selected = t.getNameType();
-					columnFacade.addColumn(columnName.getText(), boardFacade.getCurrentBoard(),selected);
-				});
+		Column dateTypeColumn = null;
+		Column textTypeColumn = null;
+		Column dependencyTypeColumn= null;
+		Column timelineTypeColumn= null;
+		Column personTypeColumn= null;
+		Column numberTypeColumn= null;
+		Column statusTypeColumn= null;
 
-				typeColumnMenuButton.getItems().add(mic);
+		if(!statusTypeTextField.getText().isBlank() || !statusTypeTextField.getText().isBlank() || !statusTypeTextField.getText().isBlank() || !statusTypeTextField.getText().isBlank() || !statusTypeTextField.getText().isBlank() || !statusTypeTextField.getText().isBlank() || !statusTypeTextField.getText().isBlank()) {
+
+			for(Column c: boardFacade.currentBoard.getColumns() ){
+				switch (c.getColumnType().getNameType()){
+					case "DateType":
+						dateTypeColumn = c;
+						break;
+					case "NumberType":
+						numberTypeColumn = c;
+						break;
+					case "TextType":
+						textTypeColumn = c;
+						break;
+					case "PersonType":
+						personTypeColumn = c;
+						break;
+					case "TimelineType":
+						timelineTypeColumn = c;
+						break;
+					case "StatusType":
+						statusTypeColumn = c;
+						break;
+					case "DependencyType":
+						dependencyTypeColumn = c;
+						break;
+				}
 			}
 
-			for (int i=0; i < typeColumnMenuButton.getItems().size();i++) {
-				typeColumnMenuButton.get
 
-			}
 
-			 */
-			columnFacade.addColumn(columnName.getText(), boardFacade.getCurrentBoard(),type.getText());
+			boardFacade.addItem(itemLabel.getText(), this.currentItemCollection);
+
+
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/workspace.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -103,11 +141,25 @@ public class CreateItemController {
 		workspaceFacade = WorkspaceFacade.getWorkspaceFacadeInstance();
 		boardFacade = BoardFacade.getBoardFacadeInstance();
 		columnFacade = ColumnFacade.getColumnFacadeInstance();
+		cellFacade = CellFacade.getCellFacadeFacadeInstance();
+		columnFacade = ColumnFacade.getColumnFacadeInstance();
 	}
 
 
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+		List<ItemCollection> myCurrentItemCollection = boardFacade.getCurrentBoard().getItemCollections();
 
+		for(ItemCollection i: myCurrentItemCollection){
+			MenuItem m = new MenuItem(i.getName());
+			m.setOnAction(e ->{
+				this.currentItemCollection = i;
+				itemCollectionMenuButton.setText(m.getText());
+			});
+			itemCollectionMenuButton.getItems().add(m);
 
+		}
+	}
 }
 
 
