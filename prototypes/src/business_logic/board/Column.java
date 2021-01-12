@@ -9,43 +9,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Description of Column.
- * 
- * @author 
+ * The {@link Column} describes a common property for all the {@link Item} of a {@link Board}
+ *
+ * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class Column<T extends Type> {
 
 	/**
-	 * is equals to T of Column<T>
+	 * The {@link Type} of the {@link Column}
 	 */
 	private final Type typeParameterClass;
 
 	/**
-	 * Description of the property name.
+	 * The name of the {@link Column}
 	 */
 	private String columnName;
 
 	/**
-	 * Description of the property column_id.
+	 * The ID of the {@link Column}
 	 */
 	private int column_id;
 
 	/**
-	 * Description of the property parentBoard.
+	 * The {@link Board} to which belongs the {@link Column}
 	 */
 	private Board parentBoard;
 
 	/**
-	 * Description of the property cells.
+	 * The {@link List} of the {@link Cell} of the {@link Column}
 	 */
-	public List<Cell<? extends Type>> cells;
+	public List<Cell<T>> cells;
 
 	/**
 	 * Constructor for {@link Column} with empty cells
-	 * @param parentBoard the parent Board {@link Board}
-	 * @param columnName the name of the column {@link String}
-	 * @param column_id int
-	 * @param typeParameterClass is the {@link Type} of the generic parameter 
+	 * @param parentBoard The parent Board {@link Board}
+	 * @param columnName The name of the column {@link String}
+	 * @param column_id The ID of the newly created {@link Column}
+	 * @param typeParameterClass The {@link Type} of the generic parameter
 	 */
 	public Column(Board parentBoard, String columnName, int column_id, Type typeParameterClass) {
 		this.parentBoard = parentBoard;
@@ -59,18 +59,19 @@ public class Column<T extends Type> {
 			}
 		}
 	}
-	
+
 	/**
 	 * Constructor with already existing cells
-	 * @param parentBoard
-	 * @param columnName
-	 * @param column_id
-	 * @param cells 
+	 * @param parentBoard The parent Board {@link Board}
+	 * @param columnName The name of the column {@link String}
+	 * @param column_id The ID of the newly created {@link Column}
+	 * @param cells The {@link List} of the cells
+	 * @param typeParameterClass The {@link Type} of the generic parameter
 	 */
 	public Column(Board parentBoard, 
 		String columnName, int column_id, 
-		List<Cell<? extends Type>> cells, Type typeParameterClass) throws Exception {
-		for (Cell<? extends Type> cell : cells) {
+		List<Cell<T>> cells, Type typeParameterClass) throws Exception {
+		for (Cell<T> cell : cells) {
 			if (cell != null && !cell.getValue().getClass().getSimpleName().equals(typeParameterClass.getClass().getSimpleName())) {
 				throw new Exception("The cells type must be"+
 					"the same as the Column type");
@@ -84,36 +85,34 @@ public class Column<T extends Type> {
 	}
 	
 	/**
-	 * Returns name.
-	 * @return name 
+	 * @return The name of the {@link Column}
 	 */
 	public String getName() {
 		return this.columnName;
 	}
 
 	/**
-	 * Sets a value to attribute columnName. 
-	 * @param newcolumnName 
+	 * Sets the name of the {@link Column}
+	 * @param newcolumnName A name for the {@link Column}
 	 */
 	public void setcolumnName(String newcolumnName) {
 		this.columnName = newcolumnName;
 	}
 
 	/**
-	 * Returns cells.
-	 * @return cells 
+	 * @return The {@link List} of the {@link Cell} of the {@link Column}
 	 */
-	public List<Cell<? extends Type>> getCells() {
+	public List<Cell<T>> getCells() {
 		return this.cells;
 	}
 
 	/**
-	 * Set the column cells 
-	 * @param cells
+	 * Set the {@link List} of the {@link Cell} of the {@link Column}
+	 * @param cells A {@link List} of the {@link Cell} of the {@link Column}
 	 * @throws Exception if the cells type is not the same as the column
 	 */
-	public void setCells(List<Cell<? extends Type>> cells) throws Exception {
-		for (Cell<? extends Type> cell : cells) {
+	public void setCells(List<Cell<T>> cells) throws Exception {
+		for (Cell<T> cell : cells) {
 			if (cell != null && !cell.getValue().getClass().getSimpleName().equals(typeParameterClass.getClass().getSimpleName())) {
 				throw new Exception("The cells type must be"+
 				 "the same as the Column type");
@@ -123,47 +122,55 @@ public class Column<T extends Type> {
 	}
 
 	/**
-	 * Returns column_id.
-	 * @return column_id 
+	 * @return The ID of the {@link Column}
 	 */
 	public int getColumn_id() {
 		return this.column_id;
 	}
 
 	/**
-	 * Sets a value to attribute column_id. 
-	 * @param newColumn_id 
+	 * Sets the ID of the {@link Column}
+	 * @param newColumn_id an ID for the {@link Column}
 	 */
 	public void setColumn_id(int newColumn_id) {
 		this.column_id = newColumn_id;
 	}
 
 	/**
-	 * Returns parentBoard.
-	 * @return parentBoard 
+	 * @return The {@link Board} to which belongs the {@link Column}
 	 */
 	public Board getParentBoard() {
 		return this.parentBoard;
 	}
 
 	/**
-	 * Sets a value to attribute parentBoard. 
-	 * @param newParentBoard 
+	 * Sets the {@link Board} to which belongs the {@link Column}
+	 * @param newParentBoard A {@link Board} to which belongs the {@link Column}
 	 */
 	public void setParentBoard(Board newParentBoard) {
 		this.parentBoard = newParentBoard;
 	}
 
+	/**
+	 * Add a {@link Cell} to the {@link List} of {@link Cell} of the {@link Column}
+	 * @param cell A {@link Cell} of the same {@link Type} than the {@link Column}
+	 */
 	public void addCell(Cell<T> cell) {
 		this.cells.add(cell);
 	}
 
+	/**
+	 * Add an empty {@link Cell} to the {@link List} of {@link Cell} of the {@link Column}
+	 */
 	public Cell<T> addEmptyCell(Item item) {
 		Cell cell = new Cell<T>(item, this, null);
 		this.cells.add(cell);
 		return cell;
 	}
 
+	/**
+	 * @return The {@link Type} of the {@link Column}
+	 */
 	public Type getColumnType() {
 		return this.typeParameterClass;
 	}
