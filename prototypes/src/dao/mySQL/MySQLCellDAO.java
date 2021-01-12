@@ -158,9 +158,9 @@ public class MySQLCellDAO extends CellDAO {
 		case "StatusType":
 			StatusType valStatus = (StatusType) value;
 
-			query = "INSERT INTO StatusType (idCell, idUser)"
+			query = "INSERT INTO statustype (idCell, idUser)"
 					+ " VALUE (?, ?)";
-			req = "INSERT INTO StatusType (idCell, idUser)"
+			req = "INSERT INTO statustype (idCell, idUser)"
 					+ " VALUE ("
 					+ DAO.stringFormat(cellId + "") + ", "
 					// here
@@ -172,9 +172,9 @@ public class MySQLCellDAO extends CellDAO {
 		case "DependencyType":
 			DependencyType valDep = (DependencyType) value;
 
-			query = "INSERT INTO DependencyType (idCell, idItem)"
+			query = "INSERT INTO dependencytype (idCell, idItem)"
 					+ " VALUE (?, ?)";
-			req = "INSERT INTO DependencyType (idCell, idItem)"
+			req = "INSERT INTO dependencytype (idCell, idItem)"
 					+ " VALUE ("
 					+ DAO.stringFormat(cellId + "") + ", "
 					// here
@@ -239,7 +239,7 @@ public class MySQLCellDAO extends CellDAO {
 		}
 
 		String req = "SELECT idCell "
-				+ "FROM Cell "
+				+ "FROM cell "
 				+ "WHERE idBoard = " + DAO.stringFormat(cell.getItem().getParentItemCollection().getParentBoard().getBoard_id() + "")
 				+ " AND idColumn = " + DAO.stringFormat(cell.getColumn().getColumn_id() + "")
 				+ " AND idItem = " + DAO.stringFormat(cell.getItem().getItem_id() + "")
@@ -319,14 +319,14 @@ public class MySQLCellDAO extends CellDAO {
 
 			//TODO faire requete sur les statuslabel
 			case "StatusType":
-				query = "UPDATE StatusType " +
+				query = "UPDATE statustype " +
 						"SET idUser = ?"
 						+ " WHERE idCell = ?";
 				break;
 
 			// TODO faire req avec tous les items
 			case "DependencyType":
-				query = "UPDATE DependencyType" +
+				query = "UPDATE dependencytype" +
 						" SET idItem = ?"
 						+ " WHERE idCell = ?";
 				break;
@@ -429,7 +429,7 @@ public class MySQLCellDAO extends CellDAO {
 			case "DependencyType":
 				DependencyType valDep = (DependencyType) value;
 
-				query = "UPDATE DependencyType" +
+				query = "UPDATE dependencytype" +
 						" SET idItem = ?"
 						+ " WHERE idCell = ?";
 

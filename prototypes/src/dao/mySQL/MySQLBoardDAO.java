@@ -291,7 +291,7 @@ public class MySQLBoardDAO extends BoardDAO {
 
 		for (Column<? extends Type> col: board.getColumns()) {
 			for (Cell cell: cells) {
-				if(cell.getColumn().getColumn_id() == col.getColumn_id()) {
+				if(cell.getColumn() != null && cell.getColumn().getColumn_id() == col.getColumn_id()) {
 					col.addCell(cell);
 				}
 			}
@@ -320,7 +320,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		Statement stmt = null;
 		ResultSet rs = null;
 		String query = "SELECT * "
-				+ "FROM itemCollection "
+				+ "FROM itemcollection "
 				+ "WHERE idBoard = ?";
 
 		ArrayList<ItemCollection> itemCollections = new ArrayList<>();
@@ -333,7 +333,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 
 		String req = "SELECT * "
-				+ "FROM itemCollection "
+				+ "FROM itemcollection "
 				+ "WHERE idBoard = " +DAO.stringFormat(board.getBoard_id() + "");
 
 		try {
@@ -359,6 +359,7 @@ public class MySQLBoardDAO extends BoardDAO {
 
 				newItemCol.setItems(getItems(newItemCol));
 				itemCollections.add(newItemCol);
+
 			}
 		} catch (SQLException e) {
 			DAO.closeConnection(0);
@@ -706,9 +707,11 @@ public class MySQLBoardDAO extends BoardDAO {
 
 			case 5: // dateType
 
-				query = "SELECT date" +
+				query = "SELECT date " +
+						" FROM datetype" +
 						" WHERE idCell = ?";
-				req = "SELECT text" +
+				req = "SELECT text " +
+						"FROM datetype" +
 						" WHERE idCell = " + DAO.stringFormat(cellId + "");
 
 				Date date = new Date();
@@ -756,7 +759,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		// Query statement
 		PreparedStatement stmt = null;
 		String query = "SELECT * "
-				+ " FROM statusLabel "
+				+ " FROM statuslabel "
 				+ "WHERE idStatusLabel = ?";
 
 		try {
@@ -767,7 +770,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 
 		String req = "SELECT * "
-				+ " FROM statusLabel "
+				+ " FROM statuslabel "
 				+ "WHERE idStatusLabel = " + DAO.stringFormat(statusId + "");
 
 		try {
@@ -809,7 +812,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		// Query statement
 		PreparedStatement stmt = null;
 		String query = "SELECT * "
-				+ " FROM Item "
+				+ " FROM item "
 				+ "WHERE idItem = ?";
 
 		try {
@@ -820,7 +823,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 
 		String req = "SELECT * "
-				+ " FROM Item "
+				+ " FROM item "
 				+ "WHERE idItem = " + DAO.stringFormat(itemId + "");
 
 		try {
@@ -980,7 +983,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		Statement stmt = null;
 		ResultSet rs = null;
 		String query = "SELECT * "
-				+ "FROM typePermission "
+				+ "FROM typepermission "
 				+ "WHERE idTypePermission = 0";
 
 		int id = -1;
@@ -1121,7 +1124,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		// Query statement
 		PreparedStatement stmt = null;
 		String query = "SELECT * "
-				+ " FROM TypePermission "
+				+ " FROM typepermission "
 				+ "WHERE idTypePermission = ?";
 
 		try {
@@ -1134,7 +1137,7 @@ public class MySQLBoardDAO extends BoardDAO {
 		}
 
 		String req = "SELECT * "
-				+ " FROM TypePermission "
+				+ " FROM typepermission "
 				+ "WHERE idTypePermission = " + DAO.stringFormat(id + "");
 
 		try {

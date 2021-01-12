@@ -145,7 +145,7 @@ public interface DAO {
 		// Query statement
 		PreparedStatement stmt = null;
 		String query = "SELECT name, firstName, email, phoneNumber,"
-				+ "profileDescription, birthday" + " FROM User "
+				+ "profileDescription, birthday" + " FROM user "
 				+ "WHERE idUser = ?";
 
 		try {
@@ -156,7 +156,7 @@ public interface DAO {
 		}
 
 		String req = "SELECT idUser, name, firstName, email, phoneNumber,"
-				+ "profileDescription, birthday" + " FROM User "
+				+ "profileDescription, birthday" + " FROM user "
 				+ "WHERE idUser = " + DAO.stringFormat(id + "");
 
 		try {
@@ -214,7 +214,7 @@ public interface DAO {
 		// Query statement
 		PreparedStatement stmt = null;
 		String query = "SELECT * "
-				+ " FROM Type "
+				+ " FROM type "
 				+ "WHERE idType = ?";
 
 		try {
@@ -225,7 +225,7 @@ public interface DAO {
 		}
 
 		String req = "SELECT * "
-				+ " FROM Type "
+				+ " FROM type "
 				+ "WHERE idType = " + DAO.stringFormat(idType + "");
 
 		try {

@@ -46,7 +46,7 @@ public class MySQLUserDAO extends UserDAO {
 			e.printStackTrace();
 		}
 
-		String req = "SELECT idUser, email FROM User " 
+		String req = "SELECT idUser, email FROM user "
 			+ "WHERE email = " + DAO.stringFormat(email);
 
 		try {
@@ -99,7 +99,7 @@ public class MySQLUserDAO extends UserDAO {
 		// Query statement
 		PreparedStatement stmt = null;
 		String query = "SELECT name, firstName, email, phoneNumber,"
-				+ "profileDescription, birthday" + " FROM User "
+				+ "profileDescription, birthday" + " FROM user "
 				+ "WHERE email = ?"
 				+ " AND password = ?";
 
@@ -111,7 +111,7 @@ public class MySQLUserDAO extends UserDAO {
 		}
 
 		String req = "SELECT idUser, name, firstName, email, phoneNumber,"
-				+ "profileDescription, birthday" + " FROM User "
+				+ "profileDescription, birthday" + " FROM user "
 				+ "WHERE email = " + DAO.stringFormat(email) 
 				+ " AND password = " + DAO.stringFormat(password);
 
@@ -171,7 +171,7 @@ public class MySQLUserDAO extends UserDAO {
 		// Query statement
 		PreparedStatement stmt = null;
 
-		String query = "INSERT INTO User(name, firstName, email, password) VALUES(?, ?, ?, ?)";
+		String query = "INSERT INTO user(name, firstName, email, password) VALUES(?, ?, ?, ?)";
 		
 		try {
 			// Getconnection
@@ -180,7 +180,7 @@ public class MySQLUserDAO extends UserDAO {
 			e.printStackTrace();
 		}
 
-		String req = "INSERT INTO User"
+		String req = "INSERT INTO user"
 				+ " (name, firstName, email, password) VALUES("
 				+ DAO.stringFormat(name) + ", " 
 				+ DAO.stringFormat(firstname) + ", " 

@@ -22,7 +22,7 @@ public class JDBCConnector {
 		for(int i = 0; i < 4; i++) {
 			try {
 				this.connection[i] = (DriverManager.getConnection(
-						"jdbc:mysql://localhost/TeamPoint?" + "user=root&password="
+						"jdbc:mysql://sql2.freemysqlhosting.net/sql2386460?" + "user=sql2386460&password=rB9*wP6%25"
 						+ "&useUnicode=true" + "&useJDBCCompliantTimezoneShift=true"
 						+ "&useLegacyDatetimeCode=false" +	"&serverTimezone=UTC"));
 

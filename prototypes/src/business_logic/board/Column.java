@@ -53,11 +53,13 @@ public class Column<T extends Type> {
 		this.typeParameterClass = typeParameterClass;
 		this.columnName = columnName;
 		this.cells = new ArrayList<>();
+		/*
 		for (ItemCollection itemCollection: parentBoard.getItemCollections()) {
 			for (Item item : itemCollection.getItems()) {
 				cells.add(new Cell<>(item,this,null));
 			}
 		}
+		 */
 	}
 
 	/**
