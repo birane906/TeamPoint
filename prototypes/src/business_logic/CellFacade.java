@@ -53,9 +53,8 @@ public class CellFacade {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		CellDAO cellDAO = daoFactory.createCellDAO();
 
-		return null;
 		// signature 	public <T extends Type> Cell<T> addCell(Column<T> column, Item item, T value) {
-		//return cellDAO.addCell(column, item, value);
+		return cellDAO.addCell(column, item, value);
 	}
 
 	/**

@@ -1,10 +1,7 @@
 package dao.mySQL;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
+import java.sql.*;
+import java.sql.Date;
 
 import business_logic.board.*;
 import business_logic.board.types.*;
@@ -19,6 +16,8 @@ import dao.DAO;
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class MySQLCellDAO extends CellDAO {
+
+	private java.util.Date utilDate;
 
 	/**
 	 * The constructor.
@@ -37,7 +36,7 @@ public class MySQLCellDAO extends CellDAO {
 	 * @return the cell created
 	 */
 	@Override
-	public <T extends Type> Cell<T> addCell(Column<T> column, Item item, T value) {
+	public <T extends Type> Cell<? extends Type> addCell(Column<? extends Type> column, Item item, T value) {
 
 		if(column == null || item == null || value == null) {
 			return null;
@@ -93,7 +92,6 @@ public class MySQLCellDAO extends CellDAO {
 
 		String type = value.getNameType();
 		switch (type) {
-			// TODO avec les date ne marche pas
 		case "TimelineType":
 
 			TimelineType valTime = (TimelineType) value;
@@ -103,8 +101,8 @@ public class MySQLCellDAO extends CellDAO {
 			req = "INSERT INTO timelinetype (idCell, startDate, endDate)"
 					+ " VALUE ("
 					+ DAO.stringFormat(cellId + "") + ", "
-					+ DAO.stringFormat(valTime.getStartDate() + "") + ", "
-					+ DAO.stringFormat(valTime.getEndDate() + "")
+					+ DAO.stringFormat(DAO.dateFormat(valTime.getStartDate()) + "") + ", "
+					+ DAO.stringFormat(DAO.dateFormat(valTime.getEndDate()) + "")
 					+ ")";
 			break;
 
@@ -140,7 +138,7 @@ public class MySQLCellDAO extends CellDAO {
 			req = "INSERT INTO datetype (idCell, date)"
 					+ " VALUE ("
 					+ DAO.stringFormat(cellId + "") + ", "
-					+ DAO.stringFormat(valDate.getDate() + "")
+					+ DAO.stringFormat(DAO.dateFormat(valDate.getDate()) + "")
 					+ ")";
 			break;
 
@@ -288,7 +286,6 @@ public class MySQLCellDAO extends CellDAO {
 
 		String type = value.getNameType();
 		switch (type) {
-			// TODO avec les date ne marche pas
 			case "TimelineType":
 				query = "UPDATE timelinetype " +
 						"SET startDate = ?, endDate = ?"
@@ -353,8 +350,8 @@ public class MySQLCellDAO extends CellDAO {
 				TimelineType valTime = (TimelineType) value;
 
 				try {
-					//stmt.setDate(1, valTime.getStartDate());
-					//stmt.setDate(2, valTime.getEndDate());
+					stmt.setDate(1, (Date) valTime.getStartDate());
+					stmt.setDate(2, (Date) valTime.getEndDate());
 					stmt.setInt(3, cell.getCellId());
 
 				} catch (SQLException e) {
@@ -392,7 +389,7 @@ public class MySQLCellDAO extends CellDAO {
 				DateType valDate = (DateType) value;
 
 				try {
-					//stmt.setDate(1, valDate.getDate());
+					stmt.setDate(1, (Date) valDate.getDate());
 					stmt.setInt(2, cell.getCellId());
 
 				} catch (SQLException e) {
@@ -470,13 +467,13 @@ public class MySQLCellDAO extends CellDAO {
 		Workspace parentWorkspace = new Workspace("salut");
 		
 		User boardOwner = new User("name", "firstName", "email", "profileDescription", "phoneNumber");
-		Board parentBoard = new Board(0, "test", parentWorkspace, boardOwner, new Date(), new Permission(0, "", ""));
+		Board parentBoard = new Board(75, "test", parentWorkspace, boardOwner, new java.util.Date(), new Permission(0, "", ""));
 
 		
-		ItemCollection itemCol = new ItemCollection("test", 0, parentBoard);
-		Item item = new Item(0, "salut", itemCol);
+		ItemCollection itemCol = new ItemCollection("test", 1, parentBoard);
+		Item item = new Item(4, "salut", itemCol);
 		
-		Column<TextType> column = new Column<TextType>(parentBoard, "sa", 0, DAO.getTypeById(0));
+		Column<TextType> column = new Column<>(parentBoard, "sa", 2, DAO.getTypeById(0));
 
 
 		TextType textType = null;
@@ -492,7 +489,9 @@ public class MySQLCellDAO extends CellDAO {
 
 		//System.out.println(new Date());
 
-		System.out.println(mySQL.addCell(column, item, textType));
+		DateType dateType = new DateType(5, "", new java.util.Date());
+
+		System.out.println(mySQL.addCell(column, item, dateType));
 		//System.out.println(mySQL.editCell(cell, textType));
 	}
 }

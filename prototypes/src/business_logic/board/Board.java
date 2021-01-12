@@ -13,8 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Description of Board.
- * 
+ * The {@link Board} is a part of the {@link Workspace}
+ *
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class Board {
