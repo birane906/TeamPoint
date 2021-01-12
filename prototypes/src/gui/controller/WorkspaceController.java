@@ -237,29 +237,82 @@ public class WorkspaceController implements Initializable {
 					BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
 					if (col > 0) {
 						String typeName = boardFacade.getCurrentBoard().getColumns().get(col - 1).getColumnType().getNameType();
+						Parent tableViewParent = null;
+						FXMLLoader loader = null;
 						switch (typeName) {
 							case "DateType":
-								System.out.println("DateType");
+								loader = new FXMLLoader(getClass().getResource("../view/addDate.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 								break;
 							case "NumberType":
-								System.out.println("NumberType");
+								loader = new FXMLLoader(getClass().getResource("../view/addNumber.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 								break;
 							case "TextType":
-								System.out.println("TextType");
+								loader = new FXMLLoader(getClass().getResource("../view/addText.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 								break;
 							case "PersonType":
-								System.out.println("PersonType");
+								loader = new FXMLLoader(getClass().getResource("../view/addPerson.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 								break;
 							case "TimelineType":
-								System.out.println("TimelineType");
+								loader = new FXMLLoader(getClass().getResource("../view/addTimeline.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 								break;
 							case "StatusType":
-								System.out.println("StatusType");
+								loader = new FXMLLoader(getClass().getResource("../view/addStatus.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 								break;
 							case "DependencyType":
-								System.out.println("DependencyType");
+								String taskString = boardTableView.getColumns().get(0).getCellData(row).toString();
+								List<Cell> cells = boardFacade.getCurrentBoard().getColumns().get(col - 1).getCells();
+								Cell c = null;
+								for (Cell cell : cells) {
+									if (cell.getItem().getLabel().equals(taskString)) {
+										c = cell;
+										break;
+									}
+								}
+								loader = new FXMLLoader(getClass().getResource("../view/addDependency.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								addDependencyController controller = loader.getController();
+								controller.setCell(c);
 								break;
+
 						}
+						Scene tableViewScene = new Scene(tableViewParent);
+						Stage window = (Stage) ((Node)click.getSource()).getScene().getWindow();
+						window.setScene(tableViewScene);
+						window.show();
 					}
 				}
 			}

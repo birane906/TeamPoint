@@ -1,16 +1,15 @@
 package business_logic;
 
 import business_logic.board.*;
-import business_logic.board.types.DependencyType;
-import business_logic.board.types.PersonType;
-import business_logic.board.types.StatusType;
-import business_logic.board.types.TimelineType;
+import business_logic.board.types.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
 import dao.CellDAO;
 import dao.ColumnDAO;
 import dao.factory.DAOFactory;
+
+import java.util.Date;
 
 /**
  * {@link BoardFacade} is a Singleton class. Simplify the use of
@@ -178,6 +177,36 @@ public class BoardFacade {
 
 		if (item != null) {
 			itemCollection.addItem(item);
+			CellDAO cellDAO = daoFactory.createCellDAO();
+			for (Column column : itemCollection.getParentBoard().getColumns()) {
+				Type type = null;
+				switch (column.getColumnType().getNameType()) {
+					case "DateType":
+						type = new DateType(new Date());
+						break;
+					case "NumberType":
+						type = new NumberType("", 0);
+						break;
+					case "TextType":
+						try {
+							type = new TextType("null");
+						} catch (Exception e) {}
+						break;
+					case "PersonType":
+						type = new PersonType(UserFacade.getUserFacadeInstance().getCurrentUser());
+						break;
+					case "TimelineType":
+						type = new TimelineType(new Date(), new Date());
+						break;
+					case "StatusType":
+						type = new StatusType("-");
+						break;
+					case "DependencyType":
+						type = new DependencyType(item);
+						break;
+				}
+				cellDAO.addCell(column, item, type);
+			}
 			return true;
 		}
 		else {

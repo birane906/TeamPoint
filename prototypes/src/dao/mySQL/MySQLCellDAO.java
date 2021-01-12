@@ -1,14 +1,13 @@
 package dao.mySQL;
 
-import java.sql.*;
-import java.sql.Date;
-
 import business_logic.board.*;
 import business_logic.board.types.*;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.CellDAO;
 import dao.DAO;
+
+import java.sql.*;
 
 /**
  * Description of MySQLCellDAO.
@@ -273,7 +272,7 @@ public class MySQLCellDAO extends CellDAO {
 	 * @return a boolean according to the success of update
 	 */
 	@Override
-	public <T extends Type> Boolean editCell(Cell<T> cell, T value) {
+	public <T extends Type> Boolean editCell(Cell<? extends Type> cell, T value) {
 
 		if(cell == null || value == null) {
 			return false;
@@ -448,7 +447,7 @@ public class MySQLCellDAO extends CellDAO {
 
 		// execute the java prepared statement
 		try {
-			stmt.executeUpdate();
+			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
