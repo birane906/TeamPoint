@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 07 jan. 2021 à 03:55
+-- Généré le :  mar. 12 jan. 2021 à 01:19
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -43,7 +43,7 @@ CREATE TABLE `board` (
 
 INSERT INTO `board` (`idBoard`, `userOwner`, `idPermission`, `boardName`, `parentWorkspace`, `boardCreationDate`) VALUES
 (75, 1, 0, 'TestBoard', 0, '2021-01-06'),
-(76, 1, 0, 'Boarddaas', 0, '2021-01-06');
+(78, 1, 0, 'AddedBoard', 0, '2021-01-12');
 
 -- --------------------------------------------------------
 
@@ -71,6 +71,19 @@ INSERT INTO `cell` (`idCell`, `idBoard`, `idColumn`, `idItem`, `idType`, `idItem
 (4, 75, 5, 59, 2, 59),
 (5, 75, 6, 59, 0, 59),
 (6, 75, 54, 59, 1, 59),
+(7, 75, 1, 59, 3, 59),
+(8, 75, 6, 4, 0, 1),
+(9, 75, 1, 4, 3, 1),
+(10, 75, 1, 3, 3, 1),
+(11, 75, 54, 3, 1, 1),
+(12, 75, 2, 3, 5, 1),
+(13, 75, 4, 3, 4, 1),
+(14, 75, 4, 4, 4, 1),
+(15, 75, 5, 3, 2, 1),
+(16, 75, 5, 4, 2, 1),
+(17, 75, 1, 1, 3, 59),
+(18, 75, 4, 1, 4, 59),
+(19, 75, 5, 1, 2, 59),
 (79, 75, 1, 1, 3, 59);
 
 -- --------------------------------------------------------
@@ -97,7 +110,9 @@ INSERT INTO `column` (`idColumn`, `idColumnType`, `idBoard`, `columnName`) VALUE
 (4, 4, 75, 'Person'),
 (5, 2, 75, 'Status'),
 (6, 0, 75, 'Timeline'),
-(54, 1, 75, 'Text');
+(54, 1, 75, 'Text'),
+(62, 6, 78, 'Dependency'),
+(63, 1, 78, 'SomeColumn');
 
 -- --------------------------------------------------------
 
@@ -116,7 +131,8 @@ CREATE TABLE `datetype` (
 --
 
 INSERT INTO `datetype` (`idDateType`, `idCell`, `date`) VALUES
-(1, 1, '2021-01-05');
+(1, 1, '2021-01-05'),
+(2, 12, '2021-01-20');
 
 -- --------------------------------------------------------
 
@@ -135,7 +151,7 @@ CREATE TABLE `dependencytype` (
 --
 
 INSERT INTO `dependencytype` (`idDependancyType`, `idCell`, `idItem`) VALUES
-(1, 2, 59);
+(1, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -157,6 +173,7 @@ CREATE TABLE `item` (
 INSERT INTO `item` (`idItem`, `idBoard`, `idItemCollection`, `itemName`) VALUES
 (1, 75, 59, 'Task2'),
 (3, 75, 1, 'Task3'),
+(4, 75, 1, 'Task4'),
 (59, 75, 1, 'Task1');
 
 -- --------------------------------------------------------
@@ -177,7 +194,9 @@ CREATE TABLE `itemcollection` (
 
 INSERT INTO `itemcollection` (`idItemCollection`, `idBoard`, `itemCollectionName`) VALUES
 (1, 75, 'Phase 2'),
-(59, 75, 'Phase1');
+(59, 75, 'Phase1'),
+(61, 78, 'Phase development'),
+(62, 78, 'some item');
 
 -- --------------------------------------------------------
 
@@ -197,7 +216,11 @@ CREATE TABLE `numbertype` (
 --
 
 INSERT INTO `numbertype` (`idNumberType`, `idCell`, `unit`, `number`) VALUES
-(1, 79, 'Dolla', 1);
+(1, 79, 'Dolla', 1),
+(2, 9, 'Dolla', 500),
+(3, 7, 'Euro', 5),
+(4, 10, 'kg', 20),
+(5, 17, 'Euro', 1000);
 
 -- --------------------------------------------------------
 
@@ -216,7 +239,10 @@ CREATE TABLE `persontype` (
 --
 
 INSERT INTO `persontype` (`idPersonType`, `idCell`, `idUser`) VALUES
-(2, 3, 1);
+(1, 13, 64),
+(2, 3, 1),
+(3, 14, 66),
+(4, 18, 65);
 
 -- --------------------------------------------------------
 
@@ -236,7 +262,8 @@ CREATE TABLE `statuslabel` (
 --
 
 INSERT INTO `statuslabel` (`idStatusLabel`, `idColumn`, `label`, `colorStatus`) VALUES
-(0, 5, 'Done', 'Rouge');
+(0, 5, 'Done', 'Vert'),
+(1, 5, 'In progress', 'Bleu');
 
 -- --------------------------------------------------------
 
@@ -255,7 +282,10 @@ CREATE TABLE `statustype` (
 --
 
 INSERT INTO `statustype` (`idStatusType`, `idCell`, `statusLabelId`) VALUES
-(2, 4, 0);
+(1, 19, 1),
+(2, 4, 0),
+(3, 15, 1),
+(4, 16, 1);
 
 -- --------------------------------------------------------
 
@@ -274,7 +304,8 @@ CREATE TABLE `texttype` (
 --
 
 INSERT INTO `texttype` (`idTextType`, `idCell`, `text`) VALUES
-(10, 6, 'SAlut');
+(1, 11, 'sometext detail'),
+(10, 6, 'do some thing');
 
 -- --------------------------------------------------------
 
@@ -294,7 +325,8 @@ CREATE TABLE `timelinetype` (
 --
 
 INSERT INTO `timelinetype` (`idTimelineType`, `idCell`, `startDate`, `endDate`) VALUES
-(1, 5, '2021-01-19', '2021-01-14');
+(1, 5, '2021-01-19', '2021-01-14'),
+(2, 8, '2020-11-11', '2021-01-11');
 
 -- --------------------------------------------------------
 
@@ -362,7 +394,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `name`, `firstName`, `email`, `password`, `phoneNumber`, `profileDescription`, `birthday`) VALUES
-(1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', '$2a$10$BcCrQI./VvJa3V61g8pv1uEHOOWNG95s6WhZxCHDTPR0ZpmICN.ny', NULL, NULL, NULL);
+(1, 'Nicolas', 'Galois', 'galoisnicolas@gmail.com', '$2a$10$BcCrQI./VvJa3V61g8pv1uEHOOWNG95s6WhZxCHDTPR0ZpmICN.ny', NULL, NULL, NULL),
+(64, 'Azharhoussen', 'Salim', 'salim@gmail.com', '$2a$10$BcCrQI./VvJa3V61g8pv1uEHOOWNG95s6WhZxCHDTPR0ZpmICN.ny', NULL, NULL, NULL),
+(65, 'Ba', 'Birane', 'biraneBa@gmail.com', '$2a$10$BcCrQI./VvJa3V61g8pv1uEHOOWNG95s6WhZxCHDTPR0ZpmICN.ny', NULL, NULL, NULL),
+(66, 'Bourret', 'Raphael', 'RaphBourret@gmail.com', '$2a$10$BcCrQI./VvJa3V61g8pv1uEHOOWNG95s6WhZxCHDTPR0ZpmICN.ny', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -549,7 +584,7 @@ ALTER TABLE `workspace`
 -- AUTO_INCREMENT pour la table `board`
 --
 ALTER TABLE `board`
-  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `idBoard` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT pour la table `cell`
@@ -561,13 +596,13 @@ ALTER TABLE `cell`
 -- AUTO_INCREMENT pour la table `column`
 --
 ALTER TABLE `column`
-  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `idColumn` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT pour la table `datetype`
 --
 ALTER TABLE `datetype`
-  MODIFY `idDateType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDateType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `dependencytype`
@@ -585,25 +620,25 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT pour la table `itemcollection`
 --
 ALTER TABLE `itemcollection`
-  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `idItemCollection` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT pour la table `numbertype`
 --
 ALTER TABLE `numbertype`
-  MODIFY `idNumberType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idNumberType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `persontype`
 --
 ALTER TABLE `persontype`
-  MODIFY `idPersonType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPersonType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `statustype`
 --
 ALTER TABLE `statustype`
-  MODIFY `idStatusType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idStatusType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `texttype`
@@ -615,19 +650,19 @@ ALTER TABLE `texttype`
 -- AUTO_INCREMENT pour la table `timelinetype`
 --
 ALTER TABLE `timelinetype`
-  MODIFY `idTimelineType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idTimelineType` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT pour la table `workspace`
 --
 ALTER TABLE `workspace`
-  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `idWorkspace` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Contraintes pour les tables déchargées
