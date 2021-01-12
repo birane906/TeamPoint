@@ -88,7 +88,7 @@ public interface DAO {
 
 			req = "SELECT * " +
 					"FROM user " +
-					"WHERE email " + DAO.stringFormat(name);
+					"WHERE email = " + DAO.stringFormat(name);
 		}
 		else {
 			query = "SELECT * "
@@ -99,7 +99,6 @@ public interface DAO {
 					+ "FROM `" + table + "` "
 					+ "WHERE " + table + "Name = " + DAO.stringFormat(name);
 		}
-
 
 		try {
 			// Getconnection from JDBCConnector
