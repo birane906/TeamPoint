@@ -49,13 +49,11 @@ public class Item {
 		//TODO : check for bugs
 
 		List<Column> columns = parentItemCollection.getParentBoard().getColumns();
-/*
+
 		for (Column column : columns) {
 			Cell cell = column.addEmptyCell(this);
 			this.cells.add(cell);
 		}
-
- */
 	}
 
 	/**

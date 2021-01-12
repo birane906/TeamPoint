@@ -79,9 +79,9 @@ public class CellFacade {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		CellDAO cellDAO = daoFactory.createCellDAO();
 
-		return null;
+
 		// signature 	public <T extends Type> Boolean editCell(Cell<T> cell, T value) {
-		//return cellDAO.editCell(cell, value);
+		return cellDAO.editCell(cell, value);
 	}
 
 	/**

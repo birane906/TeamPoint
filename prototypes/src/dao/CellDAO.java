@@ -35,5 +35,5 @@ public abstract class CellDAO implements DAO {
 	 * @param value 
 	 * @return a boolean according to the success of update
 	 */
-	public abstract <T extends Type> Boolean editCell(Cell<T> cell, T value);
+	public abstract <T extends Type> Boolean editCell(Cell<? extends Type> cell, T value);
 }

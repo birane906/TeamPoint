@@ -225,6 +225,98 @@ public class WorkspaceController implements Initializable {
 		addBoardImage.setVisible(false);
 		addBoardLabel.setVisible(false);
 		boardTableView.setEditable(true);
+		boardTableView.getSelectionModel().setCellSelectionEnabled(true);
+		boardTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent click) {
+				if (click.getClickCount() == 2) {
+					TablePosition pos = boardTableView.getSelectionModel().getSelectedCells().get(0);
+					int row = pos.getRow();
+					int col = pos.getColumn();
+					TableColumn column = pos.getTableColumn();
+					BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
+					if (col > 0) {
+						String typeName = boardFacade.getCurrentBoard().getColumns().get(col - 1).getColumnType().getNameType();
+						Parent tableViewParent = null;
+						FXMLLoader loader = null;
+						switch (typeName) {
+							case "DateType":
+								loader = new FXMLLoader(getClass().getResource("../view/addDate.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								break;
+							case "NumberType":
+								loader = new FXMLLoader(getClass().getResource("../view/addNumber.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								break;
+							case "TextType":
+								loader = new FXMLLoader(getClass().getResource("../view/addText.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								break;
+							case "PersonType":
+								loader = new FXMLLoader(getClass().getResource("../view/addPerson.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								break;
+							case "TimelineType":
+								loader = new FXMLLoader(getClass().getResource("../view/addTimeline.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								break;
+							case "StatusType":
+								loader = new FXMLLoader(getClass().getResource("../view/addStatus.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								break;
+							case "DependencyType":
+								String taskString = boardTableView.getColumns().get(0).getCellData(row).toString();
+								List<Cell> cells = boardFacade.getCurrentBoard().getColumns().get(col - 1).getCells();
+								Cell c = null;
+								for (Cell cell : cells) {
+									if (cell.getItem().getLabel().equals(taskString)) {
+										c = cell;
+										break;
+									}
+								}
+								loader = new FXMLLoader(getClass().getResource("../view/addDependency.fxml"));
+								try {
+									tableViewParent = loader.load();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+								addDependencyController controller = loader.getController();
+								controller.setCell(c);
+								break;
+
+						}
+						Scene tableViewScene = new Scene(tableViewParent);
+						Stage window = (Stage) ((Node)click.getSource()).getScene().getWindow();
+						window.setScene(tableViewScene);
+						window.show();
+					}
+				}
+			}
+		});
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 
 		if(wsl != null) {
