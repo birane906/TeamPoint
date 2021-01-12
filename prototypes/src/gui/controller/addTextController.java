@@ -19,12 +19,24 @@ public class addTextController {
      */
     private UserFacade userFacade;
 
+    /**
+     * Description of the property workspaceFacade.
+     */
     private WorkspaceFacade workspaceFacade;
 
+    /**
+     * Description of the property boardFacade.
+     */
     private BoardFacade boardFacade;
 
+    /**
+     * Description of the property columnFacade.
+     */
     private ColumnFacade columnFacade;
 
+    /**
+     * Description of the property cellFacade.
+     */
     private CellFacade cellFacade;
 
     private ItemCollection currentItemCollection;

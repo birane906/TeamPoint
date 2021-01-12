@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Description of WorkspaceController.
+ * Description of createColumnController.
  * 
  * @author 
  */

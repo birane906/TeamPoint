@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Description of WorkspaceController.
+ * Description of createBoardController.
  * 
  * @author 
  */
