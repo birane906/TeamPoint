@@ -3,12 +3,11 @@
  *******************************************************************************/
 package business_logic.board;
 
-import business_logic.board.Cell;
 import business_logic.board.types.Type;
 
 /**
- * Description of Cell.
- * 
+ * The {@link Cell} is a container of the value for a giving {@link Item} and {@link Column}
+ * The type of the {@link Cell} must implements {@link Type}
  * @author Salim Azharhoussen, Birane Ba, Raphael Bourret, Nicolas Galois
  */
 public class Cell<T extends Type> {
@@ -16,26 +15,27 @@ public class Cell<T extends Type> {
 	private int cellId;
 
 	/**
-	 * Description of the property column.
+	 * The {@link Column} of the {@link Cell}
+	 * The {@link Column} must have the same type than the {@link Cell}
 	 */
 	private Column<T> column;
 
 	/**
-	 * Description of the property value.
+	 * The effective value of type {@link Type} of the {@link Cell}
 	 */
 	private T value;
 
 	/**
-	 * Description of the property item.
+	 * The {@link Item} of the {@link Cell}
 	 */
 	private Item item;
 
 	/**
-	 * 
-	 * @param item
-	 * @param column
-	 * @param value
-	 * @param idCell
+	 * The constructor of the {@link Cell}
+	 * @param item The {@link Item} to which belongs the {@link Cell}
+	 * @param column The {@link Column} to which belongs the {@link Cell}
+	 * @param value The value of type {@link Type} of the {@link Cell}
+	 * @param idCell The ID of the newly created {@link Cell}
 	 */
 	public Cell(Item item, Column<T> column, T value, int idCell) {
 		this.column = column;
@@ -44,54 +44,57 @@ public class Cell<T extends Type> {
 		this.cellId = idCell;
 	}
 
+	/**
+	 * The constructor of the {@link Cell}
+	 * @param item The {@link Item} to which belongs the {@link Cell}
+	 * @param column The {@link Column} to which belongs the {@link Cell}
+	 * @param value The value of type {@link Type} of the {@link Cell}
+	 */
 	public Cell(Item item, Column<T> column, T value) {
 		this.column = column;
 		this.value = value;
 		this.item = item;
 	}
 	/**
-	 * Returns column.
-	 * @return column 
+	 * @return The {@link Column} of the {@link Cell}
 	 */
 	public Column<T> getColumn() {
 		return this.column;
 	}
 
 	/**
-	 * Sets a value to attribute column. 
-	 * @param newColumn 
+	 * Sets the {@link Column} of the {@link Cell}
+	 * @param newColumn A {@link Column} of the same type as the {@link Cell}
 	 */
 	public void setColumn(Column<T> newColumn) {
 		this.column = newColumn;
 	}
 
 	/**
-	 * Returns value.
-	 * @return value 
+	 * @return The effective value of type {@link Type} of the {@link Cell}
 	 */
 	public T getValue() {
 		return this.value;
 	}
 
 	/**
-	 * Sets a value to attribute value. 
-	 * @param newValue 
+	 * Sets the effective value of type {@link Type} of the {@link Cell}
+	 * @param newValue A value of the same type as the {@link Cell}
 	 */
 	public void setValue(T newValue) {
 		this.value = newValue;
 	}
 
 	/**
-	 * Returns item.
-	 * @return item 
+	 * @return The {@link Item} of the {@link Cell}
 	 */
 	public Item getItem() {
 		return this.item;
 	}
 
 	/**
-	 * Sets a value to attribute item. 
-	 * @param newItem 
+	 * Sets the {@link Item} of the {@link Cell}
+	 * @param newItem An {@link Item}
 	 */
 	public void setItem(Item newItem) {
 		this.item = newItem;
@@ -107,6 +110,9 @@ public class Cell<T extends Type> {
 		return str;
 	}
 
+	/**
+	 * @return The id of the {@link Cell}
+	 */
 	public int getCellId() {
 		return cellId;
 	}

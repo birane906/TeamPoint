@@ -19,7 +19,7 @@ public class Kanban {
         this.tabs = new ArrayList<>();
         
         //retreive all the status labels existing in the column
-        List<Cell<? extends Type>> colCells = column.getCells();
+        List<Cell<StatusType>> colCells = column.getCells();
         StatusType statusType = (StatusType) colCells.get(0).getValue();
         List<StatusLabel> statusLabels = statusType.getStatusLabels();
 
