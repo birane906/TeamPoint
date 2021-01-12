@@ -225,6 +225,45 @@ public class WorkspaceController implements Initializable {
 		addBoardImage.setVisible(false);
 		addBoardLabel.setVisible(false);
 		boardTableView.setEditable(true);
+		boardTableView.getSelectionModel().setCellSelectionEnabled(true);
+		boardTableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent click) {
+				if (click.getClickCount() == 2) {
+					TablePosition pos = boardTableView.getSelectionModel().getSelectedCells().get(0);
+					int row = pos.getRow();
+					int col = pos.getColumn();
+					TableColumn column = pos.getTableColumn();
+					BoardFacade boardFacade = BoardFacade.getBoardFacadeInstance();
+					if (col > 0) {
+						String typeName = boardFacade.getCurrentBoard().getColumns().get(col - 1).getColumnType().getNameType();
+						switch (typeName) {
+							case "DateType":
+								System.out.println("DateType");
+								break;
+							case "NumberType":
+								System.out.println("NumberType");
+								break;
+							case "TextType":
+								System.out.println("TextType");
+								break;
+							case "PersonType":
+								System.out.println("PersonType");
+								break;
+							case "TimelineType":
+								System.out.println("TimelineType");
+								break;
+							case "StatusType":
+								System.out.println("StatusType");
+								break;
+							case "DependencyType":
+								System.out.println("DependencyType");
+								break;
+						}
+					}
+				}
+			}
+		});
 		Set<Workspace> wsl = userFacade.getWorkspaces();
 
 		if(wsl != null) {
