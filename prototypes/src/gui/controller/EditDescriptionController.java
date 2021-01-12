@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Description of WorkspaceController.
+ * Description of EditDescriptionController.
  * 
  * @author 
  */
@@ -36,8 +36,6 @@ public class EditDescriptionController {
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
 
-			//TO DO
-			// TRAITEMENT BDD
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
 			Scene tableViewScene = new Scene(tableViewParent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

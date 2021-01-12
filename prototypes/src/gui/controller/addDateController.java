@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * Description of WorkspaceController.
+ * Description of addDateController.
  * 
  * @author 
  */
@@ -33,12 +33,24 @@ public class addDateController {
 	 */
 	private UserFacade userFacade;
 
+	/**
+	 * Description of the property workspaceFacade.
+	 */
 	private WorkspaceFacade workspaceFacade;
 
+	/**
+	 * Description of the property boardFacade.
+	 */
 	private BoardFacade boardFacade;
 
+	/**
+	 * Description of the property columnFacade.
+	 */
 	private ColumnFacade columnFacade;
 
+	/**
+	 * Description of the property cellFacade.
+	 */
 	private CellFacade cellFacade;
 
 	private ItemCollection currentItemCollection;

@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Description of WorkspaceController.
+ * Description of EditBirthdayController.
  * 
  * @author 
  */
@@ -30,8 +30,7 @@ public class EditBirthdayController {
 	 */
 	private UserFacade userFacade;
 
-	@FXML
-	private DatePicker birthdayDP;
+
 
 
 
@@ -42,8 +41,7 @@ public class EditBirthdayController {
 
 	@FXML
 	public void validateOnAction(ActionEvent event) throws IOException{
-				//TO DO
-				// TRAITEMENT BDD
+
 				Parent tableViewParent = FXMLLoader.load(getClass().getResource("../view/profile.fxml"));
 				Scene tableViewScene = new Scene(tableViewParent);
 				Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * Description of WorkspaceController.
+ * Description of DeleteWorkspaceController.
  * 
  * @author 
  */

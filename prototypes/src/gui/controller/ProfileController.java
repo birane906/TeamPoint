@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Description of HomeController.
+ * Description of ProfileController.
  *
  *
  */
