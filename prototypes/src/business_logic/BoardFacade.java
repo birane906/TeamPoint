@@ -86,25 +86,6 @@ public class BoardFacade {
 		board.addColumn(statusTypeColumn);
 		board.addColumn(dependencyTypeColumn);
 
-		CellDAO cellDAO = daoFactory.createCellDAO();
-
-		Column[] defaultColumn = {
-			personTypeColumn,
-			timelineTypeColumn,
-			statusTypeColumn,
-			dependencyTypeColumn
-		};
-
-		for (Column column : defaultColumn) {
-			for (ItemCollection itemCollection : board.getItemCollections()) {
-				for (Item item : itemCollection.getItems()) {
-					Cell cell = cellDAO.addCell(column, item, null);
-					item.addCell(cell);
-					column.addCell(cell);
-				}
-			}
-		}
-
 		currentBoard = board;
 		return true;
 
