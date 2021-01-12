@@ -5,10 +5,8 @@ package business_logic;
 
 import java.util.HashSet;
 
-import business_logic.ChannelFacade;
 import business_logic.notification.Channel;
 import business_logic.notification.Message;
-import gui.controller.ChannelController;
 // Start of user code (user defined imports)
 
 // End of user code

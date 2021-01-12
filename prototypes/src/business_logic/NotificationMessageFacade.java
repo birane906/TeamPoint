@@ -5,10 +5,9 @@ package business_logic;
 
 import java.util.HashSet;
 
-import business_logic.NotificationMessageFacade;
 import business_logic.notification.NotificationMessage;
 // Start of user code (user defined imports)
-import gui.controller.NotificationMessageController;
+
 
 // End of user code
 
