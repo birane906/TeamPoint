@@ -41,7 +41,7 @@ public class Item {
 	 * @param label
 	 * @param parentItemCollection
 	 */
-	public Item(int id, String label,ItemCollection parentItemCollection) {
+	public Item(int id, String label, ItemCollection parentItemCollection) {
 		this.item_id = id;
 		this.parentItemCollection = parentItemCollection;
 		this.label = label;
@@ -56,6 +56,12 @@ public class Item {
 		}
 	}
 
+	/**
+	 * This contructor is used in getItemById, in that particular case we only need the name of
+	 * the item and the id at minimum because it's to fill the value of the dependency type cell
+	 * @param id of the item
+	 * @param label of the item
+	 */
 	public Item(int id, String label) {
 		this.item_id = id;
 		this.label = label;

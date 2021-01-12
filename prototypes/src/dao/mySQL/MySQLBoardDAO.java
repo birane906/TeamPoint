@@ -915,14 +915,14 @@ public class MySQLBoardDAO extends BoardDAO {
 	 * @return a boolean according to the success of insert
 	 */
 	@Override
-	public Boolean addItem(ItemCollection itemCollection, String itemLabel) {
+	public Item addItem(ItemCollection itemCollection, String itemLabel) {
 
 		if(itemCollection == null || itemLabel.isBlank()) {
-			return false;
+			return null;
 		}
 
 		if(DAO.isNameExist(itemLabel, "item")) {
-			return false;
+			return null;
 		}
 
 		// Query statement
@@ -947,13 +947,20 @@ public class MySQLBoardDAO extends BoardDAO {
 		try {
 			assert stmt != null;
 			stmt.executeUpdate(req);
+			ResultSet rs = stmt.getResultSet();
+
+			rs.next();
+			int itemId = rs.getInt(1);
+
+			DAO.closeConnection(0);
+
+			return new Item(itemId, itemLabel, itemCollection);
+
+
 		} catch (SQLException e) {
 			DAO.closeConnection(0);
-			return false;
+			return null;
 		}
-		
-		DAO.closeConnection(0);
-		return true;
 	}
 
 	@Override

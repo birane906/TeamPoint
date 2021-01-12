@@ -64,7 +64,7 @@ public abstract class BoardDAO implements DAO {
 	 * @param itemLabel the name of the item
 	 * @return a boolean according to the success of insert
 	 */
-	public abstract Boolean addItem(ItemCollection itemCollection, String itemLabel);
+	public abstract Item addItem(ItemCollection itemCollection, String itemLabel);
 
 	/**
 	 * Description of the method deleteItem.

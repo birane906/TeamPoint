@@ -143,7 +143,7 @@ public class MongoBoardDAO extends BoardDAO {
 	}
 
 	@Override
-	public Boolean addItem(ItemCollection itemCollection, String itemLabel) {
+	public Item addItem(ItemCollection itemCollection, String itemLabel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
