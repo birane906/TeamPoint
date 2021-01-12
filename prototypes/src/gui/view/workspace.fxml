@@ -26,7 +26,7 @@
             </Label>
             <ImageView fx:id="addBoardImage" fitHeight="20.0" fitWidth="27.0" layoutX="1.0" layoutY="32.0" onMouseClicked="#addBoardClicked" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Mockups/plusButton.png" />
+                  <Image url="@../../../images/plusButton.png" />
                </image>
             </ImageView>
             <Label fx:id="addBoardLabel" layoutX="28.0" layoutY="31.0" onMouseClicked="#addBoardClicked" prefHeight="18.0" prefWidth="132.0" text="Ajouter un board" />
@@ -96,7 +96,7 @@
         <MenuButton fx:id="workspaces" layoutX="432.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="266.0" text="Selectionner un workspace" />
       <ImageView fx:id="logout" fitHeight="29.0" fitWidth="31.0" layoutX="22.0" layoutY="574.0" onMouseClicked="#logoutBtn" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../images/deconnexion.jpg" />
+            <Image url="@../../../images/deconnexion.jpg" />
          </image>
       </ImageView>
       <MenuButton fx:id="addDelete" layoutX="998.0" layoutY="19.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="42.0" text="+">
