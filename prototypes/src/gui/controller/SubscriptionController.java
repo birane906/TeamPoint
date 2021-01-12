@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 
 
 /**
- * Description of LoginController.
+ * Description of SubscriptionController.
  * 
  *
  */
