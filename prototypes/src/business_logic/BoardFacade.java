@@ -1,7 +1,10 @@
 package business_logic;
 
 import business_logic.board.*;
-import business_logic.board.types.*;
+import business_logic.board.types.DependencyType;
+import business_logic.board.types.PersonType;
+import business_logic.board.types.StatusType;
+import business_logic.board.types.TimelineType;
 import business_logic.user.User;
 import business_logic.workspace.Workspace;
 import dao.BoardDAO;
@@ -190,8 +193,15 @@ public class BoardFacade {
 		DAOFactory daoFactory = DAOFactory.getDaoFactoryInstance();
 		BoardDAO boardDAO = daoFactory.createBoardDAO();
 
-		return boardDAO.addItem(itemCollection, itemLabel);
+		Item item = boardDAO.addItem(itemCollection, itemLabel);
 
+		if (item != null) {
+			itemCollection.addItem(item);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
