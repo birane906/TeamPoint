@@ -287,7 +287,6 @@ public class MySQLWorkspaceDAO extends WorkspaceDAO {
 		try {
 			user = mySQLUserDAO.getUser("galoisnicolas@gmail.com", "toto");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

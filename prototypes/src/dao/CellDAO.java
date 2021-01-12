@@ -20,7 +20,7 @@ public abstract class CellDAO implements DAO {
 	 * @param item 
 	 * @return the cell created
 	 */
-	public abstract <T extends Type> Cell<T> addCell(Column<T> column, Item item, T value);
+	public abstract <T extends Type> Cell<? extends Type> addCell(Column<? extends Type> column, Item item, T value);
 
 	/**
 	 * delete Cell.
