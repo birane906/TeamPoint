@@ -2,7 +2,6 @@
 
 ## How to run it ?
 
-- git clone https://github.com/Salim-Azh/TeamPoint.git
 - launch Intellij IDEA
 - open Teampoint/prototypes as project
 - add run config for class gui.view.LoginView
